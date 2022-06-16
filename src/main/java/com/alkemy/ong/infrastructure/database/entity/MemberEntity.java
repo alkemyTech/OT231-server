@@ -23,21 +23,21 @@ import lombok.Setter;
 @SQLDelete(sql = "UPDATE members SET deleted = true WHERE id = ?")
 @Where(clause = "deleted = false")
 public class MemberEntity {
-	@NotNull
-	private String name;
-	@Nullable
-	private String facebookUrl;
-	@Nullable
-	private String instagramUrl;
-	@Nullable
-	private String linkedinUrl;
-	@NotNull
-	private String image;
-	@Nullable
-	private String description;
+@NotNull
+private String name;
+@Nullable
+private String facebookUrl;
+@Nullable
+private String instagramUrl;
+@Nullable
+private String linkedinUrl;
+@NotNull
+private String image;
+@Nullable
+private String description;
 	
-	@SuppressWarnings("unused")
-	private boolean deleted = Boolean.FALSE;
-	@Temporal(TemporalType.TIMESTAMP)
-    private Calendar registDate;
+@SuppressWarnings("unused")
+private boolean deleted = Boolean.FALSE;
+@Temporal(TemporalType.TIMESTAMP)
+private Calendar registDate;
 }
