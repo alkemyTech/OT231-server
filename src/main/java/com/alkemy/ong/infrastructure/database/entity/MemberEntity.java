@@ -17,14 +17,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="members")
+@Table(name = "members")
 @Getter
 @Setter
-@SQLDelete(sql="UPDATE members SET deleted = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE members SET deleted = true WHERE id = ?")
 @Where(clause = "deleted = false")
 public class MemberEntity {
-
-	
 	@NotNull
 	private String name;
 	@Nullable
@@ -42,6 +40,4 @@ public class MemberEntity {
 	private boolean deleted = Boolean.FALSE;
 	@Temporal(TemporalType.TIMESTAMP)
     private Calendar registDate;
-
-
 }
