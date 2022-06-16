@@ -23,7 +23,7 @@ import org.springframework.lang.Nullable;
 @Table(name = "members")
 @SQLDelete(sql = "UPDATE members SET deleted = true WHERE id = ?")
 @Where(clause = "softDeleted = false")
-public class MemberEntity {
+public class Member {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "MEMBER_ID")
