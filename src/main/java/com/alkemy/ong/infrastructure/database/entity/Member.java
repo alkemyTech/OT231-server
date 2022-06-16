@@ -20,7 +20,7 @@ import org.springframework.lang.Nullable;
 @Setter
 @AllArgsConstructor
 @Entity
-@Table(name = "members")
+@Table(name = "MEMBERS")
 @SQLDelete(sql = "UPDATE members SET deleted = true WHERE id = ?")
 @Where(clause = "softDeleted = false")
 public class Member {
