@@ -14,11 +14,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "slides")
-public class Slide {
+@Table(name = "SLIDES")
+public class SlideEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "SLIDE_ID")
   private Long id;
 
   @Column(name = "IMAGE_URL", nullable = false)
