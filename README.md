@@ -86,7 +86,7 @@ mvn checkstyle:checkstyle
     - [SOLID principles](http://www.blackwasp.co.uk/SOLIDPrinciples.aspx)
     - [Design principles](https://www.oodesign.com/design-principles.html)
 - [Best practices API design](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design)
-- [Writing clean code](https://enos.itcollege.ee/~jpoial/oop/naited/Clean%20Code.pdf)
+- [Writing clean code](https://github.com/jnguyen095/clean-code/blob/master/Clean.Code.A.Handbook.of.Agile.Software.Craftsmanship.pdf)
 - [Design patterns](https://refactoring.guru/design-patterns)
 - Exception handling
     - [Exception handling for REST with Spring](https://www.baeldung.com/exception-handling-for-rest-with-spring)
