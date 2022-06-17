@@ -1,36 +1,35 @@
 package com.alkemy.ong.infrastructure.database.entity;
 
+import java.sql.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Column;
-import javax.persistence.GenerationType;
-import java.sql.Timestamp;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name= "ROLES")
+@Table(name = "ROLES")
 public class RoleEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(name= "NAME", nullable = false)
+  @Column(name = "NAME", nullable = false)
   private String name;
 
-  @Column(name= "DESCRIPTION")
+  @Column(name = "DESCRIPTION")
   private String description;
 
-  @Column(name="CREATE_TIMESTAMP")
+  @Column(name = "CREATE_TIMESTAMP")
   @CreationTimestamp
   private Timestamp createTimestamp;
 }
