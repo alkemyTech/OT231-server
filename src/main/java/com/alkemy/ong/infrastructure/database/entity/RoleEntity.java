@@ -5,7 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
 import java.sql.Timestamp;
 
 @Data
@@ -14,17 +19,18 @@ import java.sql.Timestamp;
 @Entity
 @Table(name= "ROLES")
 public class RoleEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    @Column(name= "NAME", nullable = false)
-    private String name;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    @Column(name= "DESCRIPTION")
-    private String description;
+  @Column(name= "NAME", nullable = false)
+  private String name;
 
-    @Column(name="CREATE_TIMESTAMP")
-    @CreationTimestamp
-    private Timestamp createTimestamp;
+  @Column(name= "DESCRIPTION")
+  private String description;
+
+  @Column(name="CREATE_TIMESTAMP")
+  @CreationTimestamp
+  private Timestamp createTimestamp;
 }
