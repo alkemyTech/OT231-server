@@ -26,7 +26,7 @@ public class OrganizationEntity {
   @Column(name = "NAME", nullable = false)
   private String name;
 
-  @Column(name = "IMAGE")
+  @Column(name = "IMAGE", nullable = false)
   private String image;
 
   @Column(name = "ADDRESS")
@@ -35,10 +35,10 @@ public class OrganizationEntity {
   @Column(name = "PHONE")
   private String phone;
 
-  @Column(name = "EMAIL")
+  @Column(name = "EMAIL", nullable = false)
   private String email;
 
-  @Column(name = "WELCOME_TEXT")
+  @Column(name = "WELCOME_TEXT", nullable = false)
   private String welcomeText;
 
   @Column(name = "ABOUT_US_TEXT")
