@@ -34,6 +34,6 @@ public class TestimonialEntity {
   @CreationTimestamp
   private Timestamp createTimestamp;
 
-  @Column(name = "SOFT_DELETED")
-  private Boolean softDeleted;
+  @Column(name = "SOFT_DELETE")
+  private Boolean softDelete;
 }
