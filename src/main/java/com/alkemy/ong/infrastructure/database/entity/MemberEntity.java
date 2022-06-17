@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,36 +17,33 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.lang.Nullable;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @Entity
 @Table(name = "MEMBERS")
-@SQLDelete(sql = "UPDATE members SET deleted = true WHERE id = ?")
-@Where(clause = "softDeleted = false")
-public class Member {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "MEMBER_ID")
-  private Long fooId;
+public class MemberEntity {
   
-  @Column(name = "NAME")
-  @NotNull
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "MEMBER_ID")
+  private Long Id;
+  
+  @Column(name = "NAME",,nullable=false)
   private String name;
   
-  @Nullable
+  @Column(name = "FACEBOOK_URL")
   private String facebookUrl;
   
-  @Nullable
+  @Column(name = "INSTAGRAM_URL")
   private String instagramUrl;
   
-  @Nullable
+  @Column(name = "LINKEDIN_URL")
   private String linkedinUrl;
   
-  @NotNull
+  @Column(name = "IMAGE", nullable=false)
   private String image;
   
-  @Nullable
+  @Column(name = "DESCRIPTION")
   private String description;
   
   @Column(name = "CREATE_TIMESTAMP")
