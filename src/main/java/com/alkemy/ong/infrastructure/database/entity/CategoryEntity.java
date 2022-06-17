@@ -18,7 +18,7 @@ import org.hibernate.annotations.CreationTimestamp;
 @AllArgsConstructor
 @Data
 @Table(name = "CATEGORIES")
-public class CategoriesEntity {
+public class CategoryEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
