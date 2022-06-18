@@ -24,30 +24,30 @@ import org.springframework.lang.Nullable;
 @Entity
 @Table(name = "MEMBERS")
 public class MemberEntity {
-  
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "MEMBER_ID")
-  private Long Id;
-  
-  @Column(name = "NAME",,nullable=false)
+  private Long id;
+
+  @Column(name = "NAME", nullable = false)
   private String name;
-  
+
   @Column(name = "FACEBOOK_URL")
   private String facebookUrl;
-  
+
   @Column(name = "INSTAGRAM_URL")
   private String instagramUrl;
-  
+
   @Column(name = "LINKEDIN_URL")
   private String linkedinUrl;
-  
-  @Column(name = "IMAGE", nullable=false)
+
+  @Column(name = "IMAGE", nullable = false)
   private String image;
-  
+
   @Column(name = "DESCRIPTION")
   private String description;
-  
+
   @Column(name = "CREATE_TIMESTAMP")
   @CreationTimestamp
   private Timestamp createTimestamp;
