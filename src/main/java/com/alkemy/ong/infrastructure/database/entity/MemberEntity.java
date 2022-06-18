@@ -1,6 +1,6 @@
 package com.alkemy.ong.infrastructure.database.entity;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,9 +43,9 @@ public class MemberEntity {
   private String description;
 
   @Column(name = "CREATE_TIMESTAMP")
-  @CreationTimestamp
+  @CreationTimestamp 
   private Timestamp createTimestamp;
-
+   
   @Column(name = "SOFT_DELETE")
   private Boolean softDelete;
 }
