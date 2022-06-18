@@ -21,6 +21,7 @@ public class OrganizationEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "ORGANIZATION_ID")
   private Long id;
 
   @Column(name = "NAME", nullable = false)
