@@ -21,6 +21,7 @@ public class CategoryEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "CATEGORY_ID")
   private Long id;
 
   @Column(name = "NAME", nullable = false)
