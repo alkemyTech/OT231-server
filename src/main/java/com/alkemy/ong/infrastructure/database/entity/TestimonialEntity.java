@@ -1,7 +1,5 @@
 package com.alkemy.ong.infrastructure.database.entity;
 
-
-
 import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
