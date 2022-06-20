@@ -52,6 +52,6 @@ public class UserEntity {
   private Timestamp createTimestamp;
 
   @Column(name = "SOFT_DELETE")
-  private boolean softDelete;
+  private Boolean softDelete;
 
 }
