@@ -36,6 +36,6 @@ public class ContactEntity {
   private String message;
 
   @Column(name = "SOFT_DELETE")
-  private Date deletedAt = null;
+  private Date deletedAt;
 
 }

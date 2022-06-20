@@ -33,7 +33,7 @@ public class OrganizationEntity {
   @Column(name = "ADDRESS")
   private String address;
 
-  @Column(name = "PHONE")
+  @Column(name = "PHONE_NUMBER")
   private String phone;
 
   @Column(name = "EMAIL", nullable = false)
