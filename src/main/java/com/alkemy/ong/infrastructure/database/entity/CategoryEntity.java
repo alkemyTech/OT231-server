@@ -1,6 +1,6 @@
 package com.alkemy.ong.infrastructure.database.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,32 +10,35 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
-@Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "CONTACTS")
-public class ContactEntity {
+@Data
+@Table(name = "CATEGORIES")
+public class CategoryEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "CONTACT_ID")
+  @Column(name = "CATEGORY_ID")
   private Long id;
 
   @Column(name = "NAME", nullable = false)
   private String name;
 
-  @Column(name = "PHONE_NUMBER")
-  private String phone;
+  @Column(name = "DESCRIPTION")
+  private String description;
 
-  @Column(name = "EMAIL", nullable = false)
-  private String email;
+  @Column(name = "IMAGE")
+  private String image;
 
-  @Column(name = "MESSAGE", nullable = false)
-  private String message;
+  @Column(name = "CREATE_TIMESTAMP")
+  @CreationTimestamp
+  private Timestamp createTimestamp;
 
   @Column(name = "SOFT_DELETE")
-  private Date deletedAt;
+  private Boolean softDelete;
+
 
 }
