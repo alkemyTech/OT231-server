@@ -12,54 +12,40 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-@Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Table(name = "ORGANIZATIONS")
-public class OrganizationEntity {
+@Entity
+@Table(name = "MEMBERS")
+public class MemberEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "ORGANIZATION_ID")
+  @Column(name = "MEMBER_ID")
   private Long id;
 
   @Column(name = "NAME", nullable = false)
   private String name;
 
-  @Column(name = "IMAGE", nullable = false)
-  private String image;
-
-  @Column(name = "ADDRESS")
-  private String address;
-
-  @Column(name = "PHONE_NUMBER")
-  private String phone;
-
-  @Column(name = "EMAIL", nullable = false)
-  private String email;
-
-  @Column(name = "WELCOME_TEXT", nullable = false)
-  private String welcomeText;
-
-  @Column(name = "ABOUT_US_TEXT")
-  private String aboutUsText;
-
   @Column(name = "FACEBOOK_URL")
   private String facebookUrl;
-
-  @Column(name = "LINKEDIN_URL")
-  private String linkedInUrl;
 
   @Column(name = "INSTAGRAM_URL")
   private String instagramUrl;
 
-  @Column(name = "CREATE_TIMESTAMP")
-  @CreationTimestamp
-  private Timestamp createTimestamp;
+  @Column(name = "LINKEDIN_URL")
+  private String linkedInUrl;
 
+  @Column(name = "IMAGE", nullable = false)
+  private String image;
+
+  @Column(name = "DESCRIPTION")
+  private String description;
+
+  @Column(name = "CREATE_TIMESTAMP")
+  @CreationTimestamp 
+  private Timestamp createTimestamp;
+   
   @Column(name = "SOFT_DELETE")
   private Boolean softDelete;
-
-
 }

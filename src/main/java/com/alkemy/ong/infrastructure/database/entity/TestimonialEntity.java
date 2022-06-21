@@ -12,47 +12,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-@Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Table(name = "ORGANIZATIONS")
-public class OrganizationEntity {
+@Entity
+@Table(name = "TESTIMONIALS")
+public class TestimonialEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "ORGANIZATION_ID")
+  @Column(name = "TESTIMONIAL_ID")
   private Long id;
 
   @Column(name = "NAME", nullable = false)
   private String name;
 
-  @Column(name = "IMAGE", nullable = false)
+  @Column(name = "IMAGE")
   private String image;
 
-  @Column(name = "ADDRESS")
-  private String address;
-
-  @Column(name = "PHONE_NUMBER")
-  private String phone;
-
-  @Column(name = "EMAIL", nullable = false)
-  private String email;
-
-  @Column(name = "WELCOME_TEXT", nullable = false)
-  private String welcomeText;
-
-  @Column(name = "ABOUT_US_TEXT")
-  private String aboutUsText;
-
-  @Column(name = "FACEBOOK_URL")
-  private String facebookUrl;
-
-  @Column(name = "LINKEDIN_URL")
-  private String linkedInUrl;
-
-  @Column(name = "INSTAGRAM_URL")
-  private String instagramUrl;
+  @Column(name = "CONTENT")
+  private String content;
 
   @Column(name = "CREATE_TIMESTAMP")
   @CreationTimestamp
@@ -60,6 +39,4 @@ public class OrganizationEntity {
 
   @Column(name = "SOFT_DELETE")
   private Boolean softDelete;
-
-
 }

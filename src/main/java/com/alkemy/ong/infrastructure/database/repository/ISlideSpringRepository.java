@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ISlideRepository extends JpaRepository<SlideEntity, Long> {
+public interface ISlideSpringRepository extends JpaRepository<SlideEntity, Long> {
 
 }
