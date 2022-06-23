@@ -18,27 +18,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthenticationEndpoint {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+  @Autowired
+  private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+  @Autowired
+  private UserDetailsService userDetailsService;
 
-    @Autowired
-    private JwtUtils jwtTokenUtil;
+  @Autowired
+  private JwtUtils jwtTokenUtil;
 
   @RequestMapping(value = "/auth/login ", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody UserEntity userEntity) throws Exception{
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody UserEntity userEntity)
+        throws Exception {
 
-      try {
-          authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userEntity.getEmail(), userEntity.getPassword()));
-      }
-      catch (BadCredentialsException e){
-          throw new Exception("Incorrect username or password", e);
-      }
-      final UserDetails userDetails = userDetailsService.loadUserByUsername(userEntity.getEmail());
-      final String jwt = jwtTokenUtil.generateToken(userDetails);
+    try {
+      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+              userEntity.getEmail(), userEntity.getPassword()));
+    }     catch (BadCredentialsException e) {
+      throw new Exception("Incorrect username or password", e);
+    }
+    final UserDetails userDetails = userDetailsService
+        .loadUserByUsername(userEntity.getEmail());
+    final String jwt = jwtTokenUtil.generateToken(userDetails);
 
-      return ResponseEntity.ok(new AuthenticationResponse(jwt));
+    return ResponseEntity.ok(new AuthenticationResponse(jwt));
   }
 }
