@@ -1,7 +1,7 @@
-package com.alkemy.ong.infrastructure.config.spring.security;
+package com.alkemy.ong.infrastructure.config.spring;
 
 import com.alkemy.ong.infrastructure.config.spring.security.common.JwtUtils;
-import com.alkemy.ong.infrastructure.config.spring.security.models.AuthenticationResponse;
+import com.alkemy.ong.infrastructure.config.spring.models.AuthenticationResponse;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AuthenticationEndpoint {
+public class SecurityAuthentication {
 
   @Autowired
   private AuthenticationManager authenticationManager;

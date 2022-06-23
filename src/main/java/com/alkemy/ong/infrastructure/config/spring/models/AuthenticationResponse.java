@@ -1,4 +1,4 @@
-package com.alkemy.ong.infrastructure.config.spring.security.models;
+package com.alkemy.ong.infrastructure.config.spring.models;
 
 public class AuthenticationResponse {
 
