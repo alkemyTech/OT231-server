@@ -2,13 +2,13 @@ package com.alkemy.ong.infrastructure.config.spring.security.models;
 
 public class AuthenticationResponse {
 
-  private final Srtrin jwt;
+  private final String jwt;
 
-  public AuthenticationResponse(Srtrin jwt) {
+  public AuthenticationResponse(String jwt) {
         this.jwt = jwt;
   }
 
-  public Srtrin getJwt() {
+  public String getJwt() {
         return jwt;
   }
 }
