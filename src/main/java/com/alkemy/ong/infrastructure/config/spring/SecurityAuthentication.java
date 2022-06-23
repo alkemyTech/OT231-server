@@ -10,10 +10,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SecurityAuthentication {
@@ -27,16 +24,13 @@ public class SecurityAuthentication {
   @Autowired
   private JwtUtils jwtTokenUtil;
 
-  @RequestMapping(value = "/auth/login ", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody UserEntity userEntity)
-        throws Exception {
-
-    try {
+  @PostMapping(value = "/auth/login ")
+    public ResponseEntity<?> createAuthenticationToken(@Request UserEntity userEntity)
+      {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
               userEntity.getEmail(), userEntity.getPassword()));
-    }     catch (BadCredentialsException e) {
-      throw new Exception("Incorrect username or password", e);
-    }
+
+
     final UserDetails userDetails = userDetailsService
         .loadUserByUsername(userEntity.getEmail());
     final String jwt = jwtTokenUtil.generateToken(userDetails);
