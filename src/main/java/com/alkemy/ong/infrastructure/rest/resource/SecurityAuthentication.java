@@ -1,12 +1,11 @@
-package com.alkemy.ong.infrastructure.config.spring;
+package com.alkemy.ong.infrastructure.rest.resource;
 
 import com.alkemy.ong.infrastructure.config.spring.security.common.JwtUtils;
-import com.alkemy.ong.infrastructure.config.spring.models.AuthenticationResponse;
-import com.alkemy.ong.infrastructure.database.entity.UserEntity;
+import com.alkemy.ong.infrastructure.rest.response.AuthenticationResponse;
+import com.alkemy.ong.infrastructure.rest.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,14 +24,13 @@ public class SecurityAuthentication {
   private JwtUtils jwtTokenUtil;
 
   @PostMapping(value = "/auth/login ")
-    public ResponseEntity<?> createAuthenticationToken(@Request UserEntity userEntity)
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody UserResponse userResponse)
       {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-              userEntity.getEmail(), userEntity.getPassword()));
-
+              userResponse.getEmail(), userResponse.getPassword()));
 
     final UserDetails userDetails = userDetailsService
-        .loadUserByUsername(userEntity.getEmail());
+        .loadUserByUsername(userResponse.getEmail());
     final String jwt = jwtTokenUtil.generateToken(userDetails);
 
     return ResponseEntity.ok(new AuthenticationResponse(jwt));
