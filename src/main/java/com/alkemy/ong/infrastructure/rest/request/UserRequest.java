@@ -6,22 +6,26 @@ import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class UserRequest {
 
-  @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$")
+  @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$",
+      message = "Name can only contain letters and whitespaces")
   private String firstName;
 
-  @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$")
+  @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$",
+      message = "Lastname can only contain letters and whitespaces")
   private String lastName;
 
-  @Email
+  @Email(message = "Email should be valid")
   private String email;
 
-  @Size(min = 6, max = 8)
+  @Size(min = 6, max = 8, message = "Password must be between 6 and 8 characters")
   private String password;
 
 }
