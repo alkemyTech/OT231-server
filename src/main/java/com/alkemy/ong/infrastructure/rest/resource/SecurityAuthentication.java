@@ -33,8 +33,8 @@ public class SecurityAuthentication {
   public ResponseEntity<?> createAuthenticationToken(@RequestBody UserResponse userResponse) {
     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
               userResponse.getEmail(), userResponse.getPassword()));
-//no consegui entender el comentario del servicio,
-// con mis compañeros me sugirieron los cambios que hice mas no estoy seguro de lo que me hablo.
+    //no consegui entender el comentario del servicio,
+    // con mis compañeros me sugirieron los cambios que hice mas no estoy seguro de lo que me hablo.
     final UserDetails userDetails = userDetailsService
         .loadUserByUsername(userResponse.getEmail());
     final String jwt = jwtTokenUtil.generateToken(userDetails);
