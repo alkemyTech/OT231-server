@@ -1,5 +1,6 @@
 package com.alkemy.ong.application.service;
 
+import com.alkemy.ong.application.exception.UserAlreadyExistsException;
 import com.alkemy.ong.application.repository.IUserRepository;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
 import com.alkemy.ong.domain.User;
@@ -12,8 +13,9 @@ public class UserService implements ICreateUserUseCase {
 
   @Override
   public User addUser(User newUser) {
-    if (userRepository.findByEmail(newUser.getEmail()) != null) {
-      // TODO "This email address is already being used"
+    User user = userRepository.findByEmail(newUser.getEmail());
+    if (user != null) {
+      throw new UserAlreadyExistsException("This email address is already being used");
     }
     return userRepository.addUser(newUser);
   }
