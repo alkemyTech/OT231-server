@@ -57,7 +57,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 
-    http.csrf().disable().authorizeRequests()
+    //Segun mis compañeros el Verbo HTTP se trata de .csrf().disable(),
+    // pero al intentar implementarlo produce un error al enviar, no se como solucionarlo
+    http.authorizeRequests()
             .antMatchers("/auth/login")
             .permitAll()
             .anyRequest().authenticated();
