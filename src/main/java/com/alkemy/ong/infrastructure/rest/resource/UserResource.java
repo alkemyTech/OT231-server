@@ -20,14 +20,13 @@ public class UserResource {
   private ICreateUserUseCase createUserUseCase;
 
   @Autowired
-  private UserMapper mapper;
+  private UserMapper userMapper;
 
   @PostMapping(value = "auth/register", produces = {"application/json"},
       consumes = {"application/json"})
   public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest user) {
-    User newUser = mapper.toDomain(user);
-    createUserUseCase.addUser(newUser);
-    UserResponse response = mapper.toResponse(newUser);
+    User newUser = userMapper.toDomain(user);
+    UserResponse response = userMapper.toResponse(createUserUseCase.addUser(newUser));
     return new ResponseEntity<UserResponse>(response, HttpStatus.CREATED);
   }
 
