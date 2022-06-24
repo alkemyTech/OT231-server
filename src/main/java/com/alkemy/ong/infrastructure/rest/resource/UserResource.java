@@ -11,11 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("auth")
 public class UserResource {
 
   @Autowired
@@ -24,7 +22,7 @@ public class UserResource {
   @Autowired
   private UserMapper mapper;
 
-  @PostMapping(value = "/register", produces = {"application/json"},
+  @PostMapping(value = "auth/register", produces = {"application/json"},
       consumes = {"application/json"})
   public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest user) {
     User newUser = mapper.toDomain(user);
