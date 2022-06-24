@@ -8,4 +8,6 @@ public interface IUserRepository {
 
   User addUser(User newUser);
 
+  public Boolean existsByEmail(String email);
+
 }

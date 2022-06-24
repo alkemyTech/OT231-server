@@ -13,10 +13,9 @@ public class UserService implements ICreateUserUseCase {
 
   @Override
   public User addUser(User newUser) {
-    User user = userRepository.findByEmail(newUser.getEmail());
-    if (user != null) {
+    if (userRepository.existsByEmail(newUser.getEmail())) {
       throw new UserAlreadyExistsException(
-          "This email address: " + newUser.getEmail() + "is already being used");
+          "This email address: " + newUser.getEmail() + " is already being used");
     }
     return userRepository.addUser(newUser);
   }

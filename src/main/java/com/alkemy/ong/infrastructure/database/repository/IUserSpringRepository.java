@@ -9,4 +9,6 @@ public interface IUserSpringRepository extends JpaRepository<UserEntity, Long> {
 
   UserEntity findByEmail(String username);
 
+  boolean existsByEmail(String email);
+
 }
