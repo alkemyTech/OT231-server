@@ -26,11 +26,6 @@ public class UserRepository implements IUserRepository {
   }
 
   @Override
-  public Boolean existsByEmail(String email) {
-    return userSpringRepository.existsByEmail(email);
-  }
-
-  @Override
   @Transactional
   public User addUser(User newUser) {
     UserEntity user = userEntityMapper.toEntity(newUser);

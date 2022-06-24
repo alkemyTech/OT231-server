@@ -13,7 +13,8 @@ public class UserService implements ICreateUserUseCase {
 
   @Override
   public User addUser(User newUser) {
-    if (userRepository.existsByEmail(newUser.getEmail())) {
+    User user = userRepository.findByEmail(newUser.getEmail());
+    if (user != null) {
       throw new UserAlreadyExistsException(
           "This email address: " + newUser.getEmail() + " is already being used");
     }
