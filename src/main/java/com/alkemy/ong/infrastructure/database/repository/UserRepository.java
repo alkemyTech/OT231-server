@@ -18,7 +18,7 @@ public class UserRepository implements IUserRepository {
   private final IRoleSpringRepository roleSpringRepository;
   private final UserEntityMapper userEntityMapper;
 
-  private String defaultRole = Role.USER.name();
+  private static final Role DEFAULT_ROLE = Role.USER;
 
   @Override
   public User findByEmail(String email) {
@@ -34,12 +34,11 @@ public class UserRepository implements IUserRepository {
   }
 
   private RoleEntity getDefaultRole() {
-    if (roleSpringRepository.findByName(defaultRole) != null) {
-      return roleSpringRepository.findByName(defaultRole);
+    if (roleSpringRepository.findByName(DEFAULT_ROLE.getFullRoleName()) != null) {
+      return roleSpringRepository.findByName(DEFAULT_ROLE.getFullRoleName());
     }
-    RoleEntity role = new RoleEntity();
-    role.setName(defaultRole);
-    return roleSpringRepository.save(role);
+    return roleSpringRepository.save(RoleEntity.builder().description(DEFAULT_ROLE.name())
+        .name(DEFAULT_ROLE.getFullRoleName()).build());
   }
 
 }
