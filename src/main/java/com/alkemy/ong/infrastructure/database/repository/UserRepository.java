@@ -2,6 +2,7 @@ package com.alkemy.ong.infrastructure.database.repository;
 
 import com.alkemy.ong.application.repository.IUserRepository;
 import com.alkemy.ong.domain.User;
+import com.alkemy.ong.infrastructure.database.entity.UserEntity;
 import com.alkemy.ong.infrastructure.database.mapper.UserEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,8 @@ public class UserRepository implements IUserRepository {
 
   @Override
   public User addUser(User newUser) {
-    return userEntityMapper.toDomain(userSpringRepository.save(userEntityMapper.toEntity(newUser)));
+    UserEntity user = userEntityMapper.toEntity(newUser);
+    return userEntityMapper.toDomain(userSpringRepository.save(user));
   }
 
 }

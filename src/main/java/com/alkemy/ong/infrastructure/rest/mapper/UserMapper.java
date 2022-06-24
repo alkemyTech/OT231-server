@@ -1,9 +1,9 @@
 package com.alkemy.ong.infrastructure.rest.mapper;
 
-import org.springframework.stereotype.Component;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.rest.request.UserRequest;
 import com.alkemy.ong.infrastructure.rest.response.UserResponse;
+import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
