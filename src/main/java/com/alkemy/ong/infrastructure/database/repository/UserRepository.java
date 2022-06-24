@@ -18,4 +18,9 @@ public class UserRepository implements IUserRepository {
     return userEntityMapper.toDomain(userSpringRepository.findByEmail(email));
   }
 
+  @Override
+  public User addUser(User newUser) {
+    return userEntityMapper.toDomain(userSpringRepository.save(userEntityMapper.toEntity(newUser)));
+  }
+
 }
