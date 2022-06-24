@@ -17,7 +17,7 @@ public class AuthenticationRequest {
   private String email;
 
   @NotBlank(message = "Password cannot be null or empty.")
-  @Length(min = 6, max = 8, message = "The password must be between 6 and 8 characters.")
+  @Length(min = 6, max = 8, message = "Password must be between 6 and 8 characters.")
   private String password;
 
 }

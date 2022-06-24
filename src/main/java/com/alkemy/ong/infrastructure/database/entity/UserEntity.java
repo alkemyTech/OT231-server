@@ -54,7 +54,7 @@ public class UserEntity implements UserDetails {
   @Column(name = "PHOTO")
   private String photo;
 
-  @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
   @JoinColumn(name = "ROLE_ID")
   private RoleEntity role;
 
