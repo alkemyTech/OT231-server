@@ -25,6 +25,8 @@ public class AuthenticationIntegrationTest extends BigTest {
             .content(createRequest("freedy@krueger.com", "abcd1234"))
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.token", notNullValue()))
+        .andExpect(jsonPath("$.firstName", equalTo("Freddy")))
+        .andExpect(jsonPath("$.lastName", equalTo("Krueger")))
         .andExpect(status().isOk());
   }
 
