@@ -1,6 +1,7 @@
 package com.alkemy.ong.infrastructure.rest.resource;
 
 import com.alkemy.ong.infrastructure.config.spring.security.common.JwtUtils;
+import com.alkemy.ong.infrastructure.database.repository.IUserSpringRepository;
 import com.alkemy.ong.infrastructure.rest.response.JwtResponse;
 import com.alkemy.ong.infrastructure.rest.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,17 @@ public class SecurityAuthentication {
   private UserDetailsService userDetailsService;
 
   @Autowired
+  private IUserSpringRepository userSpringRepository;
+
+  @Autowired
   private JwtUtils jwtTokenUtil;
 
   @PostMapping(value = "/auth/login ")
   public ResponseEntity<?> createAuthenticationToken(@RequestBody UserResponse userResponse) {
     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
               userResponse.getEmail(), userResponse.getPassword()));
-
+//no consegui entender el comentario del servicio,
+// con mis compañeros me sugirieron los cambios que hice mas no estoy seguro de lo que me hablo.
     final UserDetails userDetails = userDetailsService
         .loadUserByUsername(userResponse.getEmail());
     final String jwt = jwtTokenUtil.generateToken(userDetails);
