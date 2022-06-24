@@ -19,7 +19,7 @@ public class DefaultExceptionHandler {
   private static final String INVALID_INPUT_DATA = "Invalid input data.";
   private static final String NO_RECORD_WITH_THE_GIVEN_EMAIL = "No record with the given email.";
   private static final String SOMETHING_WENT_WRONG = "Something went wrong.";
-  private static final String INVALID_CREDENTIALS = "Server cannot return a response due to invalid credentials.";
+  private static final String INVALID_CREDENTIALS = "Please, provide valid credentials.";
   private static final String RECORD_NOT_FOUND = "Record not found in database.";
 
   @ExceptionHandler(value = Exception.class)

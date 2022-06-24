@@ -19,7 +19,7 @@ public class AuthenticationMapper {
   }
 
   public AuthenticationResponse toResponse(User user) {
-    if(user == null) {
+    if (user == null) {
       return null;
     }
     return AuthenticationResponse.builder()
