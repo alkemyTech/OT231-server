@@ -26,9 +26,7 @@ public class UserEntityMapper {
       return null;
     }
     return UserEntity.builder().email(user.getEmail()).firstName(user.getFirstName())
-        .lastName(user.getLastName()).photo(user.getPhoto()).password(user.getPassword())
-        // TODO:no olvidar password encriptada
-        .build();
+        .lastName(user.getLastName()).photo(user.getPhoto()).password(user.getPassword()).build();
   }
 
 }
