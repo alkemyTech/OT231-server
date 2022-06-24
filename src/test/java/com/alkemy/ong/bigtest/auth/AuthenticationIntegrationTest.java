@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.alkemy.ong.bigtest.BigTest;
 import com.alkemy.ong.infrastructure.rest.request.AuthenticationRequest;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 
@@ -21,10 +22,7 @@ public class AuthenticationIntegrationTest extends BigTest {
   @Test
   public void shouldReturnTokenWhenCredentialsAreValid() throws Exception {
     mockMvc.perform(post(AUTH_LOGIN_URL)
-            .content(objectMapper.writeValueAsString(AuthenticationRequest.builder()
-                .email("freedy@krueger.com")
-                .password("abcd1234")
-                .build()))
+            .content(createRequest("freedy@krueger.com", "abcd1234"))
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.token", notNullValue()))
         .andExpect(status().isOk());
@@ -33,10 +31,7 @@ public class AuthenticationIntegrationTest extends BigTest {
   @Test
   public void shouldReturnIsUnauthorizedStatusCodeWhenCredentialsAreInvalid() throws Exception {
     mockMvc.perform(post(AUTH_LOGIN_URL)
-            .content(objectMapper.writeValueAsString(AuthenticationRequest.builder()
-                .email("freedy@krueger.com")
-                .password("badPass")
-                .build()))
+            .content(createRequest("freedy@krueger.com", "badPass"))
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.statusCode", equalTo(401)))
         .andExpect(jsonPath("$.message", equalTo("Invalid email or password.")))
@@ -48,10 +43,7 @@ public class AuthenticationIntegrationTest extends BigTest {
   @Test
   public void shouldReturnBadRequestStatusCodeWhenCredentialsHaveInvalidFormat() throws Exception {
     mockMvc.perform(post(AUTH_LOGIN_URL)
-            .content(objectMapper.writeValueAsString(AuthenticationRequest.builder()
-                .email("wrongEmailFormat")
-                .password("wrongPasswordFormat")
-                .build()))
+            .content(createRequest("wrongEmailFormat", "wrongPasswordFormat"))
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.statusCode", equalTo(400)))
         .andExpect(jsonPath("$.message", equalTo("Invalid input data.")))
@@ -59,6 +51,13 @@ public class AuthenticationIntegrationTest extends BigTest {
         .andExpect(jsonPath("$.moreInfo",
             hasItems("Password must be between 6 and 8 characters.", "Email has invalid format.")))
         .andExpect(status().isBadRequest());
+  }
+
+  private String createRequest(String email, String password) throws JsonProcessingException {
+    return objectMapper.writeValueAsString(AuthenticationRequest.builder()
+        .email(email)
+        .password(password)
+        .build());
   }
 
 }
