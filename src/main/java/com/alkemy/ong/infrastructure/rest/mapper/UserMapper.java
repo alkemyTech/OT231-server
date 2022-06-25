@@ -2,8 +2,8 @@ package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.config.spring.security.PasswordEncoder;
-import com.alkemy.ong.infrastructure.rest.request.UserRequest;
-import com.alkemy.ong.infrastructure.rest.response.UserResponse;
+import com.alkemy.ong.infrastructure.rest.request.UserRegisterRequest;
+import com.alkemy.ong.infrastructure.rest.response.UserRegisterResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ public class UserMapper {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
-  public User toDomain(UserRequest user) {
+  public User toDomain(UserRegisterRequest user) {
     if (user == null) {
       return null;
     }
@@ -23,12 +23,12 @@ public class UserMapper {
         .build();
   }
 
-  public UserResponse toResponse(User newUser) {
+  public UserRegisterResponse toResponse(User newUser) {
     if (newUser == null) {
       return null;
     }
 
-    return UserResponse.builder().firstName(newUser.getFirstName()).lastName(newUser.getLastName())
+    return UserRegisterResponse.builder().firstName(newUser.getFirstName()).lastName(newUser.getLastName())
         .email(newUser.getEmail()).build();
   }
 }

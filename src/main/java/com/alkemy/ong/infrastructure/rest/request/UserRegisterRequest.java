@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserRequest {
+public class UserRegisterRequest {
 
   @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$",
       message = "Name can only contain letters and whitespaces")

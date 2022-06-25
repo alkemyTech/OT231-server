@@ -3,8 +3,8 @@ package com.alkemy.ong.infrastructure.rest.resource;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.rest.mapper.UserMapper;
-import com.alkemy.ong.infrastructure.rest.request.UserRequest;
-import com.alkemy.ong.infrastructure.rest.response.UserResponse;
+import com.alkemy.ong.infrastructure.rest.request.UserRegisterRequest;
+import com.alkemy.ong.infrastructure.rest.response.UserRegisterResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,10 +24,10 @@ public class UserResource {
 
   @PostMapping(value = "auth/register", produces = {"application/json"},
       consumes = {"application/json"})
-  public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest user) {
+  public ResponseEntity<UserRegisterResponse> createUser(@Valid @RequestBody UserRegisterRequest user) {
     User newUser = userMapper.toDomain(user);
-    UserResponse response = userMapper.toResponse(createUserUseCase.addUser(newUser));
-    return new ResponseEntity<UserResponse>(response, HttpStatus.CREATED);
+    UserRegisterResponse response = userMapper.toResponse(createUserUseCase.addUser(newUser));
+    return new ResponseEntity<UserRegisterResponse>(response, HttpStatus.CREATED);
   }
 
 }

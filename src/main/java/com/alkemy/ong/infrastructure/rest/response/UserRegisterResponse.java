@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class UserResponse {
+public class UserRegisterResponse {
 
   private String firstName;
   private String lastName;
