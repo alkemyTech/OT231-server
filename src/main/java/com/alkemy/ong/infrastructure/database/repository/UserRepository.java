@@ -2,7 +2,6 @@ package com.alkemy.ong.infrastructure.database.repository;
 
 import com.alkemy.ong.application.repository.IUserRepository;
 import com.alkemy.ong.domain.User;
-import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
 import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
 import com.alkemy.ong.infrastructure.database.mapper.UserEntityMapper;
@@ -18,8 +17,6 @@ public class UserRepository implements IUserRepository {
   private final IRoleSpringRepository roleSpringRepository;
   private final UserEntityMapper userEntityMapper;
 
-  private static final Role DEFAULT_ROLE = Role.USER;
-
   @Override
   public User findByEmail(String email) {
     return userEntityMapper.toDomain(userSpringRepository.findByEmail(email));
@@ -29,16 +26,12 @@ public class UserRepository implements IUserRepository {
   @Transactional
   public User add(User newUser) {
     UserEntity user = userEntityMapper.toEntity(newUser);
-    user.setRole(getDefaultRole());
+    user.setRole(getDefaultRole(newUser.getRole()));
     return userEntityMapper.toDomain(userSpringRepository.save(user));
   }
-
-  private RoleEntity getDefaultRole() {
-    if (roleSpringRepository.findByName(DEFAULT_ROLE.getFullRoleName()) != null) {
-      return roleSpringRepository.findByName(DEFAULT_ROLE.getFullRoleName());
-    }
-    return roleSpringRepository.save(RoleEntity.builder().description(DEFAULT_ROLE.name())
-        .name(DEFAULT_ROLE.getFullRoleName()).build());
+  
+  private RoleEntity getDefaultRole(String role) {
+    return roleSpringRepository.findByName(role);
   }
 
 }
