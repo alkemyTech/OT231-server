@@ -3,8 +3,8 @@ package com.alkemy.ong.infrastructure.rest.mapper;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.rest.request.UserRegisterRequest;
 import com.alkemy.ong.infrastructure.rest.response.UserRegisterResponse;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
