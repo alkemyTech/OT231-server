@@ -16,17 +16,27 @@ public class UserEntityMapper {
     if (userEntity == null) {
       return null;
     }
-    return User.builder().email(userEntity.getEmail()).firstName(userEntity.getFirstName())
-        .lastName(userEntity.getLastName()).photo(userEntity.getPhoto())
-        .password(userEntity.getPassword()).token(jwtUtils.generateToken(userEntity)).build();
+    return User.builder()
+        .email(userEntity.getEmail())
+        .firstName(userEntity.getFirstName())
+        .lastName(userEntity.getLastName())
+        .photo(userEntity.getPhoto())
+        .password(userEntity.getPassword())
+        .token(jwtUtils.generateToken(userEntity))
+        .build();
   }
 
   public UserEntity toEntity(User user) {
     if (user == null) {
       return null;
     }
-    return UserEntity.builder().email(user.getEmail()).firstName(user.getFirstName())
-        .lastName(user.getLastName()).photo(user.getPhoto()).password(user.getPassword()).build();
+    return UserEntity.builder()
+        .email(user.getEmail())
+        .firstName(user.getFirstName())
+        .lastName(user.getLastName())
+        .photo(user.getPhoto())
+        .password(user.getPassword())
+        .build();
   }
 
 }

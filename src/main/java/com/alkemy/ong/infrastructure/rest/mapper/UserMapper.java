@@ -17,17 +17,22 @@ public class UserMapper {
     if (user == null) {
       return null;
     }
-
-    return User.builder().firstName(user.getFirstName()).lastName(user.getLastName())
-        .email(user.getEmail()).password(passwordEncoder.encode(user.getPassword())).build();
+    return User.builder()
+        .firstName(user.getFirstName())
+        .lastName(user.getLastName())
+        .email(user.getEmail())
+        .password(passwordEncoder.encode(user.getPassword()))
+        .build();
   }
 
   public UserRegisterResponse toResponse(User newUser) {
     if (newUser == null) {
       return null;
     }
-
-    return UserRegisterResponse.builder().firstName(newUser.getFirstName())
-        .lastName(newUser.getLastName()).email(newUser.getEmail()).build();
+    return UserRegisterResponse.builder()
+        .firstName(newUser.getFirstName())
+        .lastName(newUser.getLastName())
+        .email(newUser.getEmail())
+        .build();
   }
 }
