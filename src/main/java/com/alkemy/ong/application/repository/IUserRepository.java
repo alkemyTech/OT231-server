@@ -6,6 +6,6 @@ public interface IUserRepository {
 
   User findByEmail(String email);
 
-  User addUser(User newUser);
+  User add(User user);
 
 }

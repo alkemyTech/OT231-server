@@ -24,9 +24,9 @@ public class UserResource {
 
   @PostMapping(value = "auth/register", produces = {"application/json"},
       consumes = {"application/json"})
-  public ResponseEntity<UserRegisterResponse> createUser(@Valid @RequestBody UserRegisterRequest user) {
+  public ResponseEntity<UserRegisterResponse> create(@Valid @RequestBody UserRegisterRequest user) {
     User newUser = userMapper.toDomain(user);
-    UserRegisterResponse response = userMapper.toResponse(createUserUseCase.addUser(newUser));
+    UserRegisterResponse response = userMapper.toResponse(createUserUseCase.add(newUser));
     return new ResponseEntity<UserRegisterResponse>(response, HttpStatus.CREATED);
   }
 
