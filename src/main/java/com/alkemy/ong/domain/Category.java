@@ -7,8 +7,8 @@ import lombok.Getter;
 @Getter
 public class Category {
 
-    public String name;
-    public String description;
-    public String image;
+  public String name;
+  public String description;
+  public String image;
 
 }

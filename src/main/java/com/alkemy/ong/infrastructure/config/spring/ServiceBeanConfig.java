@@ -20,7 +20,7 @@ public class ServiceBeanConfig {
   }
 
   @Bean
-  public IDeleteCategoryUseCase categoryService (ICategoryRepository categoryRepository){
+  public IDeleteCategoryUseCase categoryService(ICategoryRepository categoryRepository) {
     return new CategoryService(categoryRepository);
   }
 }

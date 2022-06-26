@@ -8,12 +8,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CategoryService implements IDeleteCategoryUseCase {
 
-    ICategoryRepository categoryRepository;
-    @Override
-    public void delete(Long id) {
-        if (!categoryRepository.exitsById(id) || categoryRepository.isDeleted(id))
-        throw new InvalidCredentialsException("test");
+  ICategoryRepository categoryRepository;
 
-    categoryRepository.delete(id);
+  @Override
+  public void delete(Long id) {
+    if (!categoryRepository.exitsById(id) || categoryRepository.isDeleted(id)) {
+      throw new InvalidCredentialsException("test");
     }
+    categoryRepository.delete(id);
+  }
 }
