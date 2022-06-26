@@ -8,31 +8,31 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapper {
+public class UserRegisterMapper {
 
   @Autowired
   private PasswordEncoder passwordEncoder;
 
-  public User toDomain(UserRegisterRequest user) {
-    if (user == null) {
+  public User toDomain(UserRegisterRequest registerRequest) {
+    if (registerRequest == null) {
       return null;
     }
     return User.builder()
-        .firstName(user.getFirstName())
-        .lastName(user.getLastName())
-        .email(user.getEmail())
-        .password(passwordEncoder.encode(user.getPassword()))
+        .firstName(registerRequest.getFirstName())
+        .lastName(registerRequest.getLastName())
+        .email(registerRequest.getEmail())
+        .password(passwordEncoder.encode(registerRequest.getPassword()))
         .build();
   }
 
-  public UserRegisterResponse toResponse(User newUser) {
-    if (newUser == null) {
+  public UserRegisterResponse toResponse(User user) {
+    if (user == null) {
       return null;
     }
     return UserRegisterResponse.builder()
-        .firstName(newUser.getFirstName())
-        .lastName(newUser.getLastName())
-        .email(newUser.getEmail())
+        .firstName(user.getFirstName())
+        .lastName(user.getLastName())
+        .email(user.getEmail())
         .build();
   }
 }
