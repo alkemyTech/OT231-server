@@ -1,5 +1,9 @@
-package com.alkemy.ong.application.util;
+package com.alkemy.ong.infrastructure.util;
 
+import com.alkemy.ong.application.exception.ThirdPartyException;
+import com.alkemy.ong.application.util.IEmail;
+import com.alkemy.ong.application.util.ISendEmail;
+import com.alkemy.ong.infrastructure.config.sendgrid.SendgridConfig;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -7,22 +11,21 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
-import java.io.IOException;
-import org.springframework.beans.factory.annotation.Value;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class SendEmailDelegate implements ISendEmail {
 
-  @Value("${sendgrid.sender}")
-  private String sender;
-
-  @Value("${sendgrid.key}")
-  private String apiKey;
+  @Autowired
+  private SendgridConfig sendgridConfig;
 
   @Override
-  public String execute(IEmail email) {
-    Email fromEmail = new Email(sender);
+  public void execute(IEmail email) {
+    Email fromEmail = new Email(sendgridConfig.getSender());
     Email toEmail = new Email(email.getTo());
     Content mailContent = new Content(
             email.getContentType(),
@@ -30,21 +33,18 @@ public class SendEmailDelegate implements ISendEmail {
     );
 
     Mail mail = new Mail(fromEmail, email.getSubject(), toEmail, mailContent);
-    SendGrid sendGrid = new SendGrid(apiKey);
-    String resume = "";
+    SendGrid sendGrid = new SendGrid(sendgridConfig.getApiKey());
     try {
       Request request = new Request();
       request.setMethod(Method.POST);
       request.setEndpoint("mail/send");
       request.setBody(mail.build());
       Response response = sendGrid.api(request);
-      resume = "Status Code: " + response.getStatusCode()
-              + " Body: " + response.getBody()
-              + " Heaeder: " + response.getHeaders();
-    } catch (IOException e) {
-      System.out.println("Error trying to send the email.");
+      log.info("Sendgrid Status Code: " + response.getStatusCode());
+    } catch (Exception e) {
+      log.error(e.getMessage(), e);
+      throw new ThirdPartyException(e.getMessage());
     }
-    return resume;
   }
 
   @Override
