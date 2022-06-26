@@ -1,6 +1,9 @@
 package com.alkemy.ong.infrastructure.config.spring;
 
+import com.alkemy.ong.application.repository.ICategoryRepository;
 import com.alkemy.ong.application.service.AuthenticationService;
+import com.alkemy.ong.application.service.CategoryService;
+import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.infrastructure.database.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
@@ -16,4 +19,8 @@ public class ServiceBeanConfig {
     return new AuthenticationService(authenticationManager, userRepository);
   }
 
+  @Bean
+  public IDeleteCategoryUseCase categoryService (ICategoryRepository categoryRepository){
+    return new CategoryService(categoryRepository);
+  }
 }
