@@ -2,6 +2,7 @@ package com.alkemy.ong.infrastructure.config.spring.exception;
 
 import com.alkemy.ong.application.exception.InvalidCredentialsException;
 import com.alkemy.ong.application.exception.RecordNotFoundException;
+import com.alkemy.ong.application.exception.UserAlreadyExistsException;
 import com.alkemy.ong.infrastructure.rest.response.ErrorResponse;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,6 +64,14 @@ public class DefaultExceptionHandler {
         RECORD_NOT_FOUND,
         e.getMessage());
     return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+  }
+  
+  @ExceptionHandler(value = UserAlreadyExistsException.class)
+  protected ResponseEntity<ErrorResponse> handleUserAlreadyExists(UserAlreadyExistsException e) {
+    ErrorResponse errorResponse = buildError(HttpStatus.BAD_REQUEST,
+        INVALID_INPUT_DATA,
+        e.getMessage());
+    return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
   }
 
   private List<String> collectErrors(MethodArgumentNotValidException e) {
