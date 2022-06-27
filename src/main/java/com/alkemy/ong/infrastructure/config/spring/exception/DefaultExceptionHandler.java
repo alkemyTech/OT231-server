@@ -3,6 +3,8 @@ package com.alkemy.ong.infrastructure.config.spring.exception;
 import com.alkemy.ong.application.exception.InvalidCredentialsException;
 import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.exception.TestimonialNotFoundException;
+import com.alkemy.ong.application.exception.ThirdPartyException;
+import com.alkemy.ong.application.exception.UserAlreadyExistsException;
 import com.alkemy.ong.infrastructure.rest.response.ErrorResponse;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -74,6 +76,24 @@ public class DefaultExceptionHandler {
             TESTIMONIAL_NOT_FOUND,
             e.getMessage());
     return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+  }
+
+  @ExceptionHandler(value = UserAlreadyExistsException.class)
+  protected ResponseEntity<ErrorResponse> handleUserAlreadyExists(UserAlreadyExistsException e) {
+    ErrorResponse errorResponse = buildError(HttpStatus.BAD_REQUEST,
+        INVALID_INPUT_DATA,
+        e.getMessage());
+    return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(value = ThirdPartyException.class)
+  public ResponseEntity<ErrorResponse> handleUploadImageException(ThirdPartyException e) {
+    ErrorResponse errorResponse = buildError(
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        SOMETHING_WENT_WRONG,
+        e.getMessage());
+    return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+
   }
 
   private List<String> collectErrors(MethodArgumentNotValidException e) {

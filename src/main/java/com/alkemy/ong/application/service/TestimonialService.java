@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class TestimonialService implements IDeleteTestimonialUseCase {
 
-  ITestimonialRepository testimonialRepository;
+  private final ITestimonialRepository testimonialRepository;
 
   @Override
   public void delete(Long id) {

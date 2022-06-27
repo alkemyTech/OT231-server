@@ -1,6 +1,6 @@
 package com.alkemy.ong.infrastructure.database.repository;
 
-import com.alkemy.ong.application.repository.ITestimonialRepository;
+import com.alkemy.ong.application.repository.INewsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,24 +8,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Component
-public class TestimonialRepository implements ITestimonialRepository {
+public class NewsRepository implements INewsRepository {
 
   @Autowired
-  private final ITestimonialSpringRepository testimonialSpringRepository;
+  private final INewsSpringRepository newsSpringRepository;
 
   @Override
-  public boolean existById(Long id) {
-    return testimonialSpringRepository.existsById(id);
+  public boolean existsById(Long id) {
+    return newsSpringRepository.existsById(id);
   }
 
   @Override
   public boolean isDeleted(Long id) {
-    return testimonialSpringRepository.isDeleted(id).isPresent();
+    return newsSpringRepository.isDeleted(id).isPresent();
   }
 
   @Override
   @Transactional
   public void delete(Long id) {
-    testimonialSpringRepository.softDeleteById(id);
+    newsSpringRepository.softDeleteById(id);
   }
+
 }

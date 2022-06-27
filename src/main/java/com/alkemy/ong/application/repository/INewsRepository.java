@@ -1,11 +1,11 @@
 package com.alkemy.ong.application.repository;
 
+public interface INewsRepository {
 
-public interface ITestimonialRepository {
-
-  boolean existById(Long id);
+  boolean existsById(Long id);
 
   boolean isDeleted(Long id);
 
   void delete(Long id);
+
 }

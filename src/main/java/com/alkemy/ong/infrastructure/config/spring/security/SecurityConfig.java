@@ -1,5 +1,6 @@
 package com.alkemy.ong.infrastructure.config.spring.security;
 
+import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
 import com.alkemy.ong.infrastructure.config.spring.security.filter.CustomAccessDeniedHandler;
 import com.alkemy.ong.infrastructure.config.spring.security.filter.CustomAuthenticationEntryPoint;
 import com.alkemy.ong.infrastructure.config.spring.security.filter.JwtRequestFilter;
@@ -53,8 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(AuthenticationManagerBuilder managerBuilder) throws Exception {
-    managerBuilder.userDetailsService(userDetailsService)
-        .passwordEncoder(passwordEncoder);
+    managerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
   }
 
   @Override
@@ -67,10 +67,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeRequests()
-        .antMatchers(HttpMethod.POST, "/auth/login")
+        .antMatchers(HttpMethod.POST, "/auth/login", "/auth/register")
         .permitAll()
-        .antMatchers(HttpMethod.DELETE, "testimonials/")
+        .antMatchers(HttpMethod.DELETE, "testimonials/{id:[\\d+]}")
         .permitAll()
+        .antMatchers(HttpMethod.DELETE, "/news/{id:[\\d+]}")
+        .hasAnyRole(Role.ADMIN.name())
         .anyRequest()
         .authenticated()
         .and()

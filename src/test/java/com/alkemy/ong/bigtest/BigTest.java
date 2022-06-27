@@ -4,8 +4,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import com.alkemy.ong.OngApplication;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
+import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
 import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
+import com.alkemy.ong.infrastructure.database.repository.INewsSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.IRoleSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.IUserSpringRepository;
 import com.alkemy.ong.infrastructure.rest.request.AuthenticationRequest;
@@ -51,6 +53,9 @@ public abstract class BigTest {
   @Autowired
   protected IRoleSpringRepository roleRepository;
 
+  @Autowired
+  protected INewsSpringRepository newsRepository;
+
   @Before
   public void setup() {
     createRoles();
@@ -59,7 +64,11 @@ public abstract class BigTest {
 
   @After
   public void tearDown() {
+    deleteAllEntities();
+  }
 
+  private void deleteAllEntities() {
+    newsRepository.deleteAll();
   }
 
   private void createUserData() {
@@ -93,6 +102,15 @@ public abstract class BigTest {
         "Voorhees",
         ADMIN_EMAIL,
         Role.ADMIN));
+  }
+
+  protected NewsEntity saveNews() {
+    return newsRepository.save(NewsEntity.builder()
+        .image("https://s3.com/news.jpg")
+        .content("News content.")
+        .name("My first News!!")
+        .softDelete(false)
+        .build());
   }
 
   private UserEntity buildUser(String firstName, String lastName, String email, Role role) {

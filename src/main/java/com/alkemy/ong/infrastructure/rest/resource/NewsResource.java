@@ -1,6 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.resource;
 
-import com.alkemy.ong.application.service.usecase.IDeleteTestimonialUseCase;
+import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TestimonialResource {
+public class NewsResource {
 
   @Autowired
-  private IDeleteTestimonialUseCase deleteTestimonialUseCase;
+  private IDeleteNewsUseCase deleteNewsUseCase;
 
-  @DeleteMapping("/testimonials/{id}")
+  @DeleteMapping("/news/{id}")
   public ResponseEntity<Void> delete(@PathVariable Long id) {
-    deleteTestimonialUseCase.delete(id);
+    deleteNewsUseCase.delete(id);
     return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
   }
+
 }
