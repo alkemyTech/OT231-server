@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CategoryResourse {
 
-    @Autowired
-    private IDeleteCategoryUseCase deleteCategoryUseCase;
+  @Autowired
+  private IDeleteCategoryUseCase deleteCategoryUseCase;
 
-    @DeleteMapping("/categories/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        deleteCategoryUseCase.delete(id);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-    }
+  @DeleteMapping("/categories/{id}")
+  public ResponseEntity<Void> delete(@PathVariable Long id) {
+    deleteCategoryUseCase.delete(id);
+    return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+  }
 }

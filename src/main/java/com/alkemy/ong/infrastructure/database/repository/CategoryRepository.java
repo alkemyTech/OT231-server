@@ -10,25 +10,25 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class CategoryRepository implements ICategoryRepository {
 
-    @Autowired
-    private final ICategorySpringRepository categorySpringRepository;
+  @Autowired
+  private final ICategorySpringRepository categorySpringRepository;
 
-    @Override
-    public boolean existsById(Long id) {
-        return categorySpringRepository.existsById(id);
-    }
+  @Override
+  public boolean existsById(Long id) {
+    return categorySpringRepository.existsById(id);
+  }
 
-    @Override
-    public boolean isDeleted(Long id) {
-        if (categorySpringRepository.isDeleted(id) == null) {
-            return false;
-        }
-        return categorySpringRepository.isDeleted(id).isPresent();
+  @Override
+  public boolean isDeleted(Long id) {
+    if (categorySpringRepository.isDeleted(id) == null) {
+      return false;
     }
+    return categorySpringRepository.isDeleted(id).isPresent();
+  }
 
-    @Override
-    @Transactional
-    public void delete(Long id) {
-        categorySpringRepository.softDeleteById(id);
-    }
+  @Override
+  @Transactional
+  public void delete(Long id) {
+    categorySpringRepository.softDeleteById(id);
+  }
 }

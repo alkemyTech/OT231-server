@@ -11,10 +11,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ICategorySpringRepository extends JpaRepository<CategoryEntity, Long> {
 
-    @Query("SELECT c FROM CategoryEntity c WHERE c.softDelete = true")
-    Optional<CategoryEntity> isDeleted(Long id);
+  @Query("SELECT c FROM CategoryEntity c WHERE c.softDelete = true")
+  Optional<CategoryEntity> isDeleted(Long id);
 
-    @Modifying
-    @Query("UPDATE CategoryEntity c SET c.softDelete = true WHERE c.id = ?1")
-    void softDeleteById(Long id);
+  @Modifying
+  @Query("UPDATE CategoryEntity c SET c.softDelete = true WHERE c.id = ?1")
+  void softDeleteById(Long id);
 }
