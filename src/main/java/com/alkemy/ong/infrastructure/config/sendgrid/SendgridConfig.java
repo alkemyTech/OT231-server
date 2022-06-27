@@ -1,17 +1,16 @@
 package com.alkemy.ong.infrastructure.config.sendgrid;
 
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+@ConfigurationProperties(prefix = "sendgrid")
 @Configuration
-@Getter
+@Data
 public class SendgridConfig {
 
-  @Value("${sendgrid.sender}")
   private String sender;
 
-  @Value("${sendgrid.key}")
-  private String apiKey;
+  private String key;
 
 }

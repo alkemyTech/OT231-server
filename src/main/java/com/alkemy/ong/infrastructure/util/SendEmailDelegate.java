@@ -33,7 +33,7 @@ public class SendEmailDelegate implements ISendEmail {
     );
 
     Mail mail = new Mail(fromEmail, email.getSubject(), toEmail, mailContent);
-    SendGrid sendGrid = new SendGrid(sendgridConfig.getApiKey());
+    SendGrid sendGrid = new SendGrid(sendgridConfig.getKey());
     try {
       Request request = new Request();
       request.setMethod(Method.POST);
