@@ -1,12 +1,9 @@
 package com.alkemy.ong.infrastructure.config.spring;
 
 import com.alkemy.ong.application.service.AuthenticationService;
-<<<<<<< HEAD
 import com.alkemy.ong.application.service.GetOrganizationService;
-=======
 import com.alkemy.ong.application.service.UserService;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
->>>>>>> main
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
 import com.alkemy.ong.infrastructure.database.repository.OrganizationRepository;
