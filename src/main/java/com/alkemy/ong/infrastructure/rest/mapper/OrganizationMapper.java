@@ -2,9 +2,6 @@ package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.Organization;
 import com.alkemy.ong.infrastructure.rest.response.OrganizationPublicDataResponse;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,10 +11,10 @@ public class OrganizationMapper {
       return null;
     }
 
-    return OrganizationPublicDataResponse.builder().
-            name(organization.getName()).
-            image(organization.getImage()).
-            address(organization.getAddress()).
-            phone(organization.getPhone()).build();
+    return OrganizationPublicDataResponse.builder()
+            .name(organization.getName())
+            .image(organization.getImage())
+            .address(organization.getAddress())
+            .phone(organization.getPhone()).build();
   }
 }
