@@ -1,6 +1,9 @@
 package com.alkemy.ong.infrastructure.config.spring;
 
+import com.alkemy.ong.application.repository.ITestimonialRepository;
 import com.alkemy.ong.application.service.AuthenticationService;
+import com.alkemy.ong.application.service.TestimonialService;
+import com.alkemy.ong.application.service.usecase.IDeleteTestimonialUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.infrastructure.database.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
@@ -16,4 +19,9 @@ public class ServiceBeanConfig {
     return new AuthenticationService(authenticationManager, userRepository);
   }
 
+  @Bean
+  public IDeleteTestimonialUseCase testimonialService(
+          ITestimonialRepository testimonialRepository) {
+    return new TestimonialService(testimonialRepository);
+  }
 }

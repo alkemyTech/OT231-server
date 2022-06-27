@@ -2,6 +2,7 @@ package com.alkemy.ong.infrastructure.config.spring.exception;
 
 import com.alkemy.ong.application.exception.InvalidCredentialsException;
 import com.alkemy.ong.application.exception.RecordNotFoundException;
+import com.alkemy.ong.application.exception.TestimonialNotFoundException;
 import com.alkemy.ong.infrastructure.rest.response.ErrorResponse;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ public class DefaultExceptionHandler {
   private static final String SOMETHING_WENT_WRONG = "Something went wrong.";
   private static final String INVALID_CREDENTIALS = "Please, provide valid credentials.";
   private static final String RECORD_NOT_FOUND = "Record not found in database.";
+  private static final String TESTIMONIAL_NOT_FOUND = "Testimonial not found.";
 
   @ExceptionHandler(value = Exception.class)
   public ResponseEntity<ErrorResponse> handleException(Exception e) {
@@ -62,6 +64,15 @@ public class DefaultExceptionHandler {
     ErrorResponse errorResponse = buildError(HttpStatus.NOT_FOUND,
         RECORD_NOT_FOUND,
         e.getMessage());
+    return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+  }
+
+  @ExceptionHandler(value = TestimonialNotFoundException.class)
+  protected ResponseEntity<ErrorResponse> handleTestimonialNotFound(
+          TestimonialNotFoundException e) {
+    ErrorResponse errorResponse = buildError(HttpStatus.NOT_FOUND,
+            TESTIMONIAL_NOT_FOUND,
+            e.getMessage());
     return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
   }
 
