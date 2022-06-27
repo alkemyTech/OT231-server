@@ -10,3 +10,8 @@ spring:
       hbm2ddl.auto: create-drop
   h2.console.enabled: false
   sql.init.platform: h2
+
+# Sendgrid
+sendgrid:
+  sender: foo
+  key: foo
