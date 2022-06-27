@@ -20,9 +20,6 @@ public class CategoryRepository implements ICategoryRepository {
 
   @Override
   public boolean isDeleted(Long id) {
-    if (categorySpringRepository.isDeleted(id) == null) {
-      return false;
-    }
     return categorySpringRepository.isDeleted(id).isPresent();
   }
 
