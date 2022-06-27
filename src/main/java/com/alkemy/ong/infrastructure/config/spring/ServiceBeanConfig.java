@@ -34,4 +34,9 @@ public class ServiceBeanConfig {
   public IDeleteCategoryUseCase deleteCategoryUseCase(ICategoryRepository categoryRepository) {
     return new CategoryService(categoryRepository);
   }
+
+  @Bean
+  public IDeleteNewsUseCase deleteNewsService(INewsRepository newsRepository) {
+    return new NewsService(newsRepository);
+  }
 }
