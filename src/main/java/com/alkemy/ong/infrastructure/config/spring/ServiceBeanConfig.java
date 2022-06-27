@@ -1,10 +1,13 @@
 package com.alkemy.ong.infrastructure.config.spring;
 
 import com.alkemy.ong.application.repository.ICategoryRepository;
+import com.alkemy.ong.application.repository.INewsRepository;
 import com.alkemy.ong.application.service.AuthenticationService;
 import com.alkemy.ong.application.service.CategoryService;
+import com.alkemy.ong.application.service.NewsService;
 import com.alkemy.ong.application.service.UserService;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
+import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.infrastructure.database.repository.UserRepository;
