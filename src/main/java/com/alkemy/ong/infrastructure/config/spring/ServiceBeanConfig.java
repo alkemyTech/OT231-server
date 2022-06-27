@@ -29,7 +29,6 @@ public class ServiceBeanConfig {
     return new UserService(userRepository);
   }
 
-
   @Bean
   public IDeleteCategoryUseCase deleteCategoryUseCase(ICategoryRepository categoryRepository) {
     return new CategoryService(categoryRepository);
