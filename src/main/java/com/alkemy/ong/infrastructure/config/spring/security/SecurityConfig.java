@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers(HttpMethod.POST, "/auth/login", "/auth/register")
         .permitAll()
-        .antMatchers(HttpMethod.DELETE, "/news/*")
+        .antMatchers(HttpMethod.DELETE, "/news/{id:[\\d+]}")
         .hasAnyRole(Role.ADMIN.name())
         .anyRequest()
         .authenticated()

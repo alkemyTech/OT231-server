@@ -20,9 +20,6 @@ public class NewsRepository implements INewsRepository {
 
   @Override
   public boolean isDeleted(Long id) {
-    if (newsSpringRepository.isDeleted(id) == null) {
-      return false;
-    }
     return newsSpringRepository.isDeleted(id).isPresent();
   }
 
