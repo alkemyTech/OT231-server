@@ -53,8 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(AuthenticationManagerBuilder managerBuilder) throws Exception {
-    managerBuilder.userDetailsService(userDetailsService)
-        .passwordEncoder(passwordEncoder);
+    managerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
   }
 
   @Override
@@ -67,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeRequests()
-        .antMatchers(HttpMethod.POST, "/auth/login")
+        .antMatchers(HttpMethod.POST, "/auth/login", "/auth/register")
         .permitAll()
         .anyRequest()
         .authenticated()
