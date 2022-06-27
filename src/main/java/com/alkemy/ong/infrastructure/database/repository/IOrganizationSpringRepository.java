@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IOrganizationSpringRepository extends JpaRepository<OrganizationEntity, Long> {
-  @Query("SELECT u FROM OrganizationEntity u ORDER BY u.id ASC LIMIT 1")
+  @Query(value = "SELECT u FROM OrganizationEntity u ")
   OrganizationEntity find();
 
 }
