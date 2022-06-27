@@ -1,7 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.Organization;
-import com.alkemy.ong.infrastructure.rest.response.ListOrganizationResponse;
 import com.alkemy.ong.infrastructure.rest.response.OrganizationPublicDataResponse;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,20 +9,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrganizationMapper {
-  public ListOrganizationResponse toResponse(List<Organization> organizations) {
-    if (organizations == null || organizations.isEmpty()) {
-      return new ListOrganizationResponse(Collections.emptyList());
+  public OrganizationPublicDataResponse toResponse(Organization organization) {
+    if (organization == null) {
+      return null;
     }
 
-    List<OrganizationPublicDataResponse> organizationPublicDataResponses = new ArrayList<>(
-            organizations.size());
-
-    for (Organization organization : organizations) {
-      organizationPublicDataResponses.add(new OrganizationPublicDataResponse(
-                organization.getName(), organization.getImage(),organization.getAddress(),
-                organization.getPhone()));
-    }
-
-    return new ListOrganizationResponse(organizationPublicDataResponses);
+    return OrganizationPublicDataResponse.builder().
+            name(organization.getName()).
+            image(organization.getImage()).
+            address(organization.getAddress()).
+            phone(organization.getPhone()).build();
   }
 }

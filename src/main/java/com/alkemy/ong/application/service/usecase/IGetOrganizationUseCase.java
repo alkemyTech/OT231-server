@@ -4,6 +4,6 @@ import com.alkemy.ong.domain.Organization;
 
 import java.util.List;
 
-public interface IOrganizationPublicDataUseCase {
-  List<Organization> findAll();
+public interface IGetOrganizationUseCase {
+  Organization find();
 }

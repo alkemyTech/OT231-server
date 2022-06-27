@@ -1,13 +1,20 @@
 package com.alkemy.ong.infrastructure.rest.response;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class ListOrganizationResponse {
-  private List<OrganizationPublicDataResponse> organizations;
+@Setter
+@Builder
+public class UserRegisterResponse {
+
+  private String firstName;
+  private String lastName;
+  private String email;
+
 }

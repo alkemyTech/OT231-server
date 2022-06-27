@@ -5,5 +5,5 @@ import com.alkemy.ong.domain.Organization;
 import java.util.List;
 
 public interface IOrganizationRepository {
-  List<Organization> findAll();
+  Organization find();
 }
