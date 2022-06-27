@@ -35,6 +35,7 @@ public class ServiceBeanConfig {
   public IGetOrganizationUseCase organizationPublicDataUseCase(
           OrganizationRepository organizationRepository) {
     return new GetOrganizationService(organizationRepository);
+  }
 
   @Bean
   public IDeleteNewsUseCase deleteNewsService(INewsRepository newsRepository) {
