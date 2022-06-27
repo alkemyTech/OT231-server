@@ -10,3 +10,8 @@ spring:
     show-sql: false
     defer-datasource-initialization: false
     hibernate.ddl-auto: update
+
+# Sendgrid
+sendgrid:
+  sender: foo
+  key: foo
