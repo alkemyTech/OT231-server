@@ -88,6 +88,7 @@ mvn checkstyle:checkstyle
 - [Best practices API design](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design)
 - [Writing clean code](https://github.com/jnguyen095/clean-code/blob/master/Clean.Code.A.Handbook.of.Agile.Software.Craftsmanship.pdf)
 - [Design patterns](https://refactoring.guru/design-patterns)
+- [Clean architecture](https://github.com/GunterMueller/Books-3/blob/master/Clean%20Architecture%20A%20Craftsman%20Guide%20to%20Software%20Structure%20and%20Design.pdf)
 - Exception handling
     - [Exception handling for REST with Spring](https://www.baeldung.com/exception-handling-for-rest-with-spring)
     - [Handling exceptions and custom exceptions](https://www.javadevjournal.com/spring/exception-handling-for-rest-with-spring/)
