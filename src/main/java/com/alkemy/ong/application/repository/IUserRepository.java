@@ -8,4 +8,9 @@ public interface IUserRepository {
 
   User add(User user);
 
+  boolean existsById(Long id);
+
+  boolean isDeleted(Long id);
+
+  void delete(Long id);
 }
