@@ -1,9 +1,12 @@
 package com.alkemy.ong.infrastructure.config.spring;
 
 import com.alkemy.ong.application.service.AuthenticationService;
+import com.alkemy.ong.application.service.MemberService;
 import com.alkemy.ong.application.service.UserService;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
+import com.alkemy.ong.application.service.usecase.IDeleteMemberUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
+import com.alkemy.ong.infrastructure.database.repository.IMemberSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +24,11 @@ public class ServiceBeanConfig {
   @Bean
   public ICreateUserUseCase createUserService(UserRepository userRepository) {
     return new UserService(userRepository);
+  }
+
+  @Bean
+  public IDeleteMemberUseCase deleteMemberUseCase(IMemberSpringRepository memberSpringRepository) {
+    return new MemberService(memberSpringRepository);
   }
 
 }
