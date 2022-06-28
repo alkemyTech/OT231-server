@@ -25,7 +25,7 @@ public class ServiceBeanConfig {
   }
 
   @Bean
-  public IDeleteTestimonialUseCase testimonialService(
+  public IDeleteTestimonialUseCase deleteTestimonialUseCase(
           ITestimonialRepository testimonialRepository) {
     return new TestimonialService(testimonialRepository);
   }
