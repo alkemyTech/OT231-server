@@ -30,8 +30,23 @@ public class UserRepository implements IUserRepository {
     return userEntityMapper.toDomain(userSpringRepository.save(userEntity));
   }
 
+  @Override
+  public boolean existsById(Long id) {
+    return userSpringRepository.existsById(id);
+  }
+
+  @Override
+  public boolean isDeleted(Long id) {
+    return userSpringRepository.isDeleted(id).isPresent();
+  }
+
   private RoleEntity getRoleEntity(String role) {
     return roleSpringRepository.findByName(role);
   }
 
+  @Override
+  @Transactional
+  public void delete(Long id) {
+    userSpringRepository.softDeleteById(id);
+  }
 }
