@@ -16,10 +16,15 @@ public class MemberService implements IDeleteMemberUseCase {
     MemberEntity memberEntity = memberSpringRepository
         .findById(id)
         .orElseThrow(() -> new RecordNotFoundException("Member not found."));
-    if (Boolean.FALSE.equals(memberEntity.getSoftDelete())) {
+    if (isNotDeleted(memberEntity)) {
       memberEntity.setSoftDelete(true);
       memberSpringRepository.save(memberEntity);
     }
+  }
+
+  private boolean isNotDeleted(MemberEntity memberEntity) {
+    Boolean softDelete = memberEntity.getSoftDelete();
+    return softDelete == null || Boolean.FALSE.equals(softDelete);
   }
 
 }
