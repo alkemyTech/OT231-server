@@ -22,13 +22,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 public class ServiceBeanConfig {
 
   @Bean
-  public ILoginUseCase authenticationService(AuthenticationManager authenticationManager,
+  public ILoginUseCase loginUseCase(AuthenticationManager authenticationManager,
       UserRepository userRepository) {
     return new AuthenticationService(authenticationManager, userRepository);
   }
 
   @Bean
-  public ICreateUserUseCase createUserService(UserRepository userRepository) {
+  public ICreateUserUseCase createUserUseCase(UserRepository userRepository) {
     return new UserService(userRepository);
   }
 
@@ -38,13 +38,13 @@ public class ServiceBeanConfig {
   }
 
   @Bean
-  public IGetOrganizationUseCase organizationPublicDataUseCase(
+  public IGetOrganizationUseCase getOrganizationUseCase(
       OrganizationRepository organizationRepository) {
     return new OrganizationService(organizationRepository);
   }
 
   @Bean
-  public IDeleteNewsUseCase deleteNewsService(INewsRepository newsRepository) {
+  public IDeleteNewsUseCase deleteNewsUseCase(INewsRepository newsRepository) {
     return new NewsService(newsRepository);
 
   }
