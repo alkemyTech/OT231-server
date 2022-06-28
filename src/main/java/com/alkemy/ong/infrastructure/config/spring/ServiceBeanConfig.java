@@ -1,11 +1,14 @@
 package com.alkemy.ong.infrastructure.config.spring;
 
+import com.alkemy.ong.application.repository.ICategoryRepository;
 import com.alkemy.ong.application.repository.INewsRepository;
 import com.alkemy.ong.application.service.AuthenticationService;
-import com.alkemy.ong.application.service.OrganizationService;
+import com.alkemy.ong.application.service.CategoryService;
 import com.alkemy.ong.application.service.NewsService;
+import com.alkemy.ong.application.service.OrganizationService;
 import com.alkemy.ong.application.service.UserService;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
+import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
@@ -30,8 +33,13 @@ public class ServiceBeanConfig {
   }
 
   @Bean
+  public IDeleteCategoryUseCase deleteCategoryUseCase(ICategoryRepository categoryRepository) {
+    return new CategoryService(categoryRepository);
+  }
+
+  @Bean
   public IGetOrganizationUseCase organizationPublicDataUseCase(
-          OrganizationRepository organizationRepository) {
+      OrganizationRepository organizationRepository) {
     return new OrganizationService(organizationRepository);
   }
 
@@ -40,5 +48,4 @@ public class ServiceBeanConfig {
     return new NewsService(newsRepository);
 
   }
-
 }
