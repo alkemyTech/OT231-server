@@ -39,7 +39,7 @@ public class NewsEntity {
   @Column(name = "IMAGE", nullable = false)
   private String image;
 
-  @Column(name = "CREATE_TIMESTAMP")
+  @Column(name = "CREATE_TIMESTAMP", updatable = false)
   @CreationTimestamp
   private Timestamp createTimestamp;
 

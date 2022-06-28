@@ -35,7 +35,7 @@ public class CategoryEntity {
   @Column(name = "IMAGE")
   private String image;
 
-  @Column(name = "CREATE_TIMESTAMP")
+  @Column(name = "CREATE_TIMESTAMP", updatable = false)
   @CreationTimestamp
   private Timestamp createTimestamp;
 

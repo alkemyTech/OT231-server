@@ -44,7 +44,7 @@ public class MemberEntity {
   @Column(name = "DESCRIPTION")
   private String description;
 
-  @Column(name = "CREATE_TIMESTAMP")
+  @Column(name = "CREATE_TIMESTAMP", updatable = false)
   @CreationTimestamp
   private Timestamp createTimestamp;
 

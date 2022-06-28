@@ -56,7 +56,7 @@ public class OrganizationEntity {
   @Column(name = "INSTAGRAM_URL")
   private String instagramUrl;
 
-  @Column(name = "CREATE_TIMESTAMP")
+  @Column(name = "CREATE_TIMESTAMP", updatable = false)
   @CreationTimestamp
   private Timestamp createTimestamp;
 

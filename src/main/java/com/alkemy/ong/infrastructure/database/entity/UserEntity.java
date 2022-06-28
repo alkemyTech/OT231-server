@@ -57,7 +57,7 @@ public class UserEntity implements UserDetails {
   @JoinColumn(name = "ROLE_ID")
   private RoleEntity role;
 
-  @Column(name = "CREATE_TIMESTAMP")
+  @Column(name = "CREATE_TIMESTAMP", updatable = false)
   @CreationTimestamp
   private Timestamp createTimestamp;
 
