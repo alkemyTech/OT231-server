@@ -28,7 +28,7 @@ public class UserResource {
   @Autowired
   private IDeleteUserUseCase deleteUserUseCase;
 
-  @PostMapping(value = "auth/register",
+  @PostMapping(value = "/auth/register",
       produces = {"application/json"},
       consumes = {"application/json"})
   public ResponseEntity<UserRegisterResponse> create(
@@ -38,7 +38,7 @@ public class UserResource {
     return new ResponseEntity<UserRegisterResponse>(response, HttpStatus.CREATED);
   }
 
-  @DeleteMapping(value = "/{id}")
+  @DeleteMapping(value = "/users/{id}")
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     deleteUserUseCase.delete(id);
     return ResponseEntity.noContent().build();
