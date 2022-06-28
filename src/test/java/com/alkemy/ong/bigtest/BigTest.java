@@ -4,9 +4,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import com.alkemy.ong.OngApplication;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
+import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
 import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
+import com.alkemy.ong.infrastructure.database.repository.spring.IMemberSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.INewsSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IRoleSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IUserSpringRepository;
@@ -56,6 +58,9 @@ public abstract class BigTest {
   @Autowired
   protected INewsSpringRepository newsRepository;
 
+  @Autowired
+  protected IMemberSpringRepository memberRepository;
+
   @Before
   public void setup() {
     createRoles();
@@ -69,6 +74,7 @@ public abstract class BigTest {
 
   private void deleteAllEntities() {
     newsRepository.deleteAll();
+    memberRepository.deleteAll();
   }
 
   private void createUserData() {
@@ -148,6 +154,14 @@ public abstract class BigTest {
             .build()))).andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
     return JsonPath.read(content, "$.token");
+  }
+
+  protected MemberEntity getRandomMember() {
+    return memberRepository.save(MemberEntity.builder()
+        .name("Charles Lee Ray")
+        .image("https://s3.com/chucky.jpg")
+        .softDelete(false)
+        .build());
   }
 
 }
