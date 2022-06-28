@@ -33,6 +33,7 @@ public class UserRegisterMapper {
         .firstName(user.getFirstName())
         .lastName(user.getLastName())
         .email(user.getEmail())
+        .token(user.getToken())
         .build();
   }
 }
