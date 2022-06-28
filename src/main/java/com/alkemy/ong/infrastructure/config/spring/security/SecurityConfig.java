@@ -1,5 +1,6 @@
 package com.alkemy.ong.infrastructure.config.spring.security;
 
+import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
 import com.alkemy.ong.infrastructure.config.spring.security.filter.CustomAccessDeniedHandler;
 import com.alkemy.ong.infrastructure.config.spring.security.filter.CustomAuthenticationEntryPoint;
 import com.alkemy.ong.infrastructure.config.spring.security.filter.JwtRequestFilter;
@@ -68,6 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers(HttpMethod.POST, "/auth/login", "/auth/register")
         .permitAll()
+        .antMatchers(HttpMethod.DELETE,"/members/{id:[\\d+]}")
+        .hasRole(Role.ADMIN.name())
         .anyRequest()
         .authenticated()
         .and()
