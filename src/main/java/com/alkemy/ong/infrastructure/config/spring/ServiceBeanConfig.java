@@ -30,6 +30,7 @@ public class ServiceBeanConfig {
     return new TestimonialService(testimonialRepository);
   }
 
+  @Bean
   public ICreateUserUseCase createUserService(UserRepository userRepository) {
     return new UserService(userRepository);
   }
