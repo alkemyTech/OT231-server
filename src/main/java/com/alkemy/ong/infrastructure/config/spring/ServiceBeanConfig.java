@@ -2,7 +2,7 @@ package com.alkemy.ong.infrastructure.config.spring;
 
 import com.alkemy.ong.application.repository.INewsRepository;
 import com.alkemy.ong.application.service.AuthenticationService;
-import com.alkemy.ong.application.service.GetOrganizationService;
+import com.alkemy.ong.application.service.OrganizationService;
 import com.alkemy.ong.application.service.NewsService;
 import com.alkemy.ong.application.service.UserService;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
@@ -32,7 +32,7 @@ public class ServiceBeanConfig {
   @Bean
   public IGetOrganizationUseCase organizationPublicDataUseCase(
           OrganizationRepository organizationRepository) {
-    return new GetOrganizationService(organizationRepository);
+    return new OrganizationService(organizationRepository);
   }
 
   @Bean

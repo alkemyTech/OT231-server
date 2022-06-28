@@ -3,11 +3,10 @@ package com.alkemy.ong.application.service;
 import com.alkemy.ong.application.repository.IOrganizationRepository;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
 import com.alkemy.ong.domain.Organization;
-import java.util.List;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class GetOrganizationService implements IGetOrganizationUseCase {
+public class OrganizationService implements IGetOrganizationUseCase {
 
   private final IOrganizationRepository organizationRepository;
 
@@ -15,4 +14,5 @@ public class GetOrganizationService implements IGetOrganizationUseCase {
   public Organization find() {
     return organizationRepository.find();
   }
+
 }

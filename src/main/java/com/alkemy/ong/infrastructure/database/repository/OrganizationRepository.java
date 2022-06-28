@@ -18,7 +18,7 @@ public class OrganizationRepository implements IOrganizationRepository {
   @Override
   @Transactional
   public Organization find() {
-    return organizationEntityMapper.toDomain(organizationSpringRepository.find());
+    return organizationEntityMapper.toDomain(organizationSpringRepository.findAll().get(0));
   }
 
 }
