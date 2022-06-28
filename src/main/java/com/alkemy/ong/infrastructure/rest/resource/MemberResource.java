@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("members")
+@RequestMapping("/members")
 public class MemberResource {
 
   @Autowired
@@ -20,7 +20,5 @@ public class MemberResource {
     deleteMemberUseCase.delete(id);
     return ResponseEntity.noContent().build();
   }
-
-
 
 }

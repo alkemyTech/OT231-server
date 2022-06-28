@@ -13,11 +13,12 @@ public class MemberService implements IDeleteMemberUseCase {
 
   @Override
   public void delete(Long id) {
-    MemberEntity member = memberSpringRepository
-            .findById(id).orElseThrow(() -> new RecordNotFoundException("Member not found"));
-    if (!member.getSoftDelete()) {
-      member.setSoftDelete(true);
-      memberSpringRepository.save(member);
+    MemberEntity memberEntity = memberSpringRepository
+        .findById(id)
+        .orElseThrow(() -> new RecordNotFoundException("Member not found."));
+    if (Boolean.FALSE.equals(memberEntity.getSoftDelete())) {
+      memberEntity.setSoftDelete(true);
+      memberSpringRepository.save(memberEntity);
     }
   }
 
