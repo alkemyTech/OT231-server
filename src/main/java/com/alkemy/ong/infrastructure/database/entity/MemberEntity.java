@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,6 +17,7 @@ import org.hibernate.annotations.CreationTimestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "MEMBERS")
 public class MemberEntity {
 
@@ -43,9 +45,9 @@ public class MemberEntity {
   private String description;
 
   @Column(name = "CREATE_TIMESTAMP")
-  @CreationTimestamp 
+  @CreationTimestamp
   private Timestamp createTimestamp;
-   
+
   @Column(name = "SOFT_DELETE")
   private Boolean softDelete;
 }

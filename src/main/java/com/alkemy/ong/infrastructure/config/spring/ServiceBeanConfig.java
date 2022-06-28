@@ -17,7 +17,7 @@ import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteTestimonialUseCase;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
-import com.alkemy.ong.infrastructure.database.repository.IMemberSpringRepository;
+import com.alkemy.ong.infrastructure.database.repository.MemberRepository;
 import com.alkemy.ong.infrastructure.database.repository.OrganizationRepository;
 import com.alkemy.ong.infrastructure.database.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
@@ -45,8 +45,8 @@ public class ServiceBeanConfig {
   }
 
   @Bean
-  public IDeleteMemberUseCase deleteMemberUseCase(IMemberSpringRepository memberSpringRepository) {
-    return new MemberService(memberSpringRepository);
+  public IDeleteMemberUseCase deleteMemberUseCase(MemberRepository memberRepository) {
+    return new MemberService(memberRepository);
   }
 
   @Bean

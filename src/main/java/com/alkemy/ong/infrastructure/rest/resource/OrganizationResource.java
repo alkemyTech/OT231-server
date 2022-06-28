@@ -20,6 +20,6 @@ public class OrganizationResource {
   @GetMapping(value = "/organization/public", produces = {"application/json"})
   public ResponseEntity<OrganizationPublicDataResponse> getPublicData() {
     return ResponseEntity.ok().body(organizationMapper
-            .toResponse(getOrganizationUseCase.find()));
+        .toResponse(getOrganizationUseCase.find()));
   }
 }

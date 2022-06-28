@@ -5,6 +5,8 @@ import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
 import com.alkemy.ong.infrastructure.database.mapper.UserEntityMapper;
+import com.alkemy.ong.infrastructure.database.repository.spring.IRoleSpringRepository;
+import com.alkemy.ong.infrastructure.database.repository.spring.IUserSpringRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

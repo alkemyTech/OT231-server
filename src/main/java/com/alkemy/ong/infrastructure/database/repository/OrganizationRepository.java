@@ -3,6 +3,7 @@ package com.alkemy.ong.infrastructure.database.repository;
 import com.alkemy.ong.application.repository.IOrganizationRepository;
 import com.alkemy.ong.domain.Organization;
 import com.alkemy.ong.infrastructure.database.mapper.OrganizationEntityMapper;
+import com.alkemy.ong.infrastructure.database.repository.spring.IOrganizationSpringRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

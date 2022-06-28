@@ -12,11 +12,11 @@ public class OrganizationEntityMapper {
       return null;
     }
     return Organization.builder()
-            .name(organizationEntity.getName())
-            .image(organizationEntity.getImage())
-            .address(organizationEntity.getAddress())
-            .phone(organizationEntity.getPhone())
-            .build();
+        .name(organizationEntity.getName())
+        .image(organizationEntity.getImage())
+        .address(organizationEntity.getAddress())
+        .phone(organizationEntity.getPhone())
+        .build();
   }
 
 }

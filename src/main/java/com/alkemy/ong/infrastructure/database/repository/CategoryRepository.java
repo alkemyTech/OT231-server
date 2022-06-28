@@ -1,8 +1,8 @@
 package com.alkemy.ong.infrastructure.database.repository;
 
 import com.alkemy.ong.application.repository.ICategoryRepository;
+import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class CategoryRepository implements ICategoryRepository {
 
-  @Autowired
   private final ICategorySpringRepository categorySpringRepository;
 
   @Override

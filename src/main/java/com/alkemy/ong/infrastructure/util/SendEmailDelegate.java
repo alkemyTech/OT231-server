@@ -11,7 +11,6 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +27,8 @@ public class SendEmailDelegate implements ISendEmail {
     Email fromEmail = new Email(sendgridConfig.getSender());
     Email toEmail = new Email(email.getTo());
     Content mailContent = new Content(
-            email.getContentType(),
-            email.getContent()
+        email.getContentType(),
+        email.getContent()
     );
 
     Mail mail = new Mail(fromEmail, email.getSubject(), toEmail, mailContent);

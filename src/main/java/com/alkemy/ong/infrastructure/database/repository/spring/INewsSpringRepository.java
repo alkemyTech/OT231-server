@@ -1,4 +1,4 @@
-package com.alkemy.ong.infrastructure.database.repository;
+package com.alkemy.ong.infrastructure.database.repository.spring;
 
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
 import java.util.Optional;
