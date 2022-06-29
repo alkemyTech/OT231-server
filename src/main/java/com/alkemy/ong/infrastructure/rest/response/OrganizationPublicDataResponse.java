@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,5 +19,6 @@ public class OrganizationPublicDataResponse {
   private String image;
   private String address;
   private String phone;
+  private List<String> socialMedia;
 
 }
