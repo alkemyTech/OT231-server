@@ -28,6 +28,7 @@ public class UserRepository implements IUserRepository {
   @Transactional
   public User add(User newUser) {
     UserEntity userEntity = userEntityMapper.toEntity(newUser);
+    userEntity.setSoftDelete(false);
     userEntity.setRole(getRoleEntity(newUser.getRole()));
     return userEntityMapper.toDomain(userSpringRepository.save(userEntity));
   }
