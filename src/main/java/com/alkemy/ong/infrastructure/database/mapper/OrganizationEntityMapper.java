@@ -16,6 +16,9 @@ public class OrganizationEntityMapper {
         .image(organizationEntity.getImage())
         .address(organizationEntity.getAddress())
         .phone(organizationEntity.getPhone())
+        .facebookUrl(organizationEntity.getFacebookUrl())
+        .instagramUrl(organizationEntity.getInstagramUrl())
+        .linkedIndUrl(organizationEntity.getLinkedInUrl())
         .build();
   }
 
