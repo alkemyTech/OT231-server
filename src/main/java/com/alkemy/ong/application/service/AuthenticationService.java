@@ -24,7 +24,7 @@ public class AuthenticationService implements ILoginUseCase {
   private User getUserBy(String email) {
     User user = userRepository.findByEmail(email);
     if (user == null) {
-      throw new RecordNotFoundException("User not found");
+      throw new RecordNotFoundException("User not found.");
     }
     return user;
   }

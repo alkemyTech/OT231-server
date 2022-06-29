@@ -13,16 +13,17 @@ public class MemberService implements IDeleteMemberUseCase {
 
   @Override
   public void delete(Long id) {
-    Member member = memberRepository
-        .findById(id)
-        .orElseThrow(() -> new RecordNotFoundException("Member not found."));
-
-    if (isDeleted(member)) {
-      throw new RecordNotFoundException("Member not found.");
-    }
-
+    Member member = findBy(id);
     member.setSoftDelete(true);
     memberRepository.save(member);
+  }
+
+  private Member findBy(Long id) {
+    Member member = memberRepository.findById(id).orElse(null);
+    if (member == null || isDeleted(member)) {
+      throw new RecordNotFoundException("Member not found.");
+    }
+    return member;
   }
 
   private boolean isDeleted(Member member) {
