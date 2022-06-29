@@ -11,4 +11,7 @@ public class Organization {
   private String image;
   private String address;
   private String phone;
+  private String facebookUrl;
+  private String instagramUrl;
+  private String linkedIndUrl;
 }
