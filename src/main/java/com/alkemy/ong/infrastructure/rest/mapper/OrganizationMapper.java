@@ -6,6 +6,7 @@ import com.alkemy.ong.infrastructure.rest.response.OrganizationPublicDataRespons
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.List;
 
 @Component
 public class OrganizationMapper {
@@ -19,9 +20,9 @@ public class OrganizationMapper {
         .image(organization.getImage())
         .address(organization.getAddress())
         .phone(organization.getPhone())
-        .socialMedia(Collections.singletonList(organizationSocialMedia.getFacebookUrl()))
-        .socialMedia(Collections.singletonList(organizationSocialMedia.getInstagramUrl()))
-        .socialMedia(Collections.singletonList(organizationSocialMedia.getLinkedIndUrl()))
+        .socialMedia(List.add(organizationSocialMedia.getFacebookUrl()))
+        .socialMedia(List.add(organizationSocialMedia.getInstagramUrl()))
+        .socialMedia(List.add(organizationSocialMedia.getLinkedIndUrl()))
         .build();
   }
 
