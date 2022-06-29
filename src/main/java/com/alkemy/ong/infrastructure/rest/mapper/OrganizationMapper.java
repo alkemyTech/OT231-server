@@ -1,16 +1,15 @@
 package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.Organization;
-import com.alkemy.ong.domain.OrganizationSocialMedia;
 import com.alkemy.ong.infrastructure.rest.response.OrganizationPublicDataResponse;
+import java.util.Collections;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 
 @Component
 public class OrganizationMapper {
 
-  public OrganizationPublicDataResponse toResponse(Organization organization, OrganizationSocialMedia organizationSocialMedia) {
+  public OrganizationPublicDataResponse toResponse(Organization organization) {
     if (organization == null) {
       return null;
     }
@@ -19,9 +18,9 @@ public class OrganizationMapper {
         .image(organization.getImage())
         .address(organization.getAddress())
         .phone(organization.getPhone())
-        .socialMedia(Collections.singletonList(organizationSocialMedia.getFacebookUrl()))
-        .socialMedia(Collections.singletonList(organizationSocialMedia.getInstagramUrl()))
-        .socialMedia(Collections.singletonList(organizationSocialMedia.getLinkedIndUrl()))
+        .socialMedia(Collections.singletonList(organization.getFacebookUrl()))
+        .socialMedia(Collections.singletonList(organization.getInstagramUrl()))
+        .socialMedia(Collections.singletonList(organization.getLinkedIndUrl()))
         .build();
   }
 
