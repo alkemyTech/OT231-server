@@ -1,6 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.response;
 
-import java.util.List;
+import com.alkemy.ong.domain.SocialMedia;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +19,6 @@ public class OrganizationPublicDataResponse {
   private String image;
   private String address;
   private String phone;
-  private List<String> socialMedia;
+  private SocialMedia socialMedia;
 
 }

@@ -14,4 +14,5 @@ public class Organization {
   private String facebookUrl;
   private String instagramUrl;
   private String linkedIndUrl;
+  private SocialMedia socialMedia;
 }
