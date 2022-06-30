@@ -16,7 +16,9 @@ import com.alkemy.ong.application.service.usecase.IDeleteMemberUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteTestimonialUseCase;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
+import com.alkemy.ong.application.service.usecase.IGetUserUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
+import com.alkemy.ong.infrastructure.config.spring.security.common.JwtUtils;
 import com.alkemy.ong.infrastructure.database.repository.MemberRepository;
 import com.alkemy.ong.infrastructure.database.repository.OrganizationRepository;
 import com.alkemy.ong.infrastructure.database.repository.UserRepository;
@@ -41,7 +43,7 @@ public class ServiceBeanConfig {
 
   @Bean
   public ICreateUserUseCase createUserUseCase(UserRepository userRepository) {
-    return new UserService(userRepository);
+    return new UserService(userRepository, null);
   }
 
   @Bean
@@ -63,6 +65,11 @@ public class ServiceBeanConfig {
   @Bean
   public IDeleteNewsUseCase deleteNewsUseCase(INewsRepository newsRepository) {
     return new NewsService(newsRepository);
+  }
+
+  @Bean
+  public IGetUserUseCase getUserUseCase(UserRepository userRepository, JwtUtils jwtUtils) {
+    return new UserService(userRepository, jwtUtils);
   }
 
 }
