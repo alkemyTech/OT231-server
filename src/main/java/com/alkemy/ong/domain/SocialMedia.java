@@ -10,4 +10,5 @@ public class SocialMedia {
   private String facebookUrl;
   private String instagramUrl;
   private String linkedIndUrl;
+
 }
