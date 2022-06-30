@@ -16,6 +16,7 @@ import com.alkemy.ong.application.service.usecase.IDeleteMemberUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteTestimonialUseCase;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
+import com.alkemy.ong.application.service.usecase.IListUserUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.infrastructure.database.repository.MemberRepository;
 import com.alkemy.ong.infrastructure.database.repository.OrganizationRepository;
@@ -63,6 +64,11 @@ public class ServiceBeanConfig {
   @Bean
   public IDeleteNewsUseCase deleteNewsUseCase(INewsRepository newsRepository) {
     return new NewsService(newsRepository);
+  }
+
+  @Bean
+  public IListUserUseCase listUserUseCase(UserRepository userRepository) {
+    return new UserService(userRepository);
   }
 
 }

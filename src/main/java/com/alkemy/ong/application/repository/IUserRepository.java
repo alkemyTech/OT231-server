@@ -1,6 +1,7 @@
 package com.alkemy.ong.application.repository;
 
 import com.alkemy.ong.domain.User;
+import java.util.List;
 
 public interface IUserRepository {
 
@@ -13,4 +14,6 @@ public interface IUserRepository {
   boolean isDeleted(Long id);
 
   void delete(Long id);
+
+  List<User> findAll();
 }

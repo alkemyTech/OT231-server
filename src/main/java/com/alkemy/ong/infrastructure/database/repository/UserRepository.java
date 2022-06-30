@@ -7,6 +7,7 @@ import com.alkemy.ong.infrastructure.database.entity.UserEntity;
 import com.alkemy.ong.infrastructure.database.mapper.UserEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.IRoleSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IUserSpringRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,5 +52,10 @@ public class UserRepository implements IUserRepository {
   @Transactional
   public void delete(Long id) {
     userSpringRepository.softDeleteById(id);
+  }
+
+  @Override
+  public List<User> findAll() {
+    return userEntityMapper.listEntity2Domain(userSpringRepository.findAll());
   }
 }
