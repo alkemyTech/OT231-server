@@ -17,8 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Log
 @Configuration
 @Profile("default")
-public class SeedUsersTable {
-  
+public class SeedUsers {
+
   private static final String ADMIN_EMAIL_I = "jason@voorhees.com";
   private static final String ADMIN_EMAIL_II = "freddy@krueger.com";
   private static final String ADMIN_EMAIL_III = "michael@myers.com";
@@ -30,7 +30,7 @@ public class SeedUsersTable {
   private static final String USER_EMAIL_IV = "elon@tesla.com";
   private static final String USER_EMAIL_V = "jack@twitter.com";
   private static final String PASSWORD = "abcd1234";
-  
+
   @Autowired
   protected PasswordEncoder passwordEncoder;
 
@@ -39,7 +39,7 @@ public class SeedUsersTable {
 
   @Autowired
   protected IRoleSpringRepository roleRepository;
-  
+
   @Bean
   CommandLineRunner initDatabase() {
     return args -> {
@@ -58,7 +58,7 @@ public class SeedUsersTable {
       log.info("Initial Roles created");
     }
   }
-  
+
   private void createStandardAndAdminUsers() {
     if (userRepository.count() == 0) {
       userRepository.saveAll(List.of(
@@ -75,14 +75,14 @@ public class SeedUsersTable {
       log.info("Initial Users created");
     }
   }
-  
+
   private RoleEntity buildRole(Role role) {
     return RoleEntity.builder()
-         .description(role.name())
-         .name(role.getFullRoleName())
-         .build();
+        .description(role.name())
+        .name(role.getFullRoleName())
+        .build();
   }
-  
+
   private UserEntity buildUser(String firstName, String lastName, String email, Role role) {
     return UserEntity.builder()
         .firstName(firstName)
