@@ -54,7 +54,8 @@ public class UserResource {
       produces = {"application/json"})
   public ResponseEntity<AuthenticationResponse> getDetails(@RequestHeader HttpHeaders headers) {
     String jwt = headers.getFirst("Authorization");
-    AuthenticationResponse response = authenticationMapper.toResponse(getUserUseCase.getDetails(jwt));
+    AuthenticationResponse response = authenticationMapper.toResponse(
+                                          getUserUseCase.getDetails(jwt));
     return ResponseEntity.ok(response);
   }
 
