@@ -11,15 +11,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserListMapper {
 
-  public UserListResponse toResponse(List<User> usersList) {
-    if (usersList == null || usersList.isEmpty()) {
+  public UserListResponse listDomain2Response(List<User> listUsers) {
+    if (listUsers == null || listUsers.isEmpty()) {
       return new UserListResponse(Collections.emptyList());
     }
-
-    List<UserResponse> userResponses = new ArrayList<>(usersList.size());
-    for (User user : usersList) {
-      userResponses.add(new UserResponse(user.getEmail()));
+    List<UserResponse> listUsersResponses = new ArrayList<>(listUsers.size());
+    for (User user : listUsers) {
+      listUsersResponses.add(new UserResponse(user.getEmail()));
     }
-    return new UserListResponse(userResponses);
+    return new UserListResponse(listUsersResponses);
   }
 }

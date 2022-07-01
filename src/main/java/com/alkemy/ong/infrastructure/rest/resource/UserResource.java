@@ -9,6 +9,7 @@ import com.alkemy.ong.infrastructure.rest.mapper.UserRegisterMapper;
 import com.alkemy.ong.infrastructure.rest.request.UserRegisterRequest;
 import com.alkemy.ong.infrastructure.rest.response.UserListResponse;
 import com.alkemy.ong.infrastructure.rest.response.UserRegisterResponse;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,8 @@ public class UserResource {
 
   @GetMapping(value = "/users", produces = {"application/json"})
   public ResponseEntity<UserListResponse> getAll() {
-    return ResponseEntity.ok().body(userListMapper.toResponse(listUserUseCase.findAll()));
+    List<User> listUsers = listUserUseCase.findAll();
+    UserListResponse userListResponses = userListMapper.listDomain2Response(listUsers);
+    return ResponseEntity.ok().body(userListResponses);
   }
-
 }

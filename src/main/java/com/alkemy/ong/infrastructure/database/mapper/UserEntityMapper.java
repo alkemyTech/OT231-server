@@ -48,9 +48,11 @@ public class UserEntityMapper {
     }
     List<User> listUsersDomain = new ArrayList<>(allEntities.size());
     for (UserEntity userEntity : allEntities) {
-      listUsersDomain.add(User.builder()
-          .email(userEntity.getUsername())
-          .build());
+      if (!userEntity.getSoftDelete()) {
+        listUsersDomain.add(User.builder()
+            .email(userEntity.getUsername())
+            .build());
+      }
     }
     return listUsersDomain;
   }

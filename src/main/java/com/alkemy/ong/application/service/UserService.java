@@ -37,5 +37,7 @@ public class UserService implements ICreateUserUseCase, IDeleteUserUseCase, ILis
   @Override
   public List<User> findAll() {
     return userRepository.findAll();
+
+    //return userRepository.findAll();
   }
 }
