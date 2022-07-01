@@ -112,7 +112,17 @@ mvn checkstyle:checkstyle
 
 ### USERS
 
-| First Name | Last Name | Email | Password | Role |
-|------------|-----------|-------|----------|------|
-|            |           |       |          |      |
-|            |           |       |          |      |
+| First Name  | Last Name  |        Email        | Password | Role  |
+|-------------|------------|---------------------|----------|-------|
+| Jason       | Voorhees   | jason@voorhees.com  | abcd1234 | ADMIN |
+| Freddy      | Krueger    | freddy@krueger.com  | abcd1234 | ADMIN |
+| Michael     | Myers      | michael@myers.com   | abcd1234 | ADMIN |
+| Pamela      | Voorhees   | pamela@voorhees.com | abcd1234 | ADMIN |
+| Leatherface | Unknown    | leather@face.com    | abcd1234 | ADMIN |
+|-------------|------------|---------------------|----------|-------|
+| Mark        | Zuckerberg | mark@facebook.com   | abcd1234 | USER  |
+| Bill        | Gates      | bill@windows.com    | abcd1234 | USER  |
+| Jeff        | Bezos      | jeff@amazon.com     | abcd1234 | USER  |
+| Elon        | Musk       | elon@tesla.com      | abcd1234 | USER  |
+| Jack        | Dorsey     | jack@twitter.com    | abcd1234 | USER  |
+---------------------------------------------------------------------

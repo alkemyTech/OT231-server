@@ -6,18 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrganizationPublicDataResponse {
+public class SocialMediaResponse {
 
-  private String name;
-  private String image;
-  private String address;
-  private String phone;
-  private SocialMediaResponse socialMedia;
+  private String facebookUrl;
+  private String instagramUrl;
+  private String linkedIndUrl;
 
 }
