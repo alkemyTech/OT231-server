@@ -1,3 +1,4 @@
+
 {
 	"info": {
 		"_postman_id": "50acd6fb-a1e1-40b6-8b94-373c262e699a",
@@ -61,9 +62,9 @@
 									"    pm.response.to.have.jsonBody(\"token\");",
 									"",
 									"    // SETS USER_TOKEN ENVIROMENT VARIABLE",
-									"    pm.environment.unset(\"USER_TOKEN\");",
+									"    pm.collectionVariables.unset(\"USER_TOKEN\")",
 									"    var response = JSON.parse(responseBody);",
-									"    pm.environment.set(\"USER_TOKEN\", `${response.token}`);",
+									"    pm.collectionVariables.set(\"USER_TOKEN\", `${response.token}`);",
 									"})"
 								],
 								"type": "text/javascript"
@@ -128,64 +129,7 @@
 							"status": "Created",
 							"code": 201,
 							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Method"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Headers"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "X-XSS-Protection",
-									"value": "1; mode=block"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, no-store, max-age=0, must-revalidate"
-								},
-								{
-									"key": "Pragma",
-									"value": "no-cache"
-								},
-								{
-									"key": "Expires",
-									"value": "0"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "DENY"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 28 Jun 2022 15:10:12 GMT"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=60"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"firstName\": \"Michael\",\n    \"lastName\": \"Myers\",\n    \"email\": \"michael@myers.com\",\n    \"token\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInN1YiI6Im1pY2hhZWxAbXllcnMuY29tIiwiaWF0IjoxNjU2NDI5MDExLCJleHAiOjE2NTY0MzA4MTF9.uDaGTvLpc3d0fnARL8F3uV0c6Q7dQHU_fbb6O78rnrI\"\n}"
 						},
@@ -218,60 +162,7 @@
 							"status": "Bad Request",
 							"code": 400,
 							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Method"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Headers"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "X-XSS-Protection",
-									"value": "1; mode=block"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, no-store, max-age=0, must-revalidate"
-								},
-								{
-									"key": "Pragma",
-									"value": "no-cache"
-								},
-								{
-									"key": "Expires",
-									"value": "0"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "DENY"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 28 Jun 2022 15:35:26 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "close"
-								}
-							],
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"statusCode\": 400,\n    \"message\": \"Invalid input data.\",\n    \"moreInfo\": [\n        \"Email address: michael@myers.com is already being used\"\n    ]\n}"
 						}
@@ -305,6 +196,60 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "User Information",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/auth/me",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User Information",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/auth/me",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"email\": \"mark@facebook.com\",\n    \"firstName\": \"Mark\",\n    \"lastName\": \"Zuckerberg\",\n    \"photo\": null,\n    \"token\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInN1YiI6Im1hcmtAZmFjZWJvb2suY29tIiwiaWF0IjoxNjU2NjMyMDA5LCJleHAiOjE2NTY2MzM4MDl9.BAM-bpYi4RB6KtqdrLXoWyHyUVPanKJnRLZsRTWHJl4\"\n}"
+						}
+					]
 				}
 			]
 		},
@@ -581,14 +526,14 @@
 							"",
 							"// SETS ADMIN_TOKEN ENVIROMENT VARIABLE",
 							"if(`${response.email}` == \"jason@voorhees.com\"){",
-							"    pm.environment.unset(\"ADMIN_TOKEN\");",
-							"    pm.environment.set(\"ADMIN_TOKEN\", `${response.token}`);",
+							"    pm.collectionVariables.unset(\"ADMIN_TOKEN\");",
+							"    pm.collectionVariables.set(\"ADMIN_TOKEN\", `${response.token}`);",
 							"}",
 							"",
 							"// SETS USER_TOKEN ENVIROMENT VARIABLE",
 							"if(`${response.email}` == \"mark@facebook.com\"){",
-							"    pm.environment.unset(\"USER_TOKEN\");",
-							"    pm.environment.set(\"USER_TOKEN\", `${response.token}`);",
+							"    pm.collectionVariables.unset(\"USER_TOKEN\");",
+							"    pm.collectionVariables.set(\"USER_TOKEN\", `${response.token}`);",
 							"}"
 						],
 						"type": "text/javascript"
@@ -667,68 +612,40 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Vary",
-							"value": "Origin"
-						},
-						{
-							"key": "Vary",
-							"value": "Access-Control-Request-Method"
-						},
-						{
-							"key": "Vary",
-							"value": "Access-Control-Request-Headers"
-						},
-						{
-							"key": "X-Content-Type-Options",
-							"value": "nosniff"
-						},
-						{
-							"key": "X-XSS-Protection",
-							"value": "1; mode=block"
-						},
-						{
-							"key": "Cache-Control",
-							"value": "no-cache, no-store, max-age=0, must-revalidate"
-						},
-						{
-							"key": "Pragma",
-							"value": "no-cache"
-						},
-						{
-							"key": "Expires",
-							"value": "0"
-						},
-						{
-							"key": "X-Frame-Options",
-							"value": "DENY"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "Transfer-Encoding",
-							"value": "chunked"
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 28 Jun 2022 19:56:03 GMT"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=60"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
+					"header": [],
 					"cookie": [],
 					"body": "{\n    \"email\": \"jason@voorhees.com\",\n    \"firstName\": \"Jason\",\n    \"lastName\": \"Voorhees\",\n    \"photo\": null,\n    \"token\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJzdWIiOiJqYXNvbkB2b29yaGVlcy5jb20iLCJpYXQiOjE2NTY0NDYxNjMsImV4cCI6MTY1NjQ0Nzk2M30.hMRGdZc2OaB8WQeM6eV2-a0MxNyGvwwE75ROnJbcpAw\"\n}"
 				}
 			]
+		},
+    {
+			"name": "List Slides",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/slides",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slides"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
