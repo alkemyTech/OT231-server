@@ -5,5 +5,5 @@ import com.alkemy.ong.infrastructure.database.entity.ContactEntity;
 
 public interface IContactRepository {
 
-  ContactEntity add(Contact contact);
+  Contact add(Contact contact);
 }

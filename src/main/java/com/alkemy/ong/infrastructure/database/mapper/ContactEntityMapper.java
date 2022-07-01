@@ -7,7 +7,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContactEntityMapper {
 
-  public ContactEntity toEntity(Contact contact){
+  public Contact toDomain(ContactEntity contactEntity) {
+    if (contactEntity == null) {
+      return null;
+    }
+    return Contact.builder()
+            .name(contactEntity.getName())
+            .phone(contactEntity.getPhone())
+            .email(contactEntity.getEmail())
+            .message(contactEntity.getMessage())
+            .build();
+  }
+
+  public ContactEntity toEntity(Contact contact) {
     if (contact == null) {
       return null;
     }

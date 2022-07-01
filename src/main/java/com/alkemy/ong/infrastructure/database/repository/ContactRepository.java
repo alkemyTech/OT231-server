@@ -5,10 +5,10 @@ import com.alkemy.ong.domain.Contact;
 import com.alkemy.ong.infrastructure.database.entity.ContactEntity;
 import com.alkemy.ong.infrastructure.database.mapper.ContactEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.IContactSpringRepository;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
 @Component
@@ -19,9 +19,8 @@ public class ContactRepository implements IContactRepository {
 
   @Override
   @Transactional
-  public ContactEntity add(Contact newContact) {
+  public Contact add(Contact newContact) {
     ContactEntity contactEntity = contactEntityMapper.toEntity(newContact);
-    contactEntity.setDeletedAt(Date );
-    return contactSpringRepository.save(contactEntityMapper.toEntity(newContact));
+    return contactEntityMapper.toDomain(contactSpringRepository.save(contactEntity));
   }
 }
