@@ -7,12 +7,12 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class ContactService implements ICreateContactUseCase {
+
   private final IContactRepository contactRepository;
 
   @Override
   public Contact add(Contact newContact) {
-    contactRepository.add(newContact);
-    return newContact;
+    return contactRepository.add(newContact);
   }
 
 }
