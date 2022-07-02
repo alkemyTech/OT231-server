@@ -15,5 +15,6 @@ public interface IUserRepository {
 
   void delete(Long id);
 
-  List<User> findAll();
+  List<User> findAllActive();
+
 }

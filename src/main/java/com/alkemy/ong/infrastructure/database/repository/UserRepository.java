@@ -44,10 +44,6 @@ public class UserRepository implements IUserRepository {
     return userSpringRepository.isDeleted(id).isPresent();
   }
 
-  private RoleEntity getRoleEntity(String role) {
-    return roleSpringRepository.findByName(role);
-  }
-
   @Override
   @Transactional
   public void delete(Long id) {
@@ -55,7 +51,12 @@ public class UserRepository implements IUserRepository {
   }
 
   @Override
-  public List<User> findAll() {
-    return userEntityMapper.listEntity2Domain(userSpringRepository.findAll());
+  public List<User> findAllActive() {
+    return userEntityMapper.toDomain(userSpringRepository.findBySoftDeleteFalse());
   }
+
+  private RoleEntity getRoleEntity(String role) {
+    return roleSpringRepository.findByName(role);
+  }
+
 }

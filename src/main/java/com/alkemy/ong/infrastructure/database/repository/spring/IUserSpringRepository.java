@@ -20,4 +20,7 @@ public interface IUserSpringRepository extends JpaRepository<UserEntity, Long> {
   @Modifying
   @Query(value = "UPDATE UserEntity u SET u.softDelete = true WHERE u.id = :id")
   void softDeleteById(@Param("id") Long id);
+
+  List<UserEntity> findBySoftDeleteFalse();
+
 }

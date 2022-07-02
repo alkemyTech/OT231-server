@@ -15,6 +15,17 @@ public class UserEntityMapper {
   @Autowired
   private JwtUtils jwtUtils;
 
+  public List<User> toDomain(List<UserEntity> userEntities) {
+    if (userEntities == null || userEntities.isEmpty()) {
+      return Collections.emptyList();
+    }
+    List<User> users = new ArrayList<>(userEntities.size());
+    for (UserEntity userEntity : userEntities) {
+      users.add(toDomain(userEntity));
+    }
+    return users;
+  }
+
   public User toDomain(UserEntity userEntity) {
     if (userEntity == null) {
       return null;
@@ -42,18 +53,4 @@ public class UserEntityMapper {
         .build();
   }
 
-  public List<User> listEntity2Domain(List<UserEntity> allEntities) {
-    if (allEntities == null || allEntities.isEmpty()) {
-      return Collections.emptyList();
-    }
-    List<User> listUsersDomain = new ArrayList<>(allEntities.size());
-    for (UserEntity userEntity : allEntities) {
-      if (!userEntity.getSoftDelete()) {
-        listUsersDomain.add(User.builder()
-            .email(userEntity.getUsername())
-            .build());
-      }
-    }
-    return listUsersDomain;
-  }
 }

@@ -79,8 +79,9 @@ public class ServiceBeanConfig {
 
   @Bean
   public IListSlideUseCase listSlideUseCase(SlideRepository slideRepository) {
-    return  new SlideService(slideRepository);
+    return new SlideService(slideRepository);
   }
+
   @Bean
   public IListUserUseCase listUserUseCase(UserRepository userRepository) {
     return new UserService(userRepository);

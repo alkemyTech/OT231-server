@@ -4,10 +4,10 @@ import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteUserUseCase;
 import com.alkemy.ong.application.service.usecase.IListUserUseCase;
 import com.alkemy.ong.domain.User;
-import com.alkemy.ong.infrastructure.rest.mapper.UserListMapper;
+import com.alkemy.ong.infrastructure.rest.mapper.UserMapper;
 import com.alkemy.ong.infrastructure.rest.mapper.UserRegisterMapper;
 import com.alkemy.ong.infrastructure.rest.request.UserRegisterRequest;
-import com.alkemy.ong.infrastructure.rest.response.UserListResponse;
+import com.alkemy.ong.infrastructure.rest.response.ListUserResponse;
 import com.alkemy.ong.infrastructure.rest.response.UserRegisterResponse;
 import java.util.List;
 import javax.validation.Valid;
@@ -34,13 +34,14 @@ public class UserResource {
   private IDeleteUserUseCase deleteUserUseCase;
 
   @Autowired
-  private UserListMapper userListMapper;
+  private UserMapper userMapper;
 
   @Autowired
   private IListUserUseCase listUserUseCase;
 
-  @PostMapping(value = "/auth/register", produces = { "application/json" },
-      consumes = { "application/json" })
+  @PostMapping(value = "/auth/register",
+      produces = {"application/json"},
+      consumes = {"application/json"})
   public ResponseEntity<UserRegisterResponse> create(
       @Valid @RequestBody UserRegisterRequest registerRequest) {
     User user = userRegisterMapper.toDomain(registerRequest);
@@ -55,9 +56,9 @@ public class UserResource {
   }
 
   @GetMapping(value = "/users", produces = {"application/json"})
-  public ResponseEntity<UserListResponse> getAll() {
-    List<User> listUsers = listUserUseCase.findAll();
-    UserListResponse userListResponses = userListMapper.listDomain2Response(listUsers);
-    return ResponseEntity.ok().body(userListResponses);
+  public ResponseEntity<ListUserResponse> getAll() {
+    List<User> users = listUserUseCase.findAll();
+    return ResponseEntity.ok().body(userMapper.toResponse(users));
   }
+
 }
