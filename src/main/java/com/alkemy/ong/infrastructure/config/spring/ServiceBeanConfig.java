@@ -20,6 +20,7 @@ import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteTestimonialUseCase;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
 import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
+import com.alkemy.ong.application.service.usecase.IListUserUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.infrastructure.database.repository.ContactRepository;
 import com.alkemy.ong.infrastructure.database.repository.MemberRepository;
@@ -78,6 +79,12 @@ public class ServiceBeanConfig {
 
   @Bean
   public IListSlideUseCase listSlideUseCase(SlideRepository slideRepository) {
-    return  new SlideService(slideRepository);
+    return new SlideService(slideRepository);
   }
+
+  @Bean
+  public IListUserUseCase listUserUseCase(UserRepository userRepository) {
+    return new UserService(userRepository);
+  }
+
 }
