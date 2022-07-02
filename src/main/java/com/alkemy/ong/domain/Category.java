@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 public class Category {
 
-    private String name;
-    private String description;
-    private String image;
+  private String name;
+  private String description;
+  private String image;
+
 }

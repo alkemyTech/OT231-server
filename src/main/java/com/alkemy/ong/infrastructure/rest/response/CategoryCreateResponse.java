@@ -13,8 +13,8 @@ import lombok.Setter;
 @Builder
 public class CategoryCreateResponse {
 
-    private String name;
-    private String description;
-    private String image;
+  private String name;
+  private String description;
+  private String image;
 
 }
