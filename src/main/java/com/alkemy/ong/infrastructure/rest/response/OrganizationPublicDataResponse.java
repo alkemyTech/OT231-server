@@ -18,6 +18,8 @@ public class OrganizationPublicDataResponse {
   private String image;
   private String address;
   private String phone;
+  private String email;
+  private String welcomeText;
   private SocialMediaResponse socialMedia;
 
 }

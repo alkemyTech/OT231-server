@@ -2,6 +2,7 @@ package com.alkemy.ong.infrastructure.database.repository;
 
 import com.alkemy.ong.application.repository.IOrganizationRepository;
 import com.alkemy.ong.domain.Organization;
+import com.alkemy.ong.infrastructure.database.entity.OrganizationEntity;
 import com.alkemy.ong.infrastructure.database.mapper.OrganizationEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.IOrganizationSpringRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,13 @@ public class OrganizationRepository implements IOrganizationRepository {
   public Organization find() {
     return organizationEntityMapper.toDomain(organizationSpringRepository.findAll().get(0));
   }
+
+  @Override
+  @Transactional
+  public Organization update(Organization newOrganization) {
+    OrganizationEntity organizationEntity = organizationEntityMapper.toEntity(newOrganization);
+    return organizationEntityMapper.toDomain(organizationSpringRepository.save(organizationEntity));
+  }
+
 
 }

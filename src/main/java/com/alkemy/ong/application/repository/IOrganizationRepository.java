@@ -6,4 +6,5 @@ public interface IOrganizationRepository {
 
   Organization find();
 
+  Organization update(Organization organization);
 }

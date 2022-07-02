@@ -11,6 +11,8 @@ public class Organization {
   private String image;
   private String address;
   private String phone;
+  private String email;
+  private String welcomeText;
   private SocialMedia socialMedia;
 
 }

@@ -21,6 +21,23 @@ public class OrganizationEntityMapper {
         .build();
   }
 
+  public OrganizationEntity toEntity(Organization updateOrganization) {
+    if (updateOrganization == null) {
+      return null;
+    }
+    return OrganizationEntity.builder()
+            .name(updateOrganization.getName())
+            .image(updateOrganization.getImage())
+            .address(updateOrganization.getAddress())
+            .phone(updateOrganization.getPhone())
+            .email(updateOrganization.getEmail())
+            .welcomeText(updateOrganization.getWelcomeText())
+            .facebookUrl(updateOrganization.getSocialMedia().getFacebookUrl())
+            .instagramUrl(updateOrganization.getSocialMedia().getInstagramUrl())
+            .linkedInUrl(updateOrganization.getSocialMedia().getLinkedIndUrl())
+            .build();
+  }
+
   private SocialMedia getSocialMedia(OrganizationEntity organizationEntity) {
     return SocialMedia.builder()
         .facebookUrl(organizationEntity.getFacebookUrl())
@@ -28,5 +45,6 @@ public class OrganizationEntityMapper {
         .linkedIndUrl(organizationEntity.getLinkedInUrl())
         .build();
   }
+
 
 }
