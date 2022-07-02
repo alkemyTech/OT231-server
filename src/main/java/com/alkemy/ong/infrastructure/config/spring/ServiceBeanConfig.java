@@ -15,7 +15,6 @@ import com.alkemy.ong.application.service.UserService;
 import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateContactUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
-import com.alkemy.ong.application.service.usecase.ICreateContactUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteMemberUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
