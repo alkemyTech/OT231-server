@@ -60,9 +60,10 @@
 									"pm.test(\"Response should contain token\", function() {",
 									"    pm.response.to.have.jsonBody(\"token\");",
 									"",
-									"    pm.environment.unset(\"USER_TOKEN\");",
+									"    // SETS USER_TOKEN ENVIROMENT VARIABLE",
+									"    pm.collectionVariables.unset(\"USER_TOKEN\")",
 									"    var response = JSON.parse(responseBody);",
-									"    pm.environment.set(\"USER_TOKEN\", `${response.token}`);",
+									"    pm.collectionVariables.set(\"USER_TOKEN\", `${response.token}`);",
 									"})"
 								],
 								"type": "text/javascript"
@@ -127,64 +128,7 @@
 							"status": "Created",
 							"code": 201,
 							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Method"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Headers"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "X-XSS-Protection",
-									"value": "1; mode=block"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, no-store, max-age=0, must-revalidate"
-								},
-								{
-									"key": "Pragma",
-									"value": "no-cache"
-								},
-								{
-									"key": "Expires",
-									"value": "0"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "DENY"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 28 Jun 2022 15:10:12 GMT"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=60"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"firstName\": \"Michael\",\n    \"lastName\": \"Myers\",\n    \"email\": \"michael@myers.com\",\n    \"token\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInN1YiI6Im1pY2hhZWxAbXllcnMuY29tIiwiaWF0IjoxNjU2NDI5MDExLCJleHAiOjE2NTY0MzA4MTF9.uDaGTvLpc3d0fnARL8F3uV0c6Q7dQHU_fbb6O78rnrI\"\n}"
 						},
@@ -217,62 +161,92 @@
 							"status": "Bad Request",
 							"code": 400,
 							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Method"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Headers"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "X-XSS-Protection",
-									"value": "1; mode=block"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, no-store, max-age=0, must-revalidate"
-								},
-								{
-									"key": "Pragma",
-									"value": "no-cache"
-								},
-								{
-									"key": "Expires",
-									"value": "0"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "DENY"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 28 Jun 2022 15:35:26 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "close"
-								}
-							],
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"statusCode\": 400,\n    \"message\": \"Invalid input data.\",\n    \"moreInfo\": [\n        \"Email address: michael@myers.com is already being used\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete User by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Information",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/auth/me",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User Information",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/auth/me",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"email\": \"mark@facebook.com\",\n    \"firstName\": \"Mark\",\n    \"lastName\": \"Zuckerberg\",\n    \"photo\": null,\n    \"token\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInN1YiI6Im1hcmtAZmFjZWJvb2suY29tIiwiaWF0IjoxNjU2NjMyMDA5LCJleHAiOjE2NTY2MzM4MDl9.BAM-bpYi4RB6KtqdrLXoWyHyUVPanKJnRLZsRTWHJl4\"\n}"
 						}
 					]
 				}
@@ -284,6 +258,16 @@
 				{
 					"name": "Members",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -308,6 +292,16 @@
 				{
 					"name": "Delete Category by Id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -345,6 +339,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -359,7 +363,81 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Delete News Successful",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/news/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"news",
+										"1"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 28 Jun 2022 19:58:47 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
 				}
 			]
 		},
@@ -369,6 +447,16 @@
 				{
 					"name": "Delete Testimonial by Id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -393,6 +481,9 @@
 				{
 					"name": "Public Organization Details",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -413,6 +504,41 @@
 		},
 		{
 			"name": "Auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response should be JSON\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"Response should contain token\", function() {",
+							"    pm.response.to.have.jsonBody(\"token\");",
+							"})",
+							"",
+							"var response = JSON.parse(responseBody);",
+							"",
+							"// SETS ADMIN_TOKEN ENVIROMENT VARIABLE",
+							"if(`${response.email}` == \"jason@voorhees.com\"){",
+							"    pm.collectionVariables.unset(\"ADMIN_TOKEN\");",
+							"    pm.collectionVariables.set(\"ADMIN_TOKEN\", `${response.token}`);",
+							"}",
+							"",
+							"// SETS USER_TOKEN ENVIROMENT VARIABLE",
+							"if(`${response.email}` == \"mark@facebook.com\"){",
+							"    pm.collectionVariables.unset(\"USER_TOKEN\");",
+							"    pm.collectionVariables.set(\"USER_TOKEN\", `${response.token}`);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -421,7 +547,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"freddy@krueger.com\",\n    \"password\": \"abcd1234\"\n}",
+					"raw": "{\n    \"email\": \"jason@voorhees.com\",\n    \"password\": \"abcd1234\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -441,9 +567,80 @@
 					"query": [
 						{
 							"key": "",
-							"value": null,
+							"value": "",
 							"disabled": true
 						}
+					]
+				},
+				"description": "Request body must contain:\n\n*   `email` : `String` (valid email)\n*   `password` : `String` (min 6 & max 8 characters)\n    \n\nThis is a public endpoint, there is no need for a jwt token.\n\nIf email and credentials are valid, the response should contain the User information and a jwt token.\n\n| **Admin Users Emails** | **Regular User Emails** |\n| --- | --- |\n| [jason@voorhees.com](mailto:jason@voorhees.com) | [mark@facebook.com](mailto:mark@facebook.com) |\n| [freddy@krueger.com](mailto:freddy@krueger.com) | [bill@windows.com](mailto:bill@windows.com) |\n| [michael@myers.com](mailto:michael@myers.com) | [jeff@amazon.com](mailto:jeff@amazon.com) |\n| [pamela@voorhees.com](mailto:pamela@voorhees.com) | [elon@tesla.com](mailto:elon@tesla.com) |\n| [leather@face.com](mailto:leather@face.com) | [jack@twitter.com](mailto:jack@twitter.com) |\n\n| **Default Password** | **abdc1234** |\n| --- | --- |"
+			},
+			"response": [
+				{
+					"name": "Admin Auth Successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"jason@voorhees.com\",\n    \"password\": \"abcd1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"email\": \"jason@voorhees.com\",\n    \"firstName\": \"Jason\",\n    \"lastName\": \"Voorhees\",\n    \"photo\": null,\n    \"token\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJzdWIiOiJqYXNvbkB2b29yaGVlcy5jb20iLCJpYXQiOjE2NTY0NDYxNjMsImV4cCI6MTY1NjQ0Nzk2M30.hMRGdZc2OaB8WQeM6eV2-a0MxNyGvwwE75ROnJbcpAw\"\n}"
+				}
+			]
+		},
+    {
+			"name": "List Slides",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/slides",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slides"
 					]
 				}
 			},

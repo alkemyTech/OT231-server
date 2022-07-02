@@ -2,15 +2,14 @@ package com.alkemy.ong.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
-@Builder
 @Getter
-public class Organization {
-
+@Setter
+@Builder
+public class Contact {
   private String name;
-  private String image;
-  private String address;
   private String phone;
-  private SocialMedia socialMedia;
-
+  private String email;
+  private String message;
 }

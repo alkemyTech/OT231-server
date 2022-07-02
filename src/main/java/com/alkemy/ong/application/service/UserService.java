@@ -5,12 +5,14 @@ import com.alkemy.ong.application.exception.UserAlreadyExistsException;
 import com.alkemy.ong.application.repository.IUserRepository;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteUserUseCase;
+import com.alkemy.ong.application.service.usecase.IListUserUseCase;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
+import java.util.List;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class UserService implements ICreateUserUseCase, IDeleteUserUseCase {
+public class UserService implements ICreateUserUseCase, IDeleteUserUseCase, IListUserUseCase {
 
   private final IUserRepository userRepository;
 
@@ -31,4 +33,10 @@ public class UserService implements ICreateUserUseCase, IDeleteUserUseCase {
     }
     userRepository.delete(id);
   }
+
+  @Override
+  public List<User> findAll() {
+    return userRepository.findAllActive();
+  }
+
 }
