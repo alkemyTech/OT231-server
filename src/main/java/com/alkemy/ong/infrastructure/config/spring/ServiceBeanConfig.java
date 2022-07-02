@@ -12,6 +12,7 @@ import com.alkemy.ong.application.service.TestimonialService;
 import com.alkemy.ong.application.service.UserService;
 import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
+import com.alkemy.ong.application.service.usecase.ICreateContactUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteMemberUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
@@ -19,6 +20,7 @@ import com.alkemy.ong.application.service.usecase.IDeleteTestimonialUseCase;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.infrastructure.database.repository.CategoryRepository;
+import com.alkemy.ong.infrastructure.database.repository.ContactRepository;
 import com.alkemy.ong.infrastructure.database.repository.MemberRepository;
 import com.alkemy.ong.infrastructure.database.repository.OrganizationRepository;
 import com.alkemy.ong.infrastructure.database.repository.UserRepository;
@@ -49,6 +51,10 @@ public class ServiceBeanConfig {
   @Bean
   public ICreateCategoryUseCase createCategoryUseCase(CategoryRepository categoryRepository) {
     return new CategoryService(categoryRepository);
+  }
+
+  public ICreateContactUseCase createContactUseCase(ContactRepository contactRepository) {
+    return new ContactService(contactRepository);
   }
 
   @Bean
