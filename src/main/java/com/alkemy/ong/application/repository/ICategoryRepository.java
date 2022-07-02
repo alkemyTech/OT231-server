@@ -4,9 +4,10 @@ import com.alkemy.ong.domain.Category;
 
 public interface ICategoryRepository {
 
-  boolean existsById(Long id);
+  Category findByName(String name);
 
-  Category add(Category user);
+  boolean existsById(Long id);
+  Category add(Category category);
   boolean isDeleted(Long id);
 
   void delete(Long id);
