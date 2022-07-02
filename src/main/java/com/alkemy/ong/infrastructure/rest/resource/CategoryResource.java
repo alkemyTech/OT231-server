@@ -27,7 +27,7 @@ public class CategoryResource {
   private CategoryCreateMapper createMapper;
 
   @Autowired
-  ICreateCategoryUseCase createUseCase;
+  private ICreateCategoryUseCase createUseCase;
 
   @DeleteMapping("/categories/{id}")
   public ResponseEntity<Void> delete(@PathVariable Long id) {
