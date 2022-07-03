@@ -14,9 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CategoryRepository implements ICategoryRepository {
 
   private final ICategorySpringRepository categorySpringRepository;
-
   private final CategoryEntityMapper categoryEntityMapper;
-
 
   @Override
   @Transactional
@@ -40,4 +38,5 @@ public class CategoryRepository implements ICategoryRepository {
   public void delete(Long id) {
     categorySpringRepository.softDeleteById(id);
   }
+
 }

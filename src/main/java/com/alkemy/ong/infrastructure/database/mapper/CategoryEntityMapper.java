@@ -12,10 +12,10 @@ public class CategoryEntityMapper {
       return null;
     }
     return Category.builder()
-            .name(categoryEntity.getName())
-            .description(categoryEntity.getDescription())
-            .image(categoryEntity.getImage())
-            .build();
+        .name(categoryEntity.getName())
+        .description(categoryEntity.getDescription())
+        .image(categoryEntity.getImage())
+        .build();
   }
 
   public CategoryEntity toEntity(Category category) {
@@ -23,10 +23,10 @@ public class CategoryEntityMapper {
       return null;
     }
     return CategoryEntity.builder()
-            .name(category.getName())
-            .description(category.getDescription())
-            .image(category.getImage())
-            .build();
+        .name(category.getName())
+        .description(category.getDescription())
+        .image(category.getImage())
+        .build();
   }
 
 }

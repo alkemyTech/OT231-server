@@ -11,4 +11,5 @@ public interface ICategoryRepository {
   boolean isDeleted(Long id);
 
   void delete(Long id);
+
 }

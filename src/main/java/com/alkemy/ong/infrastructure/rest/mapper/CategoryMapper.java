@@ -13,10 +13,10 @@ public class CategoryMapper {
       return null;
     }
     return Category.builder()
-              .name(categoryRequest.getName())
-              .description(categoryRequest.getDescription())
-              .image(categoryRequest.getImage())
-              .build();
+        .name(categoryRequest.getName())
+        .description(categoryRequest.getDescription())
+        .image(categoryRequest.getImage())
+        .build();
   }
 
   public CategoryResponse toResponse(Category category) {
@@ -24,9 +24,9 @@ public class CategoryMapper {
       return null;
     }
     return CategoryResponse.builder()
-              .name(category.getName())
-              .description(category.getDescription())
-              .image(category.getImage())
-              .build();
+        .name(category.getName())
+        .description(category.getDescription())
+        .image(category.getImage())
+        .build();
   }
 }
