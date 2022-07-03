@@ -1,6 +1,9 @@
 package com.alkemy.ong.infrastructure.database.repository;
 
 import com.alkemy.ong.application.repository.ICategoryRepository;
+import com.alkemy.ong.domain.Category;
+import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
+import com.alkemy.ong.infrastructure.database.mapper.CategoryEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,6 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class CategoryRepository implements ICategoryRepository {
 
   private final ICategorySpringRepository categorySpringRepository;
+  private final CategoryEntityMapper categoryEntityMapper;
+
+  @Override
+  @Transactional
+  public Category add(Category newCategory) {
+    CategoryEntity categoryEntity = categoryEntityMapper.toEntity(newCategory);
+    return categoryEntityMapper.toDomain(categorySpringRepository.save(categoryEntity));
+  }
 
   @Override
   public boolean existsById(Long id) {
@@ -27,4 +38,5 @@ public class CategoryRepository implements ICategoryRepository {
   public void delete(Long id) {
     categorySpringRepository.softDeleteById(id);
   }
+
 }
