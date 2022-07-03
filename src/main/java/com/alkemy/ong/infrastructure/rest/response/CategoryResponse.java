@@ -1,6 +1,5 @@
 package com.alkemy.ong.infrastructure.rest.response;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +13,7 @@ import lombok.Setter;
 @Builder
 public class CategoryResponse {
 
-    private String name;
-    private String description;
-    private String image;
+  private String name;
+  private String description;
+  private String image;
 }

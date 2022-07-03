@@ -59,7 +59,7 @@ public class ServiceBeanConfig {
   }
 
   @Bean
-  public ICreateCategoryUseCase createCategoryUseCase(CategoryRepository categoryRepository){
+  public ICreateCategoryUseCase createCategoryUseCase(CategoryRepository categoryRepository) {
     return new CategoryService(categoryRepository);
   }
 

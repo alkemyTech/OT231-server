@@ -13,9 +13,10 @@ public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryU
   private final ICategoryRepository categoryRepository;
 
   @Override
-  public Category add(Category newCategory){
+  public Category add(Category newCategory) {
     return categoryRepository.add(newCategory);
   }
+
   @Override
   public void delete(Long id) {
     if (!categoryRepository.existsById(id) || categoryRepository.isDeleted(id)) {

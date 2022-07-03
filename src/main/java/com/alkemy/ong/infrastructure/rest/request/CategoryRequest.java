@@ -15,12 +15,12 @@ import lombok.Setter;
 @Builder
 public class CategoryRequest {
 
-    @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$",
-            message = "Name can only contain letters and whitespaces")
-    private String name;
+  @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$",
+          message = "Name can only contain letters and whitespaces")
+  private String name;
 
-    private String description;
+  private String description;
 
-    private String image;
+  private String image;
 
 }

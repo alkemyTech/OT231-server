@@ -20,10 +20,11 @@ public class CategoryRepository implements ICategoryRepository {
 
   @Override
   @Transactional
-  public Category add(Category newCategory){
+  public Category add(Category newCategory) {
     CategoryEntity categoryEntity = categoryEntityMapper.toEntity(newCategory);
     return categoryEntityMapper.toDomain(categorySpringRepository.save(categoryEntity));
   }
+
   @Override
   public boolean existsById(Long id) {
     return categorySpringRepository.existsById(id);
