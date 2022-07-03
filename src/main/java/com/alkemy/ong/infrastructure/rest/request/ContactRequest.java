@@ -18,7 +18,7 @@ import lombok.Setter;
 public class ContactRequest {
 
   @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$",
-          message = "Name can only contain letters and whitespaces")
+      message = "Name can only contain letters and whitespaces")
   private String name;
 
   private String phone;
@@ -28,7 +28,7 @@ public class ContactRequest {
 
   @Size(max = 150, message = "Message must have a maximum of 150 characters")
   @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Message can only contain "
-          + "alphanumeric and whitespaces")
+      + "alphanumeric and whitespaces")
   private String message;
 
 }

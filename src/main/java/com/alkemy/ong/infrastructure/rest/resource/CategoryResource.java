@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CategoryResourse {
+public class CategoryResource {
 
   @Autowired
   private IDeleteCategoryUseCase deleteCategoryUseCase;

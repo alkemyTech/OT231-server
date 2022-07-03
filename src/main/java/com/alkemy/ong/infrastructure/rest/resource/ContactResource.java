@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 public class ContactResource {
 
@@ -24,10 +23,10 @@ public class ContactResource {
   private ContactMapper contactMapper;
 
   @PostMapping(value = "/contacts",
-        produces = {"application/json"},
-        consumes = {"application/json"})
+      produces = {"application/json"},
+      consumes = {"application/json"})
   public ResponseEntity<ContactResponse> create(
-        @Valid @RequestBody ContactRequest contactRequest) {
+      @Valid @RequestBody ContactRequest contactRequest) {
     Contact contact = contactMapper.toDomain(contactRequest);
     ContactResponse response = contactMapper.toResponse(createContactUseCase.add(contact));
     return new ResponseEntity<ContactResponse>(response, HttpStatus.CREATED);

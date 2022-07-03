@@ -13,11 +13,11 @@ public class ContactMapper {
       return null;
     }
     return Contact.builder()
-            .name(contactRequest.getName())
-            .phone(contactRequest.getPhone())
-            .email(contactRequest.getEmail())
-            .message(contactRequest.getMessage())
-            .build();
+        .name(contactRequest.getName())
+        .phone(contactRequest.getPhone())
+        .email(contactRequest.getEmail())
+        .message(contactRequest.getMessage())
+        .build();
   }
 
   public ContactResponse toResponse(Contact contact) {
@@ -26,10 +26,10 @@ public class ContactMapper {
     }
 
     return ContactResponse.builder()
-                .name(contact.getName())
-                .phone(contact.getPhone())
-                .email(contact.getEmail())
-                .message(contact.getMessage())
-                .build();
+        .name(contact.getName())
+        .phone(contact.getPhone())
+        .email(contact.getEmail())
+        .message(contact.getMessage())
+        .build();
   }
 }

@@ -16,7 +16,7 @@ import lombok.Setter;
 public class CategoryRequest {
 
   @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$",
-          message = "Name can only contain letters and whitespaces")
+      message = "Name can only contain letters and whitespaces")
   private String name;
 
   private String description;
