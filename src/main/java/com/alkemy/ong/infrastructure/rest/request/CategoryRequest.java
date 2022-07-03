@@ -1,8 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.request;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,20 +13,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class ContactRequest {
+public class CategoryRequest {
 
   @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$",
       message = "Name can only contain letters and whitespaces")
   private String name;
 
-  private String phone;
+  private String description;
 
-  @Email(message = "Email should be valid")
-  private String email;
-
-  @Size(max = 150, message = "Message must have a maximum of 150 characters")
-  @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Message can only contain "
-      + "alphanumeric and whitespaces")
-  private String message;
+  private String image;
 
 }
