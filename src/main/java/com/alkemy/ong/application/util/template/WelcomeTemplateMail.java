@@ -26,9 +26,10 @@ public class WelcomeTemplateMail implements IEmail {
   public String getContent() {
     return organization.getWelcomeText();
   }
+
   @Override
   public String getContentType() {
-  return "text/plain";
+    return "text/plain";
   }
 
 }
