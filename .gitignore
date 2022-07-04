@@ -225,6 +225,9 @@ buildNumber.properties
 ### Visual Code ###
 .vscode
 
+### Others ###
+.checkstyle
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
