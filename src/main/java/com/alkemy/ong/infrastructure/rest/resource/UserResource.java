@@ -56,7 +56,7 @@ public class UserResource {
   }
 
   @GetMapping(value = "/users", produces = {"application/json"})
-  public ResponseEntity<ListUserResponse> getAll() {
+  public ResponseEntity<ListUserResponse> list() {
     List<User> users = listUserUseCase.findAll();
     return ResponseEntity.ok().body(userMapper.toResponse(users));
   }
