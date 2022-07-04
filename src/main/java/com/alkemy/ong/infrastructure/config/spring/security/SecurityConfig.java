@@ -69,8 +69,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers(HttpMethod.POST, "/auth/login", "/auth/register")
         .permitAll()
+<<<<<<< HEAD
         .antMatchers(HttpMethod.GET, "/auth/me")
         .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
+=======
+        .antMatchers(HttpMethod.POST, "/contacts")
+        .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
+        .antMatchers(HttpMethod.POST, "/categories")
+        .hasAnyRole(Role.ADMIN.name())
+>>>>>>> main
         .antMatchers(HttpMethod.GET, "/organization/public")
         .permitAll()
         .antMatchers(HttpMethod.DELETE, "/categories/{id:[\\d+]}")
@@ -83,6 +90,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .hasRole(Role.ADMIN.name())
         .antMatchers(HttpMethod.DELETE, "users/{id:[\\d+]}")
         .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
+        .antMatchers(HttpMethod.GET, "/slides")
+        .hasRole(Role.ADMIN.name())
+        .antMatchers(HttpMethod.GET, "/users")
+        .hasAnyRole(Role.ADMIN.name())
         .anyRequest()
         .authenticated()
         .and()

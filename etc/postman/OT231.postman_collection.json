@@ -616,6 +616,35 @@
 					"body": "{\n    \"email\": \"jason@voorhees.com\",\n    \"firstName\": \"Jason\",\n    \"lastName\": \"Voorhees\",\n    \"photo\": null,\n    \"token\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJzdWIiOiJqYXNvbkB2b29yaGVlcy5jb20iLCJpYXQiOjE2NTY0NDYxNjMsImV4cCI6MTY1NjQ0Nzk2M30.hMRGdZc2OaB8WQeM6eV2-a0MxNyGvwwE75ROnJbcpAw\"\n}"
 				}
 			]
+		},
+    {
+			"name": "List Slides",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/slides",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slides"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

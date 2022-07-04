@@ -15,3 +15,10 @@ spring:
 sendgrid:
   sender: foo
   key: foo
+
+# AWS
+aws:
+  bucket-name: cohorte-junio-a192d78b
+  public-key: foo
+  secret-key: foo
+  region: us-east-1

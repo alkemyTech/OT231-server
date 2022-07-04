@@ -3,12 +3,16 @@ package com.alkemy.ong.infrastructure.rest.resource;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteUserUseCase;
 import com.alkemy.ong.application.service.usecase.IGetUserUseCase;
+import com.alkemy.ong.application.service.usecase.IListUserUseCase;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.rest.mapper.AuthenticationMapper;
+import com.alkemy.ong.infrastructure.rest.mapper.UserMapper;
 import com.alkemy.ong.infrastructure.rest.mapper.UserRegisterMapper;
 import com.alkemy.ong.infrastructure.rest.request.UserRegisterRequest;
 import com.alkemy.ong.infrastructure.rest.response.AuthenticationResponse;
+import com.alkemy.ong.infrastructure.rest.response.ListUserResponse;
 import com.alkemy.ong.infrastructure.rest.response.UserRegisterResponse;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -40,6 +44,12 @@ public class UserResource {
   @Autowired
   private AuthenticationMapper authenticationMapper;
 
+  @Autowired
+  private UserMapper userMapper;
+
+  @Autowired
+  private IListUserUseCase listUserUseCase;
+
   @PostMapping(value = "/auth/register",
       produces = {"application/json"},
       consumes = {"application/json"})
@@ -63,6 +73,12 @@ public class UserResource {
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     deleteUserUseCase.delete(id);
     return ResponseEntity.noContent().build();
+  }
+
+  @GetMapping(value = "/users", produces = {"application/json"})
+  public ResponseEntity<ListUserResponse> getAll() {
+    List<User> users = listUserUseCase.findAll();
+    return ResponseEntity.ok().body(userMapper.toResponse(users));
   }
 
 }
