@@ -26,6 +26,12 @@ public class UserRepository implements IUserRepository {
   }
 
   @Override
+  public User findByFirstNameAndLastName(String firstName, String lastName) {
+    return userEntityMapper.toDomain(
+            userSpringRepository.findByFirstNameAndLastName(firstName,lastName));
+  }
+
+  @Override
   @Transactional
   public User add(User newUser) {
     UserEntity userEntity = userEntityMapper.toEntity(newUser);
