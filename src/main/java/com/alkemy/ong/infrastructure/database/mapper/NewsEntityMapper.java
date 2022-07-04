@@ -15,7 +15,7 @@ public class NewsEntityMapper {
         .name(news.getName())
         .content(news.getText())
         .image(news.getImage())
-        .softDelete(false)
+        .softDelete(news.isSoftDelete())
         .build();
   }
 

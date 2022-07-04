@@ -22,6 +22,7 @@ public class NewsService implements IDeleteNewsUseCase, ICreateNewsUseCase {
 
   @Override
   public News add(News news) {
+    news.setSoftDelete(false);
     return newsRepository.add(news);
   }
 

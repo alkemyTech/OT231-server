@@ -26,9 +26,9 @@ public class CreateNewsIntegrationTest extends BigTest {
   private static final String IMAGE = "https://s3.com/news.jpg";
   private static final String INVALID_NAME = "This name contains more than permitted characters!!";
   private NewsResponse response;
-  
+
   @Test
-  public void shouldReturn403WhenMissingAuthToken() throws Exception {
+  public void shouldReturn403WhenAuthTokenIsInvalid() throws Exception {
     mockMvc.perform(post("/news")
         .header(HttpHeaders.AUTHORIZATION, "INVALID_TOKEN"))
     .andExpect(status().isForbidden());
@@ -71,7 +71,7 @@ public class CreateNewsIntegrationTest extends BigTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(createRequest(NAME, TEXT, "https://s3. com/image .jpg")))
     .andExpect(jsonPath("$.moreInfo",
-        hasItems("Image can only contain alphanumericals with no whitespaces.")))
+        hasItems("Image can only contain alphanumerical with no whitespaces.")))
     .andExpect(status().isBadRequest());
   }
   

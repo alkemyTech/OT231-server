@@ -23,7 +23,7 @@ public class NewsRequest {
   private String text;
   
   @Pattern(regexp = "^[\\p{L}\\d.?:/-]*$", 
-      message = "Image can only contain alphanumericals with no whitespaces.")
+      message = "Image can only contain alphanumerical with no whitespaces.")
   @NotBlank(message = "Image must not be empty.")
   private String image;
 

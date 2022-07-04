@@ -13,5 +13,6 @@ public class News {
   private String name;
   private String text;
   private String image;
+  private boolean softDelete;
 
 }
