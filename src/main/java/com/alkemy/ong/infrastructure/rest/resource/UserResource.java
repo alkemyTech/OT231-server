@@ -5,17 +5,15 @@ import com.alkemy.ong.application.service.usecase.IDeleteUserUseCase;
 import com.alkemy.ong.application.service.usecase.IGetUserUseCase;
 import com.alkemy.ong.application.service.usecase.IListUserUseCase;
 import com.alkemy.ong.domain.User;
-import com.alkemy.ong.infrastructure.rest.mapper.AuthenticationMapper;
 import com.alkemy.ong.infrastructure.rest.mapper.UserMapper;
 import com.alkemy.ong.infrastructure.rest.mapper.UserRegisterMapper;
 import com.alkemy.ong.infrastructure.rest.request.UserRegisterRequest;
-import com.alkemy.ong.infrastructure.rest.response.AuthenticationResponse;
 import com.alkemy.ong.infrastructure.rest.response.ListUserResponse;
 import com.alkemy.ong.infrastructure.rest.response.UserRegisterResponse;
+import com.alkemy.ong.infrastructure.rest.response.UserResponse;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,22 +31,19 @@ public class UserResource {
   private ICreateUserUseCase createUserUseCase;
 
   @Autowired
-  private UserRegisterMapper userRegisterMapper;
-
-  @Autowired
   private IDeleteUserUseCase deleteUserUseCase;
-  
-  @Autowired
-  private IGetUserUseCase getUserUseCase;
-  
-  @Autowired
-  private AuthenticationMapper authenticationMapper;
-
-  @Autowired
-  private UserMapper userMapper;
 
   @Autowired
   private IListUserUseCase listUserUseCase;
+
+  @Autowired
+  private IGetUserUseCase getUserUseCase;
+
+  @Autowired
+  private UserRegisterMapper userRegisterMapper;
+
+  @Autowired
+  private UserMapper userMapper;
 
   @PostMapping(value = "/auth/register",
       produces = {"application/json"},
@@ -62,10 +57,10 @@ public class UserResource {
   
   @GetMapping(value = "/auth/me", 
       produces = {"application/json"})
-  public ResponseEntity<AuthenticationResponse> getDetails(@RequestHeader HttpHeaders headers) {
-    String jwt = headers.getFirst("Authorization");
-    AuthenticationResponse response = authenticationMapper.toResponse(
-                                          getUserUseCase.getDetails(jwt));
+  public ResponseEntity<UserResponse> getDetails(
+      @RequestHeader("Authorization") String authorizationHeader) {
+    User user = userMapper.toDomain(authorizationHeader);
+    UserResponse response = userMapper.toResponse(getUserUseCase.getDetails(user));
     return ResponseEntity.ok(response);
   }
 
