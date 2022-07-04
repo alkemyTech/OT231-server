@@ -8,7 +8,6 @@ import com.alkemy.ong.application.service.usecase.IDeleteUserUseCase;
 import com.alkemy.ong.application.service.usecase.IGetUserUseCase;
 import com.alkemy.ong.application.service.usecase.IListUserUseCase;
 import com.alkemy.ong.domain.User;
-import com.alkemy.ong.infrastructure.config.spring.security.common.JwtUtils;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -17,8 +16,6 @@ import lombok.AllArgsConstructor;
 public class UserService implements ICreateUserUseCase, IDeleteUserUseCase, IListUserUseCase, IGetUserUseCase {
 
   private final IUserRepository userRepository;
-
-  private final JwtUtils jwtUtils;
 
   @Override
   public User add(User newUser) {
@@ -44,9 +41,8 @@ public class UserService implements ICreateUserUseCase, IDeleteUserUseCase, ILis
   }
   
   @Override
-  public User getDetails(String token) {
-    String email = jwtUtils.extractUsername(token);
-    return getUserBy(email);
+  public User getDetails(User user) {
+    return getUserBy(user.getEmail());
   }
 
   private User getUserBy(String email) {
