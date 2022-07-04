@@ -1,5 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.resource;
 
+import com.alkemy.ong.application.service.usecase.ICreateNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
 import com.alkemy.ong.domain.News;
 import com.alkemy.ong.infrastructure.rest.mapper.NewsMapper;
