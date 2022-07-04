@@ -69,15 +69,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers(HttpMethod.POST, "/auth/login", "/auth/register")
         .permitAll()
-<<<<<<< HEAD
         .antMatchers(HttpMethod.GET, "/auth/me")
-        .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
-=======
+        .hasAnyRole(Role.USER.name())
         .antMatchers(HttpMethod.POST, "/contacts")
         .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
         .antMatchers(HttpMethod.POST, "/categories")
         .hasAnyRole(Role.ADMIN.name())
->>>>>>> main
         .antMatchers(HttpMethod.GET, "/organization/public")
         .permitAll()
         .antMatchers(HttpMethod.DELETE, "/categories/{id:[\\d+]}")
