@@ -18,4 +18,6 @@ public interface INewsSpringRepository extends JpaRepository<NewsEntity, Long> {
   @Query(value = "UPDATE NewsEntity u SET u.softDelete = true WHERE u.id = :id")
   void softDeleteById(@Param("id") Long id);
 
+  NewsEntity findByName(String name);
+
 }
