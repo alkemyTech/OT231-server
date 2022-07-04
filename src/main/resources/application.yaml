@@ -19,7 +19,7 @@ sendgrid:
 
 # AWS
 aws:
-  bucketName: cohorte-junio-a192d78b
-  publicKey: foo
-  secretKey: foo
+  bucket-Name: cohorte-junio-a192d78b
+  public-key: foo
+  secret-Key: foo
   region: us-east-1
