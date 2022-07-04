@@ -4,11 +4,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import com.alkemy.ong.OngApplication;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
+import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
 import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
 import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
-import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IMemberSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.INewsSpringRepository;

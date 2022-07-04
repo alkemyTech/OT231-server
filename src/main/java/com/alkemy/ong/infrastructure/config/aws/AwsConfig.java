@@ -24,14 +24,14 @@ public class AwsConfig {
   @Bean
   public AmazonS3 createClientConnection() {
     AWSCredentials credentials = new BasicAWSCredentials(
-            publicKey,
-            secretKey
+        publicKey,
+        secretKey
     );
     return AmazonS3ClientBuilder
-            .standard()
-            .withCredentials(new AWSStaticCredentialsProvider(credentials))
-            .withRegion(Regions.fromName(region))
-            .build();
+        .standard()
+        .withCredentials(new AWSStaticCredentialsProvider(credentials))
+        .withRegion(Regions.fromName(region))
+        .build();
   }
 
   public String getBucketName() {

@@ -54,8 +54,8 @@ public class UserResource {
     UserRegisterResponse response = userRegisterMapper.toResponse(createUserUseCase.add(user));
     return new ResponseEntity<UserRegisterResponse>(response, HttpStatus.CREATED);
   }
-  
-  @GetMapping(value = "/auth/me", 
+
+  @GetMapping(value = "/auth/me",
       produces = {"application/json"})
   public ResponseEntity<UserResponse> getDetails(
       @RequestHeader("Authorization") String authorizationHeader) {

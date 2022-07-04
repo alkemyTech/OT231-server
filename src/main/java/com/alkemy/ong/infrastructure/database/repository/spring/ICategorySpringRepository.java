@@ -19,5 +19,5 @@ public interface ICategorySpringRepository extends JpaRepository<CategoryEntity,
   void softDeleteById(@Param("id") Long id);
 
   CategoryEntity findByName(String name);
-  
+
 }

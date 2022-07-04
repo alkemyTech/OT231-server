@@ -21,10 +21,10 @@ public class NewsResource {
 
   @Autowired
   private IDeleteNewsUseCase deleteNewsUseCase;
-  
+
   @Autowired
   private ICreateNewsUseCase createNewsUseCase;
-  
+
   @Autowired
   private NewsMapper newsMapper;
 
@@ -33,7 +33,7 @@ public class NewsResource {
     deleteNewsUseCase.delete(id);
     return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
   }
-  
+
   @PostMapping(value = "/news",
       produces = {"application/json"},
       consumes = {"application/json"})

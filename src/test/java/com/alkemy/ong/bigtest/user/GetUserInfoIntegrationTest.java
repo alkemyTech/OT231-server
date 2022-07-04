@@ -11,14 +11,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 public class GetUserInfoIntegrationTest extends BigTest {
-  
+
   @Test
   public void shouldReturn403WhenAuthTokenIsNotValid() throws Exception {
     mockMvc.perform(get("/auth/me")
             .header(HttpHeaders.AUTHORIZATION, "INVALID_TOKEN"))
         .andExpect(status().isForbidden());
   }
-  
+
   @Test
   public void shouldReturnUserInfoWhenRequestHasValidToken() throws Exception {
     mockMvc.perform(get("/auth/me")

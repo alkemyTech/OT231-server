@@ -94,7 +94,7 @@ public class ServiceBeanConfig {
   public IListUserUseCase listUserUseCase(UserRepository userRepository) {
     return new UserService(userRepository);
   }
-  
+
   @Bean
   public IGetUserUseCase getUserUseCase(UserRepository userRepository) {
     return new UserService(userRepository);

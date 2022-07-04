@@ -35,12 +35,12 @@ public class UserService
     }
     userRepository.delete(id);
   }
-  
+
   @Override
   public List<User> findAll() {
     return userRepository.findAllActive();
   }
-  
+
   @Override
   public User getDetails(User user) {
     return getUserBy(user.getEmail());
@@ -53,5 +53,5 @@ public class UserService
     }
     return user;
   }
-  
+
 }

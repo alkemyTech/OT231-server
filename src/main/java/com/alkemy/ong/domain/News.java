@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class News {
-  
+
   private Long id;
   private String name;
   private String text;
