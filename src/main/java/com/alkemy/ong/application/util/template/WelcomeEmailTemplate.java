@@ -1,16 +1,15 @@
 package com.alkemy.ong.application.util.template;
 
+import com.alkemy.ong.application.util.IContactInfo;
 import com.alkemy.ong.application.util.IEmail;
-import com.alkemy.ong.infrastructure.database.entity.OrganizationEntity;
-import com.alkemy.ong.infrastructure.database.entity.UserEntity;
+import com.alkemy.ong.domain.Organization;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class WelcomeTemplateMail implements IEmail {
+public class WelcomeEmailTemplate implements IEmail {
 
-  private String logo;
-  private final OrganizationEntity organization;
-  private final UserEntity user;
+  private final Organization organization;
+  private final IContactInfo contactInfo;
 
   @Override
   public String getSubject() {
@@ -19,7 +18,7 @@ public class WelcomeTemplateMail implements IEmail {
 
   @Override
   public String getTo() {
-    return user.getEmail();
+    return contactInfo.getEmail();
   }
 
   @Override
