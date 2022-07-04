@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class UserMapper {
   
   @Autowired
-  JwtUtils jwtUtils;
+  private JwtUtils jwtUtils;
 
   public ListUserResponse toResponse(List<User> users) {
     if (users == null || users.isEmpty()) {
