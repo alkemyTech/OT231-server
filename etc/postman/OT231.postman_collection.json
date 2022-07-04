@@ -617,7 +617,7 @@
 				}
 			]
 		},
-    {
+        {
 			"name": "List Slides",
 			"request": {
 				"auth": {
@@ -641,6 +641,43 @@
 					"port": "8080",
 					"path": [
 						"slides"
+					]
+				}
+			},
+			"response": []
+		}, {
+			"name": "Create Comment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInN1YiI6Im1pY2hhZWxAbXllcnMuY29tIiwiaWF0IjoxNjU2OTA1MDIxLCJleHAiOjE2NTY5MDY4MjF9.gq-50K7vjVCcXU7Zy5JWjg-I1sD47QSs671nJVYZDbI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\": \"muy bueno todo 1234\",\r\n    \"createBy\": \r\n        {\r\n            \"firstName\":\"Michael\",\r\n            \"lastName\": \"Myers\"\r\n        },\r\n    \"associatedNews\":\"Pelota\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comments"
 					]
 				}
 			},
