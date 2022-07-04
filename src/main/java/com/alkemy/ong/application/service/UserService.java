@@ -13,7 +13,8 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class UserService implements ICreateUserUseCase, IDeleteUserUseCase, IListUserUseCase, IGetUserUseCase {
+public class UserService
+    implements ICreateUserUseCase, IDeleteUserUseCase, IListUserUseCase, IGetUserUseCase {
 
   private final IUserRepository userRepository;
 
