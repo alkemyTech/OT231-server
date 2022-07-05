@@ -10,6 +10,7 @@ import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
 import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
+import com.alkemy.ong.infrastructure.database.repository.spring.ICommentSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IMemberSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.INewsSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IRoleSpringRepository;
@@ -68,6 +69,9 @@ public abstract class BigTest {
   @Autowired
   protected ICategorySpringRepository categoryRepository;
 
+  @Autowired
+  protected ICommentSpringRepository commentRepository;
+
   @Before
   public void setup() {
     createRoles();
@@ -80,7 +84,12 @@ public abstract class BigTest {
     deleteAllEntities();
   }
 
+  protected Long getRandomUserId() {
+    return userRepository.findByEmail(USER_EMAIL).getId();
+  }
+
   private void deleteAllEntities() {
+    commentRepository.deleteAll();
     newsRepository.deleteAll();
     memberRepository.deleteAll();
   }

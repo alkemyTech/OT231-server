@@ -37,8 +37,12 @@ public class UserEntityMapper {
         .lastName(userEntity.getLastName())
         .photo(userEntity.getPhoto())
         .password(userEntity.getPassword())
-        .token(jwtUtils.generateToken(userEntity))
+        .token(getToken(userEntity))
         .build();
+  }
+
+  private String getToken(UserEntity userEntity) {
+    return userEntity.getRole() == null ? "NOT_TOKEN" : jwtUtils.generateToken(userEntity);
   }
 
   public UserEntity toEntity(User user) {
@@ -46,6 +50,7 @@ public class UserEntityMapper {
       return null;
     }
     return UserEntity.builder()
+        .id(user.getId())
         .email(user.getEmail())
         .firstName(user.getFirstName())
         .lastName(user.getLastName())
