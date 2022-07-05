@@ -23,7 +23,7 @@ public class SeedActivities {
   protected IActivitySpringRepository activitySpringRepository;
 
   @Bean
-  CommandLineRunner initDatabase() {
+  CommandLineRunner initActivityData() {
     return args -> {
       log.info("Loading initial Activities in Database...");
       createStandarActivity();
