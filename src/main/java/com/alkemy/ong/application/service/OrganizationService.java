@@ -30,7 +30,8 @@ public class OrganizationService implements IGetOrganizationUseCase, IUpdateOrga
     return savedOrganization;
   }
 
-  private void updateBasicInformation(Organization savedOrganization, Organization updateOrganization) {
+  private void updateBasicInformation(Organization savedOrganization,
+      Organization updateOrganization) {
     String name = updateOrganization.getName();
     if (name != null) {
       savedOrganization.setName(name);
