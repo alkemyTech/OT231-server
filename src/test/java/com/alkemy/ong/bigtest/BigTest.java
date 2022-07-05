@@ -4,10 +4,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import com.alkemy.ong.OngApplication;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
+import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
 import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
 import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
+import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IMemberSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.INewsSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IRoleSpringRepository;
@@ -63,10 +65,14 @@ public abstract class BigTest {
   @Autowired
   protected IMemberSpringRepository memberRepository;
 
+  @Autowired
+  protected ICategorySpringRepository categoryRepository;
+
   @Before
   public void setup() {
     createRoles();
     createUserData();
+    createNewsCategory();
   }
 
   @After
@@ -93,6 +99,12 @@ public abstract class BigTest {
       roleRepository.saveAll(List.of(
           buildRole(Role.USER),
           buildRole(Role.ADMIN)));
+    }
+  }
+
+  private void createNewsCategory() {
+    if (categoryRepository.findByName("news") == null) {
+      categoryRepository.save(buildCategory("news"));
     }
   }
 
@@ -136,6 +148,12 @@ public abstract class BigTest {
     return RoleEntity.builder()
         .description(role.name())
         .name(role.getFullRoleName())
+        .build();
+  }
+
+  private CategoryEntity buildCategory(String name) {
+    return CategoryEntity.builder()
+        .name(name)
         .build();
   }
 
