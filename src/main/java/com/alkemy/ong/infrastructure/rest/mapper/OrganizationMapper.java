@@ -2,6 +2,7 @@ package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.Organization;
 import com.alkemy.ong.domain.SocialMedia;
+import com.alkemy.ong.infrastructure.rest.request.UpdateOrganizationRequest;
 import com.alkemy.ong.infrastructure.rest.response.OrganizationPublicDataResponse;
 import com.alkemy.ong.infrastructure.rest.response.SocialMediaResponse;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrganizationMapper {
+
+  public Organization toDomain(UpdateOrganizationRequest updateOrganizationRequest) {
+    if (updateOrganizationRequest == null) {
+      return null;
+    }
+    return Organization.builder()
+            .name(updateOrganizationRequest.getName())
+            .image(updateOrganizationRequest.getImage())
+            .address(updateOrganizationRequest.getAddress())
+            .phone(updateOrganizationRequest.getPhone())
+            .build();
+  }
 
   public OrganizationPublicDataResponse toResponse(Organization organization) {
     if (organization == null) {

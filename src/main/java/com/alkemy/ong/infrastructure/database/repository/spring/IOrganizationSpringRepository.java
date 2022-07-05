@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IOrganizationSpringRepository extends JpaRepository<OrganizationEntity, Long> {
 
-
 }
