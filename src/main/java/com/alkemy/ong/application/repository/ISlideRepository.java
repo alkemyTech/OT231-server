@@ -7,4 +7,9 @@ public interface ISlideRepository {
 
   List<Slide> findAllByOrderByOrder();
 
+  boolean existsById(Long id);
+
+  boolean isDeleted(Long id);
+
+  void delete(Long id);
 }
