@@ -26,20 +26,9 @@ public class OrganizationRepository implements IOrganizationRepository {
   @Override
   @Transactional
   public Organization update(Organization organization) {
-    OrganizationEntity organizationEntity = organizationEntityMapper.toEntity(organization);
-    OrganizationEntity updatedOrganization = organizationSpringRepository.findAll().get(0);
-    updatedOrganization.setName(organizationEntity.getName());
-    updatedOrganization.setImage(organizationEntity.getImage());
-    updatedOrganization.setAddress(organizationEntity.getAddress());
-    updatedOrganization.setPhone(organizationEntity.getPhone());
-    updatedOrganization.setEmail(organizationEntity.getEmail());
-    updatedOrganization.setWelcomeText(organizationEntity.getWelcomeText());
-    updatedOrganization.setAboutUsText(organizationEntity.getAboutUsText());
-    updatedOrganization.setFacebookUrl(organizationEntity.getFacebookUrl());
-    updatedOrganization.setLinkedInUrl(organizationEntity.getLinkedInUrl());
-    updatedOrganization.setInstagramUrl(organizationEntity.getInstagramUrl());
-    return organizationEntityMapper.toDomain(organizationSpringRepository.save(
-            updatedOrganization));
+    OrganizationEntity updatedOrganization = organizationSpringRepository.save(
+        organizationEntityMapper.toEntity(organization));
+    return organizationEntityMapper.toDomain(updatedOrganization);
   }
 
 

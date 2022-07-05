@@ -13,6 +13,7 @@ public class OrganizationEntityMapper {
       return null;
     }
     return Organization.builder()
+        .id(organizationEntity.getId())
         .name(organizationEntity.getName())
         .image(organizationEntity.getImage())
         .address(organizationEntity.getAddress())
@@ -23,21 +24,23 @@ public class OrganizationEntityMapper {
         .build();
   }
 
-  public OrganizationEntity toEntity(Organization updateOrganization) {
-    if (updateOrganization == null) {
+  public OrganizationEntity toEntity(Organization organization) {
+    if (organization == null) {
       return null;
     }
+    SocialMedia socialMedia = organization.getSocialMedia();
     return OrganizationEntity.builder()
-            .name(updateOrganization.getName())
-            .image(updateOrganization.getImage())
-            .address(updateOrganization.getAddress())
-            .phone(updateOrganization.getPhone())
-            .email(updateOrganization.getEmail())
-            .welcomeText(updateOrganization.getWelcomeText())
-            .facebookUrl(updateOrganization.getSocialMedia().getFacebookUrl())
-            .instagramUrl(updateOrganization.getSocialMedia().getInstagramUrl())
-            .linkedInUrl(updateOrganization.getSocialMedia().getLinkedIndUrl())
-            .build();
+        .id(organization.getId())
+        .name(organization.getName())
+        .image(organization.getImage())
+        .address(organization.getAddress())
+        .phone(organization.getPhone())
+        .email(organization.getEmail())
+        .welcomeText(organization.getWelcomeText())
+        .facebookUrl(socialMedia == null ? null : socialMedia.getFacebookUrl())
+        .instagramUrl(socialMedia == null ? null : socialMedia.getInstagramUrl())
+        .linkedInUrl(socialMedia == null ? null : socialMedia.getLinkedIndUrl())
+        .build();
   }
 
   private SocialMedia getSocialMedia(OrganizationEntity organizationEntity) {

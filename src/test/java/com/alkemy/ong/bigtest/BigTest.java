@@ -7,11 +7,13 @@ import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
 import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
+import com.alkemy.ong.infrastructure.database.entity.OrganizationEntity;
 import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IMemberSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.INewsSpringRepository;
+import com.alkemy.ong.infrastructure.database.repository.spring.IOrganizationSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IRoleSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IUserSpringRepository;
 import com.alkemy.ong.infrastructure.rest.request.AuthenticationRequest;
@@ -67,6 +69,9 @@ public abstract class BigTest {
 
   @Autowired
   protected ICategorySpringRepository categoryRepository;
+
+  @Autowired
+  protected IOrganizationSpringRepository organizationRepository;
 
   @Before
   public void setup() {
@@ -184,4 +189,19 @@ public abstract class BigTest {
         .build());
   }
 
+  protected Long saveOrganization() {
+    OrganizationEntity organizationEntity = organizationRepository.save(OrganizationEntity.builder()
+        .name("Somos Mas")
+        .image("https://s3.com/logo.jpg/")
+        .welcomeText("Welcome to Somos Mas")
+        .email("somos.mas@ong.com")
+        .phone("+540303456")
+        .address("Elm Street 3")
+        .facebookUrl("https://www.facebook.com/Somos_Mas/")
+        .linkedInUrl("https://www.linkedin.com/in/Somos-Mas/")
+        .instagramUrl("https://www.instagram.com/SomosMas/")
+        .build());
+
+    return organizationEntity.getId();
+  }
 }
