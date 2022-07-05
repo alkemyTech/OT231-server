@@ -15,12 +15,9 @@ import org.springframework.context.annotation.Profile;
 @Profile("default")
 public class SeedActivities {
 
-
-  //If I not failing the bullet,
-  // these constants we're created for in some case to use this images en other instances
-  private static final String IMAGE_I = "juanito.png";
-  private static final String IMAGE_II = "juanAlCuadrado.jpg";
-  private static final String IMAGE_III = "magaliArribaEspaña.jpg";
+  private static final String IMAGE_I = "https://aws.s3.com/juanito.png";
+  private static final String IMAGE_II = "https://aws.s3.com/juanAlCuadrado.jpg";
+  private static final String IMAGE_III = "https://aws.s3.com/magaliArribaEspaña.jpg";
 
   @Autowired
   protected IActivitySpringRepository activitySpringRepository;
@@ -45,10 +42,10 @@ public class SeedActivities {
 
   private ActivityEntity buildActivity(String name, String content, String image) {
     return ActivityEntity.builder()
-            .name(name)
-            .content(content)
-            .image(image)
-            .build();
+        .name(name)
+        .content(content)
+        .image(image)
+        .build();
   }
 
 }
