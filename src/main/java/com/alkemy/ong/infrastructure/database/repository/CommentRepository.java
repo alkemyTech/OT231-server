@@ -34,20 +34,6 @@ public class CommentRepository implements ICommentRepository {
     return commentEntityMapper.toDomain(commentSpringRepository.save(commentEntity));
   }
 
-  private UserEntity getUserEntity(Long id) {
-    UserEntity userEntity = userSpringRepository.findByIdAndSoftDeleteFalse(id);
-    if (userEntity == null) {
-      throw new RecordNotFoundException("User not found.");
-    }
-    return userEntity;
-  }
 
-  private NewsEntity getNewsEntity(Long id) {
-    NewsEntity newsEntity = newsSpringRepository.findByIdAndSoftDeleteFalse(id);
-    if (newsEntity == null) {
-      throw new RecordNotFoundException("News not found.");
-    }
-    return newsEntity;
-  }
 
 }

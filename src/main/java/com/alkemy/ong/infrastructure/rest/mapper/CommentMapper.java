@@ -14,11 +14,11 @@ public class CommentMapper {
     if (commentRequest == null) {
       return null;
     }
-    return Comment.builder()
-            .body(commentRequest.getBody())
-            .userId(commentRequest.getUserId())
-            .newsId(commentRequest.getNewsId())
-            .build();
+    Comment comment = new Comment();
+    comment.setNewsId(commentRequest.getNewsId());
+    comment.setUserId(commentRequest.getUserId());
+    comment.setBody(commentRequest.getBody());
+    return comment;
   }
 
   public CommentResponse toResponse(Comment comment) {

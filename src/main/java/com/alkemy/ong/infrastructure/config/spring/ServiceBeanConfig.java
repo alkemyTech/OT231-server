@@ -30,6 +30,7 @@ import com.alkemy.ong.infrastructure.database.repository.CategoryRepository;
 import com.alkemy.ong.infrastructure.database.repository.CommentRepository;
 import com.alkemy.ong.infrastructure.database.repository.ContactRepository;
 import com.alkemy.ong.infrastructure.database.repository.MemberRepository;
+import com.alkemy.ong.infrastructure.database.repository.NewsRepository;
 import com.alkemy.ong.infrastructure.database.repository.OrganizationRepository;
 import com.alkemy.ong.infrastructure.database.repository.SlideRepository;
 import com.alkemy.ong.infrastructure.database.repository.UserRepository;
@@ -104,9 +105,9 @@ public class ServiceBeanConfig {
   }
 
   @Bean
-  public ICreateCommentUseCase createCommentUseCase(
-          CommentRepository commentRepository) {
-    return new CommentService(commentRepository);
+  public ICreateCommentUseCase createCommentUseCase(CommentRepository commentRepository,
+      UserRepository userRepository, NewsRepository newsRepository) {
+    return new CommentService(commentRepository, newsRepository, userRepository);
   }
 
 }
