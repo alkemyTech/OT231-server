@@ -27,7 +27,7 @@ public class ContactRequest {
   private String email;
 
   @Size(max = 150, message = "Message must have a maximum of 150 characters")
-  @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Message can only contain "
+  @Pattern(regexp = "^[\\p{L}\\d\\s.,;:]*$"gm, message = "Message can only contain "
       + "alphanumeric and whitespaces")
   private String message;
 
