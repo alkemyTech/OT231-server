@@ -1,4 +1,4 @@
-package com.alkemy.ong.bigtest.user;
+package com.alkemy.ong.bigtest.auth;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
-public class GetUserInfoIntegrationTest extends BigTest {
+public class GetAuthDetailsIntegrationTest extends BigTest {
 
   @Test
   public void shouldReturn403WhenAuthTokenIsNotValid() throws Exception {

@@ -5,7 +5,7 @@ import com.alkemy.ong.application.exception.UserAlreadyExistsException;
 import com.alkemy.ong.application.repository.IUserRepository;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteUserUseCase;
-import com.alkemy.ong.application.service.usecase.IGetUserUseCase;
+import com.alkemy.ong.application.service.usecase.IGeAuthDetailsUseCase;
 import com.alkemy.ong.application.service.usecase.IListUserUseCase;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class UserService
-    implements ICreateUserUseCase, IDeleteUserUseCase, IListUserUseCase, IGetUserUseCase {
+    implements ICreateUserUseCase, IDeleteUserUseCase, IListUserUseCase, IGeAuthDetailsUseCase {
 
   private final IUserRepository userRepository;
 
@@ -42,7 +42,7 @@ public class UserService
   }
 
   @Override
-  public User getDetails(User user) {
+  public User getAuthDetails(User user) {
     return getUserBy(user.getEmail());
   }
 

@@ -17,4 +17,6 @@ public interface IUserRepository {
 
   List<User> findAllActive();
 
+  User findBy(Long id);
+
 }

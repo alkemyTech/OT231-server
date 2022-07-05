@@ -23,4 +23,5 @@ public interface IUserSpringRepository extends JpaRepository<UserEntity, Long> {
 
   List<UserEntity> findBySoftDeleteFalse();
 
+  UserEntity findByIdAndSoftDeleteFalse(Long id);
 }
