@@ -42,6 +42,11 @@ public class NewsRepository implements INewsRepository {
     return newsEntityMapper.toDomain(newsSpringRepository.save(newsEntity));
   }
 
+  @Override
+  public News findBy(Long id) {
+    return newsEntityMapper.toDomain(newsSpringRepository.findByIdAndSoftDeleteFalse(id));
+  }
+
   private CategoryEntity getNewsCategoryEntity() {
     return categorySpringRepository.findByName("news");
   }

@@ -12,4 +12,6 @@ public interface INewsRepository {
 
   News add(News news);
 
+  News findBy(Long id);
+
 }

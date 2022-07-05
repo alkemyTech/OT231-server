@@ -5,6 +5,7 @@ import com.alkemy.ong.application.repository.INewsRepository;
 import com.alkemy.ong.application.repository.ITestimonialRepository;
 import com.alkemy.ong.application.service.AuthenticationService;
 import com.alkemy.ong.application.service.CategoryService;
+import com.alkemy.ong.application.service.CommentService;
 import com.alkemy.ong.application.service.ContactService;
 import com.alkemy.ong.application.service.MemberService;
 import com.alkemy.ong.application.service.NewsService;
@@ -13,6 +14,7 @@ import com.alkemy.ong.application.service.SlideService;
 import com.alkemy.ong.application.service.TestimonialService;
 import com.alkemy.ong.application.service.UserService;
 import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
+import com.alkemy.ong.application.service.usecase.ICreateCommentUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateContactUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
@@ -25,8 +27,10 @@ import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
 import com.alkemy.ong.application.service.usecase.IListUserUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.infrastructure.database.repository.CategoryRepository;
+import com.alkemy.ong.infrastructure.database.repository.CommentRepository;
 import com.alkemy.ong.infrastructure.database.repository.ContactRepository;
 import com.alkemy.ong.infrastructure.database.repository.MemberRepository;
+import com.alkemy.ong.infrastructure.database.repository.NewsRepository;
 import com.alkemy.ong.infrastructure.database.repository.OrganizationRepository;
 import com.alkemy.ong.infrastructure.database.repository.SlideRepository;
 import com.alkemy.ong.infrastructure.database.repository.UserRepository;
@@ -98,6 +102,12 @@ public class ServiceBeanConfig {
   @Bean
   public IGetUserUseCase getUserUseCase(UserRepository userRepository) {
     return new UserService(userRepository);
+  }
+
+  @Bean
+  public ICreateCommentUseCase createCommentUseCase(CommentRepository commentRepository,
+      UserRepository userRepository, NewsRepository newsRepository) {
+    return new CommentService(commentRepository, newsRepository, userRepository);
   }
 
 }

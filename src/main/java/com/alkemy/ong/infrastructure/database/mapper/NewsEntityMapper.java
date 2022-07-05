@@ -12,6 +12,7 @@ public class NewsEntityMapper {
       return null;
     }
     return NewsEntity.builder()
+        .id(news.getId())
         .name(news.getName())
         .content(news.getText())
         .image(news.getImage())
