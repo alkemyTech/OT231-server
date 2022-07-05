@@ -2,7 +2,7 @@ package com.alkemy.ong.infrastructure.rest.resource;
 
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteUserUseCase;
-import com.alkemy.ong.application.service.usecase.IGetUserUseCase;
+import com.alkemy.ong.application.service.usecase.IGeAuthDetailsUseCase;
 import com.alkemy.ong.application.service.usecase.IListUserUseCase;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.rest.mapper.UserMapper;
@@ -37,7 +37,7 @@ public class UserResource {
   private IListUserUseCase listUserUseCase;
 
   @Autowired
-  private IGetUserUseCase getUserUseCase;
+  private IGeAuthDetailsUseCase geAuthDetailsUseCase;
 
   @Autowired
   private UserRegisterMapper userRegisterMapper;
@@ -57,10 +57,10 @@ public class UserResource {
 
   @GetMapping(value = "/auth/me",
       produces = {"application/json"})
-  public ResponseEntity<UserResponse> getDetails(
+  public ResponseEntity<UserResponse> getAuthDetails(
       @RequestHeader("Authorization") String authorizationHeader) {
     User user = userMapper.toDomain(authorizationHeader);
-    UserResponse response = userMapper.toResponse(getUserUseCase.getDetails(user));
+    UserResponse response = userMapper.toResponse(geAuthDetailsUseCase.getAuthDetails(user));
     return ResponseEntity.ok(response);
   }
 

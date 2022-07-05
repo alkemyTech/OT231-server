@@ -10,8 +10,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.alkemy.ong.bigtest.BigTest;
-import com.alkemy.ong.domain.News;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
+import com.alkemy.ong.infrastructure.rest.request.NewsRequest;
 import com.alkemy.ong.infrastructure.rest.response.NewsResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.Optional;
@@ -83,7 +83,7 @@ public class CreateNewsIntegrationTest extends BigTest {
 
   private String createRequest(String name, String text, String image)
       throws JsonProcessingException {
-    return objectMapper.writeValueAsString(News.builder()
+    return objectMapper.writeValueAsString(NewsRequest.builder()
         .name(name)
         .text(text)
         .image(image)
