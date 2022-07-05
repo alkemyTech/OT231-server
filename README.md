@@ -125,4 +125,5 @@ mvn checkstyle:checkstyle
 | Jeff        | Bezos      | jeff@amazon.com     | abcd1234 | USER  |
 | Elon        | Musk       | elon@tesla.com      | abcd1234 | USER  |
 | Jack        | Dorsey     | jack@twitter.com    | abcd1234 | USER  |
+
 ---------------------------------------------------------------------

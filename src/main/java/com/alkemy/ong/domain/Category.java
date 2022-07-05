@@ -7,10 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class Contact {
+public class Category {
 
   private String name;
-  private String phone;
-  private String email;
-  private String message;
+  private String description;
+  private String image;
 }

@@ -17,6 +17,8 @@ public class OrganizationEntityMapper {
         .image(organizationEntity.getImage())
         .address(organizationEntity.getAddress())
         .phone(organizationEntity.getPhone())
+        .email(organizationEntity.getEmail())
+        .welcomeText(organizationEntity.getWelcomeText())
         .socialMedia(getSocialMedia(organizationEntity))
         .build();
   }

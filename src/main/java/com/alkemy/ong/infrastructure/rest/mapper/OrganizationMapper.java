@@ -20,8 +20,6 @@ public class OrganizationMapper {
             .image(organizationRequest.getImage())
             .address(organizationRequest.getAddress())
             .phone(organizationRequest.getPhone())
-            .email(organizationRequest.getEmail())
-            .welcomeText(organizationRequest.getWelcomeText())
             .build();
   }
 
@@ -34,8 +32,6 @@ public class OrganizationMapper {
         .image(organization.getImage())
         .address(organization.getAddress())
         .phone(organization.getPhone())
-        .email(organization.getEmail())
-        .welcomeText(organization.getWelcomeText())
         .socialMedia(getSocialMedia(organization.getSocialMedia()))
         .build();
   }

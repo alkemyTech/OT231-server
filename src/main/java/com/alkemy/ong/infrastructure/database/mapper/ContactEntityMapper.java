@@ -12,11 +12,11 @@ public class ContactEntityMapper {
       return null;
     }
     return Contact.builder()
-            .name(contactEntity.getName())
-            .phone(contactEntity.getPhone())
-            .email(contactEntity.getEmail())
-            .message(contactEntity.getMessage())
-            .build();
+        .name(contactEntity.getName())
+        .phone(contactEntity.getPhone())
+        .email(contactEntity.getEmail())
+        .message(contactEntity.getMessage())
+        .build();
   }
 
   public ContactEntity toEntity(Contact contact) {
@@ -24,11 +24,11 @@ public class ContactEntityMapper {
       return null;
     }
     return ContactEntity.builder()
-            .name(contact.getName())
-            .phone(contact.getPhone())
-            .email(contact.getEmail())
-            .message(contact.getMessage())
-            .build();
+        .name(contact.getName())
+        .phone(contact.getPhone())
+        .email(contact.getEmail())
+        .message(contact.getMessage())
+        .build();
   }
 
 }

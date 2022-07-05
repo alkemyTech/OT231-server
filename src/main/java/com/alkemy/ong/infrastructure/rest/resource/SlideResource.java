@@ -20,7 +20,7 @@ public class SlideResource {
   @GetMapping(value = "/slides", produces = {"application/json"})
   public ResponseEntity<ListSlideResponse> list() {
     return ResponseEntity.ok().body(slideMapper
-            .toResponse(listSlideUseCase.findAllByOrderByOrder()));
+        .toResponse(listSlideUseCase.findAllByOrderByOrder()));
   }
 
 }

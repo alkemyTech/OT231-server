@@ -1,6 +1,8 @@
 package com.alkemy.ong.infrastructure.rest.request;
 
 import com.alkemy.ong.infrastructure.rest.response.SocialMediaResponse;
+
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -18,12 +20,12 @@ import lombok.Setter;
 @Builder
 public class OrganizationRequest {
 
-  @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Name can only contain "
-            + "alphanumeric")
+  @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$", message = "Name can only contain "
+            + "alphanumeric characters and whitespaces")
   private String name;
 
   @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Image can only contain "
-            + "alphanumeric")
+            + "alphanumeric characters without whitespaces")
   private String image;
 
   private String address;
@@ -33,9 +35,11 @@ public class OrganizationRequest {
   @Email(message = "Email should be valid")
   private String email;
 
-  @Size(max = 50, message = "Welcome text must have a maximum of 150 characters")
-  @NotBlank
+  @Size(max = 50, message = "Welcome text must have a maximum of 50 alphanumeric characters")
+  @NotBlank(message = "Welcome Text cannot be empty")
   private String welcomeText;
 
-  private SocialMediaResponse socialMedia;
+  private SocialMediaRequest socialMedia;
+
+
 }

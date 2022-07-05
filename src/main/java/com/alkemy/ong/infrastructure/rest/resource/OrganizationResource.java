@@ -4,9 +4,10 @@ import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateOrganizationUseCase;
 import com.alkemy.ong.domain.Organization;
 import com.alkemy.ong.infrastructure.rest.mapper.OrganizationMapper;
+import com.alkemy.ong.infrastructure.rest.mapper.OrganizationUpdateMapper;
 import com.alkemy.ong.infrastructure.rest.request.OrganizationRequest;
 import com.alkemy.ong.infrastructure.rest.response.OrganizationPublicDataResponse;
-import com.alkemy.ong.infrastructure.rest.response.UserRegisterResponse;
+import com.alkemy.ong.infrastructure.rest.response.OrganizationUpdateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,9 @@ public class OrganizationResource {
   @Autowired
   private OrganizationMapper organizationMapper;
 
+  @Autowired
+  private OrganizationUpdateMapper organizationUpdateMapper;
+
   @GetMapping(value = "/organization/public", produces = {"application/json"})
   public ResponseEntity<OrganizationPublicDataResponse> getPublicData() {
     return ResponseEntity.ok().body(organizationMapper
@@ -36,12 +40,12 @@ public class OrganizationResource {
   @PatchMapping(value = "/organization/public",
           produces = {"application/json"},
           consumes = {"application/json"})
-  public ResponseEntity<OrganizationPublicDataResponse> update(
+  public ResponseEntity<OrganizationUpdateResponse> update(
           @RequestBody OrganizationRequest organizationRequest) {
-    Organization organization = organizationMapper.toDomain(organizationRequest);
-    OrganizationPublicDataResponse response = organizationMapper.toResponse(
+    Organization organization = organizationUpdateMapper.toDomain(organizationRequest);
+    OrganizationUpdateResponse response = organizationUpdateMapper.toResponse(
             updateOrganizationUseCase.update(organization));
-    return new ResponseEntity<OrganizationPublicDataResponse>(response, HttpStatus.CREATED);
+    return new ResponseEntity<OrganizationUpdateResponse>(response, HttpStatus.ACCEPTED);
 
   }
 

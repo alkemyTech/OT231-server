@@ -19,9 +19,9 @@ public class SlideEntityMapper {
 
     for (SlideEntity slideEntity : slideEntities) {
       slides.add(Slide.builder()
-            .imageUrl(slideEntity.getImageUrl())
-            .order(slideEntity.getOrder())
-            .build());
+          .imageUrl(slideEntity.getImageUrl())
+          .order(slideEntity.getOrder())
+          .build());
     }
 
     return slides;

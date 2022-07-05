@@ -13,6 +13,7 @@ public class Organization {
   private String phone;
   private String email;
   private String welcomeText;
+  private String aboutUsText;
   private SocialMedia socialMedia;
 
 }

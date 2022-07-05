@@ -4,7 +4,6 @@ import com.alkemy.ong.application.repository.IOrganizationRepository;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateOrganizationUseCase;
 import com.alkemy.ong.domain.Organization;
-import com.alkemy.ong.infrastructure.database.entity.OrganizationEntity;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
