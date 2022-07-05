@@ -84,8 +84,8 @@ public abstract class BigTest {
     deleteAllEntities();
   }
 
-  protected Long getRandomUserId() {
-    return userRepository.findByEmail(USER_EMAIL).getId();
+  protected UserEntity getRandomUser() {
+    return userRepository.findByEmail(USER_EMAIL);
   }
 
   private void deleteAllEntities() {

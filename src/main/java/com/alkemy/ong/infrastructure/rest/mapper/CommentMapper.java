@@ -26,22 +26,19 @@ public class CommentMapper {
       return null;
     }
     return CommentResponse.builder()
-            .id(comment.getId())
-            .body(comment.getBody())
-            //.createBy(getFullNameResponse(comment.getUser()))
-            //.associatedNews(comment.getNewsId())
-            .createTimestamp(comment.getCreateTimestamp())
-            .build();
+        .id(comment.getId())
+        .body(comment.getBody())
+        .createdBy(getFullNameResponse(comment.getUser()))
+        .associatedNews(comment.getNews().getName())
+        .createTimestamp(comment.getCreateTimestamp())
+        .build();
   }
 
-  /*
   private FullNameResponse getFullNameResponse(User user) {
     return FullNameResponse.builder()
-            .firstName(user.getFirstName())
-            .lastName(user.getLastName())
-            .build();
-  }*/
-
-
+        .firstName(user.getFirstName())
+        .lastName(user.getLastName())
+        .build();
+  }
 
 }

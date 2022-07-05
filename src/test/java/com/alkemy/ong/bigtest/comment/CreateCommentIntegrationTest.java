@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.alkemy.ong.bigtest.BigTest;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
+import com.alkemy.ong.infrastructure.database.entity.UserEntity;
 import com.alkemy.ong.infrastructure.rest.request.CommentRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jayway.jsonpath.JsonPath;
@@ -26,12 +27,18 @@ public class CreateCommentIntegrationTest extends BigTest {
 
   @Test
   public void shouldCreateCommentWhenRequestUserHasStandardRole() throws Exception {
+    NewsEntity news = saveNews();
+    UserEntity user = getRandomUser();
+
     String response = mockMvc.perform(post("/comments")
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForStandardUser())
             .contentType(MediaType.APPLICATION_JSON)
-            .content(createRequest()))
+            .content(createRequest(news, user)))
         .andExpect(jsonPath("$.id", notNullValue()))
         .andExpect(jsonPath("$.body", equalTo(BODY)))
+        .andExpect(jsonPath("$.associatedNews", equalTo(news.getName())))
+        .andExpect(jsonPath("$.createdBy.firstName", equalTo(user.getFirstName())))
+        .andExpect(jsonPath("$.createdBy.lastName", equalTo(user.getLastName())))
         .andExpect(status().isCreated())
         .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
@@ -45,11 +52,11 @@ public class CreateCommentIntegrationTest extends BigTest {
     assertThat(optionalNewsEntity.get().getSoftDelete()).isFalse();
   }
 
-  private String createRequest() throws JsonProcessingException {
+  private String createRequest(NewsEntity news, UserEntity user) throws JsonProcessingException {
     return objectMapper.writeValueAsString(CommentRequest.builder()
         .body(BODY)
-        .newsId(saveNews().getId())
-        .userId(getRandomUserId())
+        .newsId(news.getId())
+        .userId(user.getId())
         .build());
   }
 
