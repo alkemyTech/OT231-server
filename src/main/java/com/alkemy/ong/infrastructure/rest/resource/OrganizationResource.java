@@ -8,6 +8,7 @@ import com.alkemy.ong.infrastructure.rest.mapper.OrganizationUpdateMapper;
 import com.alkemy.ong.infrastructure.rest.request.OrganizationRequest;
 import com.alkemy.ong.infrastructure.rest.response.OrganizationPublicDataResponse;
 import com.alkemy.ong.infrastructure.rest.response.OrganizationUpdateResponse;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+
 
 @RestController
 public class OrganizationResource {
@@ -41,7 +44,7 @@ public class OrganizationResource {
           produces = {"application/json"},
           consumes = {"application/json"})
   public ResponseEntity<OrganizationUpdateResponse> update(
-          @RequestBody OrganizationRequest organizationRequest) {
+          @Valid @RequestBody OrganizationRequest organizationRequest) {
     Organization organization = organizationUpdateMapper.toDomain(organizationRequest);
     OrganizationUpdateResponse response = organizationUpdateMapper.toResponse(
             updateOrganizationUseCase.update(organization));

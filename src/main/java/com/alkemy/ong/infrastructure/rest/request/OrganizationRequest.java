@@ -20,11 +20,11 @@ import lombok.Setter;
 @Builder
 public class OrganizationRequest {
 
-  @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$", message = "Name can only contain "
+  @Pattern(regexp = "^[\\p{L}\\d\\s]*$", message = "Name can only contain "
             + "alphanumeric characters and whitespaces")
   private String name;
 
-  @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Image can only contain "
+  @Pattern(regexp = "^[\\p{L}\\d.?:/-]*$", message = "Image can only contain "
             + "alphanumeric characters without whitespaces")
   private String image;
 
