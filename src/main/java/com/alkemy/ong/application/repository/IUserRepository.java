@@ -7,8 +7,6 @@ public interface IUserRepository {
 
   User findByEmail(String email);
 
-  User findByFirstNameAndLastName(String firstName, String lastName);
-
   User add(User user);
 
   boolean existsById(Long id);

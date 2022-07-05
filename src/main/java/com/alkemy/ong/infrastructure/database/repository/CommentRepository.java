@@ -1,8 +1,8 @@
 package com.alkemy.ong.infrastructure.database.repository;
 
+import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.repository.ICommentRepository;
 import com.alkemy.ong.domain.Comment;
-import com.alkemy.ong.domain.UserFullName;
 import com.alkemy.ong.infrastructure.database.entity.CommentEntity;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
@@ -13,6 +13,7 @@ import com.alkemy.ong.infrastructure.database.repository.spring.IUserSpringRepos
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
 
 @RequiredArgsConstructor
 @Component
@@ -27,19 +28,26 @@ public class CommentRepository implements ICommentRepository {
   @Transactional
   public Comment add(Comment newComment) {
     CommentEntity commentEntity = commentEntityMapper.toEntity(newComment);
-    commentEntity.setUser(getUserEntity(newComment.getCreateBy()));
-    commentEntity.setNews(getNewsEntity(newComment.getAssociatedNews()));
+    commentEntity.setUser(getUserEntity(newComment.getUserId()));
+    commentEntity.setNews(getNewsEntity(newComment.getNewsId()));
     commentEntity.setSoftDelete(false);
     return commentEntityMapper.toDomain(commentSpringRepository.save(commentEntity));
   }
 
-  private UserEntity getUserEntity(UserFullName userFullName) {
-    return userSpringRepository.findByFirstNameAndLastName(
-            userFullName.getFirstName(), userFullName.getLastName());
+  private UserEntity getUserEntity(Long id) {
+    UserEntity userEntity = userSpringRepository.findByIdAndSoftDeleteFalse(id);
+    if (userEntity == null) {
+      throw new RecordNotFoundException("User not found.");
+    }
+    return userEntity;
   }
 
-  private NewsEntity getNewsEntity(String news) {
-    return newsSpringRepository.findByName(news);
+  private NewsEntity getNewsEntity(Long id) {
+    NewsEntity newsEntity = newsSpringRepository.findByIdAndSoftDeleteFalse(id);
+    if (newsEntity == null) {
+      throw new RecordNotFoundException("News not found.");
+    }
+    return newsEntity;
   }
 
 }

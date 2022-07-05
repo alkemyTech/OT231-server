@@ -30,8 +30,7 @@ public class CommentResource {
       @Valid @RequestBody CommentRequest commentRequest) {
     Comment comment = commentMapper.toDomain(commentRequest);
     CommentResponse response = commentMapper.toResponse(
-            createCommentUseCase.add(comment, commentRequest.getCreateBy(),
-                    commentRequest.getAssociatedNews()));
+            createCommentUseCase.add(comment));
     return new ResponseEntity<CommentResponse>(response, HttpStatus.CREATED);
   }
 

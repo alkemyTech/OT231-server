@@ -12,8 +12,8 @@ public class Comment {
 
   private Long id;
   private String body;
-  private UserFullName createBy;
-  private String associatedNews;
+  private Long userId;
+  private Long newsId;
   private Timestamp createTimestamp;
 
 }

@@ -1,7 +1,6 @@
 package com.alkemy.ong.infrastructure.database.mapper;
 
 import com.alkemy.ong.domain.Comment;
-import com.alkemy.ong.domain.UserFullName;
 import com.alkemy.ong.infrastructure.database.entity.CommentEntity;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +14,8 @@ public class CommentEntityMapper {
     return Comment.builder()
             .id(commentEntity.getId())
             .body(commentEntity.getBody())
-            .createBy(getUserFullName(commentEntity))
-            .associatedNews(commentEntity.getNews().getName())
+            .userId(commentEntity.getUser().getId())
+            .newsId(commentEntity.getNews().getId())
             .createTimestamp(commentEntity.getCreateTimestamp())
             .build();
   }
@@ -31,12 +30,4 @@ public class CommentEntityMapper {
             .createTimestamp(comment.getCreateTimestamp())
             .build();
   }
-
-  private UserFullName getUserFullName(CommentEntity commentEntity) {
-    return UserFullName.builder()
-            .firstName(commentEntity.getUser().getFirstName())
-            .lastName(commentEntity.getUser().getLastName())
-            .build();
-  }
-
 }

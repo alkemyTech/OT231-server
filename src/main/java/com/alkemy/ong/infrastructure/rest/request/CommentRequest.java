@@ -1,6 +1,5 @@
 package com.alkemy.ong.infrastructure.rest.request;
 
-import com.alkemy.ong.domain.UserFullName;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -14,16 +13,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class CommentRequest {
+public class  CommentRequest {
 
   @Pattern(regexp = "^[A-Za-z\\d\\s]*$", message = "Body can only contain "
           + "alphanumeric and whitespaces")
   private String body;
 
   @NotNull(message = "User must not be null")
-  private UserFullName createBy;
+  private Long userId;
 
   @NotNull(message = "News must not be null")
-  private String associatedNews;
+  private Long newsId;
 
 }

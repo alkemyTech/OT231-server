@@ -99,8 +99,8 @@ public class ServiceBeanConfig {
 
   @Bean
   public ICreateCommentUseCase createCommentUseCase(
-          CommentRepository commentRepository, UserRepository userRepository) {
-    return new CommentService(commentRepository, userRepository);
+          CommentRepository commentRepository) {
+    return new CommentService(commentRepository);
   }
 
 }
