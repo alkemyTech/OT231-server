@@ -26,17 +26,17 @@ public class SeedActivities {
   CommandLineRunner initDatabase() {
     return args -> {
       log.info("Loading initial Activities in Database...");
-      createStandarActivity();
+      createStandardActivities();
     };
   }
 
-  private void createStandarActivity() {
+  private void createStandardActivities() {
     if (activitySpringRepository.count() == 0) {
       activitySpringRepository.saveAll(List.of(
           buildActivity("Fix the tree's", "More tree's", IMAGE_I),
-          buildActivity("Create mor donation houses", "More donation and more houses", IMAGE_II),
+          buildActivity("Create more donation houses", "More donation and more houses", IMAGE_II),
           buildActivity("Integrate public food donation mail", "Food's", IMAGE_III)));
-      log.info("Initial Activity Created");
+      log.info("Initial Activities Created");
     }
   }
 
