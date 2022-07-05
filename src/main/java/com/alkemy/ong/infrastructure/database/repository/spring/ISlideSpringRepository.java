@@ -14,9 +14,4 @@ public interface ISlideSpringRepository extends JpaRepository<SlideEntity, Long>
 
   List<SlideEntity> findAllByOrderByOrder();
 
-  Optional<SlideEntity> isDeleted(Long id);
-
-  @Modifying
-  @Query(value = "UPDATE SlideEntity u SET u.softDelete = true WHERE u.id = :id")
-  void softDeleteById(@Param("id") Long id);
 }

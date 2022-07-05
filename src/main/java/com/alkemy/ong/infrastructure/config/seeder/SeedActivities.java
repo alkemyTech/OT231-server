@@ -14,38 +14,38 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 @Profile("default")
 public class SeedActivities {
-
-  private static final String IMAGE_I = "https://aws.s3.com/juanito.png";
-  private static final String IMAGE_II = "https://aws.s3.com/juanAlCuadrado.jpg";
-  private static final String IMAGE_III = "https://aws.s3.com/magaliArribaEspaña.jpg";
-
-  @Autowired
-  protected IActivitySpringRepository activitySpringRepository;
-
-  @Bean
-  CommandLineRunner initDatabase() {
-    return args -> {
-      log.info("Loading initial Activities in Database...");
-      createStandarActivity();
-    };
-  }
-
-  private void createStandarActivity() {
-    if (activitySpringRepository.count() == 0) {
-      activitySpringRepository.saveAll(List.of(
-          buildActivity("Fix the tree's", "More tree's", IMAGE_I),
-          buildActivity("Create mor donation houses", "More donation and more houses", IMAGE_II),
-          buildActivity("Integrate public food donation mail", "Food's", IMAGE_III)));
-      log.info("Initial Activity Created");
-    }
-  }
-
-  private ActivityEntity buildActivity(String name, String content, String image) {
-    return ActivityEntity.builder()
-        .name(name)
-        .content(content)
-        .image(image)
-        .build();
-  }
+//
+//  private static final String IMAGE_I = "https://aws.s3.com/juanito.png";
+//  private static final String IMAGE_II = "https://aws.s3.com/juanAlCuadrado.jpg";
+//  private static final String IMAGE_III = "https://aws.s3.com/magaliArribaEspaña.jpg";
+//
+//  @Autowired
+//  protected IActivitySpringRepository activitySpringRepository;
+//
+//  @Bean
+//  CommandLineRunner initDatabase() {
+//    return args -> {
+//      log.info("Loading initial Activities in Database...");
+//      createStandarActivity();
+//    };
+//  }
+//
+//  private void createStandarActivity() {
+//    if (activitySpringRepository.count() == 0) {
+//      activitySpringRepository.saveAll(List.of(
+//          buildActivity("Fix the tree's", "More tree's", IMAGE_I),
+//          buildActivity("Create mor donation houses", "More donation and more houses", IMAGE_II),
+//          buildActivity("Integrate public food donation mail", "Food's", IMAGE_III)));
+//      log.info("Initial Activity Created");
+//    }
+//  }
+//
+//  private ActivityEntity buildActivity(String name, String content, String image) {
+//    return ActivityEntity.builder()
+//        .name(name)
+//        .content(content)
+//        .image(image)
+//        .build();
+//  }
 
 }

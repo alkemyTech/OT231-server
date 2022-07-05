@@ -27,14 +27,8 @@ public class SlideRepository implements ISlideRepository {
   }
 
   @Override
-  public boolean isDeleted(Long id) {
-    return slideSpringRepository.isDeleted(id).isPresent();
-  }
-
-  @Override
-  @Transactional
   public void delete(Long id) {
-    slideSpringRepository.softDeleteById(id);
+    slideSpringRepository.deleteById(id);
   }
 
 }

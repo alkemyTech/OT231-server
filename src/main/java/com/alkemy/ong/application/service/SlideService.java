@@ -21,7 +21,7 @@ public class SlideService implements IListSlideUseCase, IDeleteSlideUseCase {
 
   @Override
   public void delete(Long id) {
-    if(!slideRepository.existsById(id) || slideRepository.isDeleted(id)){
+    if (!slideRepository.existsById(id)) {
       throw new RecordNotFoundException("Slide not found");
     }
     slideRepository.delete(id);
