@@ -55,6 +55,11 @@ public class UserRepository implements IUserRepository {
     return userEntityMapper.toDomain(userSpringRepository.findBySoftDeleteFalse());
   }
 
+  @Override
+  public User findBy(Long id) {
+    return userEntityMapper.toDomain(userSpringRepository.findByIdAndSoftDeleteFalse(id));
+  }
+
   private RoleEntity getRoleEntity(String role) {
     return roleSpringRepository.findByName(role);
   }

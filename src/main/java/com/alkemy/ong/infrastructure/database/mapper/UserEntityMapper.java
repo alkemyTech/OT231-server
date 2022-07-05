@@ -31,6 +31,7 @@ public class UserEntityMapper {
       return null;
     }
     return User.builder()
+        .id(userEntity.getId())
         .email(userEntity.getEmail())
         .firstName(userEntity.getFirstName())
         .lastName(userEntity.getLastName())
