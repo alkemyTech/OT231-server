@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class SlideResponse {
 
   private String imageUrl;
+  private String text;
   private Integer order;
 
 }
