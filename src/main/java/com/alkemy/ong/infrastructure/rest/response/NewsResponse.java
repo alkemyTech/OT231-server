@@ -12,7 +12,7 @@ public class NewsResponse {
 
   private Long id;
   private String name;
-  //private String text;
+  private String text;
   private String image;
   //private Slide slide;
 
