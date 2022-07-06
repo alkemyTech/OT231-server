@@ -27,7 +27,7 @@ public class NewsMapper {
     return NewsResponse.builder()
         .id(news.getId())
         .name(news.getName())
-        .text(news.getText())
+        //.text(news.getText())
         .image(news.getImage())
         .slide(getSlide(news.getSlide()))
         .build();
