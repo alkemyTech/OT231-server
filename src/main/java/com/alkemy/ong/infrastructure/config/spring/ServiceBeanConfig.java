@@ -59,7 +59,7 @@ public class ServiceBeanConfig {
 
   @Bean
   public IUpdateOrganizationUseCase updateOrganizationUseCase(
-          OrganizationRepository organizationRepository) {
+      OrganizationRepository organizationRepository) {
     return new OrganizationService(organizationRepository);
   }
 
@@ -104,5 +104,4 @@ public class ServiceBeanConfig {
       UserRepository userRepository, NewsRepository newsRepository) {
     return new CommentService(commentRepository, newsRepository, userRepository);
   }
-
 }

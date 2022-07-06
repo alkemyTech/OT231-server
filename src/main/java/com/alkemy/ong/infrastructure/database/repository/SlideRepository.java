@@ -20,4 +20,14 @@ public class SlideRepository implements ISlideRepository {
     return slideEntityMapper.toDomain(slideSpringRepository.findAllByOrderByOrder());
   }
 
+  @Override
+  public boolean existsById(Long id) {
+    return slideSpringRepository.existsById(id);
+  }
+
+  @Override
+  public void delete(Long id) {
+    slideSpringRepository.deleteById(id);
+  }
+
 }
