@@ -32,7 +32,8 @@ public class NewsMapper {
         .slide(getSlide(news.getSlide()))
         .build();
   }
-  public Slide getSlide(Slide slide){
+
+  public Slide getSlide(Slide slide) {
     return Slide.builder()
             .order(slide.getOrder())
             .imageUrl(slide.getImageUrl())
