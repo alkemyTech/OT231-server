@@ -1,6 +1,7 @@
 package com.alkemy.ong.infrastructure.database.mapper;
 
 import com.alkemy.ong.domain.News;
+import com.alkemy.ong.domain.Slide;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,14 @@ public class NewsEntityMapper {
         .name(newsEntity.getName())
         .text(newsEntity.getContent())
         .image(newsEntity.getImage())
+        .build();
+  }
+
+  public Slide getSlide(Slide slide){
+    return Slide.builder()
+        .order(slide.getOrder())
+        .imageUrl(slide.getImageUrl())
+        .text(slide.getText())
         .build();
   }
 
