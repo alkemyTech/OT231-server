@@ -10,7 +10,7 @@ import lombok.Setter;
 public class Slide {
 
   private String imageUrl;
-  private String text;
+  //private String text;
   private Integer order;
 
 }
