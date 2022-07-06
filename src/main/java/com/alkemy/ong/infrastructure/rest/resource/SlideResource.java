@@ -35,4 +35,5 @@ public class SlideResource {
     deleteSlideUseCase.delete(id);
     return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
   }
+
 }

@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class SlideService implements IListSlideUseCase, IDeleteSlideUseCase {
 
-
   private final SlideRepository slideRepository;
 
   @Override
@@ -26,4 +25,5 @@ public class SlideService implements IListSlideUseCase, IDeleteSlideUseCase {
     }
     slideRepository.delete(id);
   }
+
 }

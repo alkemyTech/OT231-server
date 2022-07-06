@@ -5,7 +5,6 @@ import com.alkemy.ong.domain.Slide;
 import com.alkemy.ong.infrastructure.database.mapper.SlideEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.ISlideSpringRepository;
 import java.util.List;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
