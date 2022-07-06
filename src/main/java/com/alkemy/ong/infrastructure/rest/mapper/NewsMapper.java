@@ -29,7 +29,7 @@ public class NewsMapper {
         .name(news.getName())
         //.text(news.getText())
         .image(news.getImage())
-        .slide(getSlide(news.getSlide()))
+        //.slide(getSlide(news.getSlide()))
         .build();
   }
 
@@ -37,7 +37,7 @@ public class NewsMapper {
     return Slide.builder()
             .order(slide.getOrder())
             .imageUrl(slide.getImageUrl())
-            .text(slide.getText())
+            //.text(slide.getText())
             .build();
   }
 }

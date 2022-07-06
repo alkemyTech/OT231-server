@@ -1,6 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.response;
 
-import com.alkemy.ong.domain.Slide;
+//import com.alkemy.ong.domain.Slide;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +14,6 @@ public class NewsResponse {
   private String name;
   //private String text;
   private String image;
-  private Slide slide;
+  //private Slide slide;
 
 }
