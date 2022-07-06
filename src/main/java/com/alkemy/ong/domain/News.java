@@ -14,5 +14,6 @@ public class News {
   private String text;
   private String image;
   private boolean softDelete;
+  private Slide slide;
 
 }
