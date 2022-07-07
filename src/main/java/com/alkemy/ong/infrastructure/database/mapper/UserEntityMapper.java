@@ -3,7 +3,6 @@ package com.alkemy.ong.infrastructure.database.mapper;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.config.spring.security.common.JwtUtils;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
-import com.alkemy.ong.infrastructure.database.repository.spring.IRoleSpringRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +16,7 @@ public class UserEntityMapper {
   private JwtUtils jwtUtils;
   
   @Autowired
-  private IRoleSpringRepository roleSpringRepository;
+  private RoleEntityMapper roleEntityMapper;
 
   public List<User> toDomain(List<UserEntity> userEntities) {
     if (userEntities == null || userEntities.isEmpty()) {
@@ -42,7 +41,7 @@ public class UserEntityMapper {
         .photo(userEntity.getPhoto())
         .password(userEntity.getPassword())
         .token(getToken(userEntity))
-        .role(userEntity.getRole().getName())
+        .role(roleEntityMapper.toDomain(userEntity.getRole()))
         .build();
   }
 
@@ -61,7 +60,7 @@ public class UserEntityMapper {
         .lastName(user.getLastName())
         .photo(user.getPhoto())
         .password(user.getPassword())
-        .role(roleSpringRepository.findByName(user.getRole()))
+        .role(roleEntityMapper.toEntity(user.getRole()))
         .build();
   }
   

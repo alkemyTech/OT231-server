@@ -25,7 +25,9 @@ public class UserService implements ICreateUserUseCase, IDeleteUserUseCase, ILis
       throw new UserAlreadyExistsException(
           "Email address: " + newUser.getEmail() + " is already being used");
     }
-    newUser.setRole(Role.USER.getFullRoleName());
+    newUser.setRole(com.alkemy.ong.domain.Role.builder()
+        .name(Role.USER.getFullRoleName())
+        .build());
     return userRepository.add(newUser);
   }
 
