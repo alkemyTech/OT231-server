@@ -30,4 +30,5 @@ public class NewsMapper {
         .image(news.getImage())
         .build();
   }
+
 }
