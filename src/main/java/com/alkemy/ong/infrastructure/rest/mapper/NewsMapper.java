@@ -29,15 +29,8 @@ public class NewsMapper {
         .name(news.getName())
         .text(news.getText())
         .image(news.getImage())
-        //.slide(getSlide(news.getSlide()))
         .build();
   }
 
-  public Slide getSlide(Slide slide) {
-    return Slide.builder()
-            .order(slide.getOrder())
-            .imageUrl(slide.getImageUrl())
-            //.text(slide.getText())
-            .build();
-  }
+
 }

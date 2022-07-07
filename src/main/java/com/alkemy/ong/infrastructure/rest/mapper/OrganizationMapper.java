@@ -1,6 +1,7 @@
 package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.Organization;
+import com.alkemy.ong.domain.Slide;
 import com.alkemy.ong.domain.SocialMedia;
 import com.alkemy.ong.infrastructure.rest.request.UpdateOrganizationRequest;
 import com.alkemy.ong.infrastructure.rest.response.OrganizationPublicDataResponse;
@@ -43,5 +44,4 @@ public class OrganizationMapper {
         .linkedIndUrl(socialMedia.getLinkedIndUrl())
         .build();
   }
-
 }

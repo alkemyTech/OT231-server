@@ -14,6 +14,5 @@ public class NewsResponse {
   private String name;
   private String text;
   private String image;
-  //private Slide slide;
 
 }
