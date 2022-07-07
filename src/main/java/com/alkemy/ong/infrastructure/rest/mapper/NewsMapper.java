@@ -1,7 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.News;
-import com.alkemy.ong.domain.Slide;
 import com.alkemy.ong.infrastructure.rest.request.NewsRequest;
 import com.alkemy.ong.infrastructure.rest.response.NewsResponse;
 import org.springframework.stereotype.Component;
@@ -31,6 +30,4 @@ public class NewsMapper {
         .image(news.getImage())
         .build();
   }
-
-
 }
