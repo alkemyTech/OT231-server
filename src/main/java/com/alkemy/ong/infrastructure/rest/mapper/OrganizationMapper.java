@@ -35,7 +35,7 @@ public class OrganizationMapper {
         .address(organization.getAddress())
         .phone(organization.getPhone())
         .socialMedia(getSocialMedia(organization.getSocialMedia()))
-        .slide(getSlide(organization.getSlide()))
+        .slides(getSlide(organization.getSlide()))
         .build();
   }
 

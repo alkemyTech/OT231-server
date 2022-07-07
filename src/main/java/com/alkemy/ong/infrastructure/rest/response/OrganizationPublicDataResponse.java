@@ -19,6 +19,6 @@ public class OrganizationPublicDataResponse {
   private String address;
   private String phone;
   private SocialMediaResponse socialMedia;
-  private SlideResponse slide;
+  private SlideResponse slides;
 
 }
