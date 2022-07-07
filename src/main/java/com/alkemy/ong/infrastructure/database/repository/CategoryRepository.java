@@ -43,6 +43,7 @@ public class CategoryRepository implements ICategoryRepository {
 
   @Override
   public List<Category> findAllActive() {
-    return categoryEntityMapper.toListDomain(categorySpringRepository.findBySoftDeleteFalse());
+    return categoryEntityMapper.toDomain(categorySpringRepository.findBySoftDeleteFalse());
   }
+
 }

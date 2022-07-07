@@ -21,6 +21,17 @@ public class CategoryEntityMapper {
         .build();
   }
 
+  public List<Category> toDomain(List<CategoryEntity> categoryEntities) {
+    if (categoryEntities == null || categoryEntities.isEmpty()) {
+      return Collections.emptyList();
+    }
+    List<Category> categories = new ArrayList<>(categoryEntities.size());
+    for (CategoryEntity categoryEntity : categoryEntities) {
+      categories.add(toDomain(categoryEntity));
+    }
+    return categories;
+  }
+
   public CategoryEntity toEntity(Category category) {
     if (category == null) {
       return null;
@@ -32,14 +43,4 @@ public class CategoryEntityMapper {
         .build();
   }
 
-  public List<Category> toListDomain(List<CategoryEntity> categoryEntities) {
-    if (categoryEntities == null || categoryEntities.isEmpty()) {
-      return Collections.emptyList();
-    }
-    List<Category> categories = new ArrayList<>(categoryEntities.size());
-    for (CategoryEntity categoryEntity: categoryEntities) {
-      categories.add(toDomain(categoryEntity));
-    }
-    return categories;
-  }
 }

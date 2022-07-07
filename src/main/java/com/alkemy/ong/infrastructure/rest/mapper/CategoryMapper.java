@@ -34,14 +34,15 @@ public class CategoryMapper {
         .build();
   }
 
-  public ListCategoryResponse toListResponse(List<Category> categories) {
+  public ListCategoryResponse toResponse(List<Category> categories) {
     if (categories == null || categories.isEmpty()) {
       return new ListCategoryResponse(Collections.emptyList());
     }
     List<CategoryResponse> categoriesResponses = new ArrayList<>(categories.size());
-    for (Category category:categories) {
+    for (Category category : categories) {
       categoriesResponses.add(toResponse(category));
     }
     return new ListCategoryResponse(categoriesResponses);
   }
+
 }

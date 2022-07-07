@@ -54,7 +54,7 @@ public class CategoryResource {
   @GetMapping(value = "/categories", produces = {"application/json"})
   public ResponseEntity<ListCategoryResponse> list() {
     List<Category> categories = listCategoryUseCase.findAll();
-    return ResponseEntity.ok().body(categoryMapper.toListResponse(categories));
+    return ResponseEntity.ok().body(categoryMapper.toResponse(categories));
   }
 
 }

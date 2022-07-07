@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryUseCase,
-        IListCategoryUseCase {
+    IListCategoryUseCase {
 
   private final ICategoryRepository categoryRepository;
 
@@ -32,4 +32,5 @@ public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryU
   public List<Category> findAll() {
     return categoryRepository.findAllActive();
   }
+
 }
