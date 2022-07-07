@@ -59,8 +59,8 @@ public class ServiceBeanConfig {
 
   @Bean
   public IUpdateOrganizationUseCase updateOrganizationUseCase(
-      OrganizationRepository organizationRepository) {
-    return new OrganizationService(organizationRepository);
+      OrganizationRepository organizationRepository, SlideRepository slideRepository) {
+    return new OrganizationService(organizationRepository, slideRepository);
   }
 
   @Bean
@@ -85,8 +85,8 @@ public class ServiceBeanConfig {
 
   @Bean
   public IGetOrganizationUseCase getOrganizationUseCase(
-      OrganizationRepository organizationRepository) {
-    return new OrganizationService(organizationRepository);
+      OrganizationRepository organizationRepository, SlideRepository slideRepository) {
+    return new OrganizationService(organizationRepository, slideRepository);
   }
 
   @Bean

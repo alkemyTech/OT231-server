@@ -1,6 +1,7 @@
 package com.alkemy.ong.application.service;
 
 import com.alkemy.ong.application.repository.IOrganizationRepository;
+import com.alkemy.ong.application.repository.ISlideRepository;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateOrganizationUseCase;
 import com.alkemy.ong.domain.Organization;
@@ -11,10 +12,13 @@ import lombok.AllArgsConstructor;
 public class OrganizationService implements IGetOrganizationUseCase, IUpdateOrganizationUseCase {
 
   private final IOrganizationRepository organizationRepository;
+  private final ISlideRepository slideRepository;
 
   @Override
   public Organization find() {
-    return organizationRepository.find();
+    Organization organization = organizationRepository.find();
+    organization.setSlides(slideRepository.findAllByOrderByOrder());
+    return organization;
   }
 
   @Override
