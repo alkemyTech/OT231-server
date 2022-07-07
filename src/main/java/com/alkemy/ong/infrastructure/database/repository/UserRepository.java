@@ -59,6 +59,13 @@ public class UserRepository implements IUserRepository {
   public User findBy(Long id) {
     return userEntityMapper.toDomain(userSpringRepository.findByIdAndSoftDeleteFalse(id));
   }
+  
+  @Override
+  public User update(User user) {
+    UserEntity updatedUser = userEntityMapper.toEntity(user);
+    updatedUser.setSoftDelete(false);
+    return userEntityMapper.toDomain(userSpringRepository.save(updatedUser));
+  }
 
   private RoleEntity getRoleEntity(String role) {
     return roleSpringRepository.findByName(role);
