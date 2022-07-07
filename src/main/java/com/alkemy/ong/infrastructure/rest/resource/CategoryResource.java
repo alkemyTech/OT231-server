@@ -1,8 +1,8 @@
 package com.alkemy.ong.infrastructure.rest.resource;
 
-import com.alkemy.ong.application.service.usecase.IGetOneCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
+import com.alkemy.ong.application.service.usecase.IGetOneCategoryUseCase;
 import com.alkemy.ong.domain.Category;
 import com.alkemy.ong.infrastructure.rest.mapper.CategoryMapper;
 import com.alkemy.ong.infrastructure.rest.request.CategoryRequest;
@@ -49,9 +49,9 @@ public class CategoryResource {
     return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
   }
 
-  @GetMapping("/categories/{id}")
+  @GetMapping(value = "/categories/{id}", produces = {"application/json"})
   public ResponseEntity<CategoryResponse> getOne(Long id) {
     CategoryResponse categoryResponse = categoryMapper.toResponse(getOneCategoryUseCase.getOne(id));
-    return new ResponseEntity<CategoryResponse>(categoryResponse, HttpStatus.FOUND);
+    return ResponseEntity.ok().body(categoryResponse);
   }
 }

@@ -2,9 +2,9 @@ package com.alkemy.ong.application.service;
 
 import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.repository.ICategoryRepository;
-import com.alkemy.ong.application.service.usecase.IGetOneCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
+import com.alkemy.ong.application.service.usecase.IGetOneCategoryUseCase;
 import com.alkemy.ong.domain.Category;
 import lombok.AllArgsConstructor;
 
