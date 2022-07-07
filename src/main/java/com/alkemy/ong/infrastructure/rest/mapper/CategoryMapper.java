@@ -3,6 +3,10 @@ package com.alkemy.ong.infrastructure.rest.mapper;
 import com.alkemy.ong.domain.Category;
 import com.alkemy.ong.infrastructure.rest.request.CategoryRequest;
 import com.alkemy.ong.infrastructure.rest.response.CategoryResponse;
+import com.alkemy.ong.infrastructure.rest.response.ListCategoryResponse;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,5 +32,16 @@ public class CategoryMapper {
         .description(category.getDescription())
         .image(category.getImage())
         .build();
+  }
+
+  public ListCategoryResponse toListResponse(List<Category> categories) {
+    if (categories == null || categories.isEmpty()) {
+      return new ListCategoryResponse(Collections.emptyList());
+    }
+    List<CategoryResponse> categoriesResponses = new ArrayList<>(categories.size());
+    for (Category category:categories) {
+      categoriesResponses.add(toResponse(category));
+    }
+    return new ListCategoryResponse(categoriesResponses);
   }
 }
