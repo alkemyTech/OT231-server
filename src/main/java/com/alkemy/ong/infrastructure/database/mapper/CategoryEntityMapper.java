@@ -2,6 +2,9 @@ package com.alkemy.ong.infrastructure.database.mapper;
 
 import com.alkemy.ong.domain.Category;
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,6 +19,17 @@ public class CategoryEntityMapper {
         .description(categoryEntity.getDescription())
         .image(categoryEntity.getImage())
         .build();
+  }
+
+  public List<Category> toDomain(List<CategoryEntity> categoryEntities) {
+    if (categoryEntities == null || categoryEntities.isEmpty()) {
+      return Collections.emptyList();
+    }
+    List<Category> categories = new ArrayList<>(categoryEntities.size());
+    for (CategoryEntity categoryEntity : categoryEntities) {
+      categories.add(toDomain(categoryEntity));
+    }
+    return categories;
   }
 
   public CategoryEntity toEntity(Category category) {
