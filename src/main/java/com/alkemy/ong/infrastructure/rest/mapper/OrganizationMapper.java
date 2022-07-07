@@ -48,10 +48,13 @@ public class OrganizationMapper {
   }
 
   private SlideResponse getSlide(Slide slide) {
+    if (slide == null) {
+      return null;
+    }
     return SlideResponse.builder().build().builder()
-            .imageUrl(slide.getImageUrl())
-            .text(slide.getText())
-            .order(slide.getOrder())
-            .build();
+          .imageUrl(slide.getImageUrl())
+          .text(slide.getText())
+          .order(slide.getOrder())
+          .build();
   }
 }
