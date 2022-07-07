@@ -17,11 +17,11 @@ public class SlideMapper {
     }
 
     List<SlideResponse> slideResponses = new ArrayList<>(slides.size());
-
     for (Slide slide : slides) {
-      slideResponses.add(new SlideResponse(
-          slide.getImageUrl(), slide.getOrder())
-      );
+      slideResponses.add(SlideResponse.builder()
+          .imageUrl(slide.getImageUrl())
+          .order(slide.getOrder())
+          .build());
     }
     return new ListSlideResponse(slideResponses);
   }
