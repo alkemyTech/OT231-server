@@ -1,6 +1,8 @@
 package com.alkemy.ong.infrastructure.database.repository.spring;
 
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,4 +22,5 @@ public interface ICategorySpringRepository extends JpaRepository<CategoryEntity,
 
   CategoryEntity findByName(String name);
 
+  List<CategoryEntity> findBySoftDeleteFalse();
 }

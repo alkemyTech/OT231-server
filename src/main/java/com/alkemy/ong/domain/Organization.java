@@ -1,5 +1,6 @@
 package com.alkemy.ong.domain;
 
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,5 +19,6 @@ public class Organization {
   private String welcomeText;
   private String aboutUsText;
   private SocialMedia socialMedia;
+  private List<Slide> slides;
 
 }

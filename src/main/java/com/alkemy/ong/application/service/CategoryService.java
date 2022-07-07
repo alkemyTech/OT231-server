@@ -4,11 +4,14 @@ import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.repository.ICategoryRepository;
 import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
+import com.alkemy.ong.application.service.usecase.IListCategoryUseCase;
 import com.alkemy.ong.domain.Category;
+import java.util.List;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryUseCase {
+public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryUseCase,
+    IListCategoryUseCase {
 
   private final ICategoryRepository categoryRepository;
 
@@ -24,4 +27,10 @@ public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryU
     }
     categoryRepository.delete(id);
   }
+
+  @Override
+  public List<Category> findAll() {
+    return categoryRepository.findAllActive();
+  }
+
 }
