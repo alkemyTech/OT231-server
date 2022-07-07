@@ -5,6 +5,7 @@ import com.alkemy.ong.domain.Slide;
 import com.alkemy.ong.domain.SocialMedia;
 import com.alkemy.ong.infrastructure.rest.request.UpdateOrganizationRequest;
 import com.alkemy.ong.infrastructure.rest.response.OrganizationPublicDataResponse;
+import com.alkemy.ong.infrastructure.rest.response.SlideResponse;
 import com.alkemy.ong.infrastructure.rest.response.SocialMediaResponse;
 import org.springframework.stereotype.Component;
 
@@ -46,8 +47,8 @@ public class OrganizationMapper {
         .build();
   }
 
-  private Slide getSlide(Slide slide) {
-    return Slide.builder()
+  private SlideResponse getSlide(Slide slide) {
+    return SlideResponse.builder().build().builder()
             .imageUrl(slide.getImageUrl())
             .text(slide.getText())
             .order(slide.getOrder())
