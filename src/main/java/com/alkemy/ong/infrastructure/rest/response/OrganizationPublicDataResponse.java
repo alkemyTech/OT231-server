@@ -1,5 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.response;
 
+import com.alkemy.ong.domain.Slide;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,5 +20,6 @@ public class OrganizationPublicDataResponse {
   private String address;
   private String phone;
   private SocialMediaResponse socialMedia;
+  private Slide slide;
 
 }

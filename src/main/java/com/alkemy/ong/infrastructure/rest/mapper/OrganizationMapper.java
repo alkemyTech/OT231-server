@@ -34,6 +34,7 @@ public class OrganizationMapper {
         .address(organization.getAddress())
         .phone(organization.getPhone())
         .socialMedia(getSocialMedia(organization.getSocialMedia()))
+        .slide(getSlide(organization.getSlide()))
         .build();
   }
 
@@ -43,5 +44,13 @@ public class OrganizationMapper {
         .instagramUrl(socialMedia.getInstagramUrl())
         .linkedIndUrl(socialMedia.getLinkedIndUrl())
         .build();
+  }
+
+  private Slide getSlide(Slide slide) {
+    return Slide.builder()
+            .imageUrl(slide.getImageUrl())
+            .text(slide.getText())
+            .order(slide.getOrder())
+            .build();
   }
 }

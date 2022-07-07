@@ -18,5 +18,6 @@ public class Organization {
   private String welcomeText;
   private String aboutUsText;
   private SocialMedia socialMedia;
+  private Slide slide;
 
 }

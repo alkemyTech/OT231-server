@@ -1,6 +1,5 @@
 package com.alkemy.ong.infrastructure.rest.response;
 
-//import com.alkemy.ong.domain.Slide;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

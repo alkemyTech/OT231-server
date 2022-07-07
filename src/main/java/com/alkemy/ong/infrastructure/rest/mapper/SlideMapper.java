@@ -21,7 +21,7 @@ public class SlideMapper {
     for (Slide slide : slides) {
       slideResponses.add(new SlideResponse(
           slide.getImageUrl(),
-              //slide.getText()
+              slide.getText(),
               slide.getOrder())
       );
     }
