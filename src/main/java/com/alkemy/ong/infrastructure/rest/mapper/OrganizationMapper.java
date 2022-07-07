@@ -7,6 +7,9 @@ import com.alkemy.ong.infrastructure.rest.request.UpdateOrganizationRequest;
 import com.alkemy.ong.infrastructure.rest.response.OrganizationPublicDataResponse;
 import com.alkemy.ong.infrastructure.rest.response.SlideResponse;
 import com.alkemy.ong.infrastructure.rest.response.SocialMediaResponse;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 
@@ -18,11 +21,11 @@ public class OrganizationMapper {
       return null;
     }
     return Organization.builder()
-            .name(updateOrganizationRequest.getName())
-            .image(updateOrganizationRequest.getImage())
-            .address(updateOrganizationRequest.getAddress())
-            .phone(updateOrganizationRequest.getPhone())
-            .build();
+        .name(updateOrganizationRequest.getName())
+        .image(updateOrganizationRequest.getImage())
+        .address(updateOrganizationRequest.getAddress())
+        .phone(updateOrganizationRequest.getPhone())
+        .build();
   }
 
   public OrganizationPublicDataResponse toResponse(Organization organization) {
@@ -35,7 +38,7 @@ public class OrganizationMapper {
         .address(organization.getAddress())
         .phone(organization.getPhone())
         .socialMedia(getSocialMedia(organization.getSocialMedia()))
-        .slides(getSlide(organization.getSlide()))
+        .slides(getSlides(organization.getSlides()))
         .build();
   }
 
@@ -47,14 +50,20 @@ public class OrganizationMapper {
         .build();
   }
 
-  private SlideResponse getSlide(Slide slide) {
-    if (slide == null) {
-      return null;
+  private List<SlideResponse> getSlides(List<Slide> slides) {
+    if (slides == null || slides.isEmpty()) {
+      return Collections.emptyList();
     }
-    return SlideResponse.builder().build().builder()
+
+    List<SlideResponse> slideResponses = new ArrayList<>(slides.size());
+    for (Slide slide : slides) {
+      slideResponses.add(SlideResponse.builder()
           .imageUrl(slide.getImageUrl())
-          .text(slide.getText())
           .order(slide.getOrder())
-          .build();
+          .text(slide.getText())
+          .build());
+    }
+    return slideResponses;
   }
+
 }

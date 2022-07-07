@@ -17,7 +17,6 @@ public class SlideMapper {
     }
 
     List<SlideResponse> slideResponses = new ArrayList<>(slides.size());
-
     for (Slide slide : slides) {
       slideResponses.add(SlideResponse.builder()
           .imageUrl(slide.getImageUrl())
