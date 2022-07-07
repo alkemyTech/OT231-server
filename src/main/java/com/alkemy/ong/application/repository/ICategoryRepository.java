@@ -12,4 +12,5 @@ public interface ICategoryRepository {
 
   void delete(Long id);
 
+  Category getOne(Long id);
 }

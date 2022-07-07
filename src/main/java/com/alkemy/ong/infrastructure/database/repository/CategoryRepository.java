@@ -39,4 +39,9 @@ public class CategoryRepository implements ICategoryRepository {
     categorySpringRepository.softDeleteById(id);
   }
 
+  @Override
+  public Category getOne(Long id) {
+    return categoryEntityMapper.toDomain(categorySpringRepository.getReferenceById(id));
+  }
+
 }

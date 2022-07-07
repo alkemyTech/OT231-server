@@ -1,5 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.resource;
 
+import com.alkemy.ong.application.service.usecase.IGetOneCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
 import com.alkemy.ong.domain.Category;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +30,9 @@ public class CategoryResource {
   @Autowired
   private CategoryMapper categoryMapper;
 
+  @Autowired
+  private IGetOneCategoryUseCase getOneCategoryUseCase;
+
   @PostMapping(value = "/categories",
       produces = {"application/json"},
       consumes = {"application/json"})
@@ -42,5 +47,11 @@ public class CategoryResource {
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     deleteCategoryUseCase.delete(id);
     return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+  }
+
+  @GetMapping("/categories/{id}")
+  public ResponseEntity<CategoryResponse> getOne(Long id) {
+    CategoryResponse categoryResponse = categoryMapper.toResponse(getOneCategoryUseCase.getOne(id));
+    return new ResponseEntity<CategoryResponse>(categoryResponse, HttpStatus.FOUND);
   }
 }

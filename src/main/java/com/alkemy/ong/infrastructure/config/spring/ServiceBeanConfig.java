@@ -4,7 +4,7 @@ import com.alkemy.ong.application.repository.ICategoryRepository;
 import com.alkemy.ong.application.repository.INewsRepository;
 import com.alkemy.ong.application.repository.ITestimonialRepository;
 import com.alkemy.ong.application.service.AuthenticationService;
-import com.alkemy.ong.application.service.CategoryService;
+import com.alkemy.ong.application.service.CategoryServiceI;
 import com.alkemy.ong.application.service.CommentService;
 import com.alkemy.ong.application.service.ContactService;
 import com.alkemy.ong.application.service.MemberService;
@@ -70,7 +70,7 @@ public class ServiceBeanConfig {
 
   @Bean
   public ICreateCategoryUseCase createCategoryUseCase(CategoryRepository categoryRepository) {
-    return new CategoryService(categoryRepository);
+    return new CategoryServiceI(categoryRepository);
   }
 
   @Bean
@@ -80,7 +80,7 @@ public class ServiceBeanConfig {
 
   @Bean
   public IDeleteCategoryUseCase deleteCategoryUseCase(ICategoryRepository categoryRepository) {
-    return new CategoryService(categoryRepository);
+    return new CategoryServiceI(categoryRepository);
   }
 
   @Bean
