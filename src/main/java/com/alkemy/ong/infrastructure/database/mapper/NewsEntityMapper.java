@@ -31,6 +31,4 @@ public class NewsEntityMapper {
         .image(newsEntity.getImage())
         .build();
   }
-
-
 }
