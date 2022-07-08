@@ -48,8 +48,9 @@ public class UserMapper {
         .build();
   }
   
-  public User toDomain(UpdateUserRequest updateUserRequest) {
+  public User toDomain(Long id, UpdateUserRequest updateUserRequest) {
     return User.builder()
+        .id(id)
         .firstName(updateUserRequest.getFirstName())
         .lastName(updateUserRequest.getLastName())
         .email(updateUserRequest.getEmail())

@@ -87,7 +87,7 @@ public class UserResource {
       consumes = {"application/json"})
   public ResponseEntity<UserResponse> update(
       @PathVariable Long id, @Valid @RequestBody UpdateUserRequest updateUserRequest) {
-    User user = updateUserUseCase.update(id, userMapper.toDomain(updateUserRequest));
+    User user = updateUserUseCase.update(userMapper.toDomain(id, updateUserRequest));
     UserResponse response = userMapper.toResponse(user);
     return ResponseEntity.ok(response);
   }

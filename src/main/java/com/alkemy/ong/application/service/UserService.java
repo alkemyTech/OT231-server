@@ -71,8 +71,8 @@ public class UserService implements ICreateUserUseCase, IDeleteUserUseCase, ILis
   }
 
   @Override
-  public User update(Long id, User updatedUser) {
-    User savedUser = userRepository.findBy(id);
+  public User update(User updatedUser) {
+    User savedUser = userRepository.findBy(updatedUser.getId());
     if (savedUser == null) {
       throw new RecordNotFoundException("User not found.");
     }

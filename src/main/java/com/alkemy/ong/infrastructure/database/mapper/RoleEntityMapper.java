@@ -7,25 +7,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class RoleEntityMapper {
 
-  public Role toDomain(RoleEntity role) {
-    if (role == null) {
+  public Role toDomain(RoleEntity roleEntity) {
+    if (roleEntity == null) {
       return null;
     }
     return Role.builder()
-        .id(role.getId())
-        .name(role.getName())
-        .description(role.getDescription())
+        .id(roleEntity.getId())
+        .name(roleEntity.getName())
+        .description(roleEntity.getDescription())
         .build();
   }
 
-  public RoleEntity toEntity(Role roleE) {
-    if (roleE == null) {
+  public RoleEntity toEntity(Role role) {
+    if (role == null) {
       return null;
     }
     return RoleEntity.builder()
-        .id(roleE.getId())
-        .name(roleE.getName())
-        .description(roleE.getDescription())
+        .id(role.getId())
+        .name(role.getName())
+        .description(role.getDescription())
         .build();
   }
 

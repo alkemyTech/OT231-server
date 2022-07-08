@@ -4,6 +4,6 @@ import com.alkemy.ong.domain.User;
 
 public interface IUpdateUserUseCase {
 
-  User update(Long id, User user);
+  User update(User user);
 
 }
