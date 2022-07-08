@@ -5,7 +5,9 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 import com.alkemy.ong.application.exception.UserAlreadyExistsException;
+import com.alkemy.ong.application.repository.IOrganizationRepository;
 import com.alkemy.ong.application.repository.IUserRepository;
+import com.alkemy.ong.application.util.ISendEmail;
 import com.alkemy.ong.domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,12 +23,15 @@ class UserServiceTest {
 
   private UserService userService;
 
+  private IOrganizationRepository organizationRepository;
+  private ISendEmail sendEmail;
+
   @Mock
   private IUserRepository userRepository;
 
   @BeforeEach
   void setup() {
-    userService = new UserService(userRepository);
+    userService = new UserService(userRepository,organizationRepository, sendEmail);
   }
 
   @Test
