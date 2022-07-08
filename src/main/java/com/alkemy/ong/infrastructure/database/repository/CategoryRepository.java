@@ -50,7 +50,7 @@ public class CategoryRepository implements ICategoryRepository {
   @Override
   public Optional<Category> findById(Long id) {
     Optional<CategoryEntity> categoryEntityOptional = categorySpringRepository.findById(id);
-    if(categoryEntityOptional.isEmpty()){
+    if (categoryEntityOptional.isEmpty()) {
       return Optional.empty();
     }
     return Optional.of(categoryEntityMapper.toDomain(categoryEntityOptional.get()));

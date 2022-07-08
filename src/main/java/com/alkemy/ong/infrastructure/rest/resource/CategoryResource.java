@@ -65,7 +65,7 @@ public class CategoryResource {
   @GetMapping(value = "/categories/{id}", produces = {"application/json"})
   public ResponseEntity<CategoryResponse> findById(@PathVariable Long id) {
     Optional<Category> categoryOptional = getCategoryUseCase.findById(id);
-    if(categoryOptional.isEmpty()) {
+    if (categoryOptional.isEmpty()) {
       return ResponseEntity
           .status(HttpStatus.NOT_FOUND)
           .header("X-Reason", "Category not found.")
