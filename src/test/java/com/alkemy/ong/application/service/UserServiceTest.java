@@ -5,7 +5,9 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 import com.alkemy.ong.application.exception.UserAlreadyExistsException;
+import com.alkemy.ong.application.repository.IOrganizationRepository;
 import com.alkemy.ong.application.repository.IUserRepository;
+import com.alkemy.ong.application.util.ISendEmail;
 import com.alkemy.ong.domain.Role;
 import com.alkemy.ong.domain.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,13 +23,15 @@ class UserServiceTest {
   private static final String ROLE = "ROLE_USER";
 
   private UserService userService;
+  private IOrganizationRepository organizationRepository;
+  private ISendEmail sendEmail;
 
   @Mock
   private IUserRepository userRepository;
 
   @BeforeEach
   void setup() {
-    userService = new UserService(userRepository);
+    userService = new UserService(userRepository, organizationRepository, sendEmail);
   }
 
   @Test
@@ -41,9 +45,12 @@ class UserServiceTest {
   @Test
   void shouldSaveUserWhenUserDoesNotExist() {
     given(userRepository.findByEmail(EMAIL)).willReturn(null);
-    User user = User.builder().email(EMAIL)
-                 .role(Role.builder().name(ROLE).build())
-               .build();
+    User user = User.builder()
+        .email(EMAIL)
+        .role(Role.builder()
+            .name(ROLE)
+            .build())
+        .build();
 
     userService.add(user);
 
