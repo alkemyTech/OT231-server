@@ -8,6 +8,7 @@ import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteUserUseCase;
 import com.alkemy.ong.application.service.usecase.IGetAuthDetailsUseCase;
 import com.alkemy.ong.application.service.usecase.IListUserUseCase;
+import com.alkemy.ong.application.service.usecase.IUpdateUserUseCase;
 import com.alkemy.ong.application.util.ISendEmail;
 import com.alkemy.ong.application.util.template.ContactEmailTemplate;
 import com.alkemy.ong.application.util.template.WelcomeEmailTemplate;
@@ -18,10 +19,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-
 @AllArgsConstructor
-public class UserService
-    implements ICreateUserUseCase, IDeleteUserUseCase, IListUserUseCase, IGetAuthDetailsUseCase {
+public class UserService implements ICreateUserUseCase, IDeleteUserUseCase, IListUserUseCase,
+    IGetAuthDetailsUseCase, IUpdateUserUseCase {
 
   private final IUserRepository userRepository;
   private final IOrganizationRepository organizationRepository;
@@ -33,7 +33,9 @@ public class UserService
       throw new UserAlreadyExistsException(
           "Email address: " + newUser.getEmail() + " is already being used");
     }
-    newUser.setRole(Role.USER.getFullRoleName());
+    newUser.setRole(com.alkemy.ong.domain.Role.builder()
+        .name(Role.USER.getFullRoleName())
+        .build());
     User user = userRepository.add(newUser);
     sendWelcomeMail(user);
     return user;
@@ -43,7 +45,7 @@ public class UserService
     try {
       ContactEmailTemplate contactEmailTemplate = new ContactEmailTemplate(user);
       WelcomeEmailTemplate welcomeMail = new WelcomeEmailTemplate(
-              organizationRepository.find(), contactEmailTemplate);
+          organizationRepository.find(), contactEmailTemplate);
       sendEmail.execute(welcomeMail);
     } catch (Exception exception) {
       log.error("Something went wrong sending the email. Reason: " + exception.getMessage());
@@ -68,6 +70,16 @@ public class UserService
     return getUserBy(user.getEmail());
   }
 
+  @Override
+  public User update(User updatedUser) {
+    User savedUser = userRepository.findBy(updatedUser.getId());
+    if (savedUser == null) {
+      throw new RecordNotFoundException("User not found.");
+    }
+    updateUserValues(updatedUser, savedUser);
+    return userRepository.update(savedUser);
+  }
+
   private User getUserBy(String email) {
     User user = userRepository.findByEmail(email);
     if (user == null) {
@@ -76,4 +88,19 @@ public class UserService
     return user;
   }
 
+  private void updateUserValues(User updatedUser, User savedUser) {
+    updateCredentials(savedUser, updatedUser);
+    updateOptionalInfo(savedUser, updatedUser);
+  }
+
+  private void updateCredentials(User savedUser, User updatedUser) {
+    savedUser.setEmail(updatedUser.getEmail());
+    savedUser.setPassword(updatedUser.getPassword());
+  }
+
+  private void updateOptionalInfo(User savedUser, User updatedUser) {
+    savedUser.setFirstName(updatedUser.getFirstName());
+    savedUser.setLastName(updatedUser.getLastName());
+    savedUser.setPhoto(updatedUser.getPhoto());
+  }
 }

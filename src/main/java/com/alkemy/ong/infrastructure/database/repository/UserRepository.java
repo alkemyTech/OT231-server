@@ -30,7 +30,7 @@ public class UserRepository implements IUserRepository {
   public User add(User newUser) {
     UserEntity userEntity = userEntityMapper.toEntity(newUser);
     userEntity.setSoftDelete(false);
-    userEntity.setRole(getRoleEntity(newUser.getRole()));
+    userEntity.setRole(getRoleEntity(newUser.getRole().getName()));
     return userEntityMapper.toDomain(userSpringRepository.save(userEntity));
   }
 
@@ -58,6 +58,13 @@ public class UserRepository implements IUserRepository {
   @Override
   public User findBy(Long id) {
     return userEntityMapper.toDomain(userSpringRepository.findByIdAndSoftDeleteFalse(id));
+  }
+  
+  @Override
+  public User update(User user) {
+    UserEntity updatedUser = userEntityMapper.toEntity(user);
+    updatedUser.setSoftDelete(false);
+    return userEntityMapper.toDomain(userSpringRepository.save(updatedUser));
   }
 
   private RoleEntity getRoleEntity(String role) {
