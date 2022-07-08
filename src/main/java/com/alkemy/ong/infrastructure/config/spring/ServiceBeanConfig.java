@@ -2,6 +2,7 @@ package com.alkemy.ong.infrastructure.config.spring;
 
 import com.alkemy.ong.application.repository.ICategoryRepository;
 import com.alkemy.ong.application.repository.INewsRepository;
+import com.alkemy.ong.application.repository.IOrganizationRepository;
 import com.alkemy.ong.application.repository.ITestimonialRepository;
 import com.alkemy.ong.application.service.AuthenticationService;
 import com.alkemy.ong.application.service.CategoryService;
@@ -26,6 +27,7 @@ import com.alkemy.ong.application.service.usecase.IListCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateOrganizationUseCase;
+import com.alkemy.ong.application.util.ISendEmail;
 import com.alkemy.ong.infrastructure.database.repository.CategoryRepository;
 import com.alkemy.ong.infrastructure.database.repository.CommentRepository;
 import com.alkemy.ong.infrastructure.database.repository.ContactRepository;
@@ -54,8 +56,10 @@ public class ServiceBeanConfig {
   }
 
   @Bean
-  public ICreateUserUseCase createUserUseCase(UserRepository userRepository) {
-    return new UserService(userRepository);
+  public ICreateUserUseCase createUserUseCase(UserRepository userRepository,
+                                              IOrganizationRepository organizationRepository,
+                                              ISendEmail sendEmail) {
+    return new UserService(userRepository, organizationRepository, sendEmail);
   }
 
   @Bean
