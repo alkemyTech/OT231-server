@@ -653,7 +653,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInN1YiI6Im1pY2hhZWxAbXllcnMuY29tIiwiaWF0IjoxNjU2OTA1MDIxLCJleHAiOjE2NTY5MDY4MjF9.gq-50K7vjVCcXU7Zy5JWjg-I1sD47QSs671nJVYZDbI",
+							"value": "{{token}}",
 							"type": "string"
 						}
 					]
@@ -678,6 +678,45 @@
 					"port": "8080",
 					"path": [
 						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Comment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/comments/22",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comments",
+						"22"
 					]
 				}
 			},
