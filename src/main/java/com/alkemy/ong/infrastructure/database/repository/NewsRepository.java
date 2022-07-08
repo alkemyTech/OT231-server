@@ -49,7 +49,7 @@ public class NewsRepository implements INewsRepository {
 
   @Override
   public News getOne(Long id) {
-return newsEntityMapper.toDomain(newsSpringRepository.getReferenceById(id));
+    return newsEntityMapper.toDomain(newsSpringRepository.getReferenceById(id));
   }
 
   private CategoryEntity getNewsCategoryEntity() {

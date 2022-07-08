@@ -36,7 +36,7 @@ public class NewsService implements IDeleteNewsUseCase, ICreateNewsUseCase, IGet
     return newsRepository.getOne(id);
   }
 
-  public Boolean existNew(Long id){
+  public Boolean existNew(Long id) {
     return !newsRepository.existsById(id) || newsRepository.isDeleted(id);
   }
 }
