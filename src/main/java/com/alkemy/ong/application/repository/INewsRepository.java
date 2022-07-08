@@ -14,4 +14,6 @@ public interface INewsRepository {
 
   News findBy(Long id);
 
+  News getOneBy(Long id);
+
 }

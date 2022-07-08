@@ -30,7 +30,7 @@ public class NewsService implements IDeleteNewsUseCase, ICreateNewsUseCase, IGet
 
   @Override
   public News getOne(Long id) {
-    News news = newsRepository.findBy(id);
+    News news = newsRepository.getOneBy(id);
     if (news == null) {
       throw new RecordNotFoundException("News not found.");
     }
