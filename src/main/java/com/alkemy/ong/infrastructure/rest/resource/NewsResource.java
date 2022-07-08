@@ -2,6 +2,7 @@ package com.alkemy.ong.infrastructure.rest.resource;
 
 import com.alkemy.ong.application.service.usecase.ICreateNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
+import com.alkemy.ong.application.service.usecase.IGetOneNewUseCase;
 import com.alkemy.ong.domain.News;
 import com.alkemy.ong.infrastructure.rest.mapper.NewsMapper;
 import com.alkemy.ong.infrastructure.rest.request.NewsRequest;
@@ -22,7 +23,7 @@ public class NewsResource {
   private ICreateNewsUseCase createNewsUseCase;
 
   @Autowired
-  private IGetOneNewsUseCase getOneNew;
+  private IGetOneNewUseCase getOneNew;
 
   @Autowired
   private NewsMapper newsMapper;
