@@ -18,12 +18,16 @@ public class SlideMapper {
 
     List<SlideResponse> slideResponses = new ArrayList<>(slides.size());
     for (Slide slide : slides) {
-      slideResponses.add(SlideResponse.builder()
-          .imageUrl(slide.getImageUrl())
-          .order(slide.getOrder())
-          .build());
+      slideResponses.add(toResponse(slide));
     }
     return new ListSlideResponse(slideResponses);
+  }
+
+  public SlideResponse toResponse(Slide slide) {
+    return SlideResponse.builder()
+        .imageUrl(slide.getImageUrl())
+        .order(slide.getOrder())
+        .build();
   }
 
 }
