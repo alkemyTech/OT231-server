@@ -113,7 +113,7 @@ public class ServiceBeanConfig {
   }
 
   @Bean
-  public IGetOneNewUseCase getOneNewUseCase(NewsRepository newsRepository) {
-    return new NewsService(newsRepository);
+  public IGetOneNewUseCase getOne(NewsRepository repository) {
+    return new NewsService(repository);
   }
 }
