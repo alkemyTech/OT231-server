@@ -48,7 +48,7 @@ public class NewsResource {
     return new ResponseEntity<NewsResponse>(response, HttpStatus.CREATED);
   }
 
-  @GetMapping(value = "/news/{1d}",
+  @GetMapping(value = "/news/{id}",
       produces = {"application/json"})
   public ResponseEntity<NewsResponse> getOne(@PathVariable Long id) {
     NewsResponse response = newsMapper.toResponse(getOneNew.getOne(id));
