@@ -1,21 +1,28 @@
 package com.alkemy.ong.application.service;
 
+import com.alkemy.ong.application.exception.OperationNotPermittedException;
 import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.repository.ICommentRepository;
 import com.alkemy.ong.application.repository.INewsRepository;
 import com.alkemy.ong.application.repository.IUserRepository;
 import com.alkemy.ong.application.service.usecase.ICreateCommentUseCase;
+import com.alkemy.ong.application.service.usecase.IDeleteCommentUseCase;
 import com.alkemy.ong.domain.Comment;
 import com.alkemy.ong.domain.News;
 import com.alkemy.ong.domain.User;
+import com.alkemy.ong.infrastructure.config.spring.security.common.JwtUtils;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @AllArgsConstructor
-public class CommentService implements ICreateCommentUseCase {
+public class CommentService implements ICreateCommentUseCase, IDeleteCommentUseCase {
 
   private final ICommentRepository commentRepository;
   private final INewsRepository newsRepository;
   private final IUserRepository userRepository;
+
+  @Autowired
+  private JwtUtils jwtUtils;
 
   @Override
   public Comment add(Comment newComment) {
@@ -42,4 +49,30 @@ public class CommentService implements ICreateCommentUseCase {
     return news;
   }
 
+  @Override
+  public void delete(Long id, String token) {
+    String emailUser = jwtUtils.extractUsername(token);
+    User userlogged = userRepository.findByEmail(emailUser);
+    User userComment = findBy(id).getUser();
+    if (userlogged.getId() != userComment.getId()
+            && !userlogged.getRole().getName().equals("ROLE_ADMIN")) {
+      throw new OperationNotPermittedException("No permission to delete this comment.");
+    }
+    Comment comment = findBy(id);
+    comment.setSoftDelete(true);
+    commentRepository.save(comment);
+  }
+
+  private Comment findBy(Long id) {
+    Comment comment = commentRepository.findById(id).orElse(null);
+    if (comment == null || isDeleted(comment)) {
+      throw new RecordNotFoundException("Comment not found.");
+    }
+    return comment;
+  }
+
+  private boolean isDeleted(Comment comment) {
+    Boolean softDelete = comment.getSoftDelete();
+    return !(softDelete == null || Boolean.FALSE.equals(softDelete));
+  }
 }
