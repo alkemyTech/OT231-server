@@ -51,8 +51,7 @@ public class NewsResource {
   @GetMapping(value = "/news/{id}",
       produces = {"application/json"})
   public ResponseEntity<NewsResponse> getOne(@PathVariable Long id) {
-    NewsResponse response = newsMapper.toResponse(getOneNew.getOne(id));
-    return ResponseEntity.ok().body(response);
+    return ResponseEntity.ok().body(newsMapper.toResponse(getOneNew.getOne(id)));
   }
 
 }
