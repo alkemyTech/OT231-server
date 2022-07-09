@@ -1,5 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.mapper;
 
+import com.alkemy.ong.domain.Role;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.config.spring.security.common.JwtUtils;
 import com.alkemy.ong.infrastructure.rest.request.UpdateUserRequest;
@@ -45,6 +46,7 @@ public class UserMapper {
   public User toDomain(String authorizationHeader) {
     return User.builder()
         .email(extractEmail(authorizationHeader))
+        .role(Role.builder().name(extractAuthorities(authorizationHeader)).build())
         .build();
   }
   
@@ -61,6 +63,10 @@ public class UserMapper {
 
   private String extractEmail(String token) {
     return jwtUtils.extractUsername(token);
+  }
+
+  private String extractAuthorities(String token) {
+    return jwtUtils.getAuthorities(token).stream().findFirst().get().toString();
   }
 
 }

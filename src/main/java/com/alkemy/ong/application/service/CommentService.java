@@ -10,9 +10,8 @@ import com.alkemy.ong.application.service.usecase.IDeleteCommentUseCase;
 import com.alkemy.ong.domain.Comment;
 import com.alkemy.ong.domain.News;
 import com.alkemy.ong.domain.User;
-import com.alkemy.ong.infrastructure.config.spring.security.common.JwtUtils;
+import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @AllArgsConstructor
 public class CommentService implements ICreateCommentUseCase, IDeleteCommentUseCase {
@@ -20,9 +19,6 @@ public class CommentService implements ICreateCommentUseCase, IDeleteCommentUseC
   private final ICommentRepository commentRepository;
   private final INewsRepository newsRepository;
   private final IUserRepository userRepository;
-
-  @Autowired
-  private JwtUtils jwtUtils;
 
   @Override
   public Comment add(Comment newComment) {
@@ -50,12 +46,10 @@ public class CommentService implements ICreateCommentUseCase, IDeleteCommentUseC
   }
 
   @Override
-  public void delete(Long id, String token) {
-    String emailUser = jwtUtils.extractUsername(token);
-    User userlogged = userRepository.findByEmail(emailUser);
+  public void delete(Long id, User user) {
     Comment comment = findBy(id);
-    if (userlogged.getId() != comment.getUser().getId()
-            && !userlogged.getRole().getName().equals("ROLE_ADMIN")) {
+    if (!user.getEmail().equals(comment.getUser().getEmail())
+            && !user.getRole().getName().equals(Role.ADMIN.getFullRoleName())) {
       throw new OperationNotPermittedException("No permission to delete this comment.");
     }
     comment.setSoftDelete(true);
@@ -74,4 +68,5 @@ public class CommentService implements ICreateCommentUseCase, IDeleteCommentUseC
     Boolean softDelete = comment.getSoftDelete();
     return !(softDelete == null || Boolean.FALSE.equals(softDelete));
   }
+
 }

@@ -30,7 +30,6 @@ public class CommentResource {
   @Autowired
   private IDeleteCommentUseCase deleteCommentUseCase;
 
-
   @PostMapping(value = "/comments",
       produces = {"application/json"},
       consumes = {"application/json"})
@@ -44,7 +43,8 @@ public class CommentResource {
   @DeleteMapping(value = "comments/{id}")
   public ResponseEntity<Void> delete(@PathVariable Long id,
                                      @RequestHeader("Authorization") String token) {
-    deleteCommentUseCase.delete(id, token);
+    Comment comment = commentMapper.toDomain(id, token);
+    deleteCommentUseCase.delete(id, comment.getUser());
     return ResponseEntity.noContent().build();
   }
 
