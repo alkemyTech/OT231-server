@@ -2,7 +2,7 @@ package com.alkemy.ong.infrastructure.rest.resource;
 
 import com.alkemy.ong.application.service.usecase.ICreateNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
-import com.alkemy.ong.application.service.usecase.IGetOneNewUseCase;
+import com.alkemy.ong.application.service.usecase.IGetNewsUseCase;
 import com.alkemy.ong.domain.News;
 import com.alkemy.ong.infrastructure.rest.mapper.NewsMapper;
 import com.alkemy.ong.infrastructure.rest.request.NewsRequest;
@@ -28,7 +28,7 @@ public class NewsResource {
   private ICreateNewsUseCase createNewsUseCase;
 
   @Autowired
-  private IGetOneNewUseCase getOneNewUseCase;
+  private IGetNewsUseCase getNewsUseCase;
 
   @Autowired
   private NewsMapper newsMapper;
@@ -48,10 +48,9 @@ public class NewsResource {
     return new ResponseEntity<NewsResponse>(response, HttpStatus.CREATED);
   }
 
-  @GetMapping(value = "/news/{id}",
-      produces = {"application/json"})
-  public ResponseEntity<NewsResponse> getOne(@PathVariable Long id) {
-    return ResponseEntity.ok().body(newsMapper.toResponse(getOneNewUseCase.getOne(id)));
+  @GetMapping(value = "/news/{id}", produces = {"application/json"})
+  public ResponseEntity<NewsResponse> getBy(@PathVariable Long id) {
+    return ResponseEntity.ok().body(newsMapper.toResponse(getNewsUseCase.getOne(id)));
   }
 
 }

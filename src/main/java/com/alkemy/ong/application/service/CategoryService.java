@@ -10,6 +10,7 @@ import com.alkemy.ong.domain.Category;
 import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @AllArgsConstructor
 public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryUseCase,
@@ -36,7 +37,7 @@ public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryU
   }
 
   @Override
-  public Category findById(Long id) {
+  public Category findById(@PathVariable Long id) {
     Optional<Category> optionalCategory = categoryRepository.findById(id);
     if (optionalCategory.isEmpty()
         || Boolean.TRUE.equals(optionalCategory.get().getSoftDelete())) {
