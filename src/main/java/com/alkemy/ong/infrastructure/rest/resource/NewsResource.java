@@ -28,7 +28,7 @@ public class NewsResource {
   private ICreateNewsUseCase createNewsUseCase;
 
   @Autowired
-  private IGetOneNewUseCase getOneNew;
+  private IGetOneNewUseCase getOneNewUseCase;
 
   @Autowired
   private NewsMapper newsMapper;
@@ -51,7 +51,7 @@ public class NewsResource {
   @GetMapping(value = "/news/{id}",
       produces = {"application/json"})
   public ResponseEntity<NewsResponse> getOne(@PathVariable Long id) {
-    return ResponseEntity.ok().body(newsMapper.toResponse(getOneNew.getOne(id)));
+    return ResponseEntity.ok().body(newsMapper.toResponse(getOneNewUseCase.getOne(id)));
   }
 
 }
