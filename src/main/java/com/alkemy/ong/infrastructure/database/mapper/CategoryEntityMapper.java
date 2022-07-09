@@ -5,7 +5,6 @@ import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,6 +18,7 @@ public class CategoryEntityMapper {
         .name(categoryEntity.getName())
         .description(categoryEntity.getDescription())
         .image(categoryEntity.getImage())
+        .softDelete(categoryEntity.getSoftDelete())
         .build();
   }
 
@@ -41,6 +41,7 @@ public class CategoryEntityMapper {
         .name(category.getName())
         .description(category.getDescription())
         .image(category.getImage())
+        .softDelete(category.getSoftDelete())
         .build();
   }
 

@@ -36,7 +36,13 @@ public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryU
   }
 
   @Override
-  public Optional<Category> findById(Long id) {
-    return categoryRepository.findById(id);
+  public Category findById(Long id) {
+    Optional<Category> optionalCategory = categoryRepository.findById(id);
+    if (optionalCategory.isEmpty()
+        || Boolean.TRUE.equals(optionalCategory.get().getSoftDelete())) {
+      throw new RecordNotFoundException("Category not found.");
+    }
+    return optionalCategory.get();
   }
+
 }

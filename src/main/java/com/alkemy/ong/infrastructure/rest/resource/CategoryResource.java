@@ -10,7 +10,6 @@ import com.alkemy.ong.infrastructure.rest.request.CategoryRequest;
 import com.alkemy.ong.infrastructure.rest.response.CategoryResponse;
 import com.alkemy.ong.infrastructure.rest.response.ListCategoryResponse;
 import java.util.List;
-import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,14 +63,7 @@ public class CategoryResource {
 
   @GetMapping(value = "/categories/{id}", produces = {"application/json"})
   public ResponseEntity<CategoryResponse> findById(@PathVariable Long id) {
-    Optional<Category> categoryOptional = getCategoryUseCase.findById(id);
-    if (categoryOptional.isEmpty()) {
-      return ResponseEntity
-          .status(HttpStatus.NOT_FOUND)
-          .header("X-Reason", "Category not found.")
-          .body(CategoryResponse.builder().build());
-    }
-    CategoryResponse categoryResponse = categoryMapper.toResponse(categoryOptional.get());
+    CategoryResponse categoryResponse = categoryMapper.toResponse(getCategoryUseCase.findById(id));
     return ResponseEntity.ok(categoryResponse);
   }
 }

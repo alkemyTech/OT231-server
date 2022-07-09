@@ -17,4 +17,5 @@ public interface ICategoryRepository {
   List<Category> findAllActive();
 
   Optional<Category> findById(Long id);
+
 }
