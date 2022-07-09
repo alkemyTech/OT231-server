@@ -2,6 +2,7 @@ package com.alkemy.ong.infrastructure.rest.resource;
 
 import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
+import com.alkemy.ong.application.service.usecase.IGetCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IListCategoryUseCase;
 import com.alkemy.ong.domain.Category;
 import com.alkemy.ong.infrastructure.rest.mapper.CategoryMapper;
@@ -35,6 +36,9 @@ public class CategoryResource {
   @Autowired
   private IListCategoryUseCase listCategoryUseCase;
 
+  @Autowired
+  private IGetCategoryUseCase getCategoryUseCase;
+
   @PostMapping(value = "/categories",
       produces = {"application/json"},
       consumes = {"application/json"})
@@ -57,4 +61,9 @@ public class CategoryResource {
     return ResponseEntity.ok().body(categoryMapper.toResponse(categories));
   }
 
+  @GetMapping(value = "/categories/{id}", produces = {"application/json"})
+  public ResponseEntity<CategoryResponse> findById(@PathVariable Long id) {
+    CategoryResponse categoryResponse = categoryMapper.toResponse(getCategoryUseCase.findById(id));
+    return ResponseEntity.ok(categoryResponse);
+  }
 }
