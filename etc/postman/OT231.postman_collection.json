@@ -1,44 +1,11 @@
 {
 	"info": {
-		"_postman_id": "50acd6fb-a1e1-40b6-8b94-373c262e699a",
+		"_postman_id": "0b7fad93-b6ca-46f4-b012-68f5fa8c328c",
 		"name": "OT231",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21315535"
 	},
 	"item": [
-		{
-			"name": "Foos",
-			"item": [
-				{
-					"name": "DELETE Foo",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{URL}}/foos/1",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"foos",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
 		{
 			"name": "Users",
 			"item": [
@@ -86,11 +53,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/auth/register",
+							"raw": "{{URL}}/auth/register",
 							"host": [
-								"localhost"
+								"{{URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"auth",
 								"register"
@@ -183,11 +149,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/users/1",
+							"raw": "{{URL}}/users/1",
 							"host": [
-								"localhost"
+								"{{URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
 								"1"
@@ -212,11 +177,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/auth/me",
+							"raw": "{{URL}}/auth/me",
 							"host": [
-								"localhost"
+								"{{URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"auth",
 								"me"
@@ -246,17 +210,12 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"email\": \"mark@facebook.com\",\n    \"firstName\": \"Mark\",\n    \"lastName\": \"Zuckerberg\",\n    \"photo\": null,\n    \"token\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInN1YiI6Im1hcmtAZmFjZWJvb2suY29tIiwiaWF0IjoxNjU2NjMyMDA5LCJleHAiOjE2NTY2MzM4MDl9.BAM-bpYi4RB6KtqdrLXoWyHyUVPanKJnRLZsRTWHJl4\"\n}"
+							"body": "{\n    \"email\": \"mark@facebook.com\",\n    \"firstName\": \"Mark\",\n    \"lastName\": \"Zuckerberg\",\n    \"photo\": null\n}"
 						}
 					]
-				}
-			]
-		},
-		{
-			"name": "Members",
-			"item": [
+				},
 				{
-					"name": "Members",
+					"name": "List Users",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -268,122 +227,38 @@
 								}
 							]
 						},
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/members/1",
+							"raw": "{{URL}}/users",
 							"host": [
-								"localhost"
+								"{{URL}}"
 							],
-							"port": "8080",
 							"path": [
-								"members",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Categories",
-			"item": [
-				{
-					"name": "Delete Category by Id",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ADMIN_TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/categories/1",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"categories",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "News",
-			"item": [
-				{
-					"name": "Delete News by Id",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 204\", function () {",
-									"    pm.response.to.have.status(204);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{ADMIN_TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/news/1",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"news",
-								"1"
+								"users"
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "Delete News Successful",
+							"name": "List Users Successful",
 							"originalRequest": {
-								"method": "DELETE",
+								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/news/1",
+									"raw": "localhost:8080/users",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"news",
-										"1"
+										"users"
 									]
 								}
 							},
-							"status": "No Content",
-							"code": 204,
-							"_postman_previewlanguage": "plain",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
 							"header": [
 								{
 									"key": "Vary",
@@ -422,8 +297,16 @@
 									"value": "DENY"
 								},
 								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
 									"key": "Date",
-									"value": "Tue, 28 Jun 2022 19:58:47 GMT"
+									"value": "Tue, 05 Jul 2022 01:05:45 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -435,9 +318,193 @@
 								}
 							],
 							"cookie": [],
-							"body": null
+							"body": "{\n    \"users\": [\n        {\n            \"email\": \"jason@voorhees.com\",\n            \"firstName\": \"Jason\",\n            \"lastName\": \"Voorhees\",\n            \"photo\": null\n        },\n        {\n            \"email\": \"freddy@krueger.com\",\n            \"firstName\": \"Freddy\",\n            \"lastName\": \"Krueger\",\n            \"photo\": null\n        },\n        {\n            \"email\": \"michael@myers.com\",\n            \"firstName\": \"Michael\",\n            \"lastName\": \"Myers\",\n            \"photo\": null\n        },\n        {\n            \"email\": \"pamela@voorhees.com\",\n            \"firstName\": \"Pamela\",\n            \"lastName\": \"Voorhees\",\n            \"photo\": null\n        },\n        {\n            \"email\": \"leather@face.com\",\n            \"firstName\": \"Leatherface\",\n            \"lastName\": \"Unknown\",\n            \"photo\": null\n        },\n        {\n            \"email\": \"mark@facebook.com\",\n            \"firstName\": \"Mark\",\n            \"lastName\": \"Zuckerberg\",\n            \"photo\": null\n        },\n        {\n            \"email\": \"bill@windows.com\",\n            \"firstName\": \"Bill\",\n            \"lastName\": \"Gates\",\n            \"photo\": null\n        },\n        {\n            \"email\": \"jeff@amazon.com\",\n            \"firstName\": \"Jeff\",\n            \"lastName\": \"Bezos\",\n            \"photo\": null\n        },\n        {\n            \"email\": \"elon@tesla.com\",\n            \"firstName\": \"Elon\",\n            \"lastName\": \"Musk\",\n            \"photo\": null\n        },\n        {\n            \"email\": \"jack@twitter.com\",\n            \"firstName\": \"Jack\",\n            \"lastName\": \"Dorsey\",\n            \"photo\": null\n        }\n    ]\n}"
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "Members",
+			"item": [
+				{
+					"name": "Members",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/members/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"members",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Create Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"news\",\n    \"description\":\"This is a description.\",\n    \"image\":\"http://www.s3.com/news.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/categories",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/categories/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "News",
+			"item": [
+				{
+					"name": "Create News",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"These are incredible news!\",\n    \"text\":\"This is a content.\",\n    \"image\":\"http://www.s3.com/incredibleNews.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/news",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"news"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete News by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/news/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"news",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -460,11 +527,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/testimonials/1",
+							"raw": "{{URL}}/testimonials/1",
 							"host": [
-								"localhost"
+								"{{URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"testimonials",
 								"1"
@@ -487,14 +553,140 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/organization/public",
+							"raw": "{{URL}}/organization/public",
 							"host": [
-								"localhost"
+								"{{URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"organization",
 								"public"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contacts",
+			"item": [
+				{
+					"name": "Create Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Juan Manuel Carrizo\",\n    \"phone\":\"+54 9 300 123456\",\n    \"email\":\"jmcarrizo@alkemy.com\",\n    \"message\":\"This is a Message :D\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/contacts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Slides",
+			"item": [
+				{
+					"name": "List Slides",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/slides",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"slides"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Create Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"body\": \"muy bueno todo 1234\",\r\n    \"createBy\": \r\n        {\r\n            \"firstName\":\"Michael\",\r\n            \"lastName\": \"Myers\"\r\n        },\r\n    \"associatedNews\":\"Pelota\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/comments",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"comments"
 							]
 						}
 					},
@@ -523,13 +715,13 @@
 							"",
 							"var response = JSON.parse(responseBody);",
 							"",
-							"// SETS ADMIN_TOKEN ENVIROMENT VARIABLE",
+							"// SETS ADMIN_TOKEN COLLECTION VARIABLE",
 							"if(`${response.email}` == \"jason@voorhees.com\"){",
 							"    pm.collectionVariables.unset(\"ADMIN_TOKEN\");",
 							"    pm.collectionVariables.set(\"ADMIN_TOKEN\", `${response.token}`);",
 							"}",
 							"",
-							"// SETS USER_TOKEN ENVIROMENT VARIABLE",
+							"// SETS USER_TOKEN COLLECTION VARIABLE",
 							"if(`${response.email}` == \"mark@facebook.com\"){",
 							"    pm.collectionVariables.unset(\"USER_TOKEN\");",
 							"    pm.collectionVariables.set(\"USER_TOKEN\", `${response.token}`);",
@@ -555,11 +747,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/auth/login",
+					"raw": "{{URL}}/auth/login",
 					"host": [
-						"localhost"
+						"{{URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"auth",
 						"login"
@@ -616,6 +807,17 @@
 					"body": "{\n    \"email\": \"jason@voorhees.com\",\n    \"firstName\": \"Jason\",\n    \"lastName\": \"Voorhees\",\n    \"photo\": null,\n    \"token\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJzdWIiOiJqYXNvbkB2b29yaGVlcy5jb20iLCJpYXQiOjE2NTY0NDYxNjMsImV4cCI6MTY1NjQ0Nzk2M30.hMRGdZc2OaB8WQeM6eV2-a0MxNyGvwwE75ROnJbcpAw\"\n}"
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
         {
 			"name": "List Slides",
@@ -721,6 +923,32 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "USER_TOKEN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "ADMIN_TOKEN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
 		}
 	]
 }

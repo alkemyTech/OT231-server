@@ -2,8 +2,8 @@ package com.alkemy.ong.application.service.usecase;
 
 import com.alkemy.ong.domain.User;
 
-public interface IGeAuthDetailsUseCase {
+public interface IUpdateUserUseCase {
 
-  User getAuthDetails(User user);
+  User update(User user);
 
 }

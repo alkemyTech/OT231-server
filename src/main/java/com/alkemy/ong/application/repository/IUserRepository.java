@@ -19,4 +19,6 @@ public interface IUserRepository {
 
   User findBy(Long id);
 
+  User update(User user);
+
 }

@@ -41,7 +41,7 @@ public class SeedUsers {
   protected IRoleSpringRepository roleRepository;
 
   @Bean
-  CommandLineRunner initDatabase() {
+  CommandLineRunner initUsersData() {
     return args -> {
       log.info("Loading initial Roles in Database...");
       createRoles();

@@ -7,10 +7,10 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class Slide {
-
-  private String imageUrl;
-  private String text;
-  private Integer order;
+public class Role {
+  
+  private Long id;
+  private String name;
+  private String description;
 
 }

@@ -2,6 +2,7 @@ package com.alkemy.ong.infrastructure.config.spring;
 
 import com.alkemy.ong.application.repository.ICategoryRepository;
 import com.alkemy.ong.application.repository.INewsRepository;
+import com.alkemy.ong.application.repository.IOrganizationRepository;
 import com.alkemy.ong.application.repository.ITestimonialRepository;
 import com.alkemy.ong.application.service.AuthenticationService;
 import com.alkemy.ong.application.service.CategoryService;
@@ -23,9 +24,11 @@ import com.alkemy.ong.application.service.usecase.IDeleteMemberUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteTestimonialUseCase;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
+import com.alkemy.ong.application.service.usecase.IListCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateOrganizationUseCase;
+import com.alkemy.ong.application.util.ISendEmail;
 import com.alkemy.ong.infrastructure.config.spring.security.common.JwtUtils;
 import com.alkemy.ong.infrastructure.database.repository.CategoryRepository;
 import com.alkemy.ong.infrastructure.database.repository.CommentRepository;
@@ -55,14 +58,16 @@ public class ServiceBeanConfig {
   }
 
   @Bean
-  public ICreateUserUseCase createUserUseCase(UserRepository userRepository) {
-    return new UserService(userRepository);
+  public ICreateUserUseCase createUserUseCase(UserRepository userRepository,
+                                              IOrganizationRepository organizationRepository,
+                                              ISendEmail sendEmail) {
+    return new UserService(userRepository, organizationRepository, sendEmail);
   }
 
   @Bean
   public IUpdateOrganizationUseCase updateOrganizationUseCase(
-          OrganizationRepository organizationRepository) {
-    return new OrganizationService(organizationRepository);
+      OrganizationRepository organizationRepository, SlideRepository slideRepository) {
+    return new OrganizationService(organizationRepository, slideRepository);
   }
 
   @Bean
@@ -87,8 +92,8 @@ public class ServiceBeanConfig {
 
   @Bean
   public IGetOrganizationUseCase getOrganizationUseCase(
-      OrganizationRepository organizationRepository) {
-    return new OrganizationService(organizationRepository);
+      OrganizationRepository organizationRepository, SlideRepository slideRepository) {
+    return new OrganizationService(organizationRepository, slideRepository);
   }
 
   @Bean
@@ -99,6 +104,11 @@ public class ServiceBeanConfig {
   @Bean
   public IListSlideUseCase listSlideUseCase(SlideRepository slideRepository) {
     return new SlideService(slideRepository);
+  }
+
+  @Bean
+  public IListCategoryUseCase listCategoryUseCase(CategoryRepository categoryRepository) {
+    return new CategoryService(categoryRepository);
   }
 
   @Bean
@@ -114,5 +124,4 @@ public class ServiceBeanConfig {
                                                     JwtUtils jwtUtils) {
     return new CommentService(commentRepository, newsRepository, userRepository, jwtUtils);
   }
-
 }

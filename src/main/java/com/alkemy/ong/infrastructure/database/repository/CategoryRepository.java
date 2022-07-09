@@ -5,9 +5,11 @@ import com.alkemy.ong.domain.Category;
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
 import com.alkemy.ong.infrastructure.database.mapper.CategoryEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @RequiredArgsConstructor
 @Component
@@ -37,6 +39,11 @@ public class CategoryRepository implements ICategoryRepository {
   @Transactional
   public void delete(Long id) {
     categorySpringRepository.softDeleteById(id);
+  }
+
+  @Override
+  public List<Category> findAllActive() {
+    return categoryEntityMapper.toDomain(categorySpringRepository.findBySoftDeleteFalse());
   }
 
 }
