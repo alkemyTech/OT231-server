@@ -22,12 +22,14 @@ import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteMemberUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteTestimonialUseCase;
+import com.alkemy.ong.application.service.usecase.IGetCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
 import com.alkemy.ong.application.service.usecase.IListCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateOrganizationUseCase;
 import com.alkemy.ong.application.util.ISendEmail;
+import com.alkemy.ong.domain.Category;
 import com.alkemy.ong.infrastructure.database.repository.CategoryRepository;
 import com.alkemy.ong.infrastructure.database.repository.CommentRepository;
 import com.alkemy.ong.infrastructure.database.repository.ContactRepository;
@@ -113,5 +115,10 @@ public class ServiceBeanConfig {
   public ICreateCommentUseCase createCommentUseCase(CommentRepository commentRepository,
       UserRepository userRepository, NewsRepository newsRepository) {
     return new CommentService(commentRepository, newsRepository, userRepository);
+  }
+
+  @Bean
+  public IGetCategoryUseCase getCategoryUseCase(CategoryRepository categoryRepository) {
+    return new CategoryService(categoryRepository);
   }
 }

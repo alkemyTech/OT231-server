@@ -18,6 +18,7 @@ public class CategoryEntityMapper {
         .name(categoryEntity.getName())
         .description(categoryEntity.getDescription())
         .image(categoryEntity.getImage())
+        .softDelete(categoryEntity.getSoftDelete())
         .build();
   }
 
@@ -40,6 +41,7 @@ public class CategoryEntityMapper {
         .name(category.getName())
         .description(category.getDescription())
         .image(category.getImage())
+        .softDelete(category.getSoftDelete())
         .build();
   }
 
