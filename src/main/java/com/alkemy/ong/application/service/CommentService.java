@@ -53,12 +53,11 @@ public class CommentService implements ICreateCommentUseCase, IDeleteCommentUseC
   public void delete(Long id, String token) {
     String emailUser = jwtUtils.extractUsername(token);
     User userlogged = userRepository.findByEmail(emailUser);
-    User userComment = findBy(id).getUser();
-    if (userlogged.getId() != userComment.getId()
+    Comment comment = findBy(id);
+    if (userlogged.getId() != comment.getUser().getId()
             && !userlogged.getRole().getName().equals("ROLE_ADMIN")) {
       throw new OperationNotPermittedException("No permission to delete this comment.");
     }
-    Comment comment = findBy(id);
     comment.setSoftDelete(true);
     commentRepository.save(comment);
   }
