@@ -4,11 +4,12 @@ import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.repository.INewsRepository;
 import com.alkemy.ong.application.service.usecase.ICreateNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
+import com.alkemy.ong.application.service.usecase.IGetNewsUseCase;
 import com.alkemy.ong.domain.News;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class NewsService implements IDeleteNewsUseCase, ICreateNewsUseCase {
+public class NewsService implements IDeleteNewsUseCase, ICreateNewsUseCase, IGetNewsUseCase {
 
   private final INewsRepository newsRepository;
 
@@ -24,6 +25,15 @@ public class NewsService implements IDeleteNewsUseCase, ICreateNewsUseCase {
   public News add(News news) {
     news.setSoftDelete(false);
     return newsRepository.add(news);
+  }
+
+  @Override
+  public News getOne(Long id) {
+    News news = newsRepository.findBy(id);
+    if (news == null) {
+      throw new RecordNotFoundException("News not found.");
+    }
+    return news;
   }
 
 }
