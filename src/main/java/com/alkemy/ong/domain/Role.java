@@ -4,14 +4,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+@Builder
 @Getter
 @Setter
-@Builder
-public class Category {
-
+public class Role {
+  
+  private Long id;
   private String name;
   private String description;
-  private String image;
-  private Boolean softDelete;
 
 }

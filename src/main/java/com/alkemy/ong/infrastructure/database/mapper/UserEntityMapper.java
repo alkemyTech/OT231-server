@@ -14,6 +14,9 @@ public class UserEntityMapper {
 
   @Autowired
   private JwtUtils jwtUtils;
+  
+  @Autowired
+  private RoleEntityMapper roleEntityMapper;
 
   public List<User> toDomain(List<UserEntity> userEntities) {
     if (userEntities == null || userEntities.isEmpty()) {
@@ -38,6 +41,7 @@ public class UserEntityMapper {
         .photo(userEntity.getPhoto())
         .password(userEntity.getPassword())
         .token(getToken(userEntity))
+        .role(roleEntityMapper.toDomain(userEntity.getRole()))
         .build();
   }
 
@@ -56,7 +60,8 @@ public class UserEntityMapper {
         .lastName(user.getLastName())
         .photo(user.getPhoto())
         .password(user.getPassword())
+        .role(roleEntityMapper.toEntity(user.getRole()))
         .build();
   }
-
+  
 }

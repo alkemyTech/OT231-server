@@ -2,12 +2,14 @@ package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.config.spring.security.common.JwtUtils;
+import com.alkemy.ong.infrastructure.rest.request.UpdateUserRequest;
 import com.alkemy.ong.infrastructure.rest.response.ListUserResponse;
 import com.alkemy.ong.infrastructure.rest.response.UserResponse;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,6 +17,9 @@ public class UserMapper {
 
   @Autowired
   private JwtUtils jwtUtils;
+  
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
   public ListUserResponse toResponse(List<User> users) {
     if (users == null || users.isEmpty()) {
@@ -40,6 +45,17 @@ public class UserMapper {
   public User toDomain(String authorizationHeader) {
     return User.builder()
         .email(extractEmail(authorizationHeader))
+        .build();
+  }
+  
+  public User toDomain(Long id, UpdateUserRequest updateUserRequest) {
+    return User.builder()
+        .id(id)
+        .firstName(updateUserRequest.getFirstName())
+        .lastName(updateUserRequest.getLastName())
+        .email(updateUserRequest.getEmail())
+        .password(passwordEncoder.encode(updateUserRequest.getPassword()))
+        .photo(updateUserRequest.getPhoto())
         .build();
   }
 

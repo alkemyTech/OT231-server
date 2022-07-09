@@ -7,14 +7,17 @@ import com.alkemy.ong.infrastructure.rest.request.UpdateOrganizationRequest;
 import com.alkemy.ong.infrastructure.rest.response.OrganizationPublicDataResponse;
 import com.alkemy.ong.infrastructure.rest.response.SlideResponse;
 import com.alkemy.ong.infrastructure.rest.response.SocialMediaResponse;
-import java.util.ArrayList;
-import java.util.Collections;
+import com.alkemy.ong.infrastructure.rest.response.field.SlideResponseField;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
 @Component
 public class OrganizationMapper {
+
+  @Autowired
+  private SlideMapper slideMapper;
 
   public Organization toDomain(UpdateOrganizationRequest updateOrganizationRequest) {
     if (updateOrganizationRequest == null) {
@@ -51,19 +54,10 @@ public class OrganizationMapper {
   }
 
   private List<SlideResponse> getSlides(List<Slide> slides) {
-    if (slides == null || slides.isEmpty()) {
-      return Collections.emptyList();
-    }
-
-    List<SlideResponse> slideResponses = new ArrayList<>(slides.size());
-    for (Slide slide : slides) {
-      slideResponses.add(SlideResponse.builder()
-          .imageUrl(slide.getImageUrl())
-          .order(slide.getOrder())
-          .text(slide.getText())
-          .build());
-    }
-    return slideResponses;
+    return slideMapper.toResponse(slides,
+        SlideResponseField.ORDER,
+        SlideResponseField.TEXT,
+        SlideResponseField.IMAGE_URL).getSlides();
   }
 
 }

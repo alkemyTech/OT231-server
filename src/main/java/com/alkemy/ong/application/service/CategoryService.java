@@ -4,14 +4,16 @@ import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.repository.ICategoryRepository;
 import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
+import com.alkemy.ong.application.service.usecase.IGetCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IListCategoryUseCase;
 import com.alkemy.ong.domain.Category;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryUseCase,
-    IListCategoryUseCase {
+    IListCategoryUseCase, IGetCategoryUseCase {
 
   private final ICategoryRepository categoryRepository;
 
@@ -31,6 +33,16 @@ public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryU
   @Override
   public List<Category> findAll() {
     return categoryRepository.findAllActive();
+  }
+
+  @Override
+  public Category findById(Long id) {
+    Optional<Category> optionalCategory = categoryRepository.findById(id);
+    if (optionalCategory.isEmpty()
+        || Boolean.TRUE.equals(optionalCategory.get().getSoftDelete())) {
+      throw new RecordNotFoundException("Category not found.");
+    }
+    return optionalCategory.get();
   }
 
 }
