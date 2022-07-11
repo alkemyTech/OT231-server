@@ -20,7 +20,8 @@ public class OrganizationRepository implements IOrganizationRepository {
   @Override
   @Transactional
   public Organization find() {
-    return organizationEntityMapper.toDomain(organizationSpringRepository.findAll().get(0));
+    return organizationEntityMapper.toDomain(
+            organizationSpringRepository.findBySoftDeleteFalse().get(0));
   }
 
   @Override

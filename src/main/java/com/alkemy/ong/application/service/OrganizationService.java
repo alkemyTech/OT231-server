@@ -1,5 +1,6 @@
 package com.alkemy.ong.application.service;
 
+import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.repository.IOrganizationRepository;
 import com.alkemy.ong.application.repository.ISlideRepository;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
@@ -16,7 +17,12 @@ public class OrganizationService implements IGetOrganizationUseCase, IUpdateOrga
 
   @Override
   public Organization find() {
-    Organization organization = organizationRepository.find();
+    Organization organization = null;
+    try {
+      organization = organizationRepository.find();
+    } catch (Exception e) {
+      throw new RecordNotFoundException("Organization not found");
+    }
     organization.setSlides(slideRepository.findAllByOrderByOrder());
     return organization;
   }
@@ -86,9 +92,9 @@ public class OrganizationService implements IGetOrganizationUseCase, IUpdateOrga
         savedOrganization.getSocialMedia().setInstagramUrl(instagramUrl);
       }
 
-      String linkedInUrl = updateSocialMedia.getLinkedIndUrl();
+      String linkedInUrl = updateSocialMedia.getLinkedInUrl();
       if (linkedInUrl != null) {
-        savedOrganization.getSocialMedia().setLinkedIndUrl(linkedInUrl);
+        savedOrganization.getSocialMedia().setLinkedInUrl(linkedInUrl);
       }
     }
   }
