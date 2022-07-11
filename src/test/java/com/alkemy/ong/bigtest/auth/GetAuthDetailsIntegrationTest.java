@@ -16,6 +16,9 @@ public class GetAuthDetailsIntegrationTest extends BigTest {
   public void shouldReturn403WhenAuthTokenIsNotValid() throws Exception {
     mockMvc.perform(get("/auth/me")
             .header(HttpHeaders.AUTHORIZATION, "INVALID_TOKEN"))
+        .andExpect(jsonPath("$.statusCode", equalTo(403)))
+        .andExpect(jsonPath("$.message", equalTo(
+            "Access denied. Please, try to login again or contact your admin.")))
         .andExpect(status().isForbidden());
   }
 
