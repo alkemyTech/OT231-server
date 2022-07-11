@@ -4,6 +4,7 @@ import com.alkemy.ong.application.repository.ICategoryRepository;
 import com.alkemy.ong.application.repository.INewsRepository;
 import com.alkemy.ong.application.repository.IOrganizationRepository;
 import com.alkemy.ong.application.repository.ITestimonialRepository;
+import com.alkemy.ong.application.service.ActivityService;
 import com.alkemy.ong.application.service.AuthenticationService;
 import com.alkemy.ong.application.service.CategoryService;
 import com.alkemy.ong.application.service.CommentService;
@@ -14,6 +15,7 @@ import com.alkemy.ong.application.service.OrganizationService;
 import com.alkemy.ong.application.service.SlideService;
 import com.alkemy.ong.application.service.TestimonialService;
 import com.alkemy.ong.application.service.UserService;
+import com.alkemy.ong.application.service.usecase.ICreateActivityUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateCommentUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateContactUseCase;
@@ -30,6 +32,8 @@ import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateOrganizationUseCase;
 import com.alkemy.ong.application.util.ISendEmail;
+import com.alkemy.ong.infrastructure.database.mapper.ActivityEntityMapper;
+import com.alkemy.ong.infrastructure.database.repository.ActivityRepository;
 import com.alkemy.ong.infrastructure.database.repository.CategoryRepository;
 import com.alkemy.ong.infrastructure.database.repository.CommentRepository;
 import com.alkemy.ong.infrastructure.database.repository.ContactRepository;
@@ -129,4 +133,8 @@ public class ServiceBeanConfig {
     return new CategoryService(categoryRepository);
   }
 
+  @Bean
+  public ICreateActivityUseCase createActivityUseCase(ActivityRepository activityRepository) {
+    return new ActivityService(activityRepository);
+  }
 }
