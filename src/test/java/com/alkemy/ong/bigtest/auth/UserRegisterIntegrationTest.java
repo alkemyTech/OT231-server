@@ -3,6 +3,7 @@ package com.alkemy.ong.bigtest.auth;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -49,6 +50,19 @@ public class UserRegisterIntegrationTest extends BigTest {
         .andExpect(jsonPath("$.message", equalTo("Invalid input data.")))
         .andExpect(jsonPath("$.moreInfo",
             hasItem("Email address: " + REGISTERED_USER_EMAIL + " is already being used")))
+        .andExpect(status().isBadRequest());
+  }
+  
+  @Test
+  public void shouldReturn400WhenCredentialsHaveInvalidFormat() throws Exception {
+    mockMvc.perform(post(REGISTER_URL)
+            .content(
+                createRequest(USER_FIRSTNAME, USER_LASTNAME, "wrongEmailFormat", "wrongPasswordFormat"))
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.statusCode", equalTo(400)))
+        .andExpect(jsonPath("$.message", equalTo("Invalid input data.")))
+        .andExpect(jsonPath("$.moreInfo",
+            hasItems("Password must be between 6 and 8 characters", "Email should be valid")))
         .andExpect(status().isBadRequest());
   }
 
