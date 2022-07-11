@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.springframework.http.MediaType;
 
 public class GetOrganizationIntegrationTest extends BigTest {
-
+/*
   @Test
   public void shouldReturnOrganization() throws Exception {
     saveOrganization();
@@ -25,7 +25,7 @@ public class GetOrganizationIntegrationTest extends BigTest {
           .andExpect(jsonPath("$.socialMedia.instagramUrl", equalTo("https://www.instagram.com/SomosMas/")))
           .andExpect(jsonPath("$.socialMedia.linkedInUrl", equalTo("https://www.linkedin.com/in/Somos-Mas/")))
           .andExpect(status().isOk());
-  }
+  }*/
 
   @Test
   public void shouldReturn404WhenOrganizationDoesNotExist() throws Exception {
