@@ -30,10 +30,10 @@ public class UploadImageDelegate implements IUploadImage {
       objectMetadata.setContentType(image.getContentType());
 
       return new PutObjectRequest(
-            awsConfig.getBucketName(), 
-            image.getFileName(), 
-            image.getFile(), 
-            objectMetadata)
+          awsConfig.getBucketName(),
+          image.getFileName(),
+          image.getFile(),
+          objectMetadata)
           .withCannedAcl(CannedAccessControlList.PublicRead);
     } catch (Exception e) {
       throw new ThirdPartyException(e.getMessage());

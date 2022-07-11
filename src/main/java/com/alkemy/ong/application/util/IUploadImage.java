@@ -4,6 +4,6 @@ import com.alkemy.ong.domain.Image;
 
 public interface IUploadImage {
 
-  public String upload(Image image);
+  String upload(Image image);
 
 }
