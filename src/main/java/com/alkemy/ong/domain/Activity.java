@@ -9,6 +9,7 @@ import lombok.Setter;
 @Builder
 public class Activity {
 
+  private Long id;
   private String name;
   private String content;
   private String image;
