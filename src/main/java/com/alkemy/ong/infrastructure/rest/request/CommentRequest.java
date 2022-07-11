@@ -13,10 +13,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class  CommentRequest {
+public class CommentRequest {
 
   @Pattern(regexp = "^[A-Za-z\\d\\s]*$", message = "Body can only contain "
-          + "alphanumeric and whitespaces")
+      + "alphanumeric and whitespaces")
   private String body;
 
   @NotNull(message = "User must not be null")

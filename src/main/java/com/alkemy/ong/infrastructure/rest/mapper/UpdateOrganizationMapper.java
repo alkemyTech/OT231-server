@@ -48,7 +48,7 @@ public class UpdateOrganizationMapper {
     return SocialMediaResponse.builder()
         .facebookUrl(socialMedia.getFacebookUrl())
         .instagramUrl(socialMedia.getInstagramUrl())
-        .linkedIndUrl(socialMedia.getLinkedIndUrl())
+        .linkedInUrl(socialMedia.getLinkedIndUrl())
         .build();
   }
 
@@ -59,7 +59,7 @@ public class UpdateOrganizationMapper {
     return SocialMedia.builder()
         .facebookUrl(socialMedia.getFacebookUrl())
         .instagramUrl(socialMedia.getInstagramUrl())
-        .linkedIndUrl(socialMedia.getLinkedIndUrl())
+        .linkedIndUrl(socialMedia.getLinkedInUrl())
         .build();
   }
 

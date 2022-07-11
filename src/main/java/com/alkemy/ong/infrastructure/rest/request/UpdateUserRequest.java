@@ -13,7 +13,7 @@ import org.springframework.lang.Nullable;
 @Setter
 @SuperBuilder
 public class UpdateUserRequest extends UserRegisterRequest {
-  
+
   @Nullable
   private String photo;
 

@@ -59,7 +59,7 @@ public class UserRepository implements IUserRepository {
   public User findBy(Long id) {
     return userEntityMapper.toDomain(userSpringRepository.findByIdAndSoftDeleteFalse(id));
   }
-  
+
   @Override
   public User update(User user) {
     UserEntity updatedUser = userEntityMapper.toEntity(user);

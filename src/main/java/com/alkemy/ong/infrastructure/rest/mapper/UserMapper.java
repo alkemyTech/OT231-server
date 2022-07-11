@@ -1,5 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.mapper;
 
+import com.alkemy.ong.domain.Role;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.config.spring.security.common.JwtUtils;
 import com.alkemy.ong.infrastructure.rest.request.UpdateUserRequest;
@@ -8,7 +9,9 @@ import com.alkemy.ong.infrastructure.rest.response.UserResponse;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +20,7 @@ public class UserMapper {
 
   @Autowired
   private JwtUtils jwtUtils;
-  
+
   @Autowired
   private PasswordEncoder passwordEncoder;
 
@@ -45,9 +48,12 @@ public class UserMapper {
   public User toDomain(String authorizationHeader) {
     return User.builder()
         .email(extractEmail(authorizationHeader))
+        .role(Role.builder()
+            .name(extractAuthorities(authorizationHeader))
+            .build())
         .build();
   }
-  
+
   public User toDomain(Long id, UpdateUserRequest updateUserRequest) {
     return User.builder()
         .id(id)
@@ -61,6 +67,14 @@ public class UserMapper {
 
   private String extractEmail(String token) {
     return jwtUtils.extractUsername(token);
+  }
+
+  private String extractAuthorities(String token) {
+    Optional<GrantedAuthority> authority = jwtUtils.getAuthorities(token).stream().findFirst();
+    if (authority.isEmpty()) {
+      throw new IllegalArgumentException("Authority is empty.");
+    }
+    return authority.get().toString();
   }
 
 }

@@ -19,6 +19,7 @@ public class Comment {
   private User user;
   private News news;
   private Timestamp createTimestamp;
+  private Boolean softDelete;
 
   public void setUserId(Long id) {
     if (user == null) {

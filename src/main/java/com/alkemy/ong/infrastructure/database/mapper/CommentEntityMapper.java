@@ -24,6 +24,7 @@ public class CommentEntityMapper {
         .user(userEntityMapper.toDomain(commentEntity.getUser()))
         .news(newsEntityMapper.toDomain(commentEntity.getNews()))
         .createTimestamp(commentEntity.getCreateTimestamp())
+        .softDelete(commentEntity.getSoftDelete())
         .build();
   }
 
@@ -36,6 +37,7 @@ public class CommentEntityMapper {
         .body(comment.getBody())
         .user(userEntityMapper.toEntity(comment.getUser()))
         .news(newsEntityMapper.toEntity(comment.getNews()))
+        .softDelete(comment.getSoftDelete())
         .build();
   }
 }

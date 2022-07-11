@@ -30,7 +30,7 @@ public class SlideResource {
         .toResponse(listSlideUseCase.findAllByOrderByOrder()));
   }
 
-  @DeleteMapping(value = "/slides/{id}")
+  @DeleteMapping(value = "/slides/{id}", produces = {"application/json"})
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     deleteSlideUseCase.delete(id);
     return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

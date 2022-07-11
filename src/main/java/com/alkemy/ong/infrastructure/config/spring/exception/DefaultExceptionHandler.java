@@ -1,6 +1,7 @@
 package com.alkemy.ong.infrastructure.config.spring.exception;
 
 import com.alkemy.ong.application.exception.InvalidCredentialsException;
+import com.alkemy.ong.application.exception.OperationNotPermittedException;
 import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.exception.ThirdPartyException;
 import com.alkemy.ong.application.exception.UserAlreadyExistsException;
@@ -23,6 +24,7 @@ public class DefaultExceptionHandler {
   private static final String SOMETHING_WENT_WRONG = "Something went wrong.";
   private static final String INVALID_CREDENTIALS = "Please, provide valid credentials.";
   private static final String RECORD_NOT_FOUND = "Record not found in database.";
+  private static final String OPERATION_NOT_PERMITTED = "Operation not permitted.";
 
   @ExceptionHandler(value = Exception.class)
   public ResponseEntity<ErrorResponse> handleException(Exception e) {
@@ -83,6 +85,16 @@ public class DefaultExceptionHandler {
         e.getMessage());
     return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 
+  }
+
+  @ExceptionHandler(value = OperationNotPermittedException.class)
+  protected ResponseEntity<ErrorResponse> handleOperationNotPermittedException(
+      OperationNotPermittedException e) {
+    ErrorResponse errorResponse = buildError(
+        HttpStatus.FORBIDDEN,
+        OPERATION_NOT_PERMITTED,
+        e.getMessage());
+    return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
   }
 
   private List<String> collectErrors(MethodArgumentNotValidException e) {

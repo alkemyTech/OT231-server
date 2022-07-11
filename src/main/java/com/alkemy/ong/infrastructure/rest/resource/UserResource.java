@@ -41,7 +41,7 @@ public class UserResource {
 
   @Autowired
   private IGetAuthDetailsUseCase getAuthDetailsUseCase;
-  
+
   @Autowired
   private IUpdateUserUseCase updateUserUseCase;
 
@@ -70,7 +70,7 @@ public class UserResource {
     return ResponseEntity.ok(response);
   }
 
-  @DeleteMapping(value = "/users/{id}")
+  @DeleteMapping(value = "/users/{id}", produces = {"application/json"})
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     deleteUserUseCase.delete(id);
     return ResponseEntity.noContent().build();
@@ -81,7 +81,7 @@ public class UserResource {
     List<User> users = listUserUseCase.findAll();
     return ResponseEntity.ok().body(userMapper.toResponse(users));
   }
-  
+
   @PutMapping(value = "/users/{id}",
       produces = {"application/json"},
       consumes = {"application/json"})
