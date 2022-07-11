@@ -2,7 +2,7 @@ package com.alkemy.ong.domain;
 
 import java.io.InputStream;
 
-public interface Image {
+public interface IImage {
 
   InputStream getFile();
 

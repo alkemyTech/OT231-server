@@ -1,9 +1,9 @@
 package com.alkemy.ong.application.util;
 
-import com.alkemy.ong.domain.Image;
+import com.alkemy.ong.domain.IImage;
 
 public interface IUploadImage {
 
-  String upload(Image image);
+  String upload(IImage image);
 
 }
