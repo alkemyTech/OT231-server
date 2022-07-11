@@ -209,6 +209,7 @@ public abstract class BigTest {
         .facebookUrl("https://www.facebook.com/Somos_Mas/")
         .linkedInUrl("https://www.linkedin.com/in/Somos-Mas/")
         .instagramUrl("https://www.instagram.com/SomosMas/")
+        .softDelete(false)
         .build());
 
     return organizationEntity.getId();
