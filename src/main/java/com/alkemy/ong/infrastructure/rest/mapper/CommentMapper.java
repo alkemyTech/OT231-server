@@ -5,10 +5,14 @@ import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.rest.request.CommentRequest;
 import com.alkemy.ong.infrastructure.rest.response.CommentResponse;
 import com.alkemy.ong.infrastructure.rest.response.FullNameResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CommentMapper {
+
+  @Autowired
+  private UserMapper userMapper;
 
   public Comment toDomain(CommentRequest commentRequest) {
     if (commentRequest == null) {
@@ -19,6 +23,13 @@ public class CommentMapper {
     comment.setUserId(commentRequest.getUserId());
     comment.setBody(commentRequest.getBody());
     return comment;
+  }
+
+  public Comment toDomain(Long id, String token) {
+    return Comment.builder()
+        .id(id)
+        .user(userMapper.toDomain(token))
+        .build();
   }
 
   public CommentResponse toResponse(Comment comment) {
