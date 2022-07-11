@@ -5,4 +5,5 @@ import com.alkemy.ong.domain.Activity;
 public interface ICreateActivityUseCase {
 
   Activity add(Activity activity);
+
 }

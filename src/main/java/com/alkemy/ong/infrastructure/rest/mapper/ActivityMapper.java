@@ -1,10 +1,8 @@
 package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.Activity;
-import com.alkemy.ong.domain.Category;
 import com.alkemy.ong.infrastructure.rest.request.ActivityRequest;
 import com.alkemy.ong.infrastructure.rest.response.ActivityResponse;
-import com.alkemy.ong.infrastructure.rest.response.CategoryResponse;
 import org.springframework.stereotype.Component;
 
 @Component

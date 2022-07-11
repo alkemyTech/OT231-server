@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class ActivityRepository implements IActivityRepository {
 
   private final IActivitySpringRepository activitySpringRepository;
-
   private final ActivityEntityMapper activityEntityMapper;
 
   @Override
@@ -23,4 +22,5 @@ public class ActivityRepository implements IActivityRepository {
     ActivityEntity activityEntity = activityEntityMapper.toEntity(activity);
     return activityEntityMapper.toDomain(activitySpringRepository.save(activityEntity));
   }
+
 }

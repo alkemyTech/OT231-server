@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ActivityResource {
 
   @Autowired
-  ICreateActivityUseCase createActivityUseCase;
+  private ICreateActivityUseCase createActivityUseCase;
 
   @Autowired
-  ActivityMapper activityMapper;
+  private ActivityMapper activityMapper;
 
   @PostMapping(value = "/activities",
       produces = {"application/json"},

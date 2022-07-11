@@ -13,4 +13,5 @@ public class Activity {
   private String content;
   private String image;
   private Boolean softDelete;
+
 }
