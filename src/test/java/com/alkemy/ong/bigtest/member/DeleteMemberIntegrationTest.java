@@ -44,9 +44,7 @@ public class DeleteMemberIntegrationTest extends BigTest {
 
   @Test
   public void shouldReturn403WhenMissingAuthToken() throws Exception {
-    MemberEntity randomMember = getRandomMember();
-
-    mockMvc.perform(delete("/members/{id}", String.valueOf(randomMember.getId()))
+    mockMvc.perform(delete("/members/{id}", "1")
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.statusCode", equalTo(403)))
         .andExpect(jsonPath("$.message",

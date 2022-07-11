@@ -1,5 +1,6 @@
 package com.alkemy.ong.application.service;
 
+import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.repository.IOrganizationRepository;
 import com.alkemy.ong.application.repository.ISlideRepository;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
@@ -16,9 +17,13 @@ public class OrganizationService implements IGetOrganizationUseCase, IUpdateOrga
 
   @Override
   public Organization find() {
-    Organization organization = organizationRepository.find();
-    organization.setSlides(slideRepository.findAllByOrderByOrder());
-    return organization;
+    try {
+      Organization organization = organizationRepository.find();
+      organization.setSlides(slideRepository.findAllByOrderByOrder());
+      return organization;
+    } catch (RuntimeException e) {
+      throw new RecordNotFoundException("Organization not found.");
+    }
   }
 
   @Override

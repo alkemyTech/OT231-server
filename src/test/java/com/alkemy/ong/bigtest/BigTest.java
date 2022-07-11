@@ -97,6 +97,7 @@ public abstract class BigTest {
     commentRepository.deleteAll();
     newsRepository.deleteAll();
     memberRepository.deleteAll();
+    organizationRepository.deleteAll();
   }
 
   private void createUserData() {
