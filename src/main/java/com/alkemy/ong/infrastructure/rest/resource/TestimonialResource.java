@@ -14,7 +14,7 @@ public class TestimonialResource {
   @Autowired
   private IDeleteTestimonialUseCase deleteTestimonialUseCase;
 
-  @DeleteMapping("/testimonials/{id}")
+  @DeleteMapping(value = "/testimonials/{id}", produces = {"application/json"})
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     deleteTestimonialUseCase.delete(id);
     return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

@@ -32,7 +32,6 @@ import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateOrganizationUseCase;
 import com.alkemy.ong.application.util.ISendEmail;
-import com.alkemy.ong.infrastructure.database.mapper.ActivityEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.ActivityRepository;
 import com.alkemy.ong.infrastructure.database.repository.CategoryRepository;
 import com.alkemy.ong.infrastructure.database.repository.CommentRepository;
@@ -123,8 +122,8 @@ public class ServiceBeanConfig {
 
   @Bean
   public IDeleteCommentUseCase deleteCommentUseCase(CommentRepository commentRepository,
-                                                    UserRepository userRepository,
-                                                    NewsRepository newsRepository) {
+      UserRepository userRepository,
+      NewsRepository newsRepository) {
     return new CommentService(commentRepository, newsRepository, userRepository);
   }
 

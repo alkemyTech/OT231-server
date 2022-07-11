@@ -15,7 +15,7 @@ public class MemberResource {
   @Autowired
   private IDeleteMemberUseCase deleteMemberUseCase;
 
-  @DeleteMapping(value = "/{id}")
+  @DeleteMapping(value = "/{id}", produces = {"application/json"})
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     deleteMemberUseCase.delete(id);
     return ResponseEntity.noContent().build();

@@ -14,7 +14,7 @@ public class UserEntityMapper {
 
   @Autowired
   private JwtUtils jwtUtils;
-  
+
   @Autowired
   private RoleEntityMapper roleEntityMapper;
 
@@ -65,5 +65,5 @@ public class UserEntityMapper {
         .role(roleEntityMapper.toEntity(user.getRole()))
         .build();
   }
-  
+
 }

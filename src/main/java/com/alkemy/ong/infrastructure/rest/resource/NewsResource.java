@@ -33,7 +33,7 @@ public class NewsResource {
   @Autowired
   private NewsMapper newsMapper;
 
-  @DeleteMapping("/news/{id}")
+  @DeleteMapping(value = "/news/{id}", produces = {"application/json"})
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     deleteNewsUseCase.delete(id);
     return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

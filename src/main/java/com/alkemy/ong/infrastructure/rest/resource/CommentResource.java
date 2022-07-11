@@ -39,7 +39,7 @@ public class CommentResource {
     return new ResponseEntity<CommentResponse>(response, HttpStatus.CREATED);
   }
 
-  @DeleteMapping(value = "comments/{id}")
+  @DeleteMapping(value = "comments/{id}", produces = {"application/json"})
   public ResponseEntity<Void> delete(@PathVariable Long id,
       @RequestHeader("Authorization") String token) {
     Comment comment = commentMapper.toDomain(id, token);

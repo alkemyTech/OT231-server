@@ -49,7 +49,7 @@ public class CategoryResource {
     return new ResponseEntity<CategoryResponse>(response, HttpStatus.CREATED);
   }
 
-  @DeleteMapping("/categories/{id}")
+  @DeleteMapping(value = "/categories/{id}", produces = {"application/json"})
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     deleteCategoryUseCase.delete(id);
     return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
