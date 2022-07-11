@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface IActivitySpringRepository extends JpaRepository<ActivityEntity, Long> {
 
   ActivityEntity findByIdAndSoftDeleteFalse(Long id);
+
 }

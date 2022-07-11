@@ -22,11 +22,11 @@ public class ActivityMapper {
 
   public Activity toDomain(Long id, UpdateActivityRequest updateActivityRequest) {
     return Activity.builder()
-            .id(id)
-            .name(updateActivityRequest.getName())
-            .content(updateActivityRequest.getContent())
-            .image(updateActivityRequest.getImage())
-            .build();
+        .id(id)
+        .name(updateActivityRequest.getName())
+        .content(updateActivityRequest.getContent())
+        .image(updateActivityRequest.getImage())
+        .build();
   }
 
   public ActivityResponse toResponse(Activity activity) {

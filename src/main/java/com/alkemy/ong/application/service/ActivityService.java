@@ -22,17 +22,13 @@ public class ActivityService implements ICreateActivityUseCase, IUpdateActivityU
   public Activity update(Activity updActivity) {
     Activity activitySaved = activityRepository.findBy(updActivity.getId());
     if (activitySaved == null) {
-      throw new RecordNotFoundException("Activity not found");
+      throw new RecordNotFoundException("Activity not found.");
     }
-    updateActivityValues(updActivity, activitySaved);
+    updateValues(updActivity, activitySaved);
     return activityRepository.update(activitySaved);
   }
 
-  private void updateActivityValues(Activity updatedActivity, Activity savedActivity) {
-    updateInfo(savedActivity, updatedActivity);
-  }
-
-  private void updateInfo(Activity savedActivity, Activity updatedActivity) {
+  private void updateValues(Activity updatedActivity, Activity savedActivity) {
     savedActivity.setName(updatedActivity.getName());
     savedActivity.setContent(updatedActivity.getContent());
     savedActivity.setImage(updatedActivity.getImage());
