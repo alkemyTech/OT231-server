@@ -20,6 +20,8 @@ public class OrganizationEntityMapper {
         .phone(organizationEntity.getPhone())
         .email(organizationEntity.getEmail())
         .welcomeText(organizationEntity.getWelcomeText())
+        .softDelete(organizationEntity.getSoftDelete())
+        .aboutUsText(organizationEntity.getAboutUsText())
         .socialMedia(getSocialMedia(organizationEntity))
         .build();
   }
@@ -37,9 +39,11 @@ public class OrganizationEntityMapper {
         .phone(organization.getPhone())
         .email(organization.getEmail())
         .welcomeText(organization.getWelcomeText())
+        .softDelete(organization.getSoftDelete())
+        .aboutUsText(organization.getAboutUsText())
         .facebookUrl(socialMedia == null ? null : socialMedia.getFacebookUrl())
         .instagramUrl(socialMedia == null ? null : socialMedia.getInstagramUrl())
-        .linkedInUrl(socialMedia == null ? null : socialMedia.getLinkedIndUrl())
+        .linkedInUrl(socialMedia == null ? null : socialMedia.getLinkedInUrl())
         .build();
   }
 
@@ -47,7 +51,7 @@ public class OrganizationEntityMapper {
     return SocialMedia.builder()
         .facebookUrl(organizationEntity.getFacebookUrl())
         .instagramUrl(organizationEntity.getInstagramUrl())
-        .linkedIndUrl(organizationEntity.getLinkedInUrl())
+        .linkedInUrl(organizationEntity.getLinkedInUrl())
         .build();
   }
 

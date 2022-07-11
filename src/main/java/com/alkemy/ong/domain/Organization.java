@@ -19,6 +19,7 @@ public class Organization {
   private String welcomeText;
   private String aboutUsText;
   private SocialMedia socialMedia;
+  private Boolean softDelete;
   private List<Slide> slides;
 
 }
