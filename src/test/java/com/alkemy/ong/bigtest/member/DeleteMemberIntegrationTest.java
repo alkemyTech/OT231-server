@@ -30,10 +30,8 @@ public class DeleteMemberIntegrationTest extends BigTest {
   }
 
   @Test
-  public void shouldReturnF403WhenUserHasStandardRole() throws Exception {
-    MemberEntity randomMember = getRandomMember();
-
-    mockMvc.perform(delete("/members/{id}", String.valueOf(randomMember.getId()))
+  public void shouldReturn403WhenUserHasStandardRole() throws Exception {
+    mockMvc.perform(delete("/members/{id}", "1")
             .contentType(MediaType.APPLICATION_JSON)
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForStandardUser()))
         .andExpect(jsonPath("$.statusCode", equalTo(403)))
