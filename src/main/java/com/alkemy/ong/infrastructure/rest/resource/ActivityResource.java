@@ -31,4 +31,5 @@ public class ActivityResource {
     ActivityResponse response = activityMapper.toResponse(createActivityUseCase.add(activity));
     return new ResponseEntity<ActivityResponse>(response, HttpStatus.CREATED);
   }
+
 }
