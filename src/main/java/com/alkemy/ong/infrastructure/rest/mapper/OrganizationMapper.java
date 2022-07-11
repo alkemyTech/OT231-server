@@ -49,7 +49,7 @@ public class OrganizationMapper {
     return SocialMediaResponse.builder()
         .facebookUrl(socialMedia.getFacebookUrl())
         .instagramUrl(socialMedia.getInstagramUrl())
-        .linkedIndUrl(socialMedia.getLinkedIndUrl())
+        .linkedInUrl(socialMedia.getLinkedInUrl())
         .build();
   }
 

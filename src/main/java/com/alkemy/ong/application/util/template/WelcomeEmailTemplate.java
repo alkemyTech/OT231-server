@@ -59,7 +59,7 @@ public class WelcomeEmailTemplate implements IEmail {
            + organization.getSocialMedia().getInstagramUrl() + "\" target=\"_blank\">"
            + "  &#128213; Instagram </a>"
            + " <a style=\"text-decoration: none; color: #ccc;;\" href=\""
-           + organization.getSocialMedia().getLinkedIndUrl() + "\" target=\"_blank\">"
+           + organization.getSocialMedia().getLinkedInUrl() + "\" target=\"_blank\">"
            + " &#128188; LinkedIN </a> "
            + "</div>"
 
