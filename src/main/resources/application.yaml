@@ -22,3 +22,8 @@ aws:
   public-key: foo
   secret-key: foo
   region: us-east-1
+
+#OpenApi
+##springdoc:
+##  api-docs:
+##    path: "/api/docs"
