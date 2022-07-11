@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class CommentMapper {
 
   @Autowired
-  UserMapper userMapper;
+  private UserMapper userMapper;
 
   public Comment toDomain(CommentRequest commentRequest) {
     if (commentRequest == null) {
@@ -27,9 +27,9 @@ public class CommentMapper {
 
   public Comment toDomain(Long id, String token) {
     return Comment.builder()
-            .id(id)
-            .user(userMapper.toDomain(token))
-            .build();
+        .id(id)
+        .user(userMapper.toDomain(token))
+        .build();
   }
 
   public CommentResponse toResponse(Comment comment) {

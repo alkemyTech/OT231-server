@@ -24,6 +24,7 @@ public class DefaultExceptionHandler {
   private static final String SOMETHING_WENT_WRONG = "Something went wrong.";
   private static final String INVALID_CREDENTIALS = "Please, provide valid credentials.";
   private static final String RECORD_NOT_FOUND = "Record not found in database.";
+  private static final String OPERATION_NOT_PERMITTED = "Operation not permitted.";
 
   @ExceptionHandler(value = Exception.class)
   public ResponseEntity<ErrorResponse> handleException(Exception e) {
@@ -88,11 +89,11 @@ public class DefaultExceptionHandler {
 
   @ExceptionHandler(value = OperationNotPermittedException.class)
   protected ResponseEntity<ErrorResponse> handleOperationNotPermittedException(
-          OperationNotPermittedException e) {
+      OperationNotPermittedException e) {
     ErrorResponse errorResponse = buildError(
-            HttpStatus.FORBIDDEN,
-            "OPERATION NOT PERMITTED",
-            e.getMessage());
+        HttpStatus.FORBIDDEN,
+        OPERATION_NOT_PERMITTED,
+        e.getMessage());
     return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
   }
 

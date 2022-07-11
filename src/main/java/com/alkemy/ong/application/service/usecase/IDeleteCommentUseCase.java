@@ -1,8 +1,9 @@
 package com.alkemy.ong.application.service.usecase;
 
-import com.alkemy.ong.domain.User;
+import com.alkemy.ong.domain.Comment;
 
 public interface IDeleteCommentUseCase {
 
-  void delete(Long id, User user);
+  void delete(Comment comment);
+
 }

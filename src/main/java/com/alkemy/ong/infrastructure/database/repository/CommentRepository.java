@@ -40,5 +40,4 @@ public class CommentRepository implements ICommentRepository {
     commentSpringRepository.save(commentEntityMapper.toEntity(comment));
   }
 
-
 }

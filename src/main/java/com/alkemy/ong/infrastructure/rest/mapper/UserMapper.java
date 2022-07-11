@@ -9,7 +9,9 @@ import com.alkemy.ong.infrastructure.rest.response.UserResponse;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +20,7 @@ public class UserMapper {
 
   @Autowired
   private JwtUtils jwtUtils;
-  
+
   @Autowired
   private PasswordEncoder passwordEncoder;
 
@@ -46,10 +48,12 @@ public class UserMapper {
   public User toDomain(String authorizationHeader) {
     return User.builder()
         .email(extractEmail(authorizationHeader))
-        .role(Role.builder().name(extractAuthorities(authorizationHeader)).build())
+        .role(Role.builder()
+            .name(extractAuthorities(authorizationHeader))
+            .build())
         .build();
   }
-  
+
   public User toDomain(Long id, UpdateUserRequest updateUserRequest) {
     return User.builder()
         .id(id)
@@ -66,7 +70,11 @@ public class UserMapper {
   }
 
   private String extractAuthorities(String token) {
-    return jwtUtils.getAuthorities(token).stream().findFirst().get().toString();
+    Optional<GrantedAuthority> authority = jwtUtils.getAuthorities(token).stream().findFirst();
+    if (authority.isEmpty()) {
+      throw new IllegalArgumentException("Authority is empty.");
+    }
+    return authority.get().toString();
   }
 
 }

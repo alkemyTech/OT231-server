@@ -46,14 +46,22 @@ public class CommentService implements ICreateCommentUseCase, IDeleteCommentUseC
   }
 
   @Override
-  public void delete(Long id, User user) {
-    Comment comment = findBy(id);
-    if (!user.getEmail().equals(comment.getUser().getEmail())
-            && !user.getRole().getName().equals(Role.ADMIN.getFullRoleName())) {
+  public void delete(Comment commentToDelete) {
+    Comment comment = findBy(commentToDelete.getId());
+    User authenticatedUser = commentToDelete.getUser();
+    if (!isSameUser(comment, authenticatedUser) && isNotAdmin(authenticatedUser)) {
       throw new OperationNotPermittedException("No permission to delete this comment.");
     }
     comment.setSoftDelete(true);
     commentRepository.save(comment);
+  }
+
+  private boolean isSameUser(Comment comment, User authenticatedUser) {
+    return authenticatedUser.getEmail().equals(comment.getUser().getEmail());
+  }
+
+  private boolean isNotAdmin(User authenticatedUser) {
+    return !Role.ADMIN.getFullRoleName().equals(authenticatedUser.getRole().getName());
   }
 
   private Comment findBy(Long id) {

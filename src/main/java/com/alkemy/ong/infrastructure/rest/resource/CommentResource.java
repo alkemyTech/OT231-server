@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 public class CommentResource {
 
@@ -42,9 +41,9 @@ public class CommentResource {
 
   @DeleteMapping(value = "comments/{id}")
   public ResponseEntity<Void> delete(@PathVariable Long id,
-                                     @RequestHeader("Authorization") String token) {
+      @RequestHeader("Authorization") String token) {
     Comment comment = commentMapper.toDomain(id, token);
-    deleteCommentUseCase.delete(id, comment.getUser());
+    deleteCommentUseCase.delete(comment);
     return ResponseEntity.noContent().build();
   }
 
