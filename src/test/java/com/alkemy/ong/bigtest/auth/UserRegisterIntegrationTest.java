@@ -71,6 +71,7 @@ public class UserRegisterIntegrationTest extends BigTest {
     Optional<UserEntity> optionalUserEntity = Optional.of(userRepository.findByEmail(email));
     assertTrue(optionalUserEntity.isPresent());
     assertThat(optionalUserEntity.get().getSoftDelete()).isFalse();
+    userRepository.delete(optionalUserEntity.get());
   }
 
   private String createRequest(String firstName, String lastName, String email, String password)
