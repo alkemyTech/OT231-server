@@ -22,5 +22,3 @@ aws:
   public-key: foo
   secret-key: foo
   region: us-east-1
-
-
