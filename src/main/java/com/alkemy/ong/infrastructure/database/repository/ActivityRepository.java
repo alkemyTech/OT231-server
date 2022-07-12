@@ -23,4 +23,16 @@ public class ActivityRepository implements IActivityRepository {
     return activityEntityMapper.toDomain(activitySpringRepository.save(activityEntity));
   }
 
+  @Override
+  public Activity findBy(Long id) {
+    return activityEntityMapper.toDomain(activitySpringRepository.findByIdAndSoftDeleteFalse(id));
+  }
+
+  @Override
+  public Activity update(Activity activity) {
+    ActivityEntity activityUpdate = activityEntityMapper.toEntity(activity);
+    activityUpdate.setSoftDelete(false);
+    return activityEntityMapper.toDomain(activitySpringRepository.save(activityUpdate));
+  }
+
 }

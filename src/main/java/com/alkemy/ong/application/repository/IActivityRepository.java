@@ -6,4 +6,7 @@ public interface IActivityRepository {
 
   Activity add(Activity activity);
 
+  Activity findBy(Long id);
+
+  Activity update(Activity activity);
 }

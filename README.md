@@ -71,6 +71,14 @@ On the root folder run:
 mvn spring-boot:run
 ```
 
+### SWAGGER DOCUMENTATION
+
+Open below link after run it locally:
+
+```
+http://localhost:8080/api/docs
+```
+
 ### CHECKSTYLE
 
 You can generate the Checkstyle report by explicitly executing below command from the command line:
