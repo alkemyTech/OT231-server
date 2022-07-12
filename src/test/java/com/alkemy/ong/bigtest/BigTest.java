@@ -23,7 +23,6 @@ import com.alkemy.ong.infrastructure.rest.request.AuthenticationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import java.nio.charset.StandardCharsets;
-import java.sql.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;

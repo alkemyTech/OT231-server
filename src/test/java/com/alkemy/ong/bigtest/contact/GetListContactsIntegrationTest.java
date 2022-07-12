@@ -1,6 +1,5 @@
 package com.alkemy.ong.bigtest.contact;
 
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -17,7 +16,6 @@ public class GetListContactsIntegrationTest extends BigTest {
   public void shouldReturnStatusOk() throws Exception {
     saveContact();
     saveContact();
-
     mockMvc.perform(get("/contacts")
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser())
             .contentType(MediaType.APPLICATION_JSON))
@@ -27,6 +25,7 @@ public class GetListContactsIntegrationTest extends BigTest {
   @Test
   public void shouldReturn403WhenAuthTokenIsNotValid() throws Exception {
     mockMvc.perform(get("/contacts")
+            .contentType(MediaType.APPLICATION_JSON)
             .header(HttpHeaders.AUTHORIZATION, "INVALID_TOKEN"))
         .andExpect(jsonPath("$.statusCode", CoreMatchers.equalTo(403)))
         .andExpect(jsonPath("$.message", CoreMatchers.equalTo(
@@ -35,27 +34,23 @@ public class GetListContactsIntegrationTest extends BigTest {
   }
 
   @Test
-  public void shouldReturnListContactsWhenRequestHasValidToken() throws Exception {
+  public void shouldReturnListContactsAndStatus200WhenRequestHasValidToken() throws Exception {
+    saveContact();
+    saveContact();
     saveContact();
     mockMvc.perform(get("/contacts")
             .contentType(MediaType.APPLICATION_JSON)
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser()))
-        .andExpect(jsonPath("$.email", CoreMatchers.equalTo("semper@ong.com")))
-        .andExpect(jsonPath("$.name", CoreMatchers.equalTo("Semper Evincere")))
-        .andExpect(jsonPath("$.phone", CoreMatchers.equalTo("+540303456")))
+        .andExpect(jsonPath("$.contacts[0].name", CoreMatchers.equalTo("Semper Evincere")))
+        .andExpect(jsonPath("$.contacts[0].phone", CoreMatchers.equalTo("+540303456")))
+        .andExpect(jsonPath("$.contacts[0].email", CoreMatchers.equalTo("semper@ong.com")))
+        .andExpect(jsonPath("$.contacts[1].name", CoreMatchers.equalTo("Semper Evincere")))
+        .andExpect(jsonPath("$.contacts[1].phone", CoreMatchers.equalTo("+540303456")))
+        .andExpect(jsonPath("$.contacts[1].email", CoreMatchers.equalTo("semper@ong.com")))
+        .andExpect(jsonPath("$.contacts[2].name", CoreMatchers.equalTo("Semper Evincere")))
+        .andExpect(jsonPath("$.contacts[2].phone", CoreMatchers.equalTo("+540303456")))
+        .andExpect(jsonPath("$.contacts[2].email", CoreMatchers.equalTo("semper@ong.com")))
         .andExpect(status().isOk());
   }
 
- /* @Test
-  public void shouldReturnStatus400() throws Exception {
-    saveContact();
-    saveContact();
-    saveContact();
-    saveContact();
-    mockMvc.perform(get("/contacts")
-            .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForStandardUser())
-            .contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.statusCode", equalTo(403)))
-        .andExpect(status().isBadRequest());
-  }*/
 }
