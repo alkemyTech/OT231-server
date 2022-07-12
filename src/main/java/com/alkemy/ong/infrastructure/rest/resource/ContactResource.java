@@ -27,7 +27,7 @@ public class ContactResource {
   private ContactMapper contactMapper;
 
   @Autowired
-  IListContactUseCase listContactUseCase;
+  private IListContactUseCase listContactUseCase;
 
   @PostMapping(value = "/contacts",
       produces = {"application/json"},
