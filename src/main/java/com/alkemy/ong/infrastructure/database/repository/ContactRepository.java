@@ -5,6 +5,7 @@ import com.alkemy.ong.domain.Contact;
 import com.alkemy.ong.infrastructure.database.entity.ContactEntity;
 import com.alkemy.ong.infrastructure.database.mapper.ContactEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.IContactSpringRepository;
+import java.util.List;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,5 +23,10 @@ public class ContactRepository implements IContactRepository {
   public Contact add(Contact newContact) {
     ContactEntity contactEntity = contactEntityMapper.toEntity(newContact);
     return contactEntityMapper.toDomain(contactSpringRepository.save(contactEntity));
+  }
+
+  @Override
+  public List<Contact> findAllActive() {
+    return contactEntityMapper.toDomain(contactSpringRepository.findByDeletedAtNull());
   }
 }
