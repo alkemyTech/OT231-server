@@ -21,6 +21,9 @@ public class GetListContactsIntegrationTest extends BigTest {
     mockMvc.perform(get("/contacts")
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser())
             .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.name", equalTo("Semper Evincere")))
+        .andExpect(jsonPath("$.phone", equalTo("+540303456")))
+        .andExpect(jsonPath("$.email", equalTo("semper@ong.com")))
         .andExpect(status().isOk());
   }
 
