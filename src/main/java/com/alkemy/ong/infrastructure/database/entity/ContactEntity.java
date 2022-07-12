@@ -41,5 +41,4 @@ public class ContactEntity {
 
   @Column(name = "SOFT_DELETE")
   private Date deletedAt;
-
 }
