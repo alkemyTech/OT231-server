@@ -38,11 +38,11 @@ public class ContactMapper {
   }
 
   public ListContactResponse toResponse(List<Contact> contacts) {
-    if(contacts == null || contacts.isEmpty()) {
+    if (contacts == null || contacts.isEmpty()) {
       return new ListContactResponse(Collections.emptyList());
     }
     List<ContactResponse> contactsResponses = new ArrayList<>(contacts.size());
-    for(Contact contact : contacts) {
+    for (Contact contact : contacts) {
       contactsResponses.add(toResponseNoMessage(contact));
     }
     return new ListContactResponse(contactsResponses);

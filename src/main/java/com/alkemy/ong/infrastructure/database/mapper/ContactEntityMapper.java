@@ -22,6 +22,17 @@ public class ContactEntityMapper {
         .build();
   }
 
+  public List<Contact> toDomain(List<ContactEntity> contactEntities) {
+    if (contactEntities == null || contactEntities.isEmpty()) {
+      return Collections.emptyList();
+    }
+    List<Contact> contacts = new ArrayList<>(contactEntities.size());
+    for (ContactEntity contactEntity : contactEntities) {
+      contacts.add(toDomain(contactEntity));
+    }
+    return contacts;
+  }
+
   public ContactEntity toEntity(Contact contact) {
     if (contact == null) {
       return null;
@@ -34,14 +45,4 @@ public class ContactEntityMapper {
         .build();
   }
 
-  public List<Contact> toDomain(List<ContactEntity> contactEntities) {
-    if(contactEntities == null || contactEntities.isEmpty()) {
-      return Collections.emptyList();
-    }
-    List<Contact> contacts = new ArrayList<>(contactEntities.size());
-    for (ContactEntity contactEntity : contactEntities) {
-      contacts.add(toDomain(contactEntity));
-    }
-    return contacts;
-  }
 }

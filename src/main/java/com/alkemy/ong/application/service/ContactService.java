@@ -8,7 +8,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class ContactService implements ICreateContactUseCase , IListContactUseCase {
+public class ContactService implements ICreateContactUseCase, IListContactUseCase {
 
   private final IContactRepository contactRepository;
 
