@@ -11,7 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-
 public class ContactResponse {
 
   private String name;
