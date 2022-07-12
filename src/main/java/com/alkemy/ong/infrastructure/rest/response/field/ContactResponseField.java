@@ -4,5 +4,7 @@ public enum ContactResponseField {
 
   NAME,
   PHONE_NUMBER,
-  EMAIL
+  EMAIL,
+  MESSAGE
+
 }

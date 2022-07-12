@@ -34,12 +34,11 @@ public class ContactMapper {
       return null;
     }
 
-    return ContactResponse.builder()
-        .name(contact.getName())
-        .phone(contact.getPhone())
-        .email(contact.getEmail())
-        .message(contact.getMessage())
-        .build();
+    return toResponse(contact,
+        ContactResponseField.NAME,
+        ContactResponseField.PHONE_NUMBER,
+        ContactResponseField.EMAIL,
+        ContactResponseField.MESSAGE);
   }
 
   public ListContactResponse toResponse(List<Contact> contacts) {
@@ -70,6 +69,9 @@ public class ContactMapper {
           break;
         case EMAIL:
           contactResponse.setEmail(contact.getEmail());
+          break;
+        case MESSAGE:
+          contactResponse.setMessage(contact.getMessage());
           break;
         default:
           throw new UnsupportedOperationException(
