@@ -4,6 +4,6 @@ public enum SlideResponseField {
 
   IMAGE_URL,
   TEXT,
-  ORDER;
+  ORDER
 
 }

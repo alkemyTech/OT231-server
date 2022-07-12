@@ -7,7 +7,6 @@ import com.alkemy.ong.infrastructure.rest.response.ListContactResponse;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -44,8 +43,19 @@ public class ContactMapper {
     }
     List<ContactResponse> contactsResponses = new ArrayList<>(contacts.size());
     for(Contact contact : contacts) {
-      contactsResponses.add(toResponse(contact));
+      contactsResponses.add(toResponseNoMessage(contact));
     }
     return new ListContactResponse(contactsResponses);
+  }
+
+  public ContactResponse toResponseNoMessage(Contact contact) {
+    if (contact == null) {
+      return null;
+    }
+    return ContactResponse.builder()
+        .name(contact.getName())
+        .phone(contact.getPhone())
+        .email(contact.getEmail())
+        .build();
   }
 }

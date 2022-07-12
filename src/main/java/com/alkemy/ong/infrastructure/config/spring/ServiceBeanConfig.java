@@ -28,7 +28,6 @@ import com.alkemy.ong.application.service.usecase.IDeleteTestimonialUseCase;
 import com.alkemy.ong.application.service.usecase.IGetCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IGetOrganizationUseCase;
 import com.alkemy.ong.application.service.usecase.IListCategoryUseCase;
-import com.alkemy.ong.application.service.usecase.IListContactUseCase;
 import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateOrganizationUseCase;
@@ -42,10 +41,8 @@ import com.alkemy.ong.infrastructure.database.repository.NewsRepository;
 import com.alkemy.ong.infrastructure.database.repository.OrganizationRepository;
 import com.alkemy.ong.infrastructure.database.repository.SlideRepository;
 import com.alkemy.ong.infrastructure.database.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 
 @Configuration
@@ -139,9 +136,4 @@ public class ServiceBeanConfig {
   public ICreateActivityUseCase createActivityUseCase(ActivityRepository activityRepository) {
     return new ActivityService(activityRepository);
   }
-
-/*  @Bean
-  public IListContactUseCase listContactUseCase(ContactRepository contactRepository) {
-    return new ContactService(contactRepository);
-  }*/
 }
