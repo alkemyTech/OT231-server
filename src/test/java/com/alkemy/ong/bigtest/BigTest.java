@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import com.alkemy.ong.OngApplication;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
+import com.alkemy.ong.infrastructure.database.entity.ContactEntity;
 import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
 import com.alkemy.ong.infrastructure.database.entity.OrganizationEntity;
@@ -12,6 +13,7 @@ import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICommentSpringRepository;
+import com.alkemy.ong.infrastructure.database.repository.spring.IContactSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IMemberSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.INewsSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IOrganizationSpringRepository;
@@ -21,6 +23,7 @@ import com.alkemy.ong.infrastructure.rest.request.AuthenticationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import java.nio.charset.StandardCharsets;
+import java.sql.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;
@@ -76,6 +79,9 @@ public abstract class BigTest {
 
   @Autowired
   protected ICommentSpringRepository commentRepository;
+
+  @Autowired
+  protected IContactSpringRepository contactRepository;
 
   @Before
   public void setup() {
@@ -215,4 +221,16 @@ public abstract class BigTest {
 
     return organizationEntity.getId();
   }
+
+  protected void saveContact() {
+    ContactEntity contactEntity = contactRepository.save(
+        ContactEntity.builder()
+            .deletedAt(null)
+            .email("semper@ong.com")
+            .message("esto es un mensaje")
+            .name("Semper Evincere")
+            .phone("+540303456")
+            .build());
+  }
+
 }
