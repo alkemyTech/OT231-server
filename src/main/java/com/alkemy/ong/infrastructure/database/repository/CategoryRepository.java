@@ -56,4 +56,16 @@ public class CategoryRepository implements ICategoryRepository {
     return Optional.of(categoryEntityMapper.toDomain(categoryEntityOptional.get()));
   }
 
+  @Override
+  public Category findBy(Long id) {
+    return categoryEntityMapper.toDomain(categorySpringRepository.findByIdAndSoftDeleteFalse(id));
+  }
+
+  @Override
+  public Category update(Category category) {
+    CategoryEntity categoryUpdate = categoryEntityMapper.toEntity(category);
+    categoryUpdate.setSoftDelete(false);
+    return categoryEntityMapper.toDomain(categorySpringRepository.save(categoryUpdate));
+  }
+
 }

@@ -6,6 +6,7 @@ import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IGetCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IListCategoryUseCase;
+import com.alkemy.ong.application.service.usecase.IUpdateCategoryUseCase;
 import com.alkemy.ong.domain.Category;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @AllArgsConstructor
 public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryUseCase,
-    IListCategoryUseCase, IGetCategoryUseCase {
+    IListCategoryUseCase, IGetCategoryUseCase, IUpdateCategoryUseCase {
 
   private final ICategoryRepository categoryRepository;
 
@@ -46,4 +47,19 @@ public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryU
     return optionalCategory.get();
   }
 
+  @Override
+  public Category update(Category updateCategory) {
+    Category categorySaved = categoryRepository.findBy(updateCategory.getId());
+    if (categorySaved == null) {
+      throw new RecordNotFoundException("Category not found.");
+    }
+    updateCategoryValues(updateCategory, categorySaved);
+    return categoryRepository.update(categorySaved);
+  }
+
+  private void updateCategoryValues(Category updatedCategory, Category categorySave) {
+    categorySave.setName(updatedCategory.getName());
+    categorySave.setImage(updatedCategory.getImage());
+    categorySave.setDescription(updatedCategory.getDescription());
+  }
 }

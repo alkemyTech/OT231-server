@@ -31,6 +31,7 @@ import com.alkemy.ong.application.service.usecase.IListCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateActivityUseCase;
+import com.alkemy.ong.application.service.usecase.IUpdateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateOrganizationUseCase;
 import com.alkemy.ong.application.util.ISendEmail;
 import com.alkemy.ong.infrastructure.database.repository.ActivityRepository;
@@ -72,6 +73,12 @@ public class ServiceBeanConfig {
   public IUpdateOrganizationUseCase updateOrganizationUseCase(
       OrganizationRepository organizationRepository, SlideRepository slideRepository) {
     return new OrganizationService(organizationRepository, slideRepository);
+  }
+
+  @Bean
+  public IUpdateCategoryUseCase updateCategoryUseCase(
+          CategoryRepository categoryRepository) {
+    return new CategoryService(categoryRepository);
   }
 
   @Bean

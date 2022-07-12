@@ -18,4 +18,8 @@ public interface ICategoryRepository {
 
   Optional<Category> findById(Long id);
 
+  Category findBy(Long id);
+
+  Category update(Category category);
+
 }
