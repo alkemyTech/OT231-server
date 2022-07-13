@@ -75,8 +75,9 @@ public class ServiceBeanConfig {
   }
 
   @Bean
-  public ICreateContactUseCase createContactUseCase(ContactRepository contactRepository) {
-    return new ContactService(contactRepository);
+  public ICreateContactUseCase createContactUseCase(ContactRepository contactRepository,
+      ISendEmail sendEmail) {
+    return new ContactService(contactRepository, sendEmail);
   }
 
   @Bean
