@@ -118,7 +118,7 @@ public abstract class BigTest {
   }
 
   private void createNewsCategory() {
-    if (categoryRepository.findByName("news") == null) {
+    if (categoryRepository.findByNameIgnoreCase("news") == null) {
       categoryRepository.save(buildCategory("news"));
     }
   }
