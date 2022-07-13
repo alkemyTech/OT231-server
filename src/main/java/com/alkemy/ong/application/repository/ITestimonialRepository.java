@@ -1,5 +1,6 @@
 package com.alkemy.ong.application.repository;
 
+import com.alkemy.ong.domain.Testimonial;
 
 public interface ITestimonialRepository {
 
@@ -8,4 +9,6 @@ public interface ITestimonialRepository {
   boolean isDeleted(Long id);
 
   void delete(Long id);
+
+  Testimonial add(Testimonial newTestimonial);
 }
