@@ -5,6 +5,7 @@ spring:
     name: ${DATABASE_NAME:somosmas}
     username: ${DATABASE_USER:root}
     password: ${DATABASE_PASSWORD:root}
+    driver-class-name: ${DATABASE_CLASS:com.mysql.jdbc.Driver}
   jpa:
     database-platform: ${DATABASE_PLATFORM:org.hibernate.dialect.MySQL5InnoDBDialect}
     show-sql: false
