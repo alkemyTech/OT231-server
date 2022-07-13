@@ -34,6 +34,7 @@ public class TestimonialRepository implements ITestimonialRepository {
   }
 
   @Override
+  @Transactional
   public Testimonial add(Testimonial newTestimonial) {
     TestimonialEntity testimonialEntity = testimonialsEntityMapper.toEntity(newTestimonial);
     return testimonialsEntityMapper.toDomain(testimonialSpringRepository.save(testimonialEntity));
