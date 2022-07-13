@@ -1,9 +1,11 @@
 package com.alkemy.ong.infrastructure.rest.resource;
 
 import com.alkemy.ong.application.service.usecase.IDeleteSlideUseCase;
+import com.alkemy.ong.application.service.usecase.IGetSlideUseCase;
 import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
 import com.alkemy.ong.infrastructure.rest.mapper.SlideMapper;
 import com.alkemy.ong.infrastructure.rest.response.ListSlideResponse;
+import com.alkemy.ong.infrastructure.rest.response.SlideResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,9 @@ public class SlideResource {
 
   @Autowired
   private IDeleteSlideUseCase deleteSlideUseCase;
+  
+  @Autowired
+  private IGetSlideUseCase getSlideUseCase;
 
   @GetMapping(value = "/slides", produces = {"application/json"})
   public ResponseEntity<ListSlideResponse> list() {
@@ -34,6 +39,12 @@ public class SlideResource {
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     deleteSlideUseCase.delete(id);
     return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+  }
+  
+  @GetMapping(value = "/slides/{id}", produces = {"application/json"})
+  public ResponseEntity<SlideResponse> getBy(@PathVariable("id") Long id) {
+    SlideResponse response = slideMapper.toResponse(getSlideUseCase.findBy(id));
+    return ResponseEntity.ok(response);
   }
 
 }
