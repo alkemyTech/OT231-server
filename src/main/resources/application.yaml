@@ -1,24 +1,24 @@
 # Database
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/ong
-    name: somosmas
-    username: root
-    password: root
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/ong}
+    name: ${DATABASE_NAME:somosmas}
+    username: ${DATABASE_USER:root}
+    password: ${DATABASE_PASSWORD:root}
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: ${DATABASE_PLATFORM:org.hibernate.dialect.MySQL5InnoDBDialect}
     show-sql: false
     defer-datasource-initialization: false
     hibernate.ddl-auto: update
 
 # Sendgrid
 sendgrid:
-  sender: foo
-  key: foo
+  sender: ${SENDGRID_SENDER:foo@foo.com}
+  key:  ${SENDGRID_KEY:foo}
 
 # AWS
 aws:
-  bucket-name: cohorte-junio-a192d78b
-  public-key: foo
-  secret-key: foo
-  region: us-east-1
+  bucket-name: ${AWS_BUCKET:cohorte-junio-a192d78b}
+  public-key: ${AWS_PUBLIC_KEY:foo}
+  secret-key: ${AWS_SECRET_KEY:foo}
+  region: ${AWS_REGION:us-east-1}
