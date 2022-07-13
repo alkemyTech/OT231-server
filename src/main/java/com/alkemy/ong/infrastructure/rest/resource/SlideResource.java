@@ -6,6 +6,7 @@ import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
 import com.alkemy.ong.infrastructure.rest.mapper.SlideMapper;
 import com.alkemy.ong.infrastructure.rest.response.ListSlideResponse;
 import com.alkemy.ong.infrastructure.rest.response.SlideResponse;
+import com.alkemy.ong.infrastructure.rest.response.field.SlideResponseField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,11 @@ public class SlideResource {
   
   @GetMapping(value = "/slides/{id}", produces = {"application/json"})
   public ResponseEntity<SlideResponse> getBy(@PathVariable("id") Long id) {
-    SlideResponse response = slideMapper.toResponse(getSlideUseCase.findBy(id));
+    SlideResponseField[] slideResponseFields =
+        {SlideResponseField.IMAGE_URL, SlideResponseField.ORDER, SlideResponseField.TEXT};
+
+    SlideResponse response =
+        slideMapper.toResponse(getSlideUseCase.findBy(id), slideResponseFields);
     return ResponseEntity.ok(response);
   }
 
