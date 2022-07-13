@@ -22,7 +22,7 @@ public class ConfirmationEmailTemplate implements IContactInfo, IEmail {
 
   @Override
   public String getSubject() {
-    return null;
+    return "esto es un asunto de confirmacion";
   }
 
   @Override

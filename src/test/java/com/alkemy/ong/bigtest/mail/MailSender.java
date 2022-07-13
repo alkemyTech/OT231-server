@@ -12,13 +12,13 @@ import java.io.IOException;
 public class MailSender {
 
   public static void main(String[] args) throws IOException {
-    Email from = new Email("semper78@hotmail.com");
+    Email from = new Email("");
     String subject = "Sending with SendGrid is Fun";
-    Email to = new Email("spereyra.jus@gmail.com");
+    Email to = new Email("");
     Content content = new Content("text/plain", "and easy to do anywhere, even with Java");
     Mail mail = new Mail(from, subject, to, content);
 
-    SendGrid sg = new SendGrid("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");
+    SendGrid sg = new SendGrid("SG.G3DU");
     Request request = new Request();
     try {
       request.setMethod(Method.POST);
