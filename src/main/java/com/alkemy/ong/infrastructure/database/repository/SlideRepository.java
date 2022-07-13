@@ -5,7 +5,6 @@ import com.alkemy.ong.domain.Slide;
 import com.alkemy.ong.infrastructure.database.mapper.SlideEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.ISlideSpringRepository;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +30,7 @@ public class SlideRepository implements ISlideRepository {
     slideSpringRepository.deleteById(id);
   }
 
+  @Override
   public Slide findBy(Long id) {
     return slideEntityMapper.toDomain(slideSpringRepository.findById(id));
   }
