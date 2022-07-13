@@ -2,7 +2,9 @@ package com.alkemy.ong.infrastructure.database.mapper;
 
 import com.alkemy.ong.domain.Testimonial;
 import com.alkemy.ong.infrastructure.database.entity.TestimonialEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TestimonialsEntityMapper {
 
   public Testimonial toDomain(TestimonialEntity testimonialEntity) {
