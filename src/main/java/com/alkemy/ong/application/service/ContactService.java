@@ -7,6 +7,7 @@ import com.alkemy.ong.application.util.ISendEmail;
 import com.alkemy.ong.application.util.template.ConfirmationEmailTemplate;
 import com.alkemy.ong.domain.Contact;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,6 +37,11 @@ public class ContactService implements ICreateContactUseCase, IListContactUseCas
 
   @Override
   public List<Contact> findAll() {
-    return contactRepository.findAllActive();
+    List<Contact> contacts = contactRepository.findAllActive();
+    return contacts.stream()
+        .distinct()
+        .collect(Collectors.toList());
   }
+
 }
+
