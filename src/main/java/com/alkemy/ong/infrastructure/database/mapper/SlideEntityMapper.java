@@ -5,6 +5,7 @@ import com.alkemy.ong.infrastructure.database.entity.SlideEntity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,6 +26,17 @@ public class SlideEntityMapper {
     }
 
     return slides;
+  }
+
+  public Slide toDomain(Optional<SlideEntity> slideEntity) {
+    if (slideEntity.isEmpty()) {
+      return null;
+    }
+    return Slide.builder()
+        .imageUrl(slideEntity.get().getImageUrl())
+        .order(slideEntity.get().getOrder())
+        .text(slideEntity.get().getText())
+        .build();
   }
 
 }

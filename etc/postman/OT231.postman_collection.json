@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0b7fad93-b6ca-46f4-b012-68f5fa8c328c",
+		"_postman_id": "c5f97192-891a-4d1e-a7f7-9ac60d064145",
 		"name": "OT231",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21315535"
@@ -423,6 +423,17 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Find Category by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -618,6 +629,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "List Contacts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/contacts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -650,6 +688,58 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Slide By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/slides/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"slides",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Slide Successful Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/slides/1",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"slides",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"imageUrl\": \"https://s3.com/slide1.jpg\",\n    \"text\": \"This is slide number 1\",\n    \"order\": 1\n}"
+						}
+					]
 				}
 			]
 		},
@@ -687,6 +777,86 @@
 							],
 							"path": [
 								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/comments/22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comments",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Activities",
+			"item": [
+				{
+					"name": "Create Activity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJzdWIiOiJmcmVkZHlAa3J1ZWdlci5jb20iLCJpYXQiOjE2NTczODYyNzQsImV4cCI6MTY1NzM4ODA3NH0.k_Wy0zy43SmXAvZWCDnZoZdA2or6VznknljK9iY1JyI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"nombreActivity\",\r\n    \"content\":\"This is a content of activity.\",\r\n    \"image\":\"http://www.s3.com/activityII.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/activities",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"activities"
 							]
 						}
 					},
@@ -818,111 +988,6 @@
 					""
 				]
 			}
-		},
-        {
-			"name": "List Slides",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/slides",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"slides"
-					]
-				}
-			},
-			"response": []
-		}, {
-			"name": "Create Comment",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"body\": \"muy bueno todo 1234\",\r\n    \"createBy\": \r\n        {\r\n            \"firstName\":\"Michael\",\r\n            \"lastName\": \"Myers\"\r\n        },\r\n    \"associatedNews\":\"Pelota\"\r\n    \r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/comments",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"comments"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Comment",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/comments/22",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"comments",
-						"22"
-					]
-				}
-			},
-			"response": []
 		},
 		{
 			"listen": "test",

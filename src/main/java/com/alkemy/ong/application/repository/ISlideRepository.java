@@ -10,4 +10,6 @@ public interface ISlideRepository {
   boolean existsById(Long id);
 
   void delete(Long id);
+
+  Slide findBy(Long id);
 }
