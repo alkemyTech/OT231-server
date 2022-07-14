@@ -17,16 +17,16 @@ import lombok.Setter;
 public class UpdateActivityRequest {
 
   @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$",
-          message = "Name can only contain letters and whitespaces")
+      message = "Name can only contain letters and whitespaces")
   @Size(max = 50, message = "Name must have a maximum of 50 characters")
   private String name;
 
   @Pattern(regexp = "^\\p{L}+[\\p{L}\\s]*$",
-          message = "Content can only contain letters and whitespaces")
+      message = "Content can only contain letters and whitespaces")
   private String content;
 
   @Pattern(regexp = "^[\\p{L}\\d.?:/-]*$",
-          message = "Image can only contain alphanumerical with no whitespaces.")
+      message = "Image can only contain alphanumerical with no whitespaces.")
   private String image;
 
 }

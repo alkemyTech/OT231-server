@@ -13,10 +13,10 @@ public class TestimonialMapper {
       return null;
     }
     return Testimonial.builder()
-          .name(testimonialRequest.getName())
-          .content(testimonialRequest.getContent())
-          .image(testimonialRequest.getImage())
-          .build();
+        .name(testimonialRequest.getName())
+        .content(testimonialRequest.getContent())
+        .image(testimonialRequest.getImage())
+        .build();
   }
 
   public TestimonialResponse toResponse(Testimonial testimonial) {
@@ -25,9 +25,9 @@ public class TestimonialMapper {
     }
 
     return TestimonialResponse.builder()
-          .name(testimonial.getName())
-          .content(testimonial.getContent())
-          .image(testimonial.getImage())
-          .build();
+        .name(testimonial.getName())
+        .content(testimonial.getContent())
+        .image(testimonial.getImage())
+        .build();
   }
 }

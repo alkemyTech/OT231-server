@@ -15,7 +15,7 @@ spring:
 # Sendgrid
 sendgrid:
   sender: ${SENDGRID_SENDER:foo@foo.com}
-  key:  ${SENDGRID_KEY:foo}
+  key: ${SENDGRID_KEY:foo}
 
 # AWS
 aws:

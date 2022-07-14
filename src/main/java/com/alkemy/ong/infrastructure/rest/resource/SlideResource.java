@@ -26,7 +26,7 @@ public class SlideResource {
 
   @Autowired
   private IDeleteSlideUseCase deleteSlideUseCase;
-  
+
   @Autowired
   private IGetSlideUseCase getSlideUseCase;
 
@@ -41,7 +41,7 @@ public class SlideResource {
     deleteSlideUseCase.delete(id);
     return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
   }
-  
+
   @GetMapping(value = "/slides/{id}", produces = {"application/json"})
   public ResponseEntity<SlideResponse> getBy(@PathVariable("id") Long id) {
     SlideResponseField[] slideResponseFields =

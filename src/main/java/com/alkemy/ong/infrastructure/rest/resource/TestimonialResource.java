@@ -35,13 +35,13 @@ public class TestimonialResource {
   }
 
   @PostMapping(value = "/testimonials",
-          produces = {"application/json"},
-          consumes = {"application/json"})
+      produces = {"application/json"},
+      consumes = {"application/json"})
   public ResponseEntity<TestimonialResponse> create(
-          @Valid @RequestBody TestimonialRequest testimonialRequest) {
+      @Valid @RequestBody TestimonialRequest testimonialRequest) {
     Testimonial testimonial = testimonialMapper.toDomain(testimonialRequest);
     TestimonialResponse response = testimonialMapper
-            .toResponse(createTestimonialUseCase.add(testimonial));
+        .toResponse(createTestimonialUseCase.add(testimonial));
     return new ResponseEntity<TestimonialResponse>(response, HttpStatus.CREATED);
   }
 }

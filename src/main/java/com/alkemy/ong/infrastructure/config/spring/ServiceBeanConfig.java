@@ -65,7 +65,7 @@ public class ServiceBeanConfig {
 
   @Bean
   public ICreateTestimonialUseCase createTestimonialUseCase(
-          TestimonialRepository testimonialRepository) {
+      TestimonialRepository testimonialRepository) {
     return new TestimonialService(testimonialRepository);
   }
 

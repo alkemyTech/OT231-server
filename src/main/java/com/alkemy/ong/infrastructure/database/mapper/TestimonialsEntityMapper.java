@@ -12,10 +12,10 @@ public class TestimonialsEntityMapper {
       return null;
     }
     return Testimonial.builder()
-            .name(testimonialEntity.getName())
-            .content(testimonialEntity.getContent())
-            .image(testimonialEntity.getImage())
-            .build();
+        .name(testimonialEntity.getName())
+        .content(testimonialEntity.getContent())
+        .image(testimonialEntity.getImage())
+        .build();
   }
 
   public TestimonialEntity toEntity(Testimonial testimonial) {
@@ -23,9 +23,9 @@ public class TestimonialsEntityMapper {
       return null;
     }
     return TestimonialEntity.builder()
-          .name(testimonial.getName())
-          .content(testimonial.getContent())
-          .image(testimonial.getImage())
-          .build();
+        .name(testimonial.getName())
+        .content(testimonial.getContent())
+        .image(testimonial.getImage())
+        .build();
   }
 }
