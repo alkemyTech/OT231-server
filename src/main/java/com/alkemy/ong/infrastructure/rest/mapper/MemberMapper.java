@@ -34,6 +34,17 @@ public class MemberMapper {
         .build();
   }
 
+  private SocialMediaResponse getSocialMedia(SocialMedia socialMedia) {
+    if (socialMedia == null) {
+      return null;
+    }
+    return SocialMediaResponse.builder()
+        .facebookUrl(socialMedia.getFacebookUrl())
+        .instagramUrl(socialMedia.getInstagramUrl())
+        .linkedInUrl(socialMedia.getLinkedIndUrl())
+        .build();
+  }
+
   public MemberResponse toResponse(Member member) {
     if (member == null) {
       return null;
@@ -43,17 +54,6 @@ public class MemberMapper {
         .image(member.getImage())
         .socialMedia(getSocialMedia(member.getSocialMedia()))
         .description(member.getDescription())
-        .build();
-  }
-
-  private SocialMediaResponse getSocialMedia(SocialMedia socialMedia) {
-    if (socialMedia == null) {
-      return null;
-    }
-    return SocialMediaResponse.builder()
-        .facebookUrl(socialMedia.getFacebookUrl())
-        .instagramUrl(socialMedia.getInstagramUrl())
-        .linkedInUrl(socialMedia.getLinkedIndUrl())
         .build();
   }
 
