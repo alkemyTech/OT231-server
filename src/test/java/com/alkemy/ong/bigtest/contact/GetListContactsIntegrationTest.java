@@ -52,7 +52,6 @@ public class GetListContactsIntegrationTest extends BigTest {
         .andExpect(jsonPath("$.contacts[1].email", equalTo("foo@gmail.com")))
         .andExpect(jsonPath("$.contacts", hasSize(2)))
         .andExpect(status().isOk());
-    contactRepository.deleteAll();
   }
 
   @Test
@@ -65,7 +64,7 @@ public class GetListContactsIntegrationTest extends BigTest {
   }
 
   @Test
-  public void shouldReturnEmptyContactListAndStatus200WhenContacsIsNotActive() throws Exception {
+  public void shouldReturnEmptyContactListAndStatus200WhenContactsIsNotActive() throws Exception {
     saveContact(new Date(2020,10,12),
         "semper@gmail.com",
         "message for contact",
@@ -76,6 +75,5 @@ public class GetListContactsIntegrationTest extends BigTest {
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser()))
         .andExpect(jsonPath("$.contacts").isEmpty())
         .andExpect(status().isOk());
-    contactRepository.deleteAll();
   }
 }
