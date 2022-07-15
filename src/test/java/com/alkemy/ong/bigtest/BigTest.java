@@ -235,7 +235,7 @@ public abstract class BigTest {
         .build());
   }
 
-  protected void saveContact(Date date,
+  protected ContactEntity saveContact(Date date,
       String email,
       String message,
       String name,
@@ -248,5 +248,6 @@ public abstract class BigTest {
             .name(name)
             .phone(phone)
             .build());
+    return contactEntity;
   }
 }
