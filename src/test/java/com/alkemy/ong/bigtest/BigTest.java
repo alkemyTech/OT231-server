@@ -241,7 +241,7 @@ public abstract class BigTest {
       String message,
       String name,
       String phone) {
-    ContactEntity contactEntity = contactRepository.save(
+    return contactRepository.save(
         ContactEntity.builder()
             .deletedAt(date)
             .email(email)
@@ -249,6 +249,5 @@ public abstract class BigTest {
             .name(name)
             .phone(phone)
             .build());
-    return contactEntity;
   }
 }
