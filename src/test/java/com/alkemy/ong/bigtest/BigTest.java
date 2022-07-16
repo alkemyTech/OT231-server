@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import com.alkemy.ong.OngApplication;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
+import com.alkemy.ong.infrastructure.database.entity.ActivityEntity;
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
 import com.alkemy.ong.infrastructure.database.entity.ContactEntity;
 import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
@@ -12,6 +13,7 @@ import com.alkemy.ong.infrastructure.database.entity.OrganizationEntity;
 import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
 import com.alkemy.ong.infrastructure.database.entity.SlideEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
+import com.alkemy.ong.infrastructure.database.repository.spring.IActivitySpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICommentSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IContactSpringRepository;
@@ -62,6 +64,9 @@ public abstract class BigTest {
   protected ObjectMapper objectMapper;
 
   @Autowired
+  protected IActivitySpringRepository activityRepository;
+
+  @Autowired
   protected IUserSpringRepository userRepository;
 
   @Autowired
@@ -110,6 +115,7 @@ public abstract class BigTest {
     memberRepository.deleteAll();
     organizationRepository.deleteAll();
     contactRepository.deleteAll();
+    createActivity();
   }
 
   private void createUserData() {
@@ -118,6 +124,12 @@ public abstract class BigTest {
     }
     if (userRepository.findByEmail(USER_EMAIL) == null) {
       saveStandardUser();
+    }
+  }
+
+  private void createActivity(){
+    if(activityRepository.findByName("Activity") == null){
+      activityRepository.save(buildActivity("Activity", "Content", "image.png"));
     }
   }
 
@@ -181,6 +193,14 @@ public abstract class BigTest {
   private CategoryEntity buildCategory(String name) {
     return CategoryEntity.builder()
         .name(name)
+        .build();
+  }
+
+  private ActivityEntity buildActivity(String name, String content, String image){
+    return ActivityEntity.builder()
+        .name(name)
+        .content(content)
+        .image(image)
         .build();
   }
 
@@ -249,5 +269,16 @@ public abstract class BigTest {
             .name(name)
             .phone(phone)
             .build());
+  }
+
+  protected ActivityEntity saveActivity() {
+
+    return activityRepository.save(ActivityEntity.builder()
+        .name("ActyvitiS")
+        .content("Contenido")
+        .image("image.wav")
+        .softDelete(false)
+        .build());
+
   }
 }
