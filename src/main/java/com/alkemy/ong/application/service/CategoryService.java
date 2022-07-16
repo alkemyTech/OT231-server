@@ -39,27 +39,26 @@ public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryU
 
   @Override
   public Category findById(@PathVariable Long id) {
-    Optional<Category> optionalCategory = categoryRepository.findById(id);
-    if (optionalCategory.isEmpty()
-        || Boolean.TRUE.equals(optionalCategory.get().getSoftDelete())) {
+    Category category = categoryRepository.findBy(id);
+    if (category == null || Boolean.TRUE.equals(category.getSoftDelete())) {
       throw new RecordNotFoundException("Category not found.");
     }
-    return optionalCategory.get();
+    return category;
   }
 
   @Override
   public Category update(Category updateCategory) {
-    Category categorySaved = categoryRepository.findBy(updateCategory.getId());
-    if (categorySaved == null) {
+    Category categorySave = categoryRepository.findBy(updateCategory.getId());
+    if (categorySave == null) {
       throw new RecordNotFoundException("Category not found.");
     }
-    updateCategoryValues(updateCategory, categorySaved);
-    return categoryRepository.update(categorySaved);
+    updateCategoryValues(updateCategory, categorySave);
+    return categoryRepository.update(categorySave);
   }
 
-  private void updateCategoryValues(Category updatedCategory, Category categorySave) {
-    categorySave.setName(updatedCategory.getName());
-    categorySave.setImage(updatedCategory.getImage());
-    categorySave.setDescription(updatedCategory.getDescription());
+  private void updateCategoryValues(Category updateCategory, Category categorySave) {
+    categorySave.setName(updateCategory.getName());
+    categorySave.setImage(updateCategory.getImage());
+    categorySave.setDescription(updateCategory.getDescription());
   }
 }

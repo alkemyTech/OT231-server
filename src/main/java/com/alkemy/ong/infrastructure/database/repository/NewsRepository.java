@@ -48,7 +48,7 @@ public class NewsRepository implements INewsRepository {
   }
 
   private CategoryEntity getNewsCategoryEntity() {
-    return categorySpringRepository.findByName("news");
+    return categorySpringRepository.findByNameIgnoreCase("news");
   }
 
 }

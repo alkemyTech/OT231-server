@@ -19,7 +19,7 @@ public interface ICategorySpringRepository extends JpaRepository<CategoryEntity,
   @Query("UPDATE CategoryEntity c SET c.softDelete = true WHERE c.id = :id")
   void softDeleteById(@Param("id") Long id);
 
-  CategoryEntity findByName(String name);
+  CategoryEntity findByNameIgnoreCase(String name);
 
   List<CategoryEntity> findBySoftDeleteFalse();
 

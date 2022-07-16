@@ -30,4 +30,9 @@ public class SlideRepository implements ISlideRepository {
     slideSpringRepository.deleteById(id);
   }
 
+  @Override
+  public Slide findBy(Long id) {
+    return slideEntityMapper.toDomain(slideSpringRepository.findById(id));
+  }
+
 }

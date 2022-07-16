@@ -9,6 +9,7 @@ import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
 import com.alkemy.ong.infrastructure.database.entity.OrganizationEntity;
 import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
+import com.alkemy.ong.infrastructure.database.entity.SlideEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICommentSpringRepository;
@@ -16,6 +17,7 @@ import com.alkemy.ong.infrastructure.database.repository.spring.IMemberSpringRep
 import com.alkemy.ong.infrastructure.database.repository.spring.INewsSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IOrganizationSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IRoleSpringRepository;
+import com.alkemy.ong.infrastructure.database.repository.spring.ISlideSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IUserSpringRepository;
 import com.alkemy.ong.infrastructure.rest.request.AuthenticationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -77,6 +79,9 @@ public abstract class BigTest {
   @Autowired
   protected ICommentSpringRepository commentRepository;
 
+  @Autowired
+  protected ISlideSpringRepository slideRepository;
+
   @Before
   public void setup() {
     createRoles();
@@ -118,7 +123,7 @@ public abstract class BigTest {
   }
 
   private void createNewsCategory() {
-    if (categoryRepository.findByName("news") == null) {
+    if (categoryRepository.findByNameIgnoreCase("news") == null) {
       categoryRepository.save(buildCategory("news"));
     }
   }
@@ -214,5 +219,13 @@ public abstract class BigTest {
         .build());
 
     return organizationEntity.getId();
+  }
+
+  protected SlideEntity saveSlide() {
+    return slideRepository.save(SlideEntity.builder()
+        .imageUrl("https://s3.com/slide.jpg")
+        .text("This is a slide")
+        .order(1)
+        .build());
   }
 }
