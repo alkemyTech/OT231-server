@@ -9,4 +9,5 @@ public interface IActivitySpringRepository extends JpaRepository<ActivityEntity,
 
   ActivityEntity findByIdAndSoftDeleteFalse(Long id);
 
+  ActivityEntity findByName(String name);
 }
