@@ -254,6 +254,7 @@ public abstract class BigTest {
         .name("ActyvitiS")
         .content("Contenido")
         .image("image.wav")
+        .softDelete(false)
         .build());
 
   }

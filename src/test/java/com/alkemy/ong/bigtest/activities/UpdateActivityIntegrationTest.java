@@ -1,4 +1,4 @@
-package com.alkemy.ong.bigtest.activity;
+package com.alkemy.ong.bigtest.activities;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 
 public class UpdateActivityIntegrationTest extends BigTest{
 
-  private static final String NAME= "Small Activity";
+  private static final String NAME= "ActyvitiS";
 
   private static final String INVALID_NAME= "Big Activity and Example of error with more characters";
 
@@ -33,9 +33,9 @@ public class UpdateActivityIntegrationTest extends BigTest{
 
   @Test
   public void shouldUpdateActivityWhenRequestUserHasAdminRole() throws Exception {
-    ActivityEntity activityId = saveActivity();
+    Long activityId = saveActivity().getId();
 
-    mockMvc.perform(put("/activities/{id}", String.valueOf(activityId.getId()))
+    mockMvc.perform(put("/activities/" + activityId)
             .content(createRequest())
             .contentType(MediaType.APPLICATION_JSON)
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser()))
@@ -44,7 +44,7 @@ public class UpdateActivityIntegrationTest extends BigTest{
         .andExpect(jsonPath("$.image", equalTo(IMAGE)))
         .andExpect(status().isOk());
 
-    assertActivityHasBeenUpdated(activityId.getId());
+    assertActivityHasBeenUpdated(activityId);
   }
 
 

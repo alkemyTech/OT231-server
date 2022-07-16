@@ -1,4 +1,4 @@
-package com.alkemy.ong.bigtest.activity;
+package com.alkemy.ong.bigtest.activities;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -11,7 +11,6 @@ import com.alkemy.ong.bigtest.BigTest;
 import com.alkemy.ong.infrastructure.database.entity.ActivityEntity;
 import com.alkemy.ong.infrastructure.rest.response.ActivityResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jayway.jsonpath.JsonPath;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import org.junit.Test;
