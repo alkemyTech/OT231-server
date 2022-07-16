@@ -1014,6 +1014,53 @@
       "key": "URL",
       "value": "http://localhost:8080",
       "type": "string"
+    },
+    {
+      "name": "Get Categories",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{ADMIN_TOKEN}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Link",
+            "value": "page=2",
+            "type": "default"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/categories",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "categories"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "0",
+              "disabled": true
+            },
+            {
+              "key": "size",
+              "value": "10",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
