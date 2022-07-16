@@ -12,6 +12,7 @@ public class ActivityEntityMapper {
       return null;
     }
     return ActivityEntity.builder()
+        .id(activity.getId())
         .name(activity.getName())
         .content(activity.getContent())
         .image(activity.getImage())
@@ -24,6 +25,7 @@ public class ActivityEntityMapper {
       return null;
     }
     return Activity.builder()
+        .id(activityEntity.getId())
         .name(activityEntity.getName())
         .content(activityEntity.getContent())
         .image(activityEntity.getImage())

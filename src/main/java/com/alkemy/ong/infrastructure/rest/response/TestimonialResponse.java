@@ -1,6 +1,5 @@
 package com.alkemy.ong.infrastructure.rest.response;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,11 +11,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class ContactResponse {
+public class TestimonialResponse {
 
   private String name;
-  private String phone;
-  private String email;
-  private String message;
+  private String content;
+  private String image;
+
 }

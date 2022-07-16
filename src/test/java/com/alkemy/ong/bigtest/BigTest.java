@@ -5,22 +5,27 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import com.alkemy.ong.OngApplication;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
+import com.alkemy.ong.infrastructure.database.entity.ContactEntity;
 import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
 import com.alkemy.ong.infrastructure.database.entity.OrganizationEntity;
 import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
+import com.alkemy.ong.infrastructure.database.entity.SlideEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICommentSpringRepository;
+import com.alkemy.ong.infrastructure.database.repository.spring.IContactSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IMemberSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.INewsSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IOrganizationSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IRoleSpringRepository;
+import com.alkemy.ong.infrastructure.database.repository.spring.ISlideSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IUserSpringRepository;
 import com.alkemy.ong.infrastructure.rest.request.AuthenticationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import java.nio.charset.StandardCharsets;
+import java.sql.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;
@@ -77,6 +82,12 @@ public abstract class BigTest {
   @Autowired
   protected ICommentSpringRepository commentRepository;
 
+  @Autowired
+  protected ISlideSpringRepository slideRepository;
+
+  @Autowired
+  protected IContactSpringRepository contactRepository;
+
   @Before
   public void setup() {
     createRoles();
@@ -98,6 +109,7 @@ public abstract class BigTest {
     newsRepository.deleteAll();
     memberRepository.deleteAll();
     organizationRepository.deleteAll();
+    contactRepository.deleteAll();
   }
 
   private void createUserData() {
@@ -118,7 +130,7 @@ public abstract class BigTest {
   }
 
   private void createNewsCategory() {
-    if (categoryRepository.findByName("news") == null) {
+    if (categoryRepository.findByNameIgnoreCase("news") == null) {
       categoryRepository.save(buildCategory("news"));
     }
   }
@@ -214,5 +226,28 @@ public abstract class BigTest {
         .build());
 
     return organizationEntity.getId();
+  }
+
+  protected SlideEntity saveSlide() {
+    return slideRepository.save(SlideEntity.builder()
+        .imageUrl("https://s3.com/slide.jpg")
+        .text("This is a slide")
+        .order(1)
+        .build());
+  }
+
+  protected void saveContact(Date date,
+      String email,
+      String message,
+      String name,
+      String phone) {
+    ContactEntity contactEntity = contactRepository.save(
+        ContactEntity.builder()
+            .deletedAt(date)
+            .email(email)
+            .message(message)
+            .name(name)
+            .phone(phone)
+            .build());
   }
 }

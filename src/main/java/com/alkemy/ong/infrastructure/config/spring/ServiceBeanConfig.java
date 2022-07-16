@@ -19,6 +19,7 @@ import com.alkemy.ong.application.service.usecase.ICreateActivityUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateCommentUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateContactUseCase;
+import com.alkemy.ong.application.service.usecase.ICreateTestimonialUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCommentUseCase;
@@ -41,6 +42,7 @@ import com.alkemy.ong.infrastructure.database.repository.MemberRepository;
 import com.alkemy.ong.infrastructure.database.repository.NewsRepository;
 import com.alkemy.ong.infrastructure.database.repository.OrganizationRepository;
 import com.alkemy.ong.infrastructure.database.repository.SlideRepository;
+import com.alkemy.ong.infrastructure.database.repository.TestimonialRepository;
 import com.alkemy.ong.infrastructure.database.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -62,6 +64,12 @@ public class ServiceBeanConfig {
   }
 
   @Bean
+  public ICreateTestimonialUseCase createTestimonialUseCase(
+      TestimonialRepository testimonialRepository) {
+    return new TestimonialService(testimonialRepository);
+  }
+
+  @Bean
   public ICreateUserUseCase createUserUseCase(UserRepository userRepository,
       IOrganizationRepository organizationRepository,
       ISendEmail sendEmail) {
@@ -75,8 +83,9 @@ public class ServiceBeanConfig {
   }
 
   @Bean
-  public ICreateContactUseCase createContactUseCase(ContactRepository contactRepository) {
-    return new ContactService(contactRepository);
+  public ICreateContactUseCase createContactUseCase(ContactRepository contactRepository,
+      ISendEmail sendEmail) {
+    return new ContactService(contactRepository, sendEmail);
   }
 
   @Bean

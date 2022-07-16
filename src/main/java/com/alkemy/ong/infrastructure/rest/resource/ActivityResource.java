@@ -40,12 +40,12 @@ public class ActivityResource {
   }
 
   @PutMapping(value = "/activities/{id}",
-          produces = {"application/json"},
-          consumes = {"application/json"})
+      produces = {"application/json"},
+      consumes = {"application/json"})
   public ResponseEntity<ActivityResponse> update(
-          @PathVariable Long id, @Valid @RequestBody UpdateActivityRequest updateActivityRequest) {
+      @PathVariable Long id, @Valid @RequestBody UpdateActivityRequest updateActivityRequest) {
     Activity activity = updateActivityUseCase
-            .update(activityMapper.toDomain(id, updateActivityRequest));
+        .update(activityMapper.toDomain(id, updateActivityRequest));
     ActivityResponse response = activityMapper.toResponse(activity);
     return ResponseEntity.ok(response);
   }
