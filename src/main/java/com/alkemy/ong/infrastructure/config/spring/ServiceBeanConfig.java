@@ -128,7 +128,7 @@ public class ServiceBeanConfig {
   @Bean
   public IListCommentUseCase listCommentUseCase(CommentRepository commentRepository,
       UserRepository userRepository, NewsRepository newsRepository) {
-    return new CommentService(commentRepository, newsRepository , userRepository);
+    return new CommentService(commentRepository, newsRepository, userRepository);
   }
 
   @Bean

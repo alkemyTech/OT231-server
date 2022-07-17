@@ -62,7 +62,7 @@ public class CommentMapper {
         .build();
   }
 
-  public CommentResponse toResponseList(Comment comment){
+  public CommentResponse toResponseList(Comment comment) {
     if (comment == null) {
       return null;
     }
