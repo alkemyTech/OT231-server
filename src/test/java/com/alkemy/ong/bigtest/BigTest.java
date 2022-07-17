@@ -4,7 +4,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import com.alkemy.ong.OngApplication;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
-import com.alkemy.ong.infrastructure.database.entity.*;
+import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
+import com.alkemy.ong.infrastructure.database.entity.CommentEntity;
+import com.alkemy.ong.infrastructure.database.entity.ContactEntity;
+import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
+import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
+import com.alkemy.ong.infrastructure.database.entity.OrganizationEntity;
+import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
+import com.alkemy.ong.infrastructure.database.entity.SlideEntity;
+import com.alkemy.ong.infrastructure.database.entity.UserEntity;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICommentSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IContactSpringRepository;
@@ -42,7 +50,7 @@ import org.springframework.test.web.servlet.MockMvc;
 public abstract class BigTest {
 
   private static final String ADMIN_EMAIL = "jason@voorhees.com";
-  private static final String OTHER_USER_EMAIL = "jhon@connors.com";
+  private static final String OTHER_USER_EMAIL = "john@connors.com";
   private static final String USER_EMAIL = "freedy@krueger.com";
   private static final String PASSWORD = "abcd1234";
 
@@ -98,10 +106,6 @@ public abstract class BigTest {
     return userRepository.findByEmail(USER_EMAIL);
   }
 
-  protected UserEntity getRandomOtherUser() {
-    return userRepository.findByEmail(OTHER_USER_EMAIL);
-  }
-
   private void deleteAllEntities() {
     commentRepository.deleteAll();
     newsRepository.deleteAll();
@@ -147,10 +151,10 @@ public abstract class BigTest {
 
   private void saveStandardOtherUser() {
     userRepository.save(buildUser(
-            "Jhon",
-            "Connor",
-            OTHER_USER_EMAIL,
-            Role.USER));
+        "John",
+        "Connor",
+        OTHER_USER_EMAIL,
+        Role.USER));
   }
 
   private void saveAdminUser() {
@@ -255,7 +259,7 @@ public abstract class BigTest {
       String message,
       String name,
       String phone) {
-    ContactEntity contactEntity = contactRepository.save(
+    contactRepository.save(
         ContactEntity.builder()
             .deletedAt(date)
             .email(email)
@@ -267,11 +271,11 @@ public abstract class BigTest {
 
   protected Long saveComment() {
     CommentEntity commentEntity = commentRepository.save(CommentEntity.builder()
-            .body("Muy bueno")
-            .user(getRandomUser())
-            .news(saveNews())
-            .softDelete(false)
-            .build());
+        .body("Nice!")
+        .user(getRandomUser())
+        .news(saveNews())
+        .softDelete(false)
+        .build());
     return commentEntity.getId();
   }
 }

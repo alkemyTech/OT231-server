@@ -18,5 +18,4 @@ public class UpdateCommentRequest {
       + "alphanumeric and whitespaces")
   private String body;
 
-
 }

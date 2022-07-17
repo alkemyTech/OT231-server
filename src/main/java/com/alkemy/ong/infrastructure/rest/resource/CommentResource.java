@@ -62,10 +62,8 @@ public class CommentResource {
           @Valid @RequestBody UpdateCommentRequest updatecommentRequest,
           @RequestHeader("Authorization") String token) {
     Comment comment = commentMapper.toDomain(id, updatecommentRequest, token);
-    CommentResponse response = commentMapper.toResponse(
-            updateCommentUseCase.update(comment));
+    CommentResponse response = commentMapper.toResponse(updateCommentUseCase.update(comment));
     return ResponseEntity.ok().body(response);
   }
-
 
 }

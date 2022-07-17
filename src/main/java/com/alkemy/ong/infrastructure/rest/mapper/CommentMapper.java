@@ -44,7 +44,6 @@ public class CommentMapper {
             .build();
   }
 
-
   public CommentResponse toResponse(Comment comment) {
     if (comment == null) {
       return null;

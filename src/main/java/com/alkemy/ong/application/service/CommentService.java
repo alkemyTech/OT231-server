@@ -50,23 +50,24 @@ public class CommentService implements ICreateCommentUseCase,
   @Override
   public void delete(Comment commentToDelete) {
     Comment comment = findById(commentToDelete.getId());
-    User authenticatedUser = commentToDelete.getUser();
-    if (!isSameUser(comment, authenticatedUser) && isNotAdmin(authenticatedUser)) {
-      throw new OperationNotPermittedException("No permission to delete this comment.");
-    }
+    validateOperation(commentToDelete, comment, "delete");
     comment.setSoftDelete(true);
     commentRepository.save(comment);
   }
 
   @Override
-  public Comment update(Comment updComment) {
-    Comment commentSaved = findById(updComment.getId());
-    User authenticatedUser = updComment.getUser();
-    if (!isSameUser(commentSaved, authenticatedUser) && isNotAdmin(authenticatedUser)) {
-      throw new OperationNotPermittedException("No permission to update this comment.");
-    }
-    commentSaved.setBody(updComment.getBody());
+  public Comment update(Comment updateComment) {
+    Comment commentSaved = findById(updateComment.getId());
+    validateOperation(updateComment, commentSaved, "update");
+    commentSaved.setBody(updateComment.getBody());
     return commentRepository.update(commentSaved);
+  }
+
+  private void validateOperation(Comment updateComment, Comment commentSaved, String operation) {
+    User authenticatedUser = updateComment.getUser();
+    if (!isSameUser(commentSaved, authenticatedUser) && isNotAdmin(authenticatedUser)) {
+      throw new OperationNotPermittedException("No permission to " + operation +" this comment.");
+    }
   }
 
   private boolean isSameUser(Comment comment, User authenticatedUser) {
