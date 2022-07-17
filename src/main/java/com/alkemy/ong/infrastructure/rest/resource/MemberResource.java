@@ -37,8 +37,8 @@ public class MemberResource {
   @PostMapping(value = "/members",
       produces = {"application/json"},
       consumes = {"application/json"})
-  public ResponseEntity<MemberResponse> create(@Valid @RequestBody MemberRequest createRequest) {
-    Member member = memberMapper.toDomain(createRequest);
+  public ResponseEntity<MemberResponse> create(@Valid @RequestBody MemberRequest memberRequest) {
+    Member member = memberMapper.toDomain(memberRequest);
     MemberResponse response = memberMapper.toResponse(createMemberUseCase.add(member));
     return new ResponseEntity<>(response, HttpStatus.CREATED);
   }

@@ -151,4 +151,5 @@ public class ServiceBeanConfig {
   public IUpdateActivityUseCase updateActivityUseCase(ActivityRepository activityRepository) {
     return new ActivityService(activityRepository);
   }
+
 }

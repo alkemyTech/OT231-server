@@ -1,15 +1,16 @@
 package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.Member;
-import com.alkemy.ong.domain.SocialMedia;
 import com.alkemy.ong.infrastructure.rest.request.MemberRequest;
-import com.alkemy.ong.infrastructure.rest.request.SocialMediaRequest;
 import com.alkemy.ong.infrastructure.rest.response.MemberResponse;
-import com.alkemy.ong.infrastructure.rest.response.SocialMediaResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MemberMapper {
+
+  @Autowired
+  SocialMediaMapper socialMediaMapper;
 
   public Member toDomain(MemberRequest memberRequest) {
     if (memberRequest == null) {
@@ -18,30 +19,8 @@ public class MemberMapper {
     return Member.builder()
         .name(memberRequest.getName())
         .image(memberRequest.getImage())
-        .socialMedia(getSocialMedia(memberRequest.getSocialMedia()))
+        .socialMedia(socialMediaMapper.getSocialMedia(memberRequest.getSocialMedia()))
         .description(memberRequest.getDescription())
-        .build();
-  }
-
-  private SocialMedia getSocialMedia(SocialMediaRequest socialMediaRequest) {
-    if (socialMediaRequest == null) {
-      return null;
-    }
-    return SocialMedia.builder()
-        .facebookUrl(socialMediaRequest.getFacebookUrl())
-        .instagramUrl(socialMediaRequest.getInstagramUrl())
-        .linkedIndUrl(socialMediaRequest.getLinkedInUrl())
-        .build();
-  }
-
-  private SocialMediaResponse getSocialMedia(SocialMedia socialMedia) {
-    if (socialMedia == null) {
-      return null;
-    }
-    return SocialMediaResponse.builder()
-        .facebookUrl(socialMedia.getFacebookUrl())
-        .instagramUrl(socialMedia.getInstagramUrl())
-        .linkedInUrl(socialMedia.getLinkedIndUrl())
         .build();
   }
 
@@ -52,7 +31,7 @@ public class MemberMapper {
     return MemberResponse.builder()
         .name(member.getName())
         .image(member.getImage())
-        .socialMedia(getSocialMedia(member.getSocialMedia()))
+        .socialMedia(socialMediaMapper.getSocialMediaResponse(member.getSocialMedia()))
         .description(member.getDescription())
         .build();
   }
