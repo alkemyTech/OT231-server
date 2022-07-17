@@ -50,8 +50,9 @@ public class UpdateActivityIntegrationTest extends BigTest{
 
   @Test
   public void shouldReturn400WhenNameIsNotValid() throws Exception {
-    ActivityEntity activityId = saveActivity();
-    mockMvc.perform(put("/activities/{id}", String.valueOf(activityId.getId()))
+    Long activityId = saveActivity().getId();
+
+    mockMvc.perform(put("/activities/" + activityId)
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser())
             .contentType(MediaType.APPLICATION_JSON)
             .content(createRequest(INVALID_NAME, CONTENT, IMAGE)))
