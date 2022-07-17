@@ -5,9 +5,10 @@ import com.alkemy.ong.domain.Category;
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
 import com.alkemy.ong.infrastructure.database.mapper.CategoryEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
-import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,11 +44,6 @@ public class CategoryRepository implements ICategoryRepository {
   }
 
   @Override
-  public List<Category> findAllActive() {
-    return categoryEntityMapper.toDomain(categorySpringRepository.findBySoftDeleteFalse());
-  }
-
-  @Override
   public Optional<Category> findById(Long id) {
     Optional<CategoryEntity> categoryEntityOptional = categorySpringRepository.findById(id);
     if (categoryEntityOptional.isEmpty()) {
@@ -56,4 +52,13 @@ public class CategoryRepository implements ICategoryRepository {
     return Optional.of(categoryEntityMapper.toDomain(categoryEntityOptional.get()));
   }
 
+  @Override
+  public Page<Category> findAll(Pageable pageable) {
+    Page<CategoryEntity> categories = categorySpringRepository.findBySoftDeleteFalse(pageable);
+    return categoryEntityMapper.toPageDomain(
+        categories.getContent(),
+        categories.getNumber(),
+        categories.getSize(),
+        categories.getTotalElements());
+  }
 }

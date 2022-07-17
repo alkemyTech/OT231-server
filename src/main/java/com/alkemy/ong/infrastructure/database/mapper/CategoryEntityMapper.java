@@ -5,6 +5,9 @@ import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -32,6 +35,14 @@ public class CategoryEntityMapper {
     }
     return categories;
   }
+
+  public Page<Category> toPageDomain(List<CategoryEntity> categoryEntities,
+      int page, int size, Long totalPages) {
+    return new PageImpl<>(
+        toDomain(categoryEntities),
+        PageRequest.of(page, size), totalPages);
+  }
+
 
   public CategoryEntity toEntity(Category category) {
     if (category == null) {
