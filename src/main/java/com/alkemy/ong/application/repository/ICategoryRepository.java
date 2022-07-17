@@ -2,7 +2,6 @@ package com.alkemy.ong.application.repository;
 
 import com.alkemy.ong.domain.Category;
 import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

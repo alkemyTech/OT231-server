@@ -1,9 +1,7 @@
 package com.alkemy.ong.infrastructure.database.repository.spring;
 
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
-import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -21,26 +21,26 @@ public class HeaderOnPagedResourceRetrieval {
     if (hasPreviousPage(page)) {
       String uriPrevPage = constructPrevPageUri(uriBuilder, page, size);
       appendCommaIfNecessary(linkHeader);
-      linkHeader.append(createLinkHeader(uriPrevPage,"prev"));
+      linkHeader.append(createLinkHeader(uriPrevPage, "prev"));
     }
     response.addHeader("Link", linkHeader.toString());
   }
 
   String constructNextPageUri(UriComponentsBuilder uriBuilder, int page, int size) {
     return uriBuilder.replaceQueryParam("page", page + 1)
-            .replaceQueryParam("size", size)
-            .build()
-            .encode()
-            .toUriString();
+        .replaceQueryParam("size", size)
+        .build()
+        .encode()
+        .toUriString();
   }
 
 
   String constructPrevPageUri(UriComponentsBuilder uriBuilder, int page, int size) {
     return uriBuilder.replaceQueryParam("page", page - 1)
-            .replaceQueryParam("size", size)
-            .build()
-            .encode()
-            .toUriString();
+        .replaceQueryParam("size", size)
+        .build()
+        .encode()
+        .toUriString();
   }
 
 
