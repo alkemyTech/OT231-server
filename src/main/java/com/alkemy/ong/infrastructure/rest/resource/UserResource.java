@@ -58,12 +58,12 @@ public class UserResource {
   private UserMapper userMapper;
 
 
-  @Operation(summary = "Regiter new user")
+  @Operation(summary = "Register new user")
   @ApiResponses(value = {
           @ApiResponse(responseCode = "200", description = "User register successfully",
                   content = { @Content(mediaType = "application/json",
                           schema = @Schema(implementation = UserRegisterResponse.class)) }),
-          @ApiResponse(responseCode = "400", description = "Invalid input data.",
+          @ApiResponse(responseCode = "400", description = "Invalid input data",
                   content = @Content(mediaType = "application/json",
                           schema = @Schema(implementation = ErrorResponse.class))) })
   @PostMapping(value = "/auth/register",
@@ -80,7 +80,7 @@ public class UserResource {
     return new ResponseEntity<UserRegisterResponse>(response, HttpStatus.CREATED);
   }
 
-  @Operation(summary = "Get User data")
+  @Operation(summary = "Get current user data")
   @ApiResponses(value = {
           @ApiResponse(responseCode = "200", description = "Return user data successfully",
                   content = { @Content(mediaType = "application/json",

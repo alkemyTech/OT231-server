@@ -34,7 +34,7 @@ public class AuthenticationResource {
           @ApiResponse(responseCode = "200", description = "User logged successfully",
                   content = { @Content(mediaType = "application/json",
                           schema = @Schema(implementation = AuthenticationResponse.class)) }),
-          @ApiResponse(responseCode = "400", description = "Invalid input data.",
+          @ApiResponse(responseCode = "400", description = "Invalid input data",
                   content = @Content(mediaType = "application/json",
                           schema = @Schema(implementation = ErrorResponse.class))) })
   @PostMapping(value = "/auth/login",
