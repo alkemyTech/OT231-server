@@ -39,6 +39,17 @@ public class SlideEntityMapper {
         .build();
   }
 
+  public SlideEntity toEntity(Slide slide) {
+    if (slide == null) {
+      return null;
+    }
+    return SlideEntity.builder()
+        .imageUrl(slide.getImageUrl())
+        .order(slide.getOrder())
+        .text(slide.getText())
+        .build();
+  }
+
 }
 
 
