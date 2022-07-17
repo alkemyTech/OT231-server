@@ -10,9 +10,15 @@ import com.alkemy.ong.infrastructure.rest.mapper.UserMapper;
 import com.alkemy.ong.infrastructure.rest.mapper.UserRegisterMapper;
 import com.alkemy.ong.infrastructure.rest.request.UpdateUserRequest;
 import com.alkemy.ong.infrastructure.rest.request.UserRegisterRequest;
+import com.alkemy.ong.infrastructure.rest.response.ErrorResponse;
 import com.alkemy.ong.infrastructure.rest.response.ListUserResponse;
 import com.alkemy.ong.infrastructure.rest.response.UserRegisterResponse;
 import com.alkemy.ong.infrastructure.rest.response.UserResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,16 +57,39 @@ public class UserResource {
   @Autowired
   private UserMapper userMapper;
 
+
+  @Operation(summary = "Regiter new user")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "User register successfully",
+                  content = { @Content(mediaType = "application/json",
+                          schema = @Schema(implementation = UserRegisterResponse.class)) }),
+          @ApiResponse(responseCode = "400", description = "Invalid input data.",
+                  content = @Content(mediaType = "application/json",
+                          schema = @Schema(implementation = ErrorResponse.class))) })
   @PostMapping(value = "/auth/register",
       produces = {"application/json"},
       consumes = {"application/json"})
   public ResponseEntity<UserRegisterResponse> create(
-      @Valid @RequestBody UserRegisterRequest registerRequest) {
+      @Valid @RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody
+              (description = "User Register", required = true,
+                content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = UserRegisterRequest.class)))
+                  UserRegisterRequest registerRequest) {
     User user = userRegisterMapper.toDomain(registerRequest);
     UserRegisterResponse response = userRegisterMapper.toResponse(createUserUseCase.add(user));
     return new ResponseEntity<UserRegisterResponse>(response, HttpStatus.CREATED);
   }
 
+  @Operation(summary = "Get User data")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Return user data successfully",
+                  content = { @Content(mediaType = "application/json",
+                          schema = @Schema(implementation = UserResponse.class)) }),
+          @ApiResponse(responseCode = "403",
+                  description = "Access denied. Please, try to login "
+                          + "again or contact your admin.",
+                  content = @Content(mediaType = "application/json",
+                          schema = @Schema(implementation = ErrorResponse.class))) })
   @GetMapping(value = "/auth/me",
       produces = {"application/json"})
   public ResponseEntity<UserResponse> getAuthDetails(
