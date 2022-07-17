@@ -60,10 +60,10 @@ public class SlideService
   private Integer findAndSetSubsequentOrder() {
     Integer lastKnownOrder;
     List<Slide> savedSlides = findAllByOrderByOrder();
-    if(savedSlides.isEmpty()) {
+    if (savedSlides.isEmpty()) {
       return 1;
     }
-    lastKnownOrder = savedSlides.get(savedSlides.size()-1).getOrder();
+    lastKnownOrder = savedSlides.get(savedSlides.size() - 1).getOrder();
     return lastKnownOrder + 1;
   }
 

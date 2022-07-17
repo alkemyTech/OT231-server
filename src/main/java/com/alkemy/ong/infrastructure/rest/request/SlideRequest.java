@@ -9,12 +9,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SlideRequest {
-  
-  /**
-   * @param imageFile
-   *    Request Body should contain a Base64 encoded jpeg file.
-   */
-  @NotBlank(message = "File must not be empty.")
+
+  // imageFile expects a String with a Base64 encoded jpeg file.
+  @NotBlank(message = "File must not be empty. Expected: Base64 encoded jpeg file.")
   String imageFile;
   String text;
   Integer order;

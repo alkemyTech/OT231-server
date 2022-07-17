@@ -40,7 +40,7 @@ public class SlideResource {
   private ICreateSlideUseCase createSlideUseCase;
   
   private SlideResponseField[] slideResponseFields =
-    {SlideResponseField.IMAGE_URL, SlideResponseField.ORDER, SlideResponseField.TEXT};
+      {SlideResponseField.IMAGE_URL, SlideResponseField.ORDER, SlideResponseField.TEXT};
 
   @GetMapping(value = "/slides", produces = {"application/json"})
   public ResponseEntity<ListSlideResponse> list() {
