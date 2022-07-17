@@ -7,6 +7,7 @@ import com.alkemy.ong.application.repository.INewsRepository;
 import com.alkemy.ong.application.repository.IUserRepository;
 import com.alkemy.ong.application.service.usecase.ICreateCommentUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCommentUseCase;
+import com.alkemy.ong.application.service.usecase.IUpdateCommentUseCase;
 import com.alkemy.ong.domain.Comment;
 import com.alkemy.ong.domain.News;
 import com.alkemy.ong.domain.User;
@@ -14,7 +15,8 @@ import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class CommentService implements ICreateCommentUseCase, IDeleteCommentUseCase {
+public class CommentService implements ICreateCommentUseCase,
+        IDeleteCommentUseCase, IUpdateCommentUseCase {
 
   private final ICommentRepository commentRepository;
   private final INewsRepository newsRepository;
@@ -47,13 +49,24 @@ public class CommentService implements ICreateCommentUseCase, IDeleteCommentUseC
 
   @Override
   public void delete(Comment commentToDelete) {
-    Comment comment = findBy(commentToDelete.getId());
+    Comment comment = findById(commentToDelete.getId());
     User authenticatedUser = commentToDelete.getUser();
     if (!isSameUser(comment, authenticatedUser) && isNotAdmin(authenticatedUser)) {
       throw new OperationNotPermittedException("No permission to delete this comment.");
     }
     comment.setSoftDelete(true);
     commentRepository.save(comment);
+  }
+
+  @Override
+  public Comment update(Comment updComment) {
+    Comment commentSaved = findById(updComment.getId());
+    User authenticatedUser = updComment.getUser();
+    if (!isSameUser(commentSaved, authenticatedUser) && isNotAdmin(authenticatedUser)) {
+      throw new OperationNotPermittedException("No permission to update this comment.");
+    }
+    commentSaved.setBody(updComment.getBody());
+    return commentRepository.update(commentSaved);
   }
 
   private boolean isSameUser(Comment comment, User authenticatedUser) {
@@ -64,8 +77,8 @@ public class CommentService implements ICreateCommentUseCase, IDeleteCommentUseC
     return !Role.ADMIN.getFullRoleName().equals(authenticatedUser.getRole().getName());
   }
 
-  private Comment findBy(Long id) {
-    Comment comment = commentRepository.findById(id).orElse(null);
+  private Comment findById(Long id) {
+    Comment comment = commentRepository.findBy(id);
     if (comment == null || isDeleted(comment)) {
       throw new RecordNotFoundException("Comment not found.");
     }
@@ -78,3 +91,5 @@ public class CommentService implements ICreateCommentUseCase, IDeleteCommentUseC
   }
 
 }
+
+
