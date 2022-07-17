@@ -5,6 +5,7 @@ import com.alkemy.ong.domain.Comment;
 import com.alkemy.ong.infrastructure.database.entity.CommentEntity;
 import com.alkemy.ong.infrastructure.database.mapper.CommentEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICommentSpringRepository;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,11 @@ public class CommentRepository implements ICommentRepository {
   @Override
   public void save(Comment comment) {
     commentSpringRepository.save(commentEntityMapper.toEntity(comment));
+  }
+
+  @Override
+  public List<Comment> findAll() {
+    return commentEntityMapper.toDomain(commentSpringRepository.findAll());
   }
 
 }
