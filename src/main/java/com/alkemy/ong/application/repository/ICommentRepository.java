@@ -1,6 +1,7 @@
 package com.alkemy.ong.application.repository;
 
 import com.alkemy.ong.domain.Comment;
+import java.util.List;
 import java.util.Optional;
 
 public interface ICommentRepository {
@@ -10,4 +11,6 @@ public interface ICommentRepository {
   Optional<Comment> findById(Long id);
 
   void save(Comment comment);
+
+  List<Comment> findAll();
 }
