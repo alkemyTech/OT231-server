@@ -37,6 +37,16 @@ public class CommentMapper {
         .build();
   }
 
+  public Comment toDomain(Long id, UpdateCommentRequest updateCommentRequest, String token) {
+    if (id == null || updateCommentRequest == null) {
+      return null;
+    }
+    return Comment.builder()
+        .id(id)
+        .body(updateCommentRequest.getBody())
+        .user(userMapper.toDomain(token))
+        .build();
+  }
 
   public ListCommentResponse toResponse(List<Comment> comments) {
     if (comments == null || comments.isEmpty()) {
@@ -50,18 +60,6 @@ public class CommentMapper {
     }
     return new ListCommentResponse(commentResponses);
   }
-
-  public Comment toDomain(Long id, UpdateCommentRequest updateCommentRequest, String token) {
-    if (id == null || updateCommentRequest == null) {
-      return null;
-    }
-    return Comment.builder()
-        .id(id)
-        .body(updateCommentRequest.getBody())
-        .user(userMapper.toDomain(token))
-        .build();
-  }
-
   public CommentResponse toResponse(Comment comment) {
     if (comment == null) {
       return null;
