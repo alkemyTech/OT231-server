@@ -3,6 +3,7 @@ package com.alkemy.ong.infrastructure.rest.mapper;
 import com.alkemy.ong.domain.Comment;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.rest.request.CommentRequest;
+import com.alkemy.ong.infrastructure.rest.request.UpdateCommentRequest;
 import com.alkemy.ong.infrastructure.rest.response.CommentResponse;
 import com.alkemy.ong.infrastructure.rest.response.FullNameResponse;
 import com.alkemy.ong.infrastructure.rest.response.ListCommentResponse;
@@ -36,6 +37,7 @@ public class CommentMapper {
         .build();
   }
 
+
   public ListCommentResponse toResponse(List<Comment> comments) {
     if (comments == null || comments.isEmpty()) {
       return new ListCommentResponse(Collections.emptyList());
@@ -47,6 +49,17 @@ public class CommentMapper {
       commentResponses.add(toResponseList(comment));
     }
     return new ListCommentResponse(commentResponses);
+  }
+
+  public Comment toDomain(Long id, UpdateCommentRequest updateCommentRequest, String token) {
+    if (id == null || updateCommentRequest == null) {
+      return null;
+    }
+    return Comment.builder()
+        .id(id)
+        .body(updateCommentRequest.getBody())
+        .user(userMapper.toDomain(token))
+        .build();
   }
 
   public CommentResponse toResponse(Comment comment) {
