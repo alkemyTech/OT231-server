@@ -5,7 +5,6 @@ import com.alkemy.ong.domain.Comment;
 import com.alkemy.ong.infrastructure.database.entity.CommentEntity;
 import com.alkemy.ong.infrastructure.database.mapper.CommentEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICommentSpringRepository;
-
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -29,7 +28,7 @@ public class CommentRepository implements ICommentRepository {
   @Override
   public Comment findBy(Long id) {
     return commentEntityMapper.toDomain(
-            commentSpringRepository.findByIdAndSoftDeleteFalse(id));
+        commentSpringRepository.findByIdAndSoftDeleteFalse(id));
   }
 
   @Override

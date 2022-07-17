@@ -155,8 +155,8 @@ public class ServiceBeanConfig {
 
   @Bean
   public IUpdateCommentUseCase updateCommentUseCase(CommentRepository commentRepository,
-                                                    UserRepository userRepository,
-                                                    NewsRepository newsRepository) {
+      UserRepository userRepository,
+      NewsRepository newsRepository) {
     return new CommentService(commentRepository, newsRepository, userRepository);
   }
 }

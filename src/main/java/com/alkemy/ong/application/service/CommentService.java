@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class CommentService implements ICreateCommentUseCase,
-        IDeleteCommentUseCase, IUpdateCommentUseCase {
+    IDeleteCommentUseCase, IUpdateCommentUseCase {
 
   private final ICommentRepository commentRepository;
   private final INewsRepository newsRepository;
@@ -66,7 +66,7 @@ public class CommentService implements ICreateCommentUseCase,
   private void validateOperation(Comment updateComment, Comment commentSaved, String operation) {
     User authenticatedUser = updateComment.getUser();
     if (!isSameUser(commentSaved, authenticatedUser) && isNotAdmin(authenticatedUser)) {
-      throw new OperationNotPermittedException("No permission to " + operation +" this comment.");
+      throw new OperationNotPermittedException("No permission to " + operation + " this comment.");
     }
   }
 

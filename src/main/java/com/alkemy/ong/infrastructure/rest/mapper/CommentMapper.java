@@ -38,10 +38,10 @@ public class CommentMapper {
       return null;
     }
     return Comment.builder()
-            .id(id)
-            .body(updateCommentRequest.getBody())
-            .user(userMapper.toDomain(token))
-            .build();
+        .id(id)
+        .body(updateCommentRequest.getBody())
+        .user(userMapper.toDomain(token))
+        .build();
   }
 
   public CommentResponse toResponse(Comment comment) {

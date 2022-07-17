@@ -55,12 +55,12 @@ public class CommentResource {
   }
 
   @PatchMapping(value = "comments/{id}",
-          produces = {"application/json"},
-          consumes = {"application/json"})
+      produces = {"application/json"},
+      consumes = {"application/json"})
   public ResponseEntity<CommentResponse> update(
-          @PathVariable Long id,
-          @Valid @RequestBody UpdateCommentRequest updatecommentRequest,
-          @RequestHeader("Authorization") String token) {
+      @PathVariable Long id,
+      @Valid @RequestBody UpdateCommentRequest updatecommentRequest,
+      @RequestHeader("Authorization") String token) {
     Comment comment = commentMapper.toDomain(id, updatecommentRequest, token);
     CommentResponse response = commentMapper.toResponse(updateCommentUseCase.update(comment));
     return ResponseEntity.ok().body(response);
