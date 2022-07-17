@@ -39,10 +39,9 @@ public class CategoryEntityMapper {
 
   public Page<Category> toPageDomain(List<CategoryEntity> categoryEntities,
                                      int page, int size, Long totalPages) {
-    Page<Category> dtoPage = new PageImpl<>(
+   return new PageImpl<>(
             toDomain(categoryEntities),
             PageRequest.of(page, size), totalPages);
-    return dtoPage;
   }
 
 

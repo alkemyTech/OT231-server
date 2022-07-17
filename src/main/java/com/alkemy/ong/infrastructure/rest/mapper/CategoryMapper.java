@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -46,14 +47,12 @@ public class CategoryMapper {
     return new ListCategoryResponse(categoriesResponses);
   }
 
-  public ListCategoryResponse toResponse(List<Category> categories,
-                                         int page, int size, int totalPage) {
-    ListCategoryResponse listCategoryResponse = toResponse(categories);
-    listCategoryResponse.setPage(page);
-    listCategoryResponse.setSize(size);
-    listCategoryResponse.setTotalPages(totalPage);
+  public ListCategoryResponse toResponse(Page<Category> categoryPage) {
+    ListCategoryResponse listCategoryResponse = toResponse(categoryPage.getContent());
+    listCategoryResponse.setPage(categoryPage.getNumber());
+    listCategoryResponse.setSize(categoryPage.getSize());
+    listCategoryResponse.setTotalPages(categoryPage.getTotalPages());
     return listCategoryResponse;
   }
-
 
 }

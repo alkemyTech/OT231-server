@@ -10,7 +10,6 @@ import com.alkemy.ong.infrastructure.rest.request.CategoryRequest;
 import com.alkemy.ong.infrastructure.rest.response.CategoryResponse;
 import com.alkemy.ong.infrastructure.rest.response.ListCategoryResponse;
 import com.alkemy.ong.infrastructure.util.HeaderOnPagedResourceRetrieval;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,17 +70,20 @@ public class CategoryResource {
   }
 
   @GetMapping(value = "/categories", produces = {"application/json"})
-  public ResponseEntity<ListCategoryResponse> findAll(@PageableDefault(size = 10)
-                                                                      Pageable pageable,
-                                                      UriComponentsBuilder uriBuilder,
-                                                      HttpServletResponse response) {
+  public ResponseEntity<ListCategoryResponse> list(@PageableDefault(size = 10)
+      Pageable pageable,
+      UriComponentsBuilder uriBuilder,
+      HttpServletResponse response) {
     Page<Category> resultPage = listCategoryUseCase.findAll(pageable);
     headerOnPagedResourceRetrieval.addLinkHeaderOnPagedResourceRetrieval(
-            uriBuilder, response, "/categories", resultPage.getNumber(),
-            resultPage.getTotalPages(), resultPage.getSize()
+        uriBuilder,
+        response,
+        "/categories",
+        resultPage.getNumber(),
+        resultPage.getTotalPages(),
+        resultPage.getSize()
     );
-    ListCategoryResponse listCategoryResponse = categoryMapper.toResponse(resultPage.getContent(),
-            resultPage.getNumber(),resultPage.getSize(), resultPage.getTotalPages());
+    ListCategoryResponse listCategoryResponse = categoryMapper.toResponse(resultPage);
     return ResponseEntity.ok().body(listCategoryResponse);
   }
 
