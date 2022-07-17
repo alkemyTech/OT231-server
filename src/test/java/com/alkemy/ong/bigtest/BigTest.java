@@ -100,7 +100,6 @@ public abstract class BigTest {
     createRoles();
     createUserData();
     createNewsCategory();
-    createActivity();
   }
 
   @After
@@ -118,6 +117,7 @@ public abstract class BigTest {
     memberRepository.deleteAll();
     organizationRepository.deleteAll();
     contactRepository.deleteAll();
+    activityRepository.deleteAll();
   }
 
   private void createUserData() {
@@ -144,12 +144,6 @@ public abstract class BigTest {
   private void createNewsCategory() {
     if (categoryRepository.findByNameIgnoreCase("news") == null) {
       categoryRepository.save(buildCategory("news"));
-    }
-  }
-
-  private void createActivity(){
-    if(activityRepository.findByName("Activity") == null){
-      activityRepository.save(buildActivity("Activity", "Content", "image.png"));
     }
   }
 
@@ -210,13 +204,6 @@ public abstract class BigTest {
         .build();
   }
 
-  private ActivityEntity buildActivity(String name, String content, String image){
-    return ActivityEntity.builder()
-        .name(name)
-        .content(content)
-        .image(image)
-        .build();
-  }
   protected String getAuthorizationTokenForAdminUser() throws Exception {
     return getAuthorizationTokenForUser(ADMIN_EMAIL);
   }
