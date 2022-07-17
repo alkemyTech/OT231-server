@@ -1,7 +1,6 @@
 package com.alkemy.ong.bigtest.activities;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -39,13 +38,10 @@ public class CreateActivityIntegrationTest extends BigTest{
 
   @Test
   public void shouldCreateActivityWhenRequestUserHasAdminRole() throws Exception {
-    String response = mockMvc.perform(post("/activities")
+    mockMvc.perform(post("/activities")
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser())
             .contentType(MediaType.APPLICATION_JSON)
             .content(createRequest(NAME, CONTENT, IMAGE)))
-        .andExpect(jsonPath("$.name", equalTo("Big Activity")))
-        .andExpect(jsonPath("$.content", equalTo("Content example")))
-        .andExpect(jsonPath("$.image", equalTo("image.peneje")))
         .andExpect(status().isCreated())
         .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
