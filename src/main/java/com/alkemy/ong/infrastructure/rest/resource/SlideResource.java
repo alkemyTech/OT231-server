@@ -1,18 +1,24 @@
 package com.alkemy.ong.infrastructure.rest.resource;
 
+import com.alkemy.ong.application.service.usecase.ICreateSlideUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteSlideUseCase;
 import com.alkemy.ong.application.service.usecase.IGetSlideUseCase;
 import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
+import com.alkemy.ong.domain.Slide;
 import com.alkemy.ong.infrastructure.rest.mapper.SlideMapper;
+import com.alkemy.ong.infrastructure.rest.request.SlideRequest;
 import com.alkemy.ong.infrastructure.rest.response.ListSlideResponse;
 import com.alkemy.ong.infrastructure.rest.response.SlideResponse;
 import com.alkemy.ong.infrastructure.rest.response.field.SlideResponseField;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,6 +35,12 @@ public class SlideResource {
 
   @Autowired
   private IGetSlideUseCase getSlideUseCase;
+  
+  @Autowired
+  private ICreateSlideUseCase createSlideUseCase;
+  
+  private SlideResponseField[] slideResponseFields =
+    {SlideResponseField.IMAGE_URL, SlideResponseField.ORDER, SlideResponseField.TEXT};
 
   @GetMapping(value = "/slides", produces = {"application/json"})
   public ResponseEntity<ListSlideResponse> list() {
@@ -44,12 +56,18 @@ public class SlideResource {
 
   @GetMapping(value = "/slides/{id}", produces = {"application/json"})
   public ResponseEntity<SlideResponse> getBy(@PathVariable("id") Long id) {
-    SlideResponseField[] slideResponseFields =
-        {SlideResponseField.IMAGE_URL, SlideResponseField.ORDER, SlideResponseField.TEXT};
-
     SlideResponse response =
         slideMapper.toResponse(getSlideUseCase.findBy(id), slideResponseFields);
     return ResponseEntity.ok(response);
+  }
+  
+  @PostMapping(value = "/slides", 
+      produces = {"application/json"},
+      consumes = {"application/json"})
+  public ResponseEntity<SlideResponse> create(@Valid @RequestBody SlideRequest createRequest) {
+    Slide slide = createSlideUseCase.create(slideMapper.toDomain(createRequest));
+    SlideResponse response = slideMapper.toResponse(slide, slideResponseFields);
+    return new ResponseEntity<SlideResponse>(response, HttpStatus.CREATED);
   }
 
 }
