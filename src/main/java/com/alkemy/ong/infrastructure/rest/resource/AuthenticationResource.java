@@ -4,7 +4,6 @@ import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.rest.mapper.AuthenticationMapper;
 import com.alkemy.ong.infrastructure.rest.request.AuthenticationRequest;
-import com.alkemy.ong.infrastructure.rest.request.UserRegisterRequest;
 import com.alkemy.ong.infrastructure.rest.response.AuthenticationResponse;
 import com.alkemy.ong.infrastructure.rest.response.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
