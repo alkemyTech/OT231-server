@@ -43,4 +43,9 @@ public class SlideRepository implements ISlideRepository {
     return slideEntityMapper.toDomain(Optional.of(slideSpringRepository.save(slideEntity)));
   }
 
+  @Override
+  public Integer findLastKnownOrder() {
+    return slideSpringRepository.findMaxOrder();
+  }
+
 }

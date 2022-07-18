@@ -14,4 +14,6 @@ public interface ISlideRepository {
   Slide findBy(Long id);
   
   Slide add(Slide slide);
+  
+  Integer findLastKnownOrder();
 }
