@@ -6,8 +6,8 @@ import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IGetCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IListCategoryUseCase;
+import com.alkemy.ong.application.service.usecase.IUpdateCategoryUseCase;
 import com.alkemy.ong.domain.Category;
-import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @AllArgsConstructor
 public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryUseCase,
-    IListCategoryUseCase, IGetCategoryUseCase {
+    IListCategoryUseCase, IGetCategoryUseCase, IUpdateCategoryUseCase {
 
   private final ICategoryRepository categoryRepository;
 
@@ -39,12 +39,25 @@ public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryU
 
   @Override
   public Category findById(@PathVariable Long id) {
-    Optional<Category> optionalCategory = categoryRepository.findById(id);
-    if (optionalCategory.isEmpty()
-        || Boolean.TRUE.equals(optionalCategory.get().getSoftDelete())) {
+    Category category = categoryRepository.findBy(id);
+    if (category == null || Boolean.TRUE.equals(category.getSoftDelete())) {
       throw new RecordNotFoundException("Category not found.");
     }
-    return optionalCategory.get();
+    return category;
   }
 
+  @Override
+  public Category update(Category updateCategory) {
+    Category categorySave = findById(updateCategory.getId());
+    categorySave.setSoftDelete(false);
+    updateCategoryValues(updateCategory, categorySave);
+    return categoryRepository.update(categorySave);
+
+  }
+
+  private void updateCategoryValues(Category updateCategory, Category categorySave) {
+    categorySave.setName(updateCategory.getName());
+    categorySave.setImage(updateCategory.getImage());
+    categorySave.setDescription(updateCategory.getDescription());
+  }
 }

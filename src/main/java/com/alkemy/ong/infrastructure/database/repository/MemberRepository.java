@@ -29,4 +29,10 @@ public class MemberRepository implements IMemberRepository {
     }
     return Optional.of(memberEntityMapper.toDomain(memberEntity.get()));
   }
+
+  @Override
+  public Member add(Member member) {
+    MemberEntity memberEntity = memberEntityMapper.toEntity(member);
+    return memberEntityMapper.toDomain(memberSpringRepository.save(memberEntity));
+  }
 }

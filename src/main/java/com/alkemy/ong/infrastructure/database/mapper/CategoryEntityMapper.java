@@ -18,6 +18,7 @@ public class CategoryEntityMapper {
       return null;
     }
     return Category.builder()
+        .id(categoryEntity.getId())
         .name(categoryEntity.getName())
         .description(categoryEntity.getDescription())
         .image(categoryEntity.getImage())
@@ -49,6 +50,7 @@ public class CategoryEntityMapper {
       return null;
     }
     return CategoryEntity.builder()
+        .id(category.getId())
         .name(category.getName())
         .description(category.getDescription())
         .image(category.getImage())
