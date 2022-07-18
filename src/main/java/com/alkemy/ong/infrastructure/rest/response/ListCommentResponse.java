@@ -13,4 +13,5 @@ import lombok.Setter;
 public class ListCommentResponse {
 
   List<CommentResponse> commentResponses;
+
 }

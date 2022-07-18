@@ -54,7 +54,6 @@ public class CommentMapper {
     }
 
     List<CommentResponse> commentResponses = new ArrayList<>(comments.size());
-
     for (Comment comment : comments) {
       commentResponses.add(toResponseList(comment));
     }

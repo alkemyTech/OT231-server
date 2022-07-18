@@ -17,19 +17,17 @@ public class CommentEntityMapper {
   @Autowired
   private NewsEntityMapper newsEntityMapper;
 
-  public List<Comment> toDomain(List<CommentEntity> commentEntityList) {
-    if (commentEntityList == null || commentEntityList.isEmpty()) {
+  public List<Comment> toDomain(List<CommentEntity> commentEntities) {
+    if (commentEntities == null || commentEntities.isEmpty()) {
       return Collections.emptyList();
     }
 
-    List<Comment> comments = new ArrayList<>(commentEntityList.size());
-
-    for (CommentEntity commentEntity : commentEntityList) {
+    List<Comment> comments = new ArrayList<>(commentEntities.size());
+    for (CommentEntity commentEntity : commentEntities) {
       comments.add(Comment.builder()
           .body(commentEntity.getBody())
           .build());
     }
-
     return comments;
   }
 
