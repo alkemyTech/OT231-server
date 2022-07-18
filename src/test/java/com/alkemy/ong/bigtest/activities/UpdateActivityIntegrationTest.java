@@ -20,15 +20,10 @@ import org.springframework.http.MediaType;
 public class UpdateActivityIntegrationTest extends BigTest{
 
   private static final String NAME= "ActyvitiS";
-
   private static final String INVALID_NAME= "Big Activity and Example of error with more characters";
-
   private static final String CONTENT= "Content examples again";
-
   private static final String IMAGE= "image.jotapeje";
-
   private static final String INVALID_IMAGE= "i m a g e.p e n e j e";
-
   private static final Long NON_EXISTING_ACTIVITY_ID = 999L;
 
   @Test
@@ -46,7 +41,6 @@ public class UpdateActivityIntegrationTest extends BigTest{
 
     assertActivityHasBeenUpdated(activityId);
   }
-
 
   @Test
   public void shouldReturn400WhenNameIsNotValid() throws Exception {
