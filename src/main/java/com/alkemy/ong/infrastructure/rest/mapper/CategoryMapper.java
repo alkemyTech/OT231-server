@@ -2,6 +2,7 @@ package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.Category;
 import com.alkemy.ong.infrastructure.rest.request.CategoryRequest;
+import com.alkemy.ong.infrastructure.rest.request.UpdateCategoryRequest;
 import com.alkemy.ong.infrastructure.rest.response.CategoryResponse;
 import com.alkemy.ong.infrastructure.rest.response.ListCategoryResponse;
 import java.util.ArrayList;
@@ -22,6 +23,15 @@ public class CategoryMapper {
         .description(categoryRequest.getDescription())
         .image(categoryRequest.getImage())
         .build();
+  }
+
+  public Category toDomain(Long id, UpdateCategoryRequest updateCategoryRequest) {
+    return Category.builder()
+            .id(id)
+            .name(updateCategoryRequest.getName())
+            .description(updateCategoryRequest.getDescription())
+            .image(updateCategoryRequest.getImage())
+            .build();
   }
 
   public CategoryResponse toResponse(Category category) {
