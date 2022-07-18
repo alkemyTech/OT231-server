@@ -19,6 +19,12 @@ public class MemberService implements IDeleteMemberUseCase, ICreateMemberUseCase
     memberRepository.save(member);
   }
 
+  @Override
+  public Member add(Member member) {
+    member.setSoftDelete(false);
+    return memberRepository.add(member);
+  }
+
   private Member findBy(Long id) {
     Member member = memberRepository.findById(id).orElse(null);
     if (member == null || isDeleted(member)) {
@@ -32,9 +38,4 @@ public class MemberService implements IDeleteMemberUseCase, ICreateMemberUseCase
     return !(softDelete == null || Boolean.FALSE.equals(softDelete));
   }
 
-  @Override
-  public Member add(Member member) {
-    member.setSoftDelete(false);
-    return memberRepository.add(member);
-  }
 }

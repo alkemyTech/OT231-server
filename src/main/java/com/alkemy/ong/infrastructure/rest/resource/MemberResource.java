@@ -42,4 +42,5 @@ public class MemberResource {
     MemberResponse response = memberMapper.toResponse(createMemberUseCase.add(member));
     return new ResponseEntity<>(response, HttpStatus.CREATED);
   }
+
 }

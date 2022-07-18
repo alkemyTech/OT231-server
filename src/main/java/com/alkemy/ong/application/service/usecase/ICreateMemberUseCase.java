@@ -5,4 +5,5 @@ import com.alkemy.ong.domain.Member;
 public interface ICreateMemberUseCase {
 
   Member add(Member member);
+
 }
