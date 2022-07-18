@@ -42,20 +42,15 @@ public class SlideService
 
   @Override
   public Slide create(Slide slide) {
-    String imageUrl = uploadImage.upload(slide);
-    slide.setImageUrl(imageUrl);
+    slide.setImageUrl(uploadImage.upload(slide));
     if (slide.getOrder() == null) {
-      slide.setOrder(findAndSetSubsequentOrder());
+      slide.setOrder(findSubsequentOrder());
     }
     return slideRepository.add(slide);
   }
 
-  private Integer findAndSetSubsequentOrder() {
-    Integer lastKnownOrder = slideRepository.findLastKnownOrder();
-    if (lastKnownOrder == null) {
-      return 1;
-    }
-    return lastKnownOrder + 1;
+  private Integer findSubsequentOrder() {
+    return slideRepository.findLastKnownOrder() + 1;
   }
 
 }

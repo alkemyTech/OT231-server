@@ -11,7 +11,7 @@ public interface ISlideSpringRepository extends JpaRepository<SlideEntity, Long>
 
   List<SlideEntity> findAllByOrderByOrder();
   
-  @Query(value = "SELECT MAX(position) FROM slides", nativeQuery = true)
+  @Query("SELECT coalesce(MAX(s.order), 0) FROM SlideEntity s")
   Integer findMaxOrder();
 
 }
