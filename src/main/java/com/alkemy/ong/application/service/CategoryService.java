@@ -48,12 +48,11 @@ public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryU
 
   @Override
   public Category update(Category updateCategory) {
-    Category categorySave = categoryRepository.findBy(updateCategory.getId());
-    if (categorySave == null) {
-      throw new RecordNotFoundException("Category not found.");
-    }
+    Category categorySave = findById(updateCategory.getId());
+    categorySave.setSoftDelete(false);
     updateCategoryValues(updateCategory, categorySave);
     return categoryRepository.update(categorySave);
+
   }
 
   private void updateCategoryValues(Category updateCategory, Category categorySave) {

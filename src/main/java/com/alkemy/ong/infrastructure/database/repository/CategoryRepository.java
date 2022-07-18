@@ -54,7 +54,6 @@ public class CategoryRepository implements ICategoryRepository {
   @Override
   public Category update(Category category) {
     CategoryEntity categoryUpdate = categoryEntityMapper.toEntity(category);
-    categoryUpdate.setSoftDelete(false);
     return categoryEntityMapper.toDomain(categorySpringRepository.save(categoryUpdate));
   }
 
