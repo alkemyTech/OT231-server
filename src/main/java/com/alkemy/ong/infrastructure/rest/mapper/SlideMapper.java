@@ -1,6 +1,7 @@
 package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.Slide;
+import com.alkemy.ong.infrastructure.rest.request.SlideRequest;
 import com.alkemy.ong.infrastructure.rest.response.ListSlideResponse;
 import com.alkemy.ong.infrastructure.rest.response.SlideResponse;
 import com.alkemy.ong.infrastructure.rest.response.field.SlideResponseField;
@@ -55,6 +56,17 @@ public class SlideMapper {
       }
     }
     return slideResponse;
+  }
+
+  public Slide toDomain(SlideRequest slideRequest) {
+    if (slideRequest == null) {
+      return null;
+    }
+    return Slide.builder()
+        .base64File(slideRequest.getBase64ImageEncoded())
+        .text(slideRequest.getText())
+        .order(slideRequest.getOrder())
+        .build();
   }
 
 }

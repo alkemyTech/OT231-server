@@ -2,9 +2,11 @@ package com.alkemy.ong.infrastructure.database.repository;
 
 import com.alkemy.ong.application.repository.ISlideRepository;
 import com.alkemy.ong.domain.Slide;
+import com.alkemy.ong.infrastructure.database.entity.SlideEntity;
 import com.alkemy.ong.infrastructure.database.mapper.SlideEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.ISlideSpringRepository;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +35,17 @@ public class SlideRepository implements ISlideRepository {
   @Override
   public Slide findBy(Long id) {
     return slideEntityMapper.toDomain(slideSpringRepository.findById(id));
+  }
+
+  @Override
+  public Slide add(Slide slide) {
+    SlideEntity slideEntity = slideEntityMapper.toEntity(slide);
+    return slideEntityMapper.toDomain(Optional.of(slideSpringRepository.save(slideEntity)));
+  }
+
+  @Override
+  public Integer findLastKnownOrder() {
+    return slideSpringRepository.findMaxOrder();
   }
 
 }
