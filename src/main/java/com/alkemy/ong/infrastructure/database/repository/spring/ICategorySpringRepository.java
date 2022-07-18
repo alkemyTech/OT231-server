@@ -1,6 +1,7 @@
 package com.alkemy.ong.infrastructure.database.repository.spring;
 
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
+
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,5 +23,8 @@ public interface ICategorySpringRepository extends JpaRepository<CategoryEntity,
 
   CategoryEntity findByNameIgnoreCase(String name);
 
+  CategoryEntity findByIdAndSoftDeleteFalse(Long id);
+
   Page<CategoryEntity> findBySoftDeleteFalse(Pageable pageable);
+
 }
