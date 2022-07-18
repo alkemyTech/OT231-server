@@ -59,6 +59,60 @@ public class CreateContactIntegrationTest extends BigTest {
         .andExpect(status().isForbidden());
   }
 
+  @Test
+  public void fieldsRequestShouldValidate() throws Exception {
+    mockMvc.perform(post(CREATE_CONTACT_URL)
+            .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForStandardUser())
+            .contentType(APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(createRequest())))
+        .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  public void fieldNameRequestNotValidate() throws Exception {
+      mockMvc.perform(post(CREATE_CONTACT_URL)
+      .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForStandardUser())
+      .contentType(APPLICATION_JSON)
+      .content(objectMapper.writeValueAsString(createBadRequestFieldName())))
+          .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  public void fieldMailRequestNotValidate() throws Exception {
+    mockMvc.perform(post(CREATE_CONTACT_URL)
+            .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForStandardUser())
+            .contentType(APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(createBadRequestFieldMail())))
+        .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  public void fieldMessageRequestNotValidate() throws Exception {
+    mockMvc.perform(post(CREATE_CONTACT_URL)
+            .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForStandardUser())
+            .contentType(APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(createBadRequestFieldMessageMaxCharacters())))
+        .andExpect(status().isBadRequest());
+  }
+
+  private String createBadRequestFieldMessageMaxCharacters()
+      throws JsonProcessingException {
+    return objectMapper.writeValueAsString(ContactRequest.builder()
+        .name(CreateContactIntegrationTest.NAME)
+        .phone(CreateContactIntegrationTest.MAIL)
+        .message(CreateContactIntegrationTest.INVALID_MESSAGE)
+        .build());
+  }
+
+  private String createBadRequestFieldName()
+      throws JsonProcessingException {
+    return objectMapper.writeValueAsString(ContactRequest.builder()
+        .name(CreateContactIntegrationTest.INVALID_NAME)
+        .email(CreateContactIntegrationTest.MAIL)
+        .message(CreateContactIntegrationTest.MESSAGE)
+        .build());
+  }
+
   private void assertContactHasBeenCreated() {
     Optional<ContactEntity> optionalContactEntity = Optional.of(contactRepository.findByEmail(
         CreateContactIntegrationTest.MAIL));
@@ -81,66 +135,12 @@ public class CreateContactIntegrationTest extends BigTest {
         .build());
   }
 
-  @Test
-  public void fieldsRequestShouldValidate() throws Exception {
-    mockMvc.perform(post(CREATE_CONTACT_URL)
-            .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForStandardUser())
-            .contentType(APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(createRequest())))
-        .andExpect(status().isBadRequest());
-  }
-
-  @Test
-  public void fieldNameRequestNotValidate() throws Exception {
-      mockMvc.perform(post(CREATE_CONTACT_URL)
-      .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForStandardUser())
-      .contentType(APPLICATION_JSON)
-      .content(objectMapper.writeValueAsString(createBadRequestFieldName())))
-          .andExpect(status().isBadRequest());
-  }
-
-  private String createBadRequestFieldName()
-      throws JsonProcessingException {
-    return objectMapper.writeValueAsString(ContactRequest.builder()
-        .name(CreateContactIntegrationTest.INVALID_NAME)
-        .email(CreateContactIntegrationTest.MAIL)
-        .message(CreateContactIntegrationTest.MESSAGE)
-        .build());
-  }
-
-  @Test
-  public void fieldMailRequestNotValidate() throws Exception {
-    mockMvc.perform(post(CREATE_CONTACT_URL)
-            .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForStandardUser())
-            .contentType(APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(createBadRequestFieldMail())))
-        .andExpect(status().isBadRequest());
-  }
-
   private String createBadRequestFieldMail()
       throws JsonProcessingException {
     return objectMapper.writeValueAsString(ContactRequest.builder()
         .name(CreateContactIntegrationTest.NAME)
         .phone(CreateContactIntegrationTest.INVALID_MAIL)
         .message(CreateContactIntegrationTest.MESSAGE)
-        .build());
-  }
-
-  @Test
-  public void fieldMessageRequestNotValidate() throws Exception {
-    mockMvc.perform(post(CREATE_CONTACT_URL)
-            .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForStandardUser())
-            .contentType(APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(createBadRequestFieldMessageMaxCharacters())))
-        .andExpect(status().isBadRequest());
-  }
-
-  private String createBadRequestFieldMessageMaxCharacters()
-      throws JsonProcessingException {
-    return objectMapper.writeValueAsString(ContactRequest.builder()
-        .name(CreateContactIntegrationTest.NAME)
-        .phone(CreateContactIntegrationTest.MAIL)
-        .message(CreateContactIntegrationTest.INVALID_MESSAGE)
         .build());
   }
 
