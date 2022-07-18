@@ -31,15 +31,15 @@ public class GetListContactsIntegrationTest extends BigTest {
     saveContact(null,
         "semper@gmail.com",
         "message for contact I",
-        "Semper Evincere","+54448555555");
+        "Semper Evincere", "+54448555555");
     saveContact(null,
         "semper@gmail.com",
         "message for contact II",
-        "Semper Evincere","+54448555555");
+        "Semper Evincere", "+54448555555");
     saveContact(null,
         "foo@gmail.com",
         "message for contact",
-        "fooName","+5444930145555");
+        "fooName", "+5444930145555");
 
     mockMvc.perform(get("/contacts")
             .contentType(MediaType.APPLICATION_JSON)
@@ -65,10 +65,10 @@ public class GetListContactsIntegrationTest extends BigTest {
 
   @Test
   public void shouldReturnEmptyContactListAndStatus200WhenContactsIsNotActive() throws Exception {
-    saveContact(new Date(2020,10,12),
+    saveContact(new Date(2020, 10, 12),
         "semper@gmail.com",
         "message for contact",
-        "Semper Evincere","+54448555555");
+        "Semper Evincere", "+54448555555");
 
     mockMvc.perform(get("/contacts")
             .contentType(MediaType.APPLICATION_JSON)

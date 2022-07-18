@@ -8,9 +8,9 @@ import com.alkemy.ong.application.service.usecase.IGetCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IListCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateCategoryUseCase;
 import com.alkemy.ong.domain.Category;
-import java.util.List;
-import java.util.Optional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @AllArgsConstructor
@@ -33,8 +33,8 @@ public class CategoryService implements IDeleteCategoryUseCase, ICreateCategoryU
   }
 
   @Override
-  public List<Category> findAll() {
-    return categoryRepository.findAllActive();
+  public Page<Category> findAll(Pageable pageable) {
+    return categoryRepository.findAll(pageable);
   }
 
   @Override
