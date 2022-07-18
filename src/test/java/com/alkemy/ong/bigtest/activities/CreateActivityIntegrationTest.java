@@ -19,15 +19,10 @@ import org.springframework.http.MediaType;
 public class CreateActivityIntegrationTest extends BigTest{
 
   private static final String NAME= "Big Activity";
-
   private static final String INVALID_NAME= "Big Activity and Example of error with more characters";
-
   private static final String CONTENT= "Content example";
-
   private static final String IMAGE= "image.peneje";
-
   private static final String INVALID_IMAGE= "i m a g e.p e n e j e";
-
 
   @Test
   public void shouldReturn403WhenAuthTokenIsInvalid() throws Exception {
@@ -42,12 +37,10 @@ public class CreateActivityIntegrationTest extends BigTest{
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser())
             .contentType(MediaType.APPLICATION_JSON)
             .content(createRequest(NAME, CONTENT, IMAGE)))
-        .andExpect(status().isCreated())
-        .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        .andExpect(status().isCreated());
 
     assertActivityHasBeenCreated(NAME);
   }
-
 
   @Test
   public void shouldReturn400WhenNameIsNotValid() throws Exception {
@@ -70,12 +63,14 @@ public class CreateActivityIntegrationTest extends BigTest{
             hasItems("Image can only contain alphanumerical with no whitespaces.")))
         .andExpect(status().isBadRequest());
   }
+
   private void assertActivityHasBeenCreated(String name) {
     Optional<ActivityEntity> optionalActivityEntity = Optional.ofNullable(
         activityRepository.findByName(name));
     assertTrue(optionalActivityEntity.isPresent());
     assertThat(optionalActivityEntity.get().getSoftDelete()).isFalse();
   }
+
   private String createRequest(String name, String content, String image)
       throws JsonProcessingException {
     return objectMapper.writeValueAsString(ActivityResponse.builder()
