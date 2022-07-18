@@ -19,6 +19,7 @@ import com.alkemy.ong.application.service.usecase.ICreateActivityUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateCommentUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateContactUseCase;
+import com.alkemy.ong.application.service.usecase.ICreateSlideUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateTestimonialUseCase;
 import com.alkemy.ong.application.service.usecase.ICreateUserUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCategoryUseCase;
@@ -36,6 +37,7 @@ import com.alkemy.ong.application.service.usecase.IUpdateCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateCommentUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateOrganizationUseCase;
 import com.alkemy.ong.application.util.ISendEmail;
+import com.alkemy.ong.application.util.IUploadImage;
 import com.alkemy.ong.infrastructure.database.repository.ActivityRepository;
 import com.alkemy.ong.infrastructure.database.repository.CategoryRepository;
 import com.alkemy.ong.infrastructure.database.repository.CommentRepository;
@@ -124,7 +126,7 @@ public class ServiceBeanConfig {
 
   @Bean
   public IListSlideUseCase listSlideUseCase(SlideRepository slideRepository) {
-    return new SlideService(slideRepository);
+    return new SlideService(slideRepository, null);
   }
 
   @Bean
@@ -159,12 +161,18 @@ public class ServiceBeanConfig {
   public IUpdateActivityUseCase updateActivityUseCase(ActivityRepository activityRepository) {
     return new ActivityService(activityRepository);
   }
-
+  
   @Bean
   public IUpdateCommentUseCase updateCommentUseCase(CommentRepository commentRepository,
       UserRepository userRepository,
       NewsRepository newsRepository) {
     return new CommentService(commentRepository, newsRepository, userRepository);
   }
-  
+
+  @Bean
+  public ICreateSlideUseCase createSlideUseCase(SlideRepository slideRepository,
+      IUploadImage uploadImage) {
+    return new SlideService(slideRepository, uploadImage);
+  }
+
 }
