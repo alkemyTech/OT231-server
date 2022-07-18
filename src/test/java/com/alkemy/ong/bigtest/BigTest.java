@@ -253,14 +253,12 @@ public abstract class BigTest {
   }
 
   protected ActivityEntity saveActivity() {
-
     return activityRepository.save(ActivityEntity.builder()
         .name("ActyvitiS")
-        .content("Contenido")
+        .content("Content")
         .image("image.wav")
         .softDelete(false)
         .build());
-
   }
 
   protected SlideEntity saveSlide() {
