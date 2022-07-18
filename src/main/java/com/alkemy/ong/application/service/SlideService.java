@@ -6,7 +6,6 @@ import com.alkemy.ong.application.service.usecase.IDeleteSlideUseCase;
 import com.alkemy.ong.application.service.usecase.IGetSlideUseCase;
 import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
 import com.alkemy.ong.application.util.IUploadImage;
-import com.alkemy.ong.application.util.Image;
 import com.alkemy.ong.domain.Slide;
 import com.alkemy.ong.infrastructure.database.repository.SlideRepository;
 import java.util.List;
@@ -52,18 +51,14 @@ public class SlideService
   }
 
   private String uploadSlideImage(Slide slide) {
-    Image slideImage = new Image(slide);
-    String imageUrl = uploadImage.upload(slideImage);
-    return imageUrl;
+    return uploadImage.upload(slide);
   }
 
   private Integer findAndSetSubsequentOrder() {
-    Integer lastKnownOrder;
-    List<Slide> savedSlides = findAllByOrderByOrder();
-    if (savedSlides.isEmpty()) {
+    Integer lastKnownOrder = slideRepository.findLastKnownOrder();
+    if (lastKnownOrder == null) {
       return 1;
     }
-    lastKnownOrder = savedSlides.get(savedSlides.size() - 1).getOrder();
     return lastKnownOrder + 1;
   }
 
