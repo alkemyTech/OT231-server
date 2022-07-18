@@ -13,7 +13,7 @@ import lombok.Setter;
 @Builder
 public class AuthenticationRequest {
 
-  @Schema(example = "hola@gmail.com")
+  @Schema(example = "juanago@gmail.com")
   @Email(message = "Email has invalid format.")
   @NotBlank(message = "Email cannot be null or empty.")
   private String email;

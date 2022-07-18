@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class UserResponse {
 
-  @Schema(example = "hola@gmail.com")
+  @Schema(example = "juanago@gmail.com")
   private String email;
 
   @Schema(example = "Juana")

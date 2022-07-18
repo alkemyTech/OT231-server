@@ -27,7 +27,7 @@ public class UserRegisterRequest {
       message = "Lastname can only contain letters and whitespaces")
   private String lastName;
 
-  @Schema(example = "hola@gmail.com")
+  @Schema(example = "juanago@gmail.com")
   @Email(message = "Email should be valid")
   private String email;
 
@@ -36,8 +36,3 @@ public class UserRegisterRequest {
   private String password;
 
 }
-
-
-
-
-

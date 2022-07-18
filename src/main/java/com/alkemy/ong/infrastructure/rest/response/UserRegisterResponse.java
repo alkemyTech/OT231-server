@@ -20,7 +20,7 @@ public class UserRegisterResponse {
   @Schema(example = "Gomez")
   private String lastName;
 
-  @Schema(example = "hola@gmail.com")
+  @Schema(example = "juanago@gmail.com")
   private String email;
 
   @Schema(example = "Bearer token")

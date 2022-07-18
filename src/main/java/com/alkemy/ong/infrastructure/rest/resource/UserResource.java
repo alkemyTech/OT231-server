@@ -60,7 +60,7 @@ public class UserResource {
 
   @Operation(summary = "Register new user")
   @ApiResponses(value = {
-          @ApiResponse(responseCode = "200", description = "User register successfully",
+          @ApiResponse(responseCode = "201", description = "User created successfully",
                   content = { @Content(mediaType = "application/json",
                           schema = @Schema(implementation = UserRegisterResponse.class)) }),
           @ApiResponse(responseCode = "400", description = "Invalid input data",
