@@ -63,7 +63,7 @@ public class SlideMapper {
       return null;
     }
     return Slide.builder()
-        .base64File(slideRequest.getImageFile())
+        .base64File(slideRequest.getBase64ImageEncoded())
         .text(slideRequest.getText())
         .order(slideRequest.getOrder())
         .build();

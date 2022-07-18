@@ -1,6 +1,7 @@
 package com.alkemy.ong.infrastructure.rest.request;
 
 import javax.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,10 +11,10 @@ import lombok.Setter;
 @Setter
 public class SlideRequest {
 
-  // imageFile expects a String with a Base64 encoded jpeg file.
   @NotBlank(message = "File must not be empty. Expected: Base64 encoded jpeg file.")
-  String imageFile;
-  String text;
-  Integer order;
+  @JsonAlias("imageFile")
+  private String base64ImageEncoded;
+  private String text;
+  private Integer order;
 
 }
