@@ -30,7 +30,7 @@ public class UpdateActivityIntegrationTest extends BigTest{
   public void shouldUpdateActivityWhenRequestUserHasAdminRole() throws Exception {
     Long activityId = saveActivity().getId();
 
-    mockMvc.perform(put("/activities/" + activityId)
+    mockMvc.perform(put("/activities/{id}", String.valueOf(activityId))
             .content(createRequest())
             .contentType(MediaType.APPLICATION_JSON)
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser()))
@@ -46,7 +46,7 @@ public class UpdateActivityIntegrationTest extends BigTest{
   public void shouldReturn400WhenNameIsNotValid() throws Exception {
     Long activityId = saveActivity().getId();
 
-    mockMvc.perform(put("/activities/" + activityId)
+    mockMvc.perform(put("/activities/{id}", String.valueOf(activityId))
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser())
             .contentType(MediaType.APPLICATION_JSON)
             .content(createRequest(INVALID_NAME, CONTENT, IMAGE)))
@@ -57,7 +57,7 @@ public class UpdateActivityIntegrationTest extends BigTest{
 
   @Test
   public void shouldReturn404WhenActivityDoesNotExists() throws Exception {
-    mockMvc.perform(put("/activities/" + NON_EXISTING_ACTIVITY_ID)
+    mockMvc.perform(put("/activities/{id}", String.valueOf(NON_EXISTING_ACTIVITY_ID))
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForStandardUser())
             .contentType(MediaType.APPLICATION_JSON)
             .content(createRequest(NAME, CONTENT, IMAGE)))
@@ -66,8 +66,9 @@ public class UpdateActivityIntegrationTest extends BigTest{
 
   @Test
   public void shouldReturn403WhenUserIsNotAuthenticated() throws Exception {
-    ActivityEntity activityId = saveActivity();
-    mockMvc.perform(put("/activities/{id}", String.valueOf(activityId.getId()))
+    Long activityId = saveActivity().getId();
+
+    mockMvc.perform(put("/activities/{id}", String.valueOf(activityId))
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.statusCode", IsEqual.equalTo(403)))
         .andExpect(jsonPath("$.message",
@@ -77,8 +78,9 @@ public class UpdateActivityIntegrationTest extends BigTest{
 
   @Test
   public void shouldReturn400WhenImageIsNotValid() throws Exception {
-    ActivityEntity activityId = saveActivity();
-    mockMvc.perform(put("/activities/{id}", String.valueOf(activityId.getId()))
+    Long activityId = saveActivity().getId();
+
+    mockMvc.perform(put("/activities/{id}", String.valueOf(activityId))
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser())
             .contentType(MediaType.APPLICATION_JSON)
             .content(createRequest(NAME, CONTENT, INVALID_IMAGE)))
