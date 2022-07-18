@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SocialMediaMapper {
 
-  public SocialMedia getSocialMedia(SocialMediaRequest socialMediaRequest) {
+  public SocialMedia toDomain(SocialMediaRequest socialMediaRequest) {
     if (socialMediaRequest == null) {
       return null;
     }
@@ -19,7 +19,7 @@ public class SocialMediaMapper {
         .build();
   }
 
-  public SocialMediaResponse getSocialMediaResponse(SocialMedia socialMedia) {
+  public SocialMediaResponse toResponse(SocialMedia socialMedia) {
     if (socialMedia == null) {
       return null;
     }

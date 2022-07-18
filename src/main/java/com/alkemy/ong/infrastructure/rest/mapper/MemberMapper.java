@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class MemberMapper {
 
   @Autowired
-  SocialMediaMapper socialMediaMapper;
+  private SocialMediaMapper socialMediaMapper;
 
   public Member toDomain(MemberRequest memberRequest) {
     if (memberRequest == null) {
@@ -19,7 +19,7 @@ public class MemberMapper {
     return Member.builder()
         .name(memberRequest.getName())
         .image(memberRequest.getImage())
-        .socialMedia(socialMediaMapper.getSocialMedia(memberRequest.getSocialMedia()))
+        .socialMedia(socialMediaMapper.toDomain(memberRequest.getSocialMedia()))
         .description(memberRequest.getDescription())
         .build();
   }
@@ -31,7 +31,7 @@ public class MemberMapper {
     return MemberResponse.builder()
         .name(member.getName())
         .image(member.getImage())
-        .socialMedia(socialMediaMapper.getSocialMediaResponse(member.getSocialMedia()))
+        .socialMedia(socialMediaMapper.toResponse(member.getSocialMedia()))
         .description(member.getDescription())
         .build();
   }
