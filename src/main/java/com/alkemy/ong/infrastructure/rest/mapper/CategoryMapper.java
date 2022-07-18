@@ -2,11 +2,13 @@ package com.alkemy.ong.infrastructure.rest.mapper;
 
 import com.alkemy.ong.domain.Category;
 import com.alkemy.ong.infrastructure.rest.request.CategoryRequest;
+import com.alkemy.ong.infrastructure.rest.request.UpdateCategoryRequest;
 import com.alkemy.ong.infrastructure.rest.response.CategoryResponse;
 import com.alkemy.ong.infrastructure.rest.response.ListCategoryResponse;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,6 +23,15 @@ public class CategoryMapper {
         .description(categoryRequest.getDescription())
         .image(categoryRequest.getImage())
         .build();
+  }
+
+  public Category toDomain(Long id, UpdateCategoryRequest updateCategoryRequest) {
+    return Category.builder()
+            .id(id)
+            .name(updateCategoryRequest.getName())
+            .description(updateCategoryRequest.getDescription())
+            .image(updateCategoryRequest.getImage())
+            .build();
   }
 
   public CategoryResponse toResponse(Category category) {
@@ -43,6 +54,14 @@ public class CategoryMapper {
       categoriesResponses.add(toResponse(category));
     }
     return new ListCategoryResponse(categoriesResponses);
+  }
+
+  public ListCategoryResponse toResponse(Page<Category> categoryPage) {
+    ListCategoryResponse listCategoryResponse = toResponse(categoryPage.getContent());
+    listCategoryResponse.setPage(categoryPage.getNumber());
+    listCategoryResponse.setSize(categoryPage.getSize());
+    listCategoryResponse.setTotalPages(categoryPage.getTotalPages());
+    return listCategoryResponse;
   }
 
 }
