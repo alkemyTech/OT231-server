@@ -1,7 +1,7 @@
 package com.alkemy.ong.infrastructure.rest.request;
 
-import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonAlias;
+import javax.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

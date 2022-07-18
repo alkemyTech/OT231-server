@@ -11,7 +11,7 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class Slide implements IImage{
+public class Slide implements IImage {
 
   private String imageUrl;
   private String text;
