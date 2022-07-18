@@ -32,6 +32,7 @@ import com.alkemy.ong.application.service.usecase.IListCategoryUseCase;
 import com.alkemy.ong.application.service.usecase.IListSlideUseCase;
 import com.alkemy.ong.application.service.usecase.ILoginUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateActivityUseCase;
+import com.alkemy.ong.application.service.usecase.IUpdateCommentUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateOrganizationUseCase;
 import com.alkemy.ong.application.util.ISendEmail;
 import com.alkemy.ong.infrastructure.database.repository.ActivityRepository;
@@ -150,5 +151,12 @@ public class ServiceBeanConfig {
   @Bean
   public IUpdateActivityUseCase updateActivityUseCase(ActivityRepository activityRepository) {
     return new ActivityService(activityRepository);
+  }
+
+  @Bean
+  public IUpdateCommentUseCase updateCommentUseCase(CommentRepository commentRepository,
+      UserRepository userRepository,
+      NewsRepository newsRepository) {
+    return new CommentService(commentRepository, newsRepository, userRepository);
   }
 }
