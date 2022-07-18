@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import com.alkemy.ong.OngApplication;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
+import com.alkemy.ong.infrastructure.database.entity.CommentEntity;
 import com.alkemy.ong.infrastructure.database.entity.ContactEntity;
 import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
@@ -49,6 +50,7 @@ import org.springframework.test.web.servlet.MockMvc;
 public abstract class BigTest {
 
   private static final String ADMIN_EMAIL = "jason@voorhees.com";
+  private static final String OTHER_USER_EMAIL = "john@connors.com";
   private static final String USER_EMAIL = "freedy@krueger.com";
   private static final String PASSWORD = "abcd1234";
 
@@ -119,6 +121,10 @@ public abstract class BigTest {
     if (userRepository.findByEmail(USER_EMAIL) == null) {
       saveStandardUser();
     }
+
+    if (userRepository.findByEmail(OTHER_USER_EMAIL) == null) {
+      saveStandardOtherUser();
+    }
   }
 
   private void createRoles() {
@@ -140,6 +146,14 @@ public abstract class BigTest {
         "Freddy",
         "Krueger",
         USER_EMAIL,
+        Role.USER));
+  }
+
+  private void saveStandardOtherUser() {
+    userRepository.save(buildUser(
+        "John",
+        "Connor",
+        OTHER_USER_EMAIL,
         Role.USER));
   }
 
@@ -192,6 +206,10 @@ public abstract class BigTest {
     return getAuthorizationTokenForUser(USER_EMAIL);
   }
 
+  protected String getAuthorizationTokenForStandardOtherUser() throws Exception {
+    return getAuthorizationTokenForUser(OTHER_USER_EMAIL);
+  }
+
   private String getAuthorizationTokenForUser(String email) throws Exception {
     String content = mockMvc.perform(post("/auth/login")
         .contentType(MediaType.APPLICATION_JSON)
@@ -241,7 +259,7 @@ public abstract class BigTest {
       String message,
       String name,
       String phone) {
-    return contactRepository.save(
+    contactRepository.save(
         ContactEntity.builder()
             .deletedAt(date)
             .email(email)
@@ -249,5 +267,15 @@ public abstract class BigTest {
             .name(name)
             .phone(phone)
             .build());
+  }
+
+  protected Long saveComment() {
+    CommentEntity commentEntity = commentRepository.save(CommentEntity.builder()
+        .body("Nice!")
+        .user(getRandomUser())
+        .news(saveNews())
+        .softDelete(false)
+        .build());
+    return commentEntity.getId();
   }
 }

@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ICommentSpringRepository extends JpaRepository<CommentEntity, Long> {
 
+  CommentEntity findByIdAndSoftDeleteFalse(Long id);
+
 }
