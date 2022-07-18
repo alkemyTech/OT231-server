@@ -19,10 +19,7 @@ public class SlideEntityMapper {
     List<Slide> slides = new ArrayList<>(slideEntities.size());
 
     for (SlideEntity slideEntity : slideEntities) {
-      slides.add(Slide.builder()
-          .imageUrl(slideEntity.getImageUrl())
-          .order(slideEntity.getOrder())
-          .build());
+      slides.add(toDomain(Optional.of(slideEntity)));
     }
 
     return slides;

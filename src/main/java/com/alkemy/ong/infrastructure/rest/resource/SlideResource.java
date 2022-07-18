@@ -39,7 +39,7 @@ public class SlideResource {
   @Autowired
   private ICreateSlideUseCase createSlideUseCase;
   
-  private SlideResponseField[] slideResponseFields =
+  private static final SlideResponseField[] SLIDE_RESPONSE_FIELDS =
       {SlideResponseField.IMAGE_URL, SlideResponseField.ORDER, SlideResponseField.TEXT};
 
   @GetMapping(value = "/slides", produces = {"application/json"})
@@ -57,7 +57,7 @@ public class SlideResource {
   @GetMapping(value = "/slides/{id}", produces = {"application/json"})
   public ResponseEntity<SlideResponse> getBy(@PathVariable("id") Long id) {
     SlideResponse response =
-        slideMapper.toResponse(getSlideUseCase.findBy(id), slideResponseFields);
+        slideMapper.toResponse(getSlideUseCase.findBy(id), SLIDE_RESPONSE_FIELDS);
     return ResponseEntity.ok(response);
   }
   
@@ -66,7 +66,7 @@ public class SlideResource {
       consumes = {"application/json"})
   public ResponseEntity<SlideResponse> create(@Valid @RequestBody SlideRequest slideRequest) {
     Slide slide = createSlideUseCase.create(slideMapper.toDomain(slideRequest));
-    SlideResponse response = slideMapper.toResponse(slide, slideResponseFields);
+    SlideResponse response = slideMapper.toResponse(slide, SLIDE_RESPONSE_FIELDS);
     return new ResponseEntity<SlideResponse>(response, HttpStatus.CREATED);
   }
 
