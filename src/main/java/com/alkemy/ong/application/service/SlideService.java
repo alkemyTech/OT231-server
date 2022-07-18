@@ -42,16 +42,12 @@ public class SlideService
 
   @Override
   public Slide create(Slide slide) {
-    String imageUrl = uploadSlideImage(slide);
+    String imageUrl = uploadImage.upload(slide);
     slide.setImageUrl(imageUrl);
     if (slide.getOrder() == null) {
       slide.setOrder(findAndSetSubsequentOrder());
     }
     return slideRepository.add(slide);
-  }
-
-  private String uploadSlideImage(Slide slide) {
-    return uploadImage.upload(slide);
   }
 
   private Integer findAndSetSubsequentOrder() {
