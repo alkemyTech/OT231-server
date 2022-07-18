@@ -64,8 +64,8 @@ public class SlideResource {
   @PostMapping(value = "/slides", 
       produces = {"application/json"},
       consumes = {"application/json"})
-  public ResponseEntity<SlideResponse> create(@Valid @RequestBody SlideRequest createRequest) {
-    Slide slide = createSlideUseCase.create(slideMapper.toDomain(createRequest));
+  public ResponseEntity<SlideResponse> create(@Valid @RequestBody SlideRequest slideRequest) {
+    Slide slide = createSlideUseCase.create(slideMapper.toDomain(slideRequest));
     SlideResponse response = slideMapper.toResponse(slide, slideResponseFields);
     return new ResponseEntity<SlideResponse>(response, HttpStatus.CREATED);
   }
