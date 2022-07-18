@@ -4,13 +4,15 @@ import java.util.List;
 import org.springframework.data.domain.PageRequest;
 import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.repository.IMemberRepository;
+import com.alkemy.ong.application.service.usecase.ICreateMemberUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteMemberUseCase;
 import com.alkemy.ong.application.service.usecase.IListMemberUseCase;
 import com.alkemy.ong.domain.Member;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class MemberService implements IDeleteMemberUseCase, IListMemberUseCase {
+public class MemberService
+    implements IDeleteMemberUseCase, ICreateMemberUseCase, IListMemberUseCase {
 
   private final IMemberRepository memberRepository;
 
@@ -19,6 +21,12 @@ public class MemberService implements IDeleteMemberUseCase, IListMemberUseCase {
     Member member = findBy(id);
     member.setSoftDelete(true);
     memberRepository.save(member);
+  }
+
+  @Override
+  public Member add(Member member) {
+    member.setSoftDelete(false);
+    return memberRepository.add(member);
   }
 
   private Member findBy(Long id) {

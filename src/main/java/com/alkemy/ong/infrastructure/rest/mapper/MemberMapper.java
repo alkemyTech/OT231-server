@@ -4,13 +4,29 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.springframework.stereotype.Component;
-import com.alkemy.ong.domain.Member;
 import com.alkemy.ong.infrastructure.rest.response.ListMemberResponse;
 import com.alkemy.ong.infrastructure.rest.response.MemberResponse;
-import com.alkemy.ong.infrastructure.rest.response.SocialMediaResponse;
+import com.alkemy.ong.domain.Member;
+import com.alkemy.ong.infrastructure.rest.request.MemberRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Component
 public class MemberMapper {
+
+  @Autowired
+  private SocialMediaMapper socialMediaMapper;
+
+  public Member toDomain(MemberRequest memberRequest) {
+    if (memberRequest == null) {
+      return null;
+    }
+    return Member.builder()
+        .name(memberRequest.getName())
+        .image(memberRequest.getImage())
+        .socialMedia(socialMediaMapper.toDomain(memberRequest.getSocialMedia()))
+        .description(memberRequest.getDescription())
+        .build();
+  }
 
   public ListMemberResponse toResponse(List<Member> members) {
     if (members == null || members.isEmpty()) {
@@ -24,19 +40,14 @@ public class MemberMapper {
   }
 
   public MemberResponse toResponse(Member member) {
+    if (member == null) {
+      return null;
+    }
     return MemberResponse.builder()
         .name(member.getName())
         .image(member.getImage())
+        .socialMedia(socialMediaMapper.toResponse(member.getSocialMedia()))
         .description(member.getDescription())
-        .socialMedia(getSocialMedia(member))
-        .build();
-  }
-
-  private SocialMediaResponse getSocialMedia(Member member) {
-    return SocialMediaResponse.builder()
-        .facebookUrl(member.getFacebookUrl())
-        .instagramUrl(member.getInstagramUrl())
-        .linkedInUrl(member.getLinkedInUrl())
         .build();
   }
 

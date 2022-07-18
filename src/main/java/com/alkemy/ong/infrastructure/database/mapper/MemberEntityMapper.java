@@ -1,6 +1,7 @@
 package com.alkemy.ong.infrastructure.database.mapper;
 
 import com.alkemy.ong.domain.Member;
+import com.alkemy.ong.domain.SocialMedia;
 import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,12 +18,18 @@ public class MemberEntityMapper {
     return Member.builder()
         .id(memberEntity.getId())
         .name(memberEntity.getName())
-        .facebookUrl(memberEntity.getFacebookUrl())
-        .instagramUrl(memberEntity.getInstagramUrl())
-        .linkedInUrl(memberEntity.getLinkedInUrl())
+        .socialMedia(getSocialMedia(memberEntity))
         .image(memberEntity.getImage())
         .description(memberEntity.getDescription())
         .softDelete(memberEntity.getSoftDelete())
+        .build();
+  }
+
+  private SocialMedia getSocialMedia(MemberEntity memberEntity) {
+    return SocialMedia.builder()
+        .facebookUrl(memberEntity.getFacebookUrl())
+        .instagramUrl(memberEntity.getInstagramUrl())
+        .linkedIndUrl(memberEntity.getLinkedInUrl())
         .build();
   }
 
@@ -30,12 +37,13 @@ public class MemberEntityMapper {
     if (member == null) {
       return null;
     }
+    SocialMedia socialMedia = member.getSocialMedia();
     return MemberEntity.builder()
         .id(member.getId())
         .name(member.getName())
-        .facebookUrl(member.getFacebookUrl())
-        .instagramUrl(member.getInstagramUrl())
-        .linkedInUrl(member.getLinkedInUrl())
+        .facebookUrl(socialMedia == null ? null : socialMedia.getFacebookUrl())
+        .instagramUrl(socialMedia == null ? null : socialMedia.getInstagramUrl())
+        .linkedInUrl(socialMedia == null ? null : socialMedia.getLinkedIndUrl())
         .image(member.getImage())
         .description(member.getDescription())
         .softDelete(member.getSoftDelete())

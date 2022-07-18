@@ -7,17 +7,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MemberResponse {
-  
+
+  private Long id;
+
   private String name;
-  private String image;
-  private String description;
+
   private SocialMediaResponse socialMedia;
+
+  private String image;
+
+  private String description;
 
 }

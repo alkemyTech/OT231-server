@@ -33,8 +33,14 @@ public class MemberRepository implements IMemberRepository {
   }
 
   @Override
+  public Member add(Member member) {
+    MemberEntity memberEntity = memberEntityMapper.toEntity(member);
+    return memberEntityMapper.toDomain(memberSpringRepository.save(memberEntity));
+  }
+
+  @Override
   public List<Member> findAllActive(PageRequest of) {
     return memberEntityMapper.toDomain(memberSpringRepository.findAll(of).getContent());
   }
-  
+
 }

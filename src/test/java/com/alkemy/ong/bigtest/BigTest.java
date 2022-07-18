@@ -4,7 +4,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import com.alkemy.ong.OngApplication;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
+import com.alkemy.ong.infrastructure.database.entity.ActivityEntity;
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
+import com.alkemy.ong.infrastructure.database.entity.CommentEntity;
 import com.alkemy.ong.infrastructure.database.entity.ContactEntity;
 import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
@@ -12,6 +14,7 @@ import com.alkemy.ong.infrastructure.database.entity.OrganizationEntity;
 import com.alkemy.ong.infrastructure.database.entity.RoleEntity;
 import com.alkemy.ong.infrastructure.database.entity.SlideEntity;
 import com.alkemy.ong.infrastructure.database.entity.UserEntity;
+import com.alkemy.ong.infrastructure.database.repository.spring.IActivitySpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICategorySpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.ICommentSpringRepository;
 import com.alkemy.ong.infrastructure.database.repository.spring.IContactSpringRepository;
@@ -49,6 +52,7 @@ import org.springframework.test.web.servlet.MockMvc;
 public abstract class BigTest {
 
   private static final String ADMIN_EMAIL = "jason@voorhees.com";
+  private static final String OTHER_USER_EMAIL = "john@connors.com";
   private static final String USER_EMAIL = "freedy@krueger.com";
   private static final String PASSWORD = "abcd1234";
 
@@ -60,6 +64,9 @@ public abstract class BigTest {
 
   @Autowired
   protected ObjectMapper objectMapper;
+
+  @Autowired
+  protected IActivitySpringRepository activityRepository;
 
   @Autowired
   protected IUserSpringRepository userRepository;
@@ -110,6 +117,7 @@ public abstract class BigTest {
     memberRepository.deleteAll();
     organizationRepository.deleteAll();
     contactRepository.deleteAll();
+    activityRepository.deleteAll();
   }
 
   private void createUserData() {
@@ -118,6 +126,10 @@ public abstract class BigTest {
     }
     if (userRepository.findByEmail(USER_EMAIL) == null) {
       saveStandardUser();
+    }
+
+    if (userRepository.findByEmail(OTHER_USER_EMAIL) == null) {
+      saveStandardOtherUser();
     }
   }
 
@@ -140,6 +152,14 @@ public abstract class BigTest {
         "Freddy",
         "Krueger",
         USER_EMAIL,
+        Role.USER));
+  }
+
+  private void saveStandardOtherUser() {
+    userRepository.save(buildUser(
+        "John",
+        "Connor",
+        OTHER_USER_EMAIL,
         Role.USER));
   }
 
@@ -192,6 +212,10 @@ public abstract class BigTest {
     return getAuthorizationTokenForUser(USER_EMAIL);
   }
 
+  protected String getAuthorizationTokenForStandardOtherUser() throws Exception {
+    return getAuthorizationTokenForUser(OTHER_USER_EMAIL);
+  }
+
   private String getAuthorizationTokenForUser(String email) throws Exception {
     String content = mockMvc.perform(post("/auth/login")
         .contentType(MediaType.APPLICATION_JSON)
@@ -228,6 +252,15 @@ public abstract class BigTest {
     return organizationEntity.getId();
   }
 
+  protected ActivityEntity saveActivity() {
+    return activityRepository.save(ActivityEntity.builder()
+        .name("ActyvitiS")
+        .content("Content")
+        .image("image.wav")
+        .softDelete(false)
+        .build());
+  }
+
   protected SlideEntity saveSlide() {
     return slideRepository.save(SlideEntity.builder()
         .imageUrl("https://s3.com/slide.jpg")
@@ -241,7 +274,7 @@ public abstract class BigTest {
       String message,
       String name,
       String phone) {
-    ContactEntity contactEntity = contactRepository.save(
+    contactRepository.save(
         ContactEntity.builder()
             .deletedAt(date)
             .email(email)
@@ -249,5 +282,15 @@ public abstract class BigTest {
             .name(name)
             .phone(phone)
             .build());
+  }
+
+  protected Long saveComment() {
+    CommentEntity commentEntity = commentRepository.save(CommentEntity.builder()
+        .body("Nice!")
+        .user(getRandomUser())
+        .news(saveNews())
+        .softDelete(false)
+        .build());
+    return commentEntity.getId();
   }
 }
