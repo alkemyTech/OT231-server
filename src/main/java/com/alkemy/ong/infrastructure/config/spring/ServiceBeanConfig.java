@@ -166,4 +166,5 @@ public class ServiceBeanConfig {
       NewsRepository newsRepository) {
     return new CommentService(commentRepository, newsRepository, userRepository);
   }
+  
 }

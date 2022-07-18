@@ -2,12 +2,13 @@ package com.alkemy.ong.application.service;
 
 import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.repository.IMemberRepository;
+import com.alkemy.ong.application.service.usecase.ICreateMemberUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteMemberUseCase;
 import com.alkemy.ong.domain.Member;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class MemberService implements IDeleteMemberUseCase {
+public class MemberService implements IDeleteMemberUseCase, ICreateMemberUseCase {
 
   private final IMemberRepository memberRepository;
 
@@ -16,6 +17,12 @@ public class MemberService implements IDeleteMemberUseCase {
     Member member = findBy(id);
     member.setSoftDelete(true);
     memberRepository.save(member);
+  }
+
+  @Override
+  public Member add(Member member) {
+    member.setSoftDelete(false);
+    return memberRepository.add(member);
   }
 
   private Member findBy(Long id) {
