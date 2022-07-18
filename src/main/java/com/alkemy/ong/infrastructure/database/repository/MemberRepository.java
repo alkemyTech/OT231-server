@@ -5,8 +5,10 @@ import com.alkemy.ong.domain.Member;
 import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import com.alkemy.ong.infrastructure.database.mapper.MemberEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.IMemberSpringRepository;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
@@ -29,4 +31,10 @@ public class MemberRepository implements IMemberRepository {
     }
     return Optional.of(memberEntityMapper.toDomain(memberEntity.get()));
   }
+
+  @Override
+  public List<Member> findAllActive(PageRequest of) {
+    return memberEntityMapper.toDomain(memberSpringRepository.findAll(of).getContent());
+  }
+  
 }

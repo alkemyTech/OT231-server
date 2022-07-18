@@ -2,6 +2,9 @@ package com.alkemy.ong.infrastructure.database.mapper;
 
 import com.alkemy.ong.domain.Member;
 import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -37,5 +40,16 @@ public class MemberEntityMapper {
         .description(member.getDescription())
         .softDelete(member.getSoftDelete())
         .build();
+  }
+
+  public List<Member> toDomain(List<MemberEntity> memberEntities) {
+    if (memberEntities == null || memberEntities.isEmpty()) {
+      return Collections.emptyList();
+    }
+    List<Member> members = new ArrayList<>(memberEntities.size());
+    for (MemberEntity memberEntity : memberEntities) {
+      members.add(toDomain(memberEntity));
+    }
+    return members;
   }
 }
