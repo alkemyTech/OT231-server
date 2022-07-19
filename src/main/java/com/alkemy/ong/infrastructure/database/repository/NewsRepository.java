@@ -1,6 +1,7 @@
 package com.alkemy.ong.infrastructure.database.repository;
 
 import com.alkemy.ong.application.repository.INewsRepository;
+import com.alkemy.ong.domain.ListComments;
 import com.alkemy.ong.domain.News;
 import com.alkemy.ong.infrastructure.database.entity.CategoryEntity;
 import com.alkemy.ong.infrastructure.database.entity.NewsEntity;
@@ -10,6 +11,7 @@ import com.alkemy.ong.infrastructure.database.repository.spring.INewsSpringRepos
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @RequiredArgsConstructor
 @Component
@@ -49,6 +51,11 @@ public class NewsRepository implements INewsRepository {
 
   private CategoryEntity getNewsCategoryEntity() {
     return categorySpringRepository.findByNameIgnoreCase("news");
+  }
+
+  @Override
+  public ListComments getCommentsNews(Long id) {
+    return newsEntityMapper.toDomain(newsSpringRepository.findCommentsNews(id));
   }
 
 }

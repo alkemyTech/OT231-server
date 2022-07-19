@@ -1,5 +1,6 @@
 package com.alkemy.ong.application.repository;
 
+import com.alkemy.ong.domain.ListComments;
 import com.alkemy.ong.domain.News;
 
 public interface INewsRepository {
@@ -14,4 +15,5 @@ public interface INewsRepository {
 
   News findBy(Long id);
 
+  ListComments getCommentsNews(Long id);
 }
