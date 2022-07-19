@@ -7,16 +7,18 @@ import com.alkemy.ong.application.repository.INewsRepository;
 import com.alkemy.ong.application.repository.IUserRepository;
 import com.alkemy.ong.application.service.usecase.ICreateCommentUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteCommentUseCase;
+import com.alkemy.ong.application.service.usecase.IListCommentUseCase;
 import com.alkemy.ong.application.service.usecase.IUpdateCommentUseCase;
 import com.alkemy.ong.domain.Comment;
 import com.alkemy.ong.domain.News;
 import com.alkemy.ong.domain.User;
 import com.alkemy.ong.infrastructure.config.spring.security.common.Role;
+import java.util.List;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class CommentService implements ICreateCommentUseCase,
-    IDeleteCommentUseCase, IUpdateCommentUseCase {
+    IDeleteCommentUseCase, IUpdateCommentUseCase, IListCommentUseCase  {
 
   private final ICommentRepository commentRepository;
   private final INewsRepository newsRepository;
@@ -91,6 +93,10 @@ public class CommentService implements ICreateCommentUseCase,
     return !(softDelete == null || Boolean.FALSE.equals(softDelete));
   }
 
+  @Override
+  public List<Comment> findAll() {
+    return commentRepository.findAll();
+  }
 }
 
 

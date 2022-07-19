@@ -6,6 +6,10 @@ import com.alkemy.ong.infrastructure.rest.request.CommentRequest;
 import com.alkemy.ong.infrastructure.rest.request.UpdateCommentRequest;
 import com.alkemy.ong.infrastructure.rest.response.CommentResponse;
 import com.alkemy.ong.infrastructure.rest.response.FullNameResponse;
+import com.alkemy.ong.infrastructure.rest.response.ListCommentResponse;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,6 +48,19 @@ public class CommentMapper {
         .build();
   }
 
+  public ListCommentResponse toResponse(List<Comment> comments) {
+    if (comments == null || comments.isEmpty()) {
+      return new ListCommentResponse(Collections.emptyList());
+    }
+
+    List<CommentResponse> commentResponses = new ArrayList<>(comments.size());
+    for (Comment comment : comments) {
+      CommentResponse response = CommentResponse.builder().body(comment.getBody()).build();
+      commentResponses.add(response);
+    }
+    return new ListCommentResponse(commentResponses);
+  }
+  
   public CommentResponse toResponse(Comment comment) {
     if (comment == null) {
       return null;
