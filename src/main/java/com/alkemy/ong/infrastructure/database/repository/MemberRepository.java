@@ -5,9 +5,9 @@ import com.alkemy.ong.domain.Member;
 import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import com.alkemy.ong.infrastructure.database.mapper.MemberEntityMapper;
 import com.alkemy.ong.infrastructure.database.repository.spring.IMemberSpringRepository;
-import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
@@ -39,8 +39,13 @@ public class MemberRepository implements IMemberRepository {
   }
 
   @Override
-  public List<Member> findAllActive(PageRequest of) {
-    return memberEntityMapper.toDomain(memberSpringRepository.findAll(of).getContent());
+  public Page<Member> findAll(PageRequest pageable) {
+    Page<MemberEntity> members = memberSpringRepository.findBySoftDeleteFalse(pageable);
+    return memberEntityMapper.toDomain(
+        members.getContent(),
+        members.getNumber(),
+        members.getSize(),
+        members.getTotalElements());
   }
 
 }

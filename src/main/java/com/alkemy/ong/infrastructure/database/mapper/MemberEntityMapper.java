@@ -6,6 +6,9 @@ import com.alkemy.ong.infrastructure.database.entity.MemberEntity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -59,5 +62,12 @@ public class MemberEntityMapper {
       members.add(toDomain(memberEntity));
     }
     return members;
+  }
+
+  public Page<Member> toDomain(List<MemberEntity> memberEntities, int number, int size,
+      long totalElements) {
+    return new PageImpl<>(
+        toDomain(memberEntities),
+        PageRequest.of(number, size), totalElements);
   }
 }
