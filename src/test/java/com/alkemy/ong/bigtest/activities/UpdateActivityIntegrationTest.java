@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.alkemy.ong.bigtest.BigTest;
 import com.alkemy.ong.infrastructure.database.entity.ActivityEntity;
 import com.alkemy.ong.infrastructure.rest.response.ActivityResponse;
@@ -17,13 +18,13 @@ import org.junit.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
-public class UpdateActivityIntegrationTest extends BigTest{
+public class UpdateActivityIntegrationTest extends BigTest {
 
-  private static final String NAME= "ActyvitiS";
-  private static final String INVALID_NAME= "Big Activity and Example of error with more characters";
-  private static final String CONTENT= "Content examples again";
-  private static final String IMAGE= "image.jotapeje";
-  private static final String INVALID_IMAGE= "i m a g e.p e n e j e";
+  private static final String NAME = "ActyvitiS";
+  private static final String INVALID_NAME = "Big Activity and Example of error with more characters";
+  private static final String CONTENT = "Content examples again";
+  private static final String IMAGE = "image.jotapeje";
+  private static final String INVALID_IMAGE = "i m a g e.p e n e j e";
   private static final Long NON_EXISTING_ACTIVITY_ID = 999L;
 
   @Test

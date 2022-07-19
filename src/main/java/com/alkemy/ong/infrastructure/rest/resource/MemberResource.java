@@ -49,8 +49,8 @@ public class MemberResource {
     return ResponseEntity.noContent().build();
   }
 
-  @PostMapping(value = "/members", 
-      produces = {"application/json"}, 
+  @PostMapping(value = "/members",
+      produces = {"application/json"},
       consumes = {"application/json"})
   public ResponseEntity<MemberResponse> create(@Valid @RequestBody MemberRequest memberRequest) {
     Member member = memberMapper.toDomain(memberRequest);

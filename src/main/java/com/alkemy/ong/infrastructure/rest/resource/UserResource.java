@@ -60,21 +60,21 @@ public class UserResource {
 
   @Operation(summary = "Register new user")
   @ApiResponses(value = {
-          @ApiResponse(responseCode = "201", description = "User created successfully",
-                  content = { @Content(mediaType = "application/json",
-                          schema = @Schema(implementation = UserRegisterResponse.class)) }),
-          @ApiResponse(responseCode = "400", description = "Invalid input data",
-                  content = @Content(mediaType = "application/json",
-                          schema = @Schema(implementation = ErrorResponse.class))) })
+      @ApiResponse(responseCode = "201", description = "User created successfully",
+          content = {@Content(mediaType = "application/json",
+              schema = @Schema(implementation = UserRegisterResponse.class))}),
+      @ApiResponse(responseCode = "400", description = "Invalid input data",
+          content = @Content(mediaType = "application/json",
+              schema = @Schema(implementation = ErrorResponse.class)))})
   @PostMapping(value = "/auth/register",
       produces = {"application/json"},
       consumes = {"application/json"})
   public ResponseEntity<UserRegisterResponse> create(
       @Valid @RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody
-              (description = "User Register", required = true,
-                content = @Content(mediaType = "application/json",
-                        schema = @Schema(implementation = UserRegisterRequest.class)))
-                  UserRegisterRequest registerRequest) {
+          (description = "User Register", required = true,
+              content = @Content(mediaType = "application/json",
+                  schema = @Schema(implementation = UserRegisterRequest.class)))
+      UserRegisterRequest registerRequest) {
     User user = userRegisterMapper.toDomain(registerRequest);
     UserRegisterResponse response = userRegisterMapper.toResponse(createUserUseCase.add(user));
     return new ResponseEntity<UserRegisterResponse>(response, HttpStatus.CREATED);
@@ -82,14 +82,14 @@ public class UserResource {
 
   @Operation(summary = "Get current user data")
   @ApiResponses(value = {
-          @ApiResponse(responseCode = "200", description = "Return user data successfully",
-                  content = { @Content(mediaType = "application/json",
-                          schema = @Schema(implementation = UserResponse.class)) }),
-          @ApiResponse(responseCode = "403",
-                  description = "Access denied. Please, try to login "
-                          + "again or contact your admin.",
-                  content = @Content(mediaType = "application/json",
-                          schema = @Schema(implementation = ErrorResponse.class))) })
+      @ApiResponse(responseCode = "200", description = "Return user data successfully",
+          content = {@Content(mediaType = "application/json",
+              schema = @Schema(implementation = UserResponse.class))}),
+      @ApiResponse(responseCode = "403",
+          description = "Access denied. Please, try to login "
+              + "again or contact your admin.",
+          content = @Content(mediaType = "application/json",
+              schema = @Schema(implementation = ErrorResponse.class)))})
   @GetMapping(value = "/auth/me",
       produces = {"application/json"})
   public ResponseEntity<UserResponse> getAuthDetails(

@@ -48,7 +48,7 @@ public class CreateContactIntegrationTest extends BigTest {
         .andDo(MvcResult -> {
           String json = MvcResult.getResponse().getContentAsString();
           contactResponse = objectMapper.readValue(json, ContactResponse.class);
-    });
+        });
 
     assertContactHasBeenCreated(contactResponse.getEmail());
   }
@@ -57,7 +57,7 @@ public class CreateContactIntegrationTest extends BigTest {
   public void shouldReturn403WhenAuthTokenIsNotValid() throws Exception {
     mockMvc.perform(post(CREATE_CONTACT_URL)
             .header(HttpHeaders.AUTHORIZATION, "INVALID_TOKEN")
-            .content(createRequest(NAME,MAIL,MESSAGE))
+            .content(createRequest(NAME, MAIL, MESSAGE))
             .contentType(APPLICATION_JSON))
         .andExpect(jsonPath("$.statusCode", CoreMatchers.equalTo(403)))
         .andExpect(jsonPath("$.message", CoreMatchers.equalTo(ACCESS_DENIED)))
@@ -69,7 +69,7 @@ public class CreateContactIntegrationTest extends BigTest {
     mockMvc.perform(post(CREATE_CONTACT_URL)
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser())
             .contentType(MediaType.APPLICATION_JSON)
-            .content(createRequest(INVALID_NAME, MAIL,MESSAGE)))
+            .content(createRequest(INVALID_NAME, MAIL, MESSAGE)))
         .andExpect(jsonPath("$.moreInfo",
             hasItems("Name can only contain letters and whitespaces")))
         .andExpect(jsonPath("$.statusCode", equalTo(400)))
@@ -81,7 +81,7 @@ public class CreateContactIntegrationTest extends BigTest {
     mockMvc.perform(post(CREATE_CONTACT_URL)
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser())
             .contentType(MediaType.APPLICATION_JSON)
-            .content(createRequest(NAME, INVALID_MAIL,MESSAGE)))
+            .content(createRequest(NAME, INVALID_MAIL, MESSAGE)))
         .andExpect(jsonPath("$.moreInfo",
             hasItems("Email should be valid")))
         .andExpect(jsonPath("$.statusCode", equalTo(400)))

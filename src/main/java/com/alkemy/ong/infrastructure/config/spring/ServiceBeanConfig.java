@@ -89,7 +89,7 @@ public class ServiceBeanConfig {
 
   @Bean
   public IUpdateCategoryUseCase updateCategoryUseCase(
-          CategoryRepository categoryRepository) {
+      CategoryRepository categoryRepository) {
     return new CategoryService(categoryRepository);
   }
 
@@ -168,7 +168,7 @@ public class ServiceBeanConfig {
   public IUpdateActivityUseCase updateActivityUseCase(ActivityRepository activityRepository) {
     return new ActivityService(activityRepository);
   }
-  
+
   @Bean
   public IUpdateCommentUseCase updateCommentUseCase(CommentRepository commentRepository,
       UserRepository userRepository,

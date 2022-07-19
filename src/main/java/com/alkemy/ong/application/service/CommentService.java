@@ -18,7 +18,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class CommentService implements ICreateCommentUseCase,
-    IDeleteCommentUseCase, IUpdateCommentUseCase, IListCommentUseCase  {
+    IDeleteCommentUseCase, IUpdateCommentUseCase, IListCommentUseCase {
 
   private final ICommentRepository commentRepository;
   private final INewsRepository newsRepository;

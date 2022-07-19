@@ -17,7 +17,7 @@ public class Slide implements IImage {
   private String text;
   private Integer order;
   private String base64File;
-  
+
   @Override
   public InputStream getFile() {
     byte[] decodedBytes = Base64.getDecoder().decode(base64File);

@@ -35,10 +35,10 @@ public class SlideResource {
 
   @Autowired
   private IGetSlideUseCase getSlideUseCase;
-  
+
   @Autowired
   private ICreateSlideUseCase createSlideUseCase;
-  
+
   private static final SlideResponseField[] SLIDE_RESPONSE_FIELDS =
       {SlideResponseField.IMAGE_URL, SlideResponseField.ORDER, SlideResponseField.TEXT};
 
@@ -60,8 +60,8 @@ public class SlideResource {
         slideMapper.toResponse(getSlideUseCase.findBy(id), SLIDE_RESPONSE_FIELDS);
     return ResponseEntity.ok(response);
   }
-  
-  @PostMapping(value = "/slides", 
+
+  @PostMapping(value = "/slides",
       produces = {"application/json"},
       consumes = {"application/json"})
   public ResponseEntity<SlideResponse> create(@Valid @RequestBody SlideRequest slideRequest) {

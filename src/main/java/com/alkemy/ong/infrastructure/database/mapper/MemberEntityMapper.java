@@ -27,7 +27,7 @@ public class MemberEntityMapper {
         .softDelete(memberEntity.getSoftDelete())
         .build();
   }
-  
+
   public List<Member> toDomain(List<MemberEntity> memberEntities) {
     if (memberEntities == null || memberEntities.isEmpty()) {
       return Collections.emptyList();
@@ -38,7 +38,7 @@ public class MemberEntityMapper {
     }
     return members;
   }
-  
+
   public Page<Member> toDomain(List<MemberEntity> memberEntities, int number, int size,
       long totalElements) {
     return new PageImpl<>(

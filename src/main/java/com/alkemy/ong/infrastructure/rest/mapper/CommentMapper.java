@@ -60,7 +60,7 @@ public class CommentMapper {
     }
     return new ListCommentResponse(commentResponses);
   }
-  
+
   public CommentResponse toResponse(Comment comment) {
     if (comment == null) {
       return null;

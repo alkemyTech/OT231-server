@@ -12,8 +12,8 @@ public interface ISlideRepository {
   void delete(Long id);
 
   Slide findBy(Long id);
-  
+
   Slide add(Slide slide);
-  
+
   Integer findLastKnownOrder();
 }

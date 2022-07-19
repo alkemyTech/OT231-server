@@ -30,21 +30,21 @@ public class AuthenticationResource {
 
   @Operation(summary = "User login")
   @ApiResponses(value = {
-          @ApiResponse(responseCode = "200", description = "User logged successfully",
-                  content = { @Content(mediaType = "application/json",
-                          schema = @Schema(implementation = AuthenticationResponse.class)) }),
-          @ApiResponse(responseCode = "400", description = "Invalid input data",
-                  content = @Content(mediaType = "application/json",
-                          schema = @Schema(implementation = ErrorResponse.class))) })
+      @ApiResponse(responseCode = "200", description = "User logged successfully",
+          content = {@Content(mediaType = "application/json",
+              schema = @Schema(implementation = AuthenticationResponse.class))}),
+      @ApiResponse(responseCode = "400", description = "Invalid input data",
+          content = @Content(mediaType = "application/json",
+              schema = @Schema(implementation = ErrorResponse.class)))})
   @PostMapping(value = "/auth/login",
       produces = {"application/json"},
       consumes = {"application/json"})
   public ResponseEntity<AuthenticationResponse> login(
-      @RequestBody @Valid  @io.swagger.v3.oas.annotations.parameters.RequestBody
-              (description = "User login", required = true,
-                      content = @Content(mediaType = "application/json",
-                              schema = @Schema(implementation = AuthenticationRequest.class)))
-              AuthenticationRequest authenticationRequest) {
+      @RequestBody @Valid @io.swagger.v3.oas.annotations.parameters.RequestBody
+          (description = "User login", required = true,
+              content = @Content(mediaType = "application/json",
+                  schema = @Schema(implementation = AuthenticationRequest.class)))
+      AuthenticationRequest authenticationRequest) {
     User user = loginUseCase.login(authenticationMapper.toDomain(authenticationRequest));
     return ResponseEntity.ok().body(authenticationMapper.toResponse(user));
   }

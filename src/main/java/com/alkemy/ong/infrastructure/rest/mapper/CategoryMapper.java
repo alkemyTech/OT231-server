@@ -27,11 +27,11 @@ public class CategoryMapper {
 
   public Category toDomain(Long id, UpdateCategoryRequest updateCategoryRequest) {
     return Category.builder()
-            .id(id)
-            .name(updateCategoryRequest.getName())
-            .description(updateCategoryRequest.getDescription())
-            .image(updateCategoryRequest.getImage())
-            .build();
+        .id(id)
+        .name(updateCategoryRequest.getName())
+        .description(updateCategoryRequest.getDescription())
+        .image(updateCategoryRequest.getImage())
+        .build();
   }
 
   public CategoryResponse toResponse(Category category) {

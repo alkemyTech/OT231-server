@@ -6,23 +6,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.alkemy.ong.bigtest.BigTest;
 import com.alkemy.ong.infrastructure.database.entity.ActivityEntity;
 import com.alkemy.ong.infrastructure.rest.response.ActivityResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import org.junit.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
-public class CreateActivityIntegrationTest extends BigTest{
+public class CreateActivityIntegrationTest extends BigTest {
 
-  private static final String NAME= "Big Activity";
-  private static final String INVALID_NAME= "Big Activity and Example of error with more characters";
-  private static final String CONTENT= "Content example";
-  private static final String IMAGE= "image.peneje";
-  private static final String INVALID_IMAGE= "i m a g e.p e n e j e";
+  private static final String NAME = "Big Activity";
+  private static final String INVALID_NAME = "Big Activity and Example of error with more characters";
+  private static final String CONTENT = "Content example";
+  private static final String IMAGE = "image.peneje";
+  private static final String INVALID_IMAGE = "i m a g e.p e n e j e";
 
   @Test
   public void shouldReturn403WhenAuthTokenIsInvalid() throws Exception {

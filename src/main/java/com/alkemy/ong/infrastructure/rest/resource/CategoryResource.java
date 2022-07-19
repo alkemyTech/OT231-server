@@ -76,21 +76,19 @@ public class CategoryResource {
   }
 
   @PutMapping(value = "/categories/{id}",
-          produces = {"application/json"},
-          consumes = {"application/json"})
+      produces = {"application/json"},
+      consumes = {"application/json"})
   public ResponseEntity<CategoryResponse> update(
-          @PathVariable Long id, @Valid @RequestBody UpdateCategoryRequest updateCategoryRequest) {
+      @PathVariable Long id, @Valid @RequestBody UpdateCategoryRequest updateCategoryRequest) {
     Category category = updateCategoryUseCase
-            .update(categoryMapper.toDomain(id, updateCategoryRequest));
+        .update(categoryMapper.toDomain(id, updateCategoryRequest));
     CategoryResponse response = categoryMapper.toResponse(category);
     return ResponseEntity.ok(response);
   }
 
   @GetMapping(value = "/categories", produces = {"application/json"})
-  public ResponseEntity<ListCategoryResponse> list(@PageableDefault(size = 10)
-      Pageable pageable,
-      UriComponentsBuilder uriBuilder,
-      HttpServletResponse response) {
+  public ResponseEntity<ListCategoryResponse> list(@PageableDefault(size = 10) Pageable pageable,
+      UriComponentsBuilder uriBuilder, HttpServletResponse response) {
     Page<Category> resultPage = listCategoryUseCase.findAll(pageable);
     headerOnPagedResourceRetrieval.addLinkHeaderOnPagedResourceRetrieval(
         uriBuilder,
