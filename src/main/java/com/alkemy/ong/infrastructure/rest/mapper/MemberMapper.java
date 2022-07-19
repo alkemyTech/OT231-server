@@ -9,6 +9,7 @@ import com.alkemy.ong.infrastructure.rest.response.MemberResponse;
 import com.alkemy.ong.domain.Member;
 import com.alkemy.ong.infrastructure.rest.request.MemberRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 
 @Component
 public class MemberMapper {
@@ -49,6 +50,14 @@ public class MemberMapper {
         .socialMedia(socialMediaMapper.toResponse(member.getSocialMedia()))
         .description(member.getDescription())
         .build();
+  }
+
+  public ListMemberResponse toResponse(Page<Member> resultPage) {
+    ListMemberResponse listMemberResponse = toResponse(resultPage.getContent());
+    listMemberResponse.setPage(resultPage.getNumber());
+    listMemberResponse.setSize(resultPage.getSize());
+    listMemberResponse.setTotalPages(resultPage.getTotalPages());
+    return listMemberResponse;
   }
 
 }

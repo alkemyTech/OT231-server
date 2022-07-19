@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListMemberResponse {
+public class ListMemberResponse extends PaginationResponse {
 
   private List<MemberResponse> members;
 
