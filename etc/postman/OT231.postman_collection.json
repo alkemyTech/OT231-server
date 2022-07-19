@@ -1100,6 +1100,48 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Get Comments News By id Copy",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", function () {",
+              "    pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{USER_TOKEN}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/news/1/comments",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "news",
+            "1",
+            "comments"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
