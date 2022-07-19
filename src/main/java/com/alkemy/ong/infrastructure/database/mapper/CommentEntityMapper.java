@@ -1,9 +1,14 @@
 package com.alkemy.ong.infrastructure.database.mapper;
 
 import com.alkemy.ong.domain.Comment;
+import com.alkemy.ong.domain.ListComments;
 import com.alkemy.ong.infrastructure.database.entity.CommentEntity;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 
 @Component
 public class CommentEntityMapper {
@@ -26,6 +31,17 @@ public class CommentEntityMapper {
         .createTimestamp(commentEntity.getCreateTimestamp())
         .softDelete(commentEntity.getSoftDelete())
         .build();
+  }
+
+  public ListComments toDomain(List<CommentEntity> commentEntities) {
+    if (commentEntities == null || commentEntities.isEmpty()) {
+      return new ListComments(Collections.emptyList());
+    }
+    List<Comment> comments = new ArrayList<>(commentEntities.size());
+    for (CommentEntity commentEntity : commentEntities) {
+      comments.add(toDomain(commentEntity));
+    }
+    return new ListComments(comments);
   }
 
   public CommentEntity toEntity(Comment comment) {
