@@ -1,6 +1,6 @@
 package com.alkemy.ong.application.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.repository.IMemberRepository;
@@ -43,8 +43,8 @@ public class MemberService
   }
 
   @Override
-  public List<Member> findAll(PageRequest of) {
-    return memberRepository.findAllActive(of);
+  public Page<Member> findAll(PageRequest pageRequest) {
+    return memberRepository.findAll(pageRequest);
   }
 
 }

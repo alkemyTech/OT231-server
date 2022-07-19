@@ -1,8 +1,8 @@
 package com.alkemy.ong.application.repository;
 
 import com.alkemy.ong.domain.Member;
-import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 public interface IMemberRepository {
@@ -13,6 +13,6 @@ public interface IMemberRepository {
 
   Member add(Member member);
 
-  List<Member> findAllActive(PageRequest of);
+  Page<Member> findAll(PageRequest pageable);
 
 }
