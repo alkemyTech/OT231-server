@@ -44,7 +44,4 @@ public class NewsEntityMapper {
     return commentEntityMapper.toDomain(commentEntities);
   }
 
-
-
-
 }
