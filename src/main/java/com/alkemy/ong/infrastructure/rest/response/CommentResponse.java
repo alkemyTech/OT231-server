@@ -1,5 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CommentResponse {
 
   private Long id;
