@@ -5,6 +5,7 @@ import com.alkemy.ong.application.repository.INewsRepository;
 import com.alkemy.ong.application.service.usecase.ICreateNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IDeleteNewsUseCase;
 import com.alkemy.ong.application.service.usecase.IGetNewsUseCase;
+import com.alkemy.ong.domain.ListComments;
 import com.alkemy.ong.domain.News;
 import lombok.AllArgsConstructor;
 
@@ -35,5 +36,19 @@ public class NewsService implements IDeleteNewsUseCase, ICreateNewsUseCase, IGet
     }
     return news;
   }
+
+  @Override
+  public ListComments listCommentsByNewsId(Long id) {
+    if (!newsRepository.existsById(id) || newsRepository.isDeleted(id)) {
+      throw new RecordNotFoundException("News not found.");
+    }
+    if (newsRepository.getCommentsNews(id).getComments().isEmpty()) {
+      throw new RecordNotFoundException("The News has no comment.");
+    }
+    return newsRepository.getCommentsNews(id);
+  }
+
+
+
 
 }
