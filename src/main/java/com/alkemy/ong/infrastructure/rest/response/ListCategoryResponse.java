@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListCategoryResponse {
+public class ListCategoryResponse extends PaginationResponse {
 
   private List<CategoryResponse> categories;
 

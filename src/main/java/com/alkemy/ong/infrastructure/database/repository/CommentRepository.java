@@ -45,7 +45,6 @@ public class CommentRepository implements ICommentRepository {
   public Comment update(Comment comment) {
     CommentEntity commentEntity = commentEntityMapper.toEntity(comment);
     return commentEntityMapper.toDomain(commentSpringRepository.save(commentEntity));
-
   }
 
 }

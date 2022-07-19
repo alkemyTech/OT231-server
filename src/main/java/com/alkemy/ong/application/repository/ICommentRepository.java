@@ -11,7 +11,6 @@ public interface ICommentRepository {
 
   void save(Comment comment);
 
-
   List<Comment> findAll();
 
   Comment update(Comment comment);

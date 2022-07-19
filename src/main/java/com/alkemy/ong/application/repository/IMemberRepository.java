@@ -9,4 +9,5 @@ public interface IMemberRepository {
 
   Optional<Member> findById(Long id);
 
+  Member add(Member member);
 }

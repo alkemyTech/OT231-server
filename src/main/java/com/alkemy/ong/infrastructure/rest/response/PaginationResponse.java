@@ -1,6 +1,5 @@
 package com.alkemy.ong.infrastructure.rest.response;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListCommentResponse {
+public class PaginationResponse {
 
-  List<CommentResponse> commentResponses;
+  private int page;
+  private int totalPages;
+  private int size;
 
 }
