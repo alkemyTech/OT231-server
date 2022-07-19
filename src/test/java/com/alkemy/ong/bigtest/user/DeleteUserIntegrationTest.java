@@ -18,18 +18,10 @@ import org.springframework.http.MediaType;
 
 public class DeleteUserIntegrationTest extends BigTest {
 
+
   private static final String DELETE_USER_URL = "/users/{id}";
 
-  @Test
-  public void shouldDeleteUserWhenRequestHasAdminRole() throws Exception {
-    Long randomUserId = getRandomUser().getId();
-    mockMvc.perform(delete(DELETE_USER_URL, String.valueOf(randomUserId))
-            .contentType(MediaType.APPLICATION_JSON)
-            .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser()))
-            .andExpect(status().isNoContent());
 
-    assertUserHasBeenDeleted(randomUserId);
-  }
 
   @Test
   public void shouldReturn403WhenMissingAuthToken() throws Exception {

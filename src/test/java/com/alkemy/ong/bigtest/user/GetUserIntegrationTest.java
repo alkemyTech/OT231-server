@@ -23,9 +23,11 @@ public class GetUserIntegrationTest extends BigTest {
 
   @Test
   public void shouldReturnUsersListWhenAdminIsAuthenticated() throws Exception{
+
     mockMvc.perform(get("/users")
             .header(HttpHeaders.AUTHORIZATION, getAuthorizationTokenForAdminUser())
             .contentType(MediaType.APPLICATION_JSON))
+
         .andExpect(jsonPath("$.users", hasSize(3)))
         .andExpect(jsonPath("$.users[0].email", equalTo("jason@voorhees.com")))
         .andExpect(jsonPath("$.users[1].email", equalTo("freedy@krueger.com")))
@@ -44,6 +46,7 @@ public class GetUserIntegrationTest extends BigTest {
             .andExpect(jsonPath("$.users[1].email", equalTo("freedy@krueger.com")))
             .andExpect(jsonPath("$.users[2].email", equalTo("john@connors.com")))
             .andExpect(status().isOk());
+
   }
 
   private void createdUserWhitSoftDeleteTrue() {
