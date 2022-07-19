@@ -1,7 +1,5 @@
 package com.alkemy.ong.application.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import com.alkemy.ong.application.exception.RecordNotFoundException;
 import com.alkemy.ong.application.repository.IMemberRepository;
 import com.alkemy.ong.application.service.usecase.ICreateMemberUseCase;
@@ -9,6 +7,8 @@ import com.alkemy.ong.application.service.usecase.IDeleteMemberUseCase;
 import com.alkemy.ong.application.service.usecase.IListMemberUseCase;
 import com.alkemy.ong.domain.Member;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 @AllArgsConstructor
 public class MemberService

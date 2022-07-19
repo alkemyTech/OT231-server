@@ -27,6 +27,24 @@ public class MemberEntityMapper {
         .softDelete(memberEntity.getSoftDelete())
         .build();
   }
+  
+  public List<Member> toDomain(List<MemberEntity> memberEntities) {
+    if (memberEntities == null || memberEntities.isEmpty()) {
+      return Collections.emptyList();
+    }
+    List<Member> members = new ArrayList<>(memberEntities.size());
+    for (MemberEntity memberEntity : memberEntities) {
+      members.add(toDomain(memberEntity));
+    }
+    return members;
+  }
+  
+  public Page<Member> toDomain(List<MemberEntity> memberEntities, int number, int size,
+      long totalElements) {
+    return new PageImpl<>(
+        toDomain(memberEntities),
+        PageRequest.of(number, size), totalElements);
+  }
 
   private SocialMedia getSocialMedia(MemberEntity memberEntity) {
     return SocialMedia.builder()
@@ -51,23 +69,5 @@ public class MemberEntityMapper {
         .description(member.getDescription())
         .softDelete(member.getSoftDelete())
         .build();
-  }
-
-  public List<Member> toDomain(List<MemberEntity> memberEntities) {
-    if (memberEntities == null || memberEntities.isEmpty()) {
-      return Collections.emptyList();
-    }
-    List<Member> members = new ArrayList<>(memberEntities.size());
-    for (MemberEntity memberEntity : memberEntities) {
-      members.add(toDomain(memberEntity));
-    }
-    return members;
-  }
-
-  public Page<Member> toDomain(List<MemberEntity> memberEntities, int number, int size,
-      long totalElements) {
-    return new PageImpl<>(
-        toDomain(memberEntities),
-        PageRequest.of(number, size), totalElements);
   }
 }
