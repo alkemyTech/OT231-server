@@ -8,9 +8,11 @@ import com.alkemy.ong.domain.Member;
 import com.alkemy.ong.infrastructure.rest.mapper.MemberMapper;
 import com.alkemy.ong.infrastructure.rest.request.MemberRequest;
 import com.alkemy.ong.infrastructure.rest.response.MemberResponse;
-import java.util.List;
+import com.alkemy.ong.infrastructure.util.HeaderOnPagedResourceRetrieval;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 public class MemberResource {
@@ -54,10 +57,18 @@ public class MemberResource {
 
   @GetMapping(value = "/members", produces = {"application/json"})
   public ResponseEntity<ListMemberResponse> list(@RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "10") int size) {
-    List<Member> members = listMemberUseCase.findAll(PageRequest.of(page, size));
-    ListMemberResponse response = memberMapper.toResponse(members);
-    return ResponseEntity.ok(response);
+      @RequestParam(defaultValue = "10") int size, UriComponentsBuilder uriBuilder,
+      HttpServletResponse response) {
+    Page<Member> resultPage = listMemberUseCase.findAll(PageRequest.of(page, size));
+    headerOnPagedResourceRetrieval.addLinkHeaderOnPagedResourceRetrieval(
+        uriBuilder,
+        response,
+        "/members",
+        resultPage.getNumber(),
+        resultPage.getTotalPages(),
+        resultPage.getSize());
+    ListMemberResponse listMemberResponse = memberMapper.toResponse(resultPage);
+    return ResponseEntity.ok(listMemberResponse);
   }
 
 }
