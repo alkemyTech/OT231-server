@@ -56,7 +56,8 @@ public class CommentMapper {
     List<CommentResponse> commentResponses = new ArrayList<>(comments.size());
 
     for (Comment comment : comments) {
-      commentResponses.add(toResponseList(comment));
+      CommentResponse response = CommentResponse.builder().body(comment.getBody()).build();
+      commentResponses.add(response);
     }
     return new ListCommentResponse(commentResponses);
   }
@@ -71,15 +72,6 @@ public class CommentMapper {
         .createdBy(getFullNameResponse(comment.getUser()))
         .associatedNews(comment.getNews().getName())
         .createTimestamp(comment.getCreateTimestamp())
-        .build();
-  }
-
-  public CommentResponse toResponseList(Comment comment) {
-    if (comment == null) {
-      return null;
-    }
-    return CommentResponse.builder()
-        .body(comment.getBody())
         .build();
   }
 
