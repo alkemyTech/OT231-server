@@ -285,12 +285,15 @@ public abstract class BigTest {
   }
 
   protected Long saveComment() {
-    CommentEntity commentEntity = commentRepository.save(CommentEntity.builder()
+    return saveComment(saveNews());
+  }
+
+  protected Long saveComment(NewsEntity newsEntity) {
+    return commentRepository.save(CommentEntity.builder()
         .body("Nice!")
         .user(getRandomUser())
-        .news(saveNews())
+        .news(newsEntity)
         .softDelete(false)
-        .build());
-    return commentEntity.getId();
+        .build()).getId();
   }
 }
