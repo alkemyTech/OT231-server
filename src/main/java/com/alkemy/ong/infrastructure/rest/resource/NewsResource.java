@@ -6,6 +6,7 @@ import com.alkemy.ong.application.service.usecase.IGetNewsUseCase;
 import com.alkemy.ong.domain.News;
 import com.alkemy.ong.infrastructure.rest.mapper.NewsMapper;
 import com.alkemy.ong.infrastructure.rest.request.NewsRequest;
+import com.alkemy.ong.infrastructure.rest.response.ListCommentsNewsResponse;
 import com.alkemy.ong.infrastructure.rest.response.NewsResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,13 @@ public class NewsResource {
   @GetMapping(value = "/news/{id}", produces = {"application/json"})
   public ResponseEntity<NewsResponse> getBy(@PathVariable Long id) {
     return ResponseEntity.ok().body(newsMapper.toResponse(getNewsUseCase.getOne(id)));
+  }
+
+  @GetMapping(value = "/news/{id}/comments", produces = {"application/json"})
+  public ResponseEntity<ListCommentsNewsResponse> listCommentsByNewsId(
+          @PathVariable Long id) {
+    return ResponseEntity.ok().body(newsMapper.toListResponse(
+            getNewsUseCase.listCommentsByNewsId(id)));
   }
 
 }
