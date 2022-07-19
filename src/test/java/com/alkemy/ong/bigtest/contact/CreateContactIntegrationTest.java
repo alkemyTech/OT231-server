@@ -53,12 +53,6 @@ public class CreateContactIntegrationTest extends BigTest {
     assertContactHasBeenCreated(contactResponse.getEmail());
   }
 
-  private void assertContactHasBeenCreated(String contactEmail) {
-    ContactEntity contactEntity = contactRepository.findByEmail(contactEmail);
-    assertNotNull(contactEntity);
-    assertThat(contactEntity.getDeletedAt()).isNull();
-  }
-
   @Test
   public void shouldReturn403WhenAuthTokenIsNotValid() throws Exception {
     mockMvc.perform(post(CREATE_CONTACT_URL)
@@ -66,8 +60,7 @@ public class CreateContactIntegrationTest extends BigTest {
             .content(createRequest(NAME,MAIL,MESSAGE))
             .contentType(APPLICATION_JSON))
         .andExpect(jsonPath("$.statusCode", CoreMatchers.equalTo(403)))
-        .andExpect(jsonPath("$.message", CoreMatchers.equalTo(
-            ACCESS_DENIED)))
+        .andExpect(jsonPath("$.message", CoreMatchers.equalTo(ACCESS_DENIED)))
         .andExpect(status().isForbidden());
   }
 
@@ -114,6 +107,12 @@ public class CreateContactIntegrationTest extends BigTest {
         .email(email)
         .message(message)
         .build());
+  }
+
+  private void assertContactHasBeenCreated(String contactEmail) {
+    ContactEntity contactEntity = contactRepository.findByEmail(contactEmail);
+    assertNotNull(contactEntity);
+    assertThat(contactEntity.getDeletedAt()).isNull();
   }
 
 }
