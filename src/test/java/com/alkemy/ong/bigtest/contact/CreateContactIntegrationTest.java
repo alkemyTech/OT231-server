@@ -14,7 +14,6 @@ import com.alkemy.ong.infrastructure.database.entity.ContactEntity;
 import com.alkemy.ong.infrastructure.rest.request.ContactRequest;
 import com.alkemy.ong.infrastructure.rest.response.ContactResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import javax.validation.constraints.Pattern;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.springframework.http.HttpHeaders;
@@ -35,7 +34,6 @@ public class CreateContactIntegrationTest extends BigTest {
   private static final String ACCESS_DENIED = "Access denied. Please, try to login again or "
       + "contact your admin.";
   private ContactResponse contactResponse;
-  private String string;
 
   @Test
   public void shouldCreateContactWhenRequestIsValid() throws Exception {
