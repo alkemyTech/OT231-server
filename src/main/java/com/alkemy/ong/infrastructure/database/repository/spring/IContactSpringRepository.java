@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface IContactSpringRepository extends JpaRepository<ContactEntity, Long> {
 
   List<ContactEntity> findByDeletedAtNull();
+
+  ContactEntity findByEmail(String email);
 }
