@@ -17,6 +17,7 @@ public class Slide implements IImage {
   private String text;
   private Integer order;
   private String base64File;
+  private final UUID uuid = UUID.randomUUID();
 
   @Override
   public InputStream getFile() {
@@ -26,7 +27,6 @@ public class Slide implements IImage {
 
   @Override
   public String getFileName() {
-    UUID uuid = UUID.randomUUID();
     return uuid.toString();
   }
 
