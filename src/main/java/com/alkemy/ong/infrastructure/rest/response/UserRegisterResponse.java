@@ -1,5 +1,6 @@
 package com.alkemy.ong.infrastructure.rest.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserRegisterResponse {
 
   @Schema(example = "Juana")
